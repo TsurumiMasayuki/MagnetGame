@@ -33,6 +33,9 @@ public:
 	virtual void fixPosition(BoxCollider2D* pCollider) = 0;
 	virtual void fixPosition(CircleCollider2D* pCollider) = 0;
 
+	virtual void onEnable() override;
+	virtual void onDisable() override;
+
 	void clearHitStates();
 	void checkHitStates();
 

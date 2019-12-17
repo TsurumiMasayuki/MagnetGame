@@ -53,6 +53,16 @@ AbstractCollider2D::~AbstractCollider2D()
 	}
 }
 
+void AbstractCollider2D::onEnable()
+{
+	m_Enabled = true;
+}
+
+void AbstractCollider2D::onDisable()
+{
+	m_Enabled = false;
+}
+
 void AbstractCollider2D::clearHitStates()
 {
 	for (auto previousHit : m_PreviousHits)

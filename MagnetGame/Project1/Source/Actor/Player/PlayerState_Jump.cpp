@@ -5,7 +5,9 @@
 #include "Actor\Player\Player.h"
 #include "Component\Physics\Gravity.h"
 
+#include "Device\Input.h"
 #include "PlayerState_Default.h"
+#include "PlayerState_MagChange.h"
 
 const float PlayerState_Jump::MAX_JUMP_FORCE = 64.0f;
 
@@ -36,6 +38,8 @@ IState * PlayerState_Jump::nextState()
 {
 	if (m_JumpForce <= 0)
 		return new PlayerState_Default(m_pPlayer);
+	if (Input::isKeyDown('Z'))
+		return new PlayerState_MagChange(m_pPlayer);
 
 	return nullptr;
 }

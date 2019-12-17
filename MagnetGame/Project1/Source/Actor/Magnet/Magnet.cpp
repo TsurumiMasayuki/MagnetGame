@@ -33,12 +33,32 @@ void Magnet::start()
 
 	m_pNMap = getGameMediator()->getNMap();
 	m_pSMap = getGameMediator()->getSMap();
+
+	setTag("Magnet");
 }
 
 void Magnet::update()
 {
 	writeMagMap();
 	readMagMap();
+}
+
+void Magnet::onCollisionEnter(GameObject * pHit)
+{
+	if (pHit->compareTag("MagChangeS"))
+		SetMagOption(MAGNET_S);
+
+	if (pHit->compareTag("MagChangeN"))
+		SetMagOption(MAGNET_N);
+}
+
+void Magnet::onCollisionStay(GameObject * pHit)
+{
+	if (pHit->compareTag("MagChangeS"))
+		SetMagOption(MAGNET_S);
+
+	if (pHit->compareTag("MagChangeN"))
+		SetMagOption(MAGNET_N);
 }
 
 void Magnet::SetMagOption(MagnetOption magOption)

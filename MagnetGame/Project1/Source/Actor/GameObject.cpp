@@ -72,6 +72,11 @@ bool GameObject::compareTag(std::string tag)
 void GameObject::setActive(bool value)
 {
 	m_Enabled = value;
+
+	if (m_Enabled)
+		m_pComponentManager->onEnable();
+	else
+		m_pComponentManager->onDisable();
 }
 
 bool GameObject::isActive()
@@ -118,16 +123,19 @@ void GameObject::checkCollision()
 
 void GameObject::onCollisionEnterCallBack(GameObject* pHit)
 {
+	onCollisionEnter(pHit);
 	m_pComponentManager->onCollisionEnter(pHit);
 }
 
 void GameObject::onCollisionStayCallBack(GameObject* pHit)
 {
+	onCollisionStay(pHit);
 	m_pComponentManager->onCollisionStay(pHit);
 }
 
 void GameObject::onCollisionExitCallBack(GameObject* pHit)
 {
+	onCollisionExit(pHit);
 	m_pComponentManager->onCollisionExit(pHit);
 }
 

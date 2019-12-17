@@ -2,6 +2,7 @@
 #include "Device\Input.h"
 #include "Actor\Player\Player.h"
 #include "Actor\Player\PlayerState_Jump.h"
+#include "Actor\Player\PlayerState_MagChange.h"
 #include "Component\Physics\Gravity.h"
 
 PlayerState_Default::PlayerState_Default(Player * pPlayer)
@@ -25,6 +26,9 @@ IState * PlayerState_Default::nextState()
 {
 	if (Input::isKeyDown(VK_SPACE) && m_pGravity->isGround())
 		return new PlayerState_Jump(m_pPlayer);
+
+	if (Input::isKeyDown('Z'))
+		return new PlayerState_MagChange(m_pPlayer);
 
 	return nullptr;
 }
