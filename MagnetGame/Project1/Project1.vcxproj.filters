@@ -28,7 +28,6 @@
     <ClCompile Include="Source\Device\Base\Shader\PixelShader.cpp" />
     <ClCompile Include="Source\Scene\SceneManager.cpp" />
     <ClCompile Include="Source\Device\GameTime.cpp" />
-    <ClCompile Include="Source\Actor\Test\TestObject.cpp" />
     <ClCompile Include="Source\Component\SpriteRenderer.cpp" />
     <ClCompile Include="Source\Device\Renderer.cpp" />
     <ClCompile Include="Source\Device\GameDevice.cpp" />
@@ -86,7 +85,6 @@
     <ClInclude Include="Source\Scene\SceneManager.h" />
     <ClInclude Include="Source\Device\GameTime.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
-    <ClInclude Include="Source\Actor\Test\TestObject.h" />
     <ClInclude Include="Source\Component\SpriteRenderer.h" />
     <ClInclude Include="Source\Device\IRenderable2D.h" />
     <ClInclude Include="Source\Device\Renderer.h" />

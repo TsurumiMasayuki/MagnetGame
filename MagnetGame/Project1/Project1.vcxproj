@@ -164,7 +164,6 @@
     <ClCompile Include="Source\Actor\Player\PlayerState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Block.cpp" />
-    <ClCompile Include="Source\Actor\Test\TestObject.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
     <ClCompile Include="Source\Component\Physics\CircleCollider2D.cpp" />
@@ -220,7 +219,6 @@
     <ClInclude Include="Source\Actor\Player\PlayerState_Default.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />
     <ClInclude Include="Source\Actor\Tilemap\Block.h" />
-    <ClInclude Include="Source\Actor\Test\TestObject.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />
     <ClInclude Include="Source\Component\Physics\CircleCollider2D.h" />

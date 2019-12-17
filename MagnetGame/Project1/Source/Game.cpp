@@ -2,7 +2,6 @@
 #include <Windows.h>
 
 #include "Actor\GameObject.h"
-#include "Actor\Test\TestObject.h"
 #include "Actor\Player\Player.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Tilemap\Tilemap.h"
@@ -42,12 +41,7 @@ void Game::init()
 
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
-	//auto testObj = new TestObject(this);
-
 	new Player(this);
-
-	//auto block = new Block(this, "BoxFill", 512.0f * 2, 64.0f);
-	//block->setPosition(Vec3(256.0f, -120, 0));
 
 	auto tilemap = new Tilemap(this, 32, 32);
 	tilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
