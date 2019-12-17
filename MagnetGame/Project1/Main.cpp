@@ -69,9 +69,9 @@ void initXAudio()
 
 	UINT32 flags = 0;
 #if defined(_DEBUG)
-	flags |= XAUDIO2_DEBUG_ENGINE;
+	//flags |= XAUDIO2_DEBUG_ENGINE;
 #endif
-	XAudio2Create(&g_pXAudio2, flags);
+	auto result = XAudio2Create(&g_pXAudio2, flags);
 
 	g_pXAudio2->CreateMasteringVoice(&g_pMasteringVoice);
 
