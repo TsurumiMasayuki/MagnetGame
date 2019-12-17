@@ -21,4 +21,5 @@ private:
 
 	float m_JumpForce;
 	static const float MAX_JUMP_FORCE;
+	static const float MAX_SUPERJUMP_FORCE;
 };

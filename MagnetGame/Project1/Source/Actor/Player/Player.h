@@ -21,6 +21,9 @@ public:
 private:
 	void initMagChange();
 
+public:
+	bool isSuperJump;
+
 private:
 	StateManager* m_pStateManager;
 	Gravity* m_pGravity;

@@ -16,6 +16,7 @@ public:
 
 	float getGravSpeed();
 	bool isGround();
+	bool isOnSMagnet();
 
 private:
 	class GroundDetector
@@ -45,4 +46,5 @@ private:
 	float m_GravSpeed;
 	float m_DetectorDistance;
 	bool m_isGround;
+	bool m_isOnSMagnet;
 };

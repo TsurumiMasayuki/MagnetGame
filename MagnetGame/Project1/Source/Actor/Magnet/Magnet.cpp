@@ -61,6 +61,11 @@ void Magnet::onCollisionStay(GameObject * pHit)
 		SetMagOption(MAGNET_N);
 }
 
+Magnet::MagnetOption Magnet::getMagOpition()
+{
+	return m_MagOption;
+}
+
 void Magnet::SetMagOption(MagnetOption magOption)
 {
 	m_MagOption = magOption;

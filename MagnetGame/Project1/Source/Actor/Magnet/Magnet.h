@@ -22,6 +22,7 @@ public:
 	virtual void onCollisionEnter(GameObject* pHit) override;
 	virtual void onCollisionStay(GameObject* pHit) override;
 
+	MagnetOption getMagOpition();
 	void SetMagOption(MagnetOption magOption);
 
 private:
