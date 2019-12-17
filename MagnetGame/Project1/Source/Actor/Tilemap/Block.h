@@ -4,7 +4,7 @@ class Block
 	: public GameObject
 {
 public:
-	Block(IGameMediator* pGameMediator, std::string textureName, float width, float height);
+	Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, bool hasCollider = true);
 	~Block();
 
 	virtual void start() override;
@@ -12,6 +12,8 @@ public:
 private:
 	float m_Width;
 	float m_Height;
+
+	bool m_HasCollider;
 
 	std::string m_TextureName;
 };

@@ -37,7 +37,7 @@ void Tilemap::load(std::string csvFileName)
 			if (data[0] == 'g')
 				spawnMultiBlock(reader, groupList, x, y);
 			else
-				spawnSingleBlock(data, x, y);
+				spawnSingleBlock(reader, data, x, y);
 		}
 	}
 }
@@ -52,12 +52,16 @@ float Tilemap::getHeight()
 	return m_MapHeight;
 }
 
-void Tilemap::spawnSingleBlock(std::string data, unsigned int x, unsigned int y)
+void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int x, unsigned int y)
 {
 	GameObject* block = nullptr;
 
+	bool hasCollider =
+		reader.getDataClampIndex(x - 1, y) != "0" || reader.getDataClampIndex(x + 1, y) != "0" ||
+		reader.getDataClampIndex(x, y - 1) != "0" || reader.getDataClampIndex(x, y + 1) != "0";
+
 	if (data == "1")
-		block = new Block(m_pGameMediator, "BoxFill", m_CellWidth, m_CellHeight);
+		block = new Block(m_pGameMediator, "BoxFill", m_CellWidth, m_CellHeight, hasCollider);
 
 
 	if (block != nullptr)
@@ -96,19 +100,21 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 	float height = yCount * m_CellHeight;
 
 	GameObject* object = nullptr;
-	if (split.at(1) == "B")
+	if (split.at(1) == "1")
 	{
 		object = new Block(m_pGameMediator, "BoxOutline", width, height);
 	}
 	else if (split.at(1) == "N")
 	{
 		bool move = split.at(2) == "0";
-		object = new Magnet(m_pGameMediator, Magnet::MAGNET_N, move, width, height);
+		bool changeMag = split.at(3) == "0";
+		object = new Magnet(m_pGameMediator, Magnet::MAGNET_N, move, changeMag, width, height);
 	}
 	else if (split.at(1) == "S")
 	{
 		bool move = split.at(2) == "0";
-		object = new Magnet(m_pGameMediator, Magnet::MAGNET_S, move, width, height);
+		bool changeMag = split.at(3) == "0";
+		object = new Magnet(m_pGameMediator, Magnet::MAGNET_S, move, changeMag, width, height);
 	}
 
 	Vec3 tilePos = Vec3(

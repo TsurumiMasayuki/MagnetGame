@@ -15,6 +15,7 @@ public:
 	unsigned int getRowCount();
 
 	std::string getData(unsigned int column, unsigned int row);
+	std::string getDataClampIndex(unsigned int column, unsigned int row);
 
 private:
 	std::vector<std::vector<std::string>> m_DataList;

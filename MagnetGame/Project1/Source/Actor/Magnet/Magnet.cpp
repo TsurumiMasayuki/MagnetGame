@@ -7,10 +7,11 @@
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
 
-Magnet::Magnet(IGameMediator * pGameMediator, MagnetOption magOption, bool isMove, float width, float height)
+Magnet::Magnet(IGameMediator * pGameMediator, MagnetOption magOption, bool isMove, bool isMagChange, float width, float height)
 	: GameObject(pGameMediator),
 	m_MagOption(magOption),
-	m_IsMove(isMove)
+	m_IsMove(isMove),
+	m_IsMagChange(isMagChange)
 {
 	setSize(Vec3(width, height, 0));
 }
@@ -68,6 +69,8 @@ Magnet::MagnetOption Magnet::getMagOpition()
 
 void Magnet::SetMagOption(MagnetOption magOption)
 {
+	if (!m_IsMagChange) return;
+
 	m_MagOption = magOption;
 
 	if (m_MagOption == MAGNET_N)

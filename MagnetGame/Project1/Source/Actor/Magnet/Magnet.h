@@ -14,7 +14,7 @@ public:
 		MAGNET_S
 	};
 
-	Magnet(IGameMediator* pGameMediator, MagnetOption magOption, bool isMove, float width, float height);
+	Magnet(IGameMediator* pGameMediator, MagnetOption magOption, bool isMove, bool isMagChange, float width, float height);
 
 	virtual void start() override;
 	virtual void update() override;
@@ -34,6 +34,7 @@ private:
 	ForceMap* m_pNMap;
 	ForceMap* m_pSMap;
 	bool m_IsMove;
+	bool m_IsMagChange;
 
 	SpriteRenderer* m_pSprite;
 

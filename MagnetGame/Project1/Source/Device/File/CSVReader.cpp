@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include "Utility\StringUtility.h"
+#include "Math\MathUtility.h"
 
 CSVReader::CSVReader()
 {
@@ -50,5 +51,13 @@ unsigned int CSVReader::getRowCount()
 
 std::string CSVReader::getData(unsigned int column, unsigned int row)
 {
+	return m_DataList.at(row).at(column);
+}
+
+std::string CSVReader::getDataClampIndex(unsigned int column, unsigned int row)
+{
+	column = MathUtility::clamp(column, 0, getColumnCount(row) - 1);
+	row = MathUtility::clamp(row, 0, getRowCount() - 1);
+
 	return m_DataList.at(row).at(column);
 }

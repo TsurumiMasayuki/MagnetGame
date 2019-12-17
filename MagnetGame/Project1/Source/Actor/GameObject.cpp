@@ -59,6 +59,11 @@ void GameObject::addCollider(AbstractCollider2D * pCollider)
 	m_pCollider = pCollider;
 }
 
+AbstractCollider2D* GameObject::getCollider()
+{
+	return m_pCollider;
+}
+
 void GameObject::removeCollider()
 {
 	m_pCollider = nullptr;

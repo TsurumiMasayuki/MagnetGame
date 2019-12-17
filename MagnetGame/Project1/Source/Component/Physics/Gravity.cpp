@@ -106,7 +106,7 @@ void Gravity::GroundDetector::onCollisionEnter(GameObject * pHit)
 
 void Gravity::GroundDetector::onCollisionStay(GameObject * pHit)
 {
-	if (pHit != m_pListner->getUser() && !pHit->compareTag("MagChangeS"))
+	if (pHit != m_pListner->getUser() && !pHit->getCollider()->isTrigger)
 	{
 		m_pListner->m_isGround = true;
 		m_pListner->m_GravSpeed = 0.0f;

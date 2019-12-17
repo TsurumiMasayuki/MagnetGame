@@ -19,6 +19,7 @@ public:
 	void removeComponent(AbstractComponent* pComponent);
 
 	void addCollider(AbstractCollider2D* pCollider);
+	AbstractCollider2D* getCollider();
 	void removeCollider();
 
 	bool compareTag(std::string tag);

@@ -21,7 +21,7 @@ public:
 	float getHeight();
 
 private:
-	void spawnSingleBlock(std::string data, unsigned int x, unsigned int y);
+	void spawnSingleBlock(CSVReader& reader, std::string data, unsigned int x, unsigned int y);
 	void spawnMultiBlock(CSVReader& reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y);
 
 private:
