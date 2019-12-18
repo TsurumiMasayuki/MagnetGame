@@ -64,11 +64,6 @@ bool Gravity::isGround()
 	return m_isGround;
 }
 
-bool Gravity::isOnSMagnet()
-{
-	return m_isOnSMagnet;
-}
-
 Gravity::GroundDetector::GroundDetector(GameObject * pUser, Gravity * pListner)
 	: AbstractComponent(pUser), m_pListner(pListner)
 {
@@ -94,14 +89,6 @@ void Gravity::GroundDetector::onCollisionEnter(GameObject * pHit)
 		m_pListner->m_isGround = true;
 		m_pListner->m_GravSpeed = 0.0f;
 	}
-
-	if (pHit != m_pListner->getUser() &&
-		pHit->compareTag("Magnet") &&
-		!m_pListner->m_isOnSMagnet)
-	{
-		Magnet* magnet = reinterpret_cast<Magnet*>(pHit);
-		m_pListner->m_isOnSMagnet = (magnet->getMagOpition() == Magnet::MAGNET_S);
-	}
 }
 
 void Gravity::GroundDetector::onCollisionStay(GameObject * pHit)
@@ -111,13 +98,6 @@ void Gravity::GroundDetector::onCollisionStay(GameObject * pHit)
 		m_pListner->m_isGround = true;
 		m_pListner->m_GravSpeed = 0.0f;
 	}
-
-	if (pHit != m_pListner->getUser() &&
-		pHit->compareTag("Magnet"))
-	{
-		Magnet* magnet = reinterpret_cast<Magnet*>(pHit);
-		m_pListner->m_isOnSMagnet = (magnet->getMagOpition() == Magnet::MAGNET_S);
-	}
 }
 
 void Gravity::GroundDetector::onCollisionExit(GameObject * pHit)
@@ -125,10 +105,5 @@ void Gravity::GroundDetector::onCollisionExit(GameObject * pHit)
 	if (pHit != m_pListner->getUser() && !pHit->compareTag("MagChangeS"))
 	{
 		m_pListner->m_isGround = false;
-	}
-
-	if (pHit != m_pListner->getUser() && pHit->compareTag("Magnet"))
-	{
-		m_pListner->m_isOnSMagnet = false;
 	}
 }
