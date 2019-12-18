@@ -54,6 +54,8 @@
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_MagChange.cpp" />
+    <ClCompile Include="Source\Actor\Player\PlayerState_SuperJump.cpp" />
+    <ClCompile Include="Source\Actor\DetectHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -116,6 +118,8 @@
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_MagChange.h" />
+    <ClInclude Include="Source\Actor\Player\PlayerState_SuperJump.h" />
+    <ClInclude Include="Source\Actor\DetectHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

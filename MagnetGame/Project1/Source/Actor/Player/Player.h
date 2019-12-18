@@ -3,6 +3,7 @@
 
 class StateManager;
 class Gravity;
+class DetectHelper;
 
 class Player :
 	public GameObject
@@ -18,8 +19,14 @@ public:
 	Gravity* getGravity();
 	GameObject* getMagChange();
 	
+	bool isDetectUp();
+	bool isDetectDown();
+	bool isDetectRight();
+	bool isDetectLeft();
+
 private:
 	void initMagChange();
+	void initDetectors();
 
 public:
 	bool isSuperJump;
@@ -28,6 +35,11 @@ private:
 	StateManager* m_pStateManager;
 	Gravity* m_pGravity;
 	GameObject* m_pMagChange;
+
+	DetectHelper* m_pDetectUp;
+	DetectHelper* m_pDetectDown;
+	DetectHelper* m_pDetectRight;
+	DetectHelper* m_pDetectLeft;
 
 	static const float MOVE_SPEED;
 };

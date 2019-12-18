@@ -4,11 +4,11 @@
 class Player;
 class Gravity;
 
-class PlayerState_Jump
+class PlayerState_SuperJump
 	: public IState
 {
 public:
-	PlayerState_Jump(Player* pPlayer);
+	PlayerState_SuperJump(Player* pPlayer);
 
 	virtual void update() override;
 	virtual void onStateEnter() override;
@@ -19,6 +19,5 @@ private:
 	Player* m_pPlayer;
 	Gravity* m_pGravity;
 
-	float m_JumpForce;
-	static const float MAX_JUMP_FORCE;
+	static const float MAX_SUPERJUMP_FORCE;
 };

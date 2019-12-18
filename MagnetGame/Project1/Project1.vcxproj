@@ -160,10 +160,12 @@
   <ItemGroup>
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
+    <ClCompile Include="Source\Actor\DetectHelper.cpp" />
     <ClCompile Include="Source\Actor\Player\Player.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_MagChange.cpp" />
+    <ClCompile Include="Source\Actor\Player\PlayerState_SuperJump.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Block.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
@@ -216,10 +218,12 @@
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />
+    <ClInclude Include="Source\Actor\DetectHelper.h" />
     <ClInclude Include="Source\Actor\Player\Player.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Default.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_MagChange.h" />
+    <ClInclude Include="Source\Actor\Player\PlayerState_SuperJump.h" />
     <ClInclude Include="Source\Actor\Tilemap\Block.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />

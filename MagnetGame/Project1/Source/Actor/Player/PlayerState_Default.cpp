@@ -24,7 +24,7 @@ void PlayerState_Default::onStateExit()
 
 IState * PlayerState_Default::nextState()
 {
-	if (Input::isKeyDown(VK_SPACE) && m_pGravity->isGround())
+	if (Input::isKeyDown(VK_SPACE) && m_pPlayer->isDetectDown())
 		return new PlayerState_Jump(m_pPlayer);
 
 	if (Input::isKeyDown('Z'))

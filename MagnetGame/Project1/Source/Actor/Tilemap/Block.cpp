@@ -17,6 +17,8 @@ Block::~Block()
 
 void Block::start()
 {
+	setTag("Block");
+
 	auto sprite = new SpriteRenderer(this);
 	sprite->setTextureName(m_TextureName);
 	sprite->setColor(Color(0.25f, 0.25f, 0.25f, 1));
