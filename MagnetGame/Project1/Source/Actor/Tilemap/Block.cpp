@@ -1,6 +1,8 @@
 #include "Block.h"
 #include "Component\SpriteRenderer.h"
 #include "Component\Physics\BoxCollider2D.h"
+#include "Actor\IGameMediator.h"
+#include "Actor\Magnet\ObstacleMap.h"
 
 Block::Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, bool hasCollider)
 	: GameObject(pGameMediator),
@@ -25,12 +27,16 @@ void Block::start()
 
 	if (m_HasCollider)
 	{
+		//コライダーを作成
 		auto collider = new BoxCollider2D(this);
 		collider->isTrigger = false;
 		collider->isMove = false;
 		collider->setWidth(m_Width);
 		collider->setHeight(m_Height);
 		collider->layer = PhysicsLayer::Block;
+
+		//物理判定のあるオブジェクトなので障害物マップに書き込み
+		getGameMediator()->getObstacleMap()->writeStaticObstacle(getPosition().toVec2(), getSize().toVec2());
 	}
 
 	setSize(Vec3(m_Width, m_Height, 0));

@@ -6,8 +6,6 @@
 #include "Actor\IGameMediator.h"
 #include "Physics\PhysicsWorld.h"
 
-class ForceMap;
-
 class Game :
 	public IGameMediator
 {
@@ -24,14 +22,25 @@ public:
 	virtual void removeGameObject(GameObject * pRemoveObject) override;
 	virtual PhysicsWorld * getPhysicsWorld() override;
 
-	virtual ForceMap* getNMap() override;
-	virtual ForceMap* getSMap() override;
+	virtual ForceMap* getNMapRead() override;
+	virtual ForceMap* getSMapRead() override;
+
+	virtual ForceMap* getNMapWrite() override;
+	virtual ForceMap* getSMapWrite() override;
+
+	virtual ObstacleMap * getObstacleMap() override;
 
 private:
 	GameObjectManager* m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
 	SceneManager m_SceneManager;
-	ForceMap* m_pNMap;
-	ForceMap* m_pSMap;
+
+	ForceMap* m_pNMapWrite;
+	ForceMap* m_pSMapWrite;
+
+	ForceMap* m_pNMapRead;
+	ForceMap* m_pSMapRead;
+
+	ObstacleMap* m_pObstacleMap;
 };
 

@@ -31,8 +31,10 @@ private:
 
 private:
 	MagnetOption m_MagOption;
-	ForceMap* m_pNMap;
-	ForceMap* m_pSMap;
+	ForceMap* m_pNMapWrite;
+	ForceMap* m_pSMapWrite;
+	ForceMap* m_pNMapRead;
+	ForceMap* m_pSMapRead;
 	bool m_IsMove;
 	bool m_IsMagChange;
 

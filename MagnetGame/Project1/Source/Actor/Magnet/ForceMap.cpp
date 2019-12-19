@@ -1,10 +1,13 @@
 #include "ForceMap.h"
+#include "ObstacleMap.h"
+#include "Math\MathUtility.h"
 
-ForceMap::ForceMap(float cellWidth, float cellHeight, int columnCount, int rowCount)
+ForceMap::ForceMap(float cellWidth, float cellHeight, int columnCount, int rowCount, ObstacleMap* pObstacles)
 	: m_CellWidth(cellWidth),
 	m_CellHeight(cellHeight),
 	m_Column(columnCount),
-	m_Row(rowCount)
+	m_Row(rowCount),
+	m_pObstacles(pObstacles)
 {
 	m_VMap.reserve(m_Row);
 	while (m_VMap.size() < m_Row)
@@ -45,49 +48,53 @@ void ForceMap::writeForce(const Vec2 & position, const Vec2 & size, int up, int 
 	for (int column = leftIndex; column < leftIndex + size.x / m_CellWidth && column < m_Column; column++)
 	{
 		//上側を埋める
-		for (int row = 0; row < upIndex && row < m_Row; row++)
+		for (int row = upIndex; row > 0; row--)
 		{
-			m_VMap.at(row).at(column) = up;
+			//障害物があったら書き込み終了
+			if (m_pObstacles->isObstacle(row, column)) break;
+
+			m_VMap.at(row).at(column) = MathUtility::clamp(m_VMap.at(row).at(column) + up, -1, 1);
 		}
 
 		//下側を埋める
 		for (int row = downIndex; row < m_Row; row++)
 		{
-			m_VMap.at(row).at(column) = down;
+			//障害物があったら書き込み終了
+			if (m_pObstacles->isObstacle(row, column)) break;
+
+			m_VMap.at(row).at(column) = MathUtility::clamp(m_VMap.at(row).at(column) + down, -1, 1);
 		}
 	}
 
-	//横方向を設定
+	//横方向を埋める
 	for (int row = upIndex; row < upIndex + size.y / m_CellHeight && row < m_Row; row++)
 	{
-		//左側を埋める
-		for (int column = 0; column < leftIndex && column < m_Column; column++)
+		//左側を埋める(インデックスを左向きに進める)
+		for (int column = leftIndex; column > 0; column--)
 		{
-			m_HMap.at(row).at(column) = left;
+			//障害物があったら書き込み終了
+			if (m_pObstacles->isObstacle(row, column)) break;
+
+			m_HMap.at(row).at(column) = MathUtility::clamp(m_HMap.at(row).at(column) + left, -1, 1);
 		}
 
-		//右側を埋める
+		//右側を埋める(インデックスを右向きに進める)
 		for (int column = rightIndex; column < m_Column; column++)
 		{
-			m_HMap.at(row).at(column) = right;
+			//障害物があったら書き込み終了
+			if (m_pObstacles->isObstacle(row, column)) break;
+
+			m_HMap.at(row).at(column) = MathUtility::clamp(m_HMap.at(row).at(column) + right, -1, 1);
 		}
 	}
-}
-
-void ForceMap::writeObstacle(const Vec2 & position, const Vec2 & size)
-{
 }
 
 void ForceMap::clear()
 {
-	for (auto row : m_VMap)
+	for (int i = 0; i < m_Row; i++)
 	{
-		std::fill(row.begin(), row.end(), 0);
-	}
-
-	for (auto row : m_HMap)
-	{
-		std::fill(row.begin(), row.end(), 0);
+		std::fill(m_VMap.at(i).begin(), m_VMap.at(i).end(), 0);
+		std::fill(m_HMap.at(i).begin(), m_HMap.at(i).end(), 0);
 	}
 }
 
@@ -99,6 +106,18 @@ Vec2 ForceMap::getForce(const Vec2 & position, const Vec2 & size)
 	return Vec2(m_HMap.at(y).at(x), m_VMap.at(y).at(x));
 }
 
+void ForceMap::copyTo(ForceMap & other)
+{
+	for (int i = 0; i < m_Row; i++)
+	{
+		other.m_VMap.at(i).clear();
+		other.m_HMap.at(i).clear();
+
+		std::copy(m_VMap.at(i).begin(), m_VMap.at(i).end(), std::back_inserter(other.m_VMap.at(i)));
+		std::copy(m_HMap.at(i).begin(), m_HMap.at(i).end(), std::back_inserter(other.m_HMap.at(i)));
+	}
+}
+
 void ForceMap::toMapIndex(const Vec2& position, unsigned int& x, unsigned int& y)
 {
 	//マップ上の座標系に変換(左上原点)
@@ -106,9 +125,4 @@ void ForceMap::toMapIndex(const Vec2& position, unsigned int& x, unsigned int& y
 	float convY = -(position.y - m_Position.y);
 	x = convX / m_CellWidth;
 	y = convY / m_CellHeight;
-}
-
-void ForceMap::toMapIndices(const Vec2& position, unsigned int x[4], unsigned int y[4])
-{
-	//範囲を超えていたら何もしない処理を書く
 }

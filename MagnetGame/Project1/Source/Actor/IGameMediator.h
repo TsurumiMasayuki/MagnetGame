@@ -3,6 +3,7 @@
 class GameObject;
 class PhysicsWorld;
 class ForceMap;
+class ObstacleMap;
 
 class IGameMediator
 {
@@ -12,8 +13,13 @@ public:
 
 	virtual PhysicsWorld* getPhysicsWorld() = 0;
 
-	virtual ForceMap* getNMap() = 0;
-	virtual ForceMap* getSMap() = 0;
+	virtual ForceMap* getNMapRead() = 0;
+	virtual ForceMap* getSMapRead() = 0;
+
+	virtual ForceMap* getNMapWrite() = 0;
+	virtual ForceMap* getSMapWrite() = 0;
+
+	virtual ObstacleMap* getObstacleMap() = 0;
 
 protected:
 	IGameMediator() {};
