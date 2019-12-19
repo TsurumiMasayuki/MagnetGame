@@ -1,6 +1,8 @@
 #include "Block.h"
 #include "Component\SpriteRenderer.h"
 #include "Component\Physics\BoxCollider2D.h"
+#include "Actor\IGameMediator.h"
+#include "Actor\Magnet\ForceMap.h"
 
 Block::Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, bool hasCollider)
 	: GameObject(pGameMediator),
@@ -34,4 +36,13 @@ void Block::start()
 	}
 
 	setSize(Vec3(m_Width, m_Height, 0));
+}
+
+void Block::update()
+{
+	//•¨—”»’è‚Ì‚ ‚éƒuƒƒbƒN‚È‚çáŠQ•¨‚Æ‚µ‚Ä‘‚«ž‚Þ
+	if (!m_HasCollider) return;
+
+	getGameMediator()->getNMapWrite()->writeObstacle(getPosition().toVec2(), getSize().toVec2());
+	getGameMediator()->getSMapWrite()->writeObstacle(getPosition().toVec2(), getSize().toVec2());
 }

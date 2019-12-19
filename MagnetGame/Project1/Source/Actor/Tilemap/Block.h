@@ -8,6 +8,7 @@ public:
 	~Block();
 
 	virtual void start() override;
+	virtual void update() override;
 
 private:
 	float m_Width;

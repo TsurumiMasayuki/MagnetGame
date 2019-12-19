@@ -32,8 +32,11 @@ void Magnet::start()
 	collider->setHeight(getSize().y);
 	collider->layer = PhysicsLayer::Magnet;
 
-	m_pNMap = getGameMediator()->getNMap();
-	m_pSMap = getGameMediator()->getSMap();
+	m_pNMapRead = getGameMediator()->getNMapRead();
+	m_pSMapRead = getGameMediator()->getSMapRead();
+
+	m_pNMapWrite = getGameMediator()->getNMapWrite();
+	m_pSMapWrite = getGameMediator()->getSMapWrite();
 
 	setTag("Magnet");
 }
@@ -84,9 +87,9 @@ void Magnet::writeMagMap()
 	if (m_IsMove) return;
 
 	if (m_MagOption == MAGNET_N)
-		m_pNMap->writeForce(getPosition().toVec2(), getSize().toVec2());
+		m_pNMapWrite->writeForce(getPosition().toVec2(), getSize().toVec2());
 	else
-		m_pSMap->writeForce(getPosition().toVec2(), getSize().toVec2());
+		m_pSMapWrite->writeForce(getPosition().toVec2(), getSize().toVec2());
 }
 
 void Magnet::readMagMap()
@@ -97,8 +100,8 @@ void Magnet::readMagMap()
 	int sModifier = -nModifier;
 
 	Vec2 move;
-	move += m_pNMap->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
-	move += m_pSMap->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
+	move += m_pNMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
+	move += m_pSMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
 
 	move = move * MAG_MOVE_SPEED * GameTime::getDeltaTime();
 
