@@ -23,6 +23,7 @@
 #include <DirectXColors.h>
 #include "Device\Camera.h"
 #include "Actor\Magnet\ForceMap.h"
+#include "Actor\Magnet\ObstacleMap.h"
 
 Game::Game()
 {
@@ -48,16 +49,19 @@ void Game::init()
 	tilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	tilemap->load("Assets/CSV/test0.csv");
 
-	m_pNMapRead = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow());
+	m_pObstacleMap = new ObstacleMap(32, 32, tilemap->getColumn(), tilemap->getRow());
+	m_pObstacleMap->setPosition(tilemap->getPosition().toVec2());
+
+	m_pNMapRead = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
 	m_pNMapRead->setPosition(tilemap->getPosition().toVec2());
 
-	m_pNMapWrite = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow());
+	m_pNMapWrite = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
 	m_pNMapWrite->setPosition(tilemap->getPosition().toVec2());
 
-	m_pSMapRead = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow());
+	m_pSMapRead = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
 	m_pSMapRead->setPosition(tilemap->getPosition().toVec2());
 
-	m_pSMapWrite = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow());
+	m_pSMapWrite = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
 	m_pSMapWrite->setPosition(tilemap->getPosition().toVec2());
 
 	TextureManager::loadTexture(L"Assets/Textures/CircleFill.png", "CircleFill");
@@ -107,6 +111,8 @@ void Game::shutdown()
 
 	delete m_pNMapWrite;
 	delete m_pSMapWrite;
+
+	delete m_pObstacleMap;
 }
 
 void Game::addGameObject(GameObject * pAddObject)
@@ -142,4 +148,9 @@ ForceMap * Game::getNMapWrite()
 ForceMap * Game::getSMapWrite()
 {
 	return m_pSMapWrite;
+}
+
+ObstacleMap * Game::getObstacleMap()
+{
+	return m_pObstacleMap;
 }
