@@ -10,7 +10,7 @@
 #include "Device\Input.h"
 #include "Device\GameTime.h"
 
-const float Player::MOVE_SPEED = 64.0f;
+const float Player::MOVE_SPEED = 128.0;
 
 Player::Player(IGameMediator * pMediator)
 	: GameObject(pMediator), isSuperJump(true)
@@ -38,11 +38,15 @@ void Player::start()
 	collider->layer = PhysicsLayer::Player;
 	collider->isPlayer = true;
 
-	m_pGravity = new Gravity(this, 1);
+	m_pGravity = new Gravity(this, 30);
 	m_pStateManager->setState(new PlayerState_Default(this));
 
 	initMagChange();
 	initDetectors();
+
+	auto down = new SpriteRenderer(m_pDetectDown, 90);
+	down->setTextureName("BoxFill");
+	down->setColor(Color(1, 0, 1, 1.0f));
 }
 
 void Player::update()
@@ -64,7 +68,7 @@ void Player::update()
 	float distX = getSize().x * 0.5f;
 	float distY = getSize().y * 0.5f;
 	m_pDetectUp->setPosition(pos + Vec3(0, 1, 0) * distY);
-	m_pDetectDown->setPosition(pos + Vec3(0, -1, 0) * distY);
+	m_pDetectDown->setPosition(pos + Vec3(0, -1.1f, 0) * distY);
 	m_pDetectRight->setPosition(pos + Vec3(1, 0, 0) * distX);
 	m_pDetectLeft->setPosition(pos + Vec3(-1, 0, 0) * distX);
 }
@@ -109,6 +113,11 @@ bool Player::isDetectLeft()
 	return  m_pDetectLeft->isDetect();
 }
 
+bool Player::canSuperJump()
+{
+	return isSuperJump && m_pDetectDown->isDetect("MagnetN");
+}
+
 void Player::initMagChange()
 {
 	m_pMagChange = new GameObject(m_pGameMediator);
@@ -133,17 +142,17 @@ void Player::initMagChange()
 
 void Player::initDetectors()
 {
-	float sizeX = getSize().x * 0.8f;
+	float sizeX = getSize().x * 0.9f;
 
-	m_pDetectUp = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectUp = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectUp->setSize(Vec3(sizeX, 6, 0));
 
-	m_pDetectDown = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectDown = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectDown->setSize(Vec3(sizeX, 6, 0));
 
-	m_pDetectRight = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectRight = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectRight->setSize(Vec3(6, sizeX, 0));
 
-	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectLeft->setSize(Vec3(6, sizeX, 0));
 }

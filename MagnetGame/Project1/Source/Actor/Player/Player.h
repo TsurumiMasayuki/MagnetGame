@@ -23,6 +23,7 @@ public:
 	bool isDetectDown();
 	bool isDetectRight();
 	bool isDetectLeft();
+	bool canSuperJump();
 
 private:
 	void initMagChange();
