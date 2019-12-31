@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -216,6 +216,7 @@
     <ClCompile Include="Source\WindowInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Actor\Effect\Particle.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />
