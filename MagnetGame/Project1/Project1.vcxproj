@@ -162,6 +162,8 @@
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
     <ClCompile Include="Source\Actor\DetectHelper.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
+    <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
+    <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\Player.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
@@ -221,6 +223,8 @@
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />
     <ClInclude Include="Source\Actor\DetectHelper.h" />
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
+    <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
+    <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
     <ClInclude Include="Source\Actor\Player\Player.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Default.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />
