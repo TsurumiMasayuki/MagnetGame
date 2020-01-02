@@ -6,7 +6,7 @@ class Gravity;
 class DetectHelper;
 
 class ObjN:
-	GameObject
+	public GameObject
 {
 public:
 	ObjN(IGameMediator* nMediator,int dir);
@@ -26,7 +26,7 @@ private:
 	void initMagChange();
 	void initDetectors();
 private:
-	StateManager*m_nStateManager;
+	//StateManager*m_nStateManager;
 	Gravity * m_nGravity;
 	GameObject*m_nMagChange;
 

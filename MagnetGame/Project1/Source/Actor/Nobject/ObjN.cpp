@@ -7,16 +7,18 @@
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
 
+const float ObjN::MOVE_SPEED = 64.0f;
+
 ObjN::ObjN(IGameMediator * nMediator, int dir)
 	:GameObject(nMediator)
 {
-	m_nStateManager = new StateManager();
+	//m_nStateManager = new StateManager();
 	direction = dir;
 }
 
 ObjN::~ObjN()
 {
-	delete m_nStateManager;
+	//delete m_nStateManager;
 }
 
 void ObjN::start()
@@ -42,7 +44,7 @@ void ObjN::start()
 
 void ObjN::update()
 {
-	m_nStateManager->update();
+	//m_nStateManager->update();
 
 	//ˆÚ“®ˆ—
 	float x = 0.0f;

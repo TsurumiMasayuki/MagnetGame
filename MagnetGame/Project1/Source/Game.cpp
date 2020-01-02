@@ -3,6 +3,7 @@
 
 #include "Actor\GameObject.h"
 #include "Actor\Player\Player.h"
+#include "Actor/Nobject/ObjN.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Tilemap\Tilemap.h"
 #include "Component\AbstractComponent.h"
@@ -43,7 +44,11 @@ void Game::init()
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	auto player = new Player(this);
-	//player->setPosition(Vec3(-640 + 96, -360 + 96, 0));
+	player->setPosition(Vec3(-640 + 96, -360 + 96, 0));
+
+	//“®‚­•¨‘ÌN
+	auto objN = new ObjN(this, 0);
+	objN->setPosition(Vec3(-640 + 96, -360 + 96, 0));
 
 	auto tilemap = new Tilemap(this, 32, 32);
 	tilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
