@@ -16,6 +16,9 @@ public:
 	virtual void update() override;
 	virtual void onDestroy() override;
 
+	virtual void onCollisionEnter(GameObject*nHit)override;
+	virtual void onCollisionStay(GameObject*nHit)override;
+
 	Gravity * getGravity();
 	GameObject*getMagChange();
 
@@ -36,4 +39,5 @@ private:
 	static const float MOVE_SPEED;
 
 	int direction;
+	float x;
 };
