@@ -59,6 +59,7 @@
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
+    <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
+    <ClInclude Include="Source\Actor\Effect\Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
