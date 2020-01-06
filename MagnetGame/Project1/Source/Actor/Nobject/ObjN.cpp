@@ -26,8 +26,8 @@ void ObjN::start()
 	setSize(Vec3(64, 64, 0));
 
 	auto sprite = new SpriteRenderer(this);
-	sprite->setTextureName("BoxOutLine");
-	sprite->setColor(Color(255, 255, 255, 1));
+	sprite->setTextureName("BoxOutline");
+	sprite->setColor(Color(0, 255, 0, 1));
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -47,7 +47,6 @@ void ObjN::update()
 	//m_nStateManager->update();
 
 	//ˆÚ“®ˆ—
-	float x = 0.0f;
 	switch (direction)
 	{
 	case 0:
@@ -75,6 +74,17 @@ void ObjN::onDestroy()
 
 	m_nDetectLeft->destroy();
 	m_nDetectRight->destroy();
+}
+
+void ObjN::onCollisionEnter(GameObject * nHit)
+{
+	if (nHit->compareTag("Magnet")) {
+		x = -x;
+	}
+}
+
+void ObjN::onCollisionStay(GameObject * nHit)
+{
 }
 
 Gravity * ObjN::getGravity()
