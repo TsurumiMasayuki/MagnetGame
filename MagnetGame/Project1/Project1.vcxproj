@@ -112,6 +112,7 @@
     <Link>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ObjectFileOutput>$(ProjectDir)Assets\Shaders\%(Filename).cso</ObjectFileOutput>
@@ -151,6 +152,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ObjectFileOutput>$(ProjectDir)Assets\Shaders\%(Filename).cso</ObjectFileOutput>
@@ -167,7 +169,9 @@
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_MagChange.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_SuperJump.cpp" />
+    <ClCompile Include="Source\Actor\Stage\Stage.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Block.cpp" />
+    <ClCompile Include="Source\Actor\Tilemap\Tile.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
     <ClCompile Include="Source\Component\Physics\CircleCollider2D.cpp" />
@@ -226,7 +230,9 @@
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_MagChange.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_SuperJump.h" />
+    <ClInclude Include="Source\Actor\Stage\Stage.h" />
     <ClInclude Include="Source\Actor\Tilemap\Block.h" />
+    <ClInclude Include="Source\Actor\Tilemap\Tile.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />
     <ClInclude Include="Source\Component\Physics\CircleCollider2D.h" />
