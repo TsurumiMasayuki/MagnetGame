@@ -10,11 +10,11 @@
 
 const float ObjN::MOVE_SPEED = 64.0f;
 
-ObjN::ObjN(IGameMediator * nMediator)
+ObjN::ObjN(IGameMediator * nMediator, int dir)
 	:GameObject(nMediator)
 {
 	//m_nStateManager = new StateManager();
-	//direction = dir;
+	direction = dir;
 }
 
 ObjN::~ObjN()
@@ -37,14 +37,12 @@ void ObjN::start()
 	collider->setHeight(64);
 	collider->layer = PhysicsLayer::Player;
 
-	m_nGravity = new Gravity(this, 1);
+	m_nGravity = new Gravity(this, 20);
+
 
 	initMagChange();
 	initDetectors();
 
-	direction = 1;
-
-	//setTag("MagChangeN");
 }
 
 void ObjN::update()
@@ -54,10 +52,10 @@ void ObjN::update()
 	switch (direction)
 	{
 	case 0:
-		x = 1.5f;
+		x = 1.0f;
 		break;
 	case 1:
-		x = -1.5f;
+		x = -1.0f;
 		break;
 	}
 
@@ -92,6 +90,11 @@ void ObjN::onDestroy()
 	m_nDetectRight->destroy();
 }
 
+
+void ObjN::onCollisionEnter(GameObject * nHit)
+{
+	
+}
 
 void ObjN::onCollisionStay(GameObject * nHit)
 {
@@ -143,9 +146,9 @@ void ObjN::initDetectors()
 {
 	float sizeX = getSize().x*0.8f;
 
-	m_nDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block","Magnet" });
+	m_nDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block","MagnetN" ,"MagnetS" });
 	m_nDetectLeft->setSize(Vec3(6, sizeX, 0));
 
-	m_nDetectRight = new DetectHelper(m_pGameMediator, this, { "Block","Magnet" });
+	m_nDetectRight = new DetectHelper(m_pGameMediator, this, { "Block","MagnetN" ,"MagnetS" });
 	m_nDetectRight->setSize(Vec3(6, sizeX, 0));
 }
