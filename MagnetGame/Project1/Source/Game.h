@@ -6,6 +6,8 @@
 #include "Actor\IGameMediator.h"
 #include "Physics\PhysicsWorld.h"
 
+class Tilemap;
+
 class Game :
 	public IGameMediator
 {
@@ -22,6 +24,8 @@ public:
 	virtual void removeGameObject(GameObject * pRemoveObject) override;
 	virtual PhysicsWorld * getPhysicsWorld() override;
 
+	virtual Tilemap * getTilemap() override;
+
 	virtual ForceMap* getNMapRead() override;
 	virtual ForceMap* getSMapRead() override;
 
@@ -34,6 +38,8 @@ private:
 	GameObjectManager* m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
 	SceneManager m_SceneManager;
+
+	Tilemap* m_pTilemap;
 
 	ForceMap* m_pNMapWrite;
 	ForceMap* m_pSMapWrite;
