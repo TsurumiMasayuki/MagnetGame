@@ -18,7 +18,7 @@ void SceneManager::update(float deltaTime)
 	m_Scenes.at(m_CurrentScene)->update(deltaTime);
 }
 
-void SceneManager::draw(RenderManager * pRenderManager)
+void SceneManager::draw()
 {
 	m_Scenes.at(m_CurrentScene)->draw();
 }
