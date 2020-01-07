@@ -117,8 +117,10 @@ void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int
 	GameObject* object = nullptr;
 
 	bool hasCollider =
-		reader.getDataClampIndex(x - 1, y) != "0" || reader.getDataClampIndex(x + 1, y) != "0" ||
-		reader.getDataClampIndex(x, y - 1) != "0" || reader.getDataClampIndex(x, y + 1) != "0";
+		reader.getDataClampIndex(x - 1, y) == "1" && reader.getDataClampIndex(x + 1, y) == "1" &&
+		reader.getDataClampIndex(x, y - 1) == "1" && reader.getDataClampIndex(x, y + 1) == "1";
+
+	hasCollider = !hasCollider;
 
 	if (data == "1")
 		object = new Block(m_pGameMediator, "BoxFill", m_CellWidth, m_CellHeight, hasCollider);
