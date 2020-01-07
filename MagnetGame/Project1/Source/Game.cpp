@@ -6,6 +6,7 @@
 #include "Actor/Nobject/ObjN.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Tilemap\Tilemap.h"
+#include "Actor/Effect/Particle.h"
 #include "Component\AbstractComponent.h"
 
 #include "Device\DirectXManager.h"
@@ -50,6 +51,10 @@ void Game::init()
 	auto objN = new ObjN(this, 0);
 	objN->setPosition(Vec3(640 -250, -360 + 144, 0));
 
+	//パーティクル（仮）
+	auto particle = new Particle(1,90,5,0.2f,this);
+	particle->setPosition(Vec3(100,30,0));
+
 	auto tilemap = new Tilemap(this, 32, 32);
 	tilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	tilemap->load("Assets/CSV/test0.csv");
@@ -73,6 +78,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/CircleOutline.png", "CircleOutline");
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
 	TextureManager::loadTexture(L"Assets/Textures/BoxOutline.png", "BoxOutline");
+	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
 
 	GameDevice::initialize();
 }
