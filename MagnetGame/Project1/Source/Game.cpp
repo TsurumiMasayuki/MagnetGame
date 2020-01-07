@@ -25,7 +25,9 @@
 #include "Device\Camera.h"
 #include "Actor\Magnet\ForceMap.h"
 #include "Actor\Magnet\ObstacleMap.h"
+#include "Actor\CheckPoint.h"
 #include "Utility\Timer.h"
+#include "Def\Screen.h"
 
 Game::Game()
 {
@@ -44,11 +46,15 @@ void Game::init()
 
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
-	auto player = new Player(this);
-	player->setPosition(Vec3(-640 + 96, -360 + 96, 0));
+	m_pPlayer = new Player(this);
+	m_pPlayer->SetRespawnPoint(Vec3(-544, -264, 0));
+	m_pPlayer->Respawn();
+
+	auto check = new CheckPoint(this, Vec3(-48, 48, 0));
+	check->setPosition(Vec3(-48, 48, 0));
 
 	//“®‚­•¨‘ÌN
-	auto objN = new ObjN(this, 0);
+	auto objN = new ObjN(this);
 	objN->setPosition(Vec3(640 -250, -360 + 144, 0));
 
 	m_pTilemap = new Tilemap(this, 32, 32);
@@ -80,6 +86,29 @@ void Game::init()
 
 void Game::update()
 {
+	if (Input::isKeyDown('R'))
+	{
+		shutdown();
+		init();
+	}
+
+	if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
+		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowWidth(), 0, 0));
+		//Camera::setPosition(Camera::getPosition() - Vec3(Screen::getDisplayWidth(), 0, 0));
+	}
+	if (m_pPlayer->getPosition().x < -Screen::getWindowWidth() / 2) {
+		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowWidth(), 0, 0));
+		//Camera::setPosition(Camera::getPosition() + Vec3(Screen::getDisplayWidth(), 0, 0));
+	}
+	if (m_pPlayer->getPosition().y > Screen::getWindowHeight() / 2) {
+		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowHeight(), 0, 0));
+		//Camera::setPosition(Camera::getPosition() - Vec3(Screen::getDisplayWidth(), 0, 0));
+	}
+	if (m_pPlayer->getPosition().y < -Screen::getWindowHeight() / 2) {
+		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowHeight(), 0, 0));
+		//Camera::setPosition(Camera::getPosition() + Vec3(Screen::getDisplayWidth(), 0, 0));
+	}
+
 	GameDevice::update();
 
 	Input::update();

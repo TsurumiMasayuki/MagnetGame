@@ -4,7 +4,7 @@ StateManager::~StateManager()
 {
 	if (m_pCurrentState != nullptr)
 	{
-		m_pCurrentState->onStateExit();
+		//m_pCurrentState->onStateExit();
 		delete m_pCurrentState;
 	}
 }

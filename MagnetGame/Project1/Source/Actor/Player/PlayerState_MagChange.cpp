@@ -9,6 +9,11 @@ PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
 {
 }
 
+PlayerState_MagChange::~PlayerState_MagChange()
+{
+	if (m_pTimer != nullptr)delete m_pTimer;
+}
+
 void PlayerState_MagChange::update()
 {
 	Vec3 magChangePos(m_pPlayer->getSize().x * m_MagChangeDir.x, m_pPlayer->getSize().y * m_MagChangeDir.y, 0);
@@ -29,7 +34,7 @@ void PlayerState_MagChange::onStateEnter()
 		m_MagChangeDir.y = -1;
 	else if (Input::isKey(VK_RIGHT))
 		m_MagChangeDir.x = 1;
-	else 
+	else
 		m_MagChangeDir.x = -1;
 
 }
@@ -38,6 +43,7 @@ void PlayerState_MagChange::onStateExit()
 {
 	m_pMagChange->setActive(false);
 	delete m_pTimer;
+	m_pTimer = nullptr;
 }
 
 IState * PlayerState_MagChange::nextState()
