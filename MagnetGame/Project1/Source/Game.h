@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor\GameObjectManager.h"
+#include "Actor/Effect/CircleEffect.h"
 #include "Scene\AbstractScene.h"
 #include "Scene\SceneManager.h"
 #include "Actor\IGameMediator.h"
@@ -50,5 +51,7 @@ private:
 
 	ObstacleMap* m_pObstacleMap;
 	Player* m_pPlayer;
+  
+	CircleEffect* circleEffect;
 };
 

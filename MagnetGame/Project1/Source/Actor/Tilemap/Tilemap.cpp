@@ -3,6 +3,7 @@
 #include "Actor\GameObject.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Magnet\Magnet.h"
+#include "Actor\Nobject\ObjN.h"
 #include "Device\File\CSVReader.h"
 #include "Utility\StringUtility.h"
 #include "Component\Tilemap\Tile.h"
@@ -44,6 +45,8 @@ void Tilemap::load(std::string csvFileName)
 
 			if (data[0] == 'g')
 				spawnMultiBlock(reader, groupList, x, y);
+			else if (data[0] == 'o')
+				spawnObject(reader, data,x, y);
 			else
 				spawnSingleBlock(reader, data, x, y);
 		}
@@ -84,6 +87,28 @@ void Tilemap::removeTile(Tile * pTile)
 	{
 		std::iter_swap(itr, m_TileList.end() - 1);
 		m_TileList.pop_back();
+	}
+}
+
+void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, unsigned int y)
+{
+	GameObject* object = nullptr;
+
+	std::vector<std::string> split;
+	StringUtility::split(data, '|', split);
+
+	if (split.at(1) == "R")
+		object = new ObjN(m_pGameMediator, 0);
+	else
+		object = new ObjN(m_pGameMediator, 1);
+
+	if (object != nullptr)
+	{
+		object->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
+
+		//管理用にTileコンポーネントをアタッチ
+		auto tile = new Tile(object);
+		m_TileList.emplace_back(tile);
 	}
 }
 
