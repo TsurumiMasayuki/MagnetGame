@@ -24,10 +24,17 @@ public:
 	bool isDetectRight();
 	bool isDetectLeft();
 	bool canSuperJump();
+	bool isSandwich();
+
+	void Respawn();
+	void SetRespawnPoint(Vec3 pos);
+	void SetJumpForce(float jumpForce);
+	float GetJumpForce();
 
 private:
 	void initMagChange();
 	void initDetectors();
+	void moveY();
 
 public:
 	bool isSuperJump;
@@ -41,6 +48,9 @@ private:
 	DetectHelper* m_pDetectDown;
 	DetectHelper* m_pDetectRight;
 	DetectHelper* m_pDetectLeft;
+
+	Vec3 m_RespawnPoint;
+	float m_JumpForce;
 
 	static const float MOVE_SPEED;
 };

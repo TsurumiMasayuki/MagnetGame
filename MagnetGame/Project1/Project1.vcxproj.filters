@@ -57,6 +57,7 @@
     <ClCompile Include="Source\Actor\Player\PlayerState_SuperJump.cpp" />
     <ClCompile Include="Source\Actor\DetectHelper.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
+    <ClCompile Include="Source\Actor\CheckPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Source\Actor\Player\PlayerState_SuperJump.h" />
     <ClInclude Include="Source\Actor\DetectHelper.h" />
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
+    <ClInclude Include="Source\Actor\CheckPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

@@ -9,6 +9,7 @@
 #include "PlayerState_Default.h"
 #include "Device\Input.h"
 #include "Device\GameTime.h"
+#include "Device\File\CSVReader.h"
 
 const float Player::MOVE_SPEED = 128.0;
 
@@ -25,6 +26,7 @@ Player::~Player()
 
 void Player::start()
 {
+	setTag("Player");
 	setSize(Vec3(64, 64, 0));
 
 	auto sprite = new SpriteRenderer(this);
@@ -64,6 +66,8 @@ void Player::update()
 	Vec3 move(x * MOVE_SPEED * GameTime::getDeltaTime(), 0, 0);
 	setPosition(getPosition() + move);
 
+	moveY();
+
 	Vec3 pos(getPosition());
 	float distX = getSize().x * 0.5f;
 	float distY = getSize().y * 0.5f;
@@ -71,6 +75,9 @@ void Player::update()
 	m_pDetectDown->setPosition(pos + Vec3(0, -1.1f, 0) * distY);
 	m_pDetectRight->setPosition(pos + Vec3(1, 0, 0) * distX);
 	m_pDetectLeft->setPosition(pos + Vec3(-1, 0, 0) * distX);
+
+	//if (isSandwich())
+	//	destroy();
 }
 
 void Player::onDestroy()
@@ -118,6 +125,33 @@ bool Player::canSuperJump()
 	return isSuperJump && m_pDetectDown->isDetect("MagnetN");
 }
 
+bool Player::isSandwich()
+{
+	return (m_pDetectRight->isDetect("Block") || m_pDetectRight->isDetect("MagnetN") || m_pDetectRight->isDetect("MagnetS")) &&
+		(m_pDetectLeft->isDetect("Block") || m_pDetectLeft->isDetect("MagnetN") || m_pDetectLeft->isDetect("MagnetS"));
+}
+
+void Player::Respawn()
+{
+	setPosition(m_RespawnPoint);
+	m_pStateManager->setState(new PlayerState_Default(this));
+}
+
+void Player::SetRespawnPoint(Vec3 pos)
+{
+	m_RespawnPoint = pos;
+}
+
+float Player::GetJumpForce()
+{
+	return m_JumpForce;
+}
+
+void Player::SetJumpForce(float jumpForce)
+{
+	m_JumpForce = jumpForce;
+}
+
 void Player::initMagChange()
 {
 	m_pMagChange = new GameObject(m_pGameMediator);
@@ -155,4 +189,14 @@ void Player::initDetectors()
 
 	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectLeft->setSize(Vec3(6, sizeX, 0));
+}
+
+void Player::moveY()
+{
+	float deltaTime = GameTime::getDeltaTime();
+
+	m_JumpForce -= m_pGravity->getGravSpeed() * deltaTime;
+
+	Vec3 move(0, std::fmaxf(0, m_JumpForce * deltaTime), 0);
+	setPosition(getPosition() + move);
 }

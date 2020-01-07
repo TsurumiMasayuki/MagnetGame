@@ -17,6 +17,7 @@ void PlayerState_Default::update()
 
 void PlayerState_Default::onStateEnter()
 {
+	m_pPlayer->SetJumpForce(0);
 }
 
 void PlayerState_Default::onStateExit()
