@@ -36,7 +36,6 @@ void Block::start()
 		collider->layer = PhysicsLayer::Block;	
 	}
 
-	getGameMediator()->getObstacleMap()->writeStaticObstacle(getPosition().toVec2(), getSize().toVec2());
-
 	setSize(Vec3(m_Width, m_Height, 0));
+	getGameMediator()->getObstacleMap()->writeStaticObstacle(getPosition().toVec2(), getSize().toVec2());
 }

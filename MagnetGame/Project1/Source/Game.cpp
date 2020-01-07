@@ -100,10 +100,8 @@ void Game::update()
 
 		m_pGameObjectManager->update();
 
-		//m_pNMapRead->clear();
-		//m_pSMapRead->clear();
-		//m_pNMapWrite->clear();
-		//m_pSMapWrite->clear();
+		//障害物マップをクリア
+		m_pObstacleMap->clear();
 
 		m_pTilemap = new Tilemap(this, 32, 32);
 		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
@@ -115,6 +113,9 @@ void Game::update()
 		delete m_pTilemap;
 
 		m_pGameObjectManager->update();
+
+		//障害物マップをクリア
+		m_pObstacleMap->clear();
 
 		m_pTilemap = new Tilemap(this, 32, 32);
 		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
@@ -138,8 +139,6 @@ void Game::update()
 	m_pGameObjectManager->update();
 
 	m_pPhysicsWorld->update();
-
-	m_pObstacleMap->clear();
 
 	m_pNMapRead->clear();
 	m_pSMapRead->clear();
