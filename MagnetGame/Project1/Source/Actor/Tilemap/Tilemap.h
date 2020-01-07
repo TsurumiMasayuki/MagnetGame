@@ -28,6 +28,7 @@ public:
 	void removeTile(Tile* pTile);
 
 private:
+	void spawnObject(CSVReader& reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y);
 	void spawnSingleBlock(CSVReader& reader, std::string data, unsigned int x, unsigned int y);
 	void spawnMultiBlock(CSVReader& reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y);
 
