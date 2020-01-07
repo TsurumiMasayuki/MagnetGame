@@ -54,16 +54,14 @@ void Game::init()
 	check->setPosition(Vec3(-48, 48, 0));
 
 	//“®‚­•¨‘ÌN
-	auto objN = new ObjN(this);
-	objN->setPosition(Vec3(640 -250, -360 + 144, 0));
 
 	circleEffect = new CircleEffect(this);
-	circleEffect->Cleate(player->getPosition(),10, 5, 2, 15);
+	circleEffect->Cleate(m_pPlayer->getPosition(),10, 5, 2, 15);
 	delete circleEffect;
 
 	m_pTilemap = new Tilemap(this, 32, 32);
 	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	m_pTilemap->load("Assets/CSV/test0.csv");
+	m_pTilemap->load("Assets/CSV/alfa1-1.csv");
 
 	m_pObstacleMap = new ObstacleMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow());
 	m_pObstacleMap->setPosition(m_pTilemap->getPosition().toVec2());

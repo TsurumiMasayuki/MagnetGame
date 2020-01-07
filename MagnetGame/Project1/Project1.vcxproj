@@ -160,6 +160,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Actor\CheckPoint.cpp" />
     <ClCompile Include="Source\Actor\Effect\CircleEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Source\Actor\Player\PlayerState_SuperJump.cpp" />
     <ClCompile Include="Source\Actor\Stage\Stage.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Block.cpp" />
+    <ClCompile Include="Source\Actor\Tilemap\GoalObject.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
     <ClCompile Include="Source\Component\AnimSpriteRenderer.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
@@ -225,6 +227,7 @@
     <ClCompile Include="Source\WindowInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Actor\CheckPoint.h" />
     <ClInclude Include="Source\Actor\Effect\CircleEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="Source\Actor\Player\PlayerState_SuperJump.h" />
     <ClInclude Include="Source\Actor\Stage\Stage.h" />
     <ClInclude Include="Source\Actor\Tilemap\Block.h" />
+    <ClInclude Include="Source\Actor\Tilemap\GoalObject.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />
