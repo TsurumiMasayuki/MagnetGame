@@ -9,8 +9,9 @@
 #include "PlayerState_Default.h"
 #include "Device\Input.h"
 #include "Device\GameTime.h"
+#include "Device\File\CSVReader.h"
 
-const float Player::MOVE_SPEED = 64.0f;
+const float Player::MOVE_SPEED = 128.0;
 
 Player::Player(IGameMediator * pMediator)
 	: GameObject(pMediator), isSuperJump(true)
@@ -25,6 +26,7 @@ Player::~Player()
 
 void Player::start()
 {
+	setTag("Player");
 	setSize(Vec3(64, 64, 0));
 
 	auto sprite = new SpriteRenderer(this);
@@ -38,11 +40,15 @@ void Player::start()
 	collider->layer = PhysicsLayer::Player;
 	collider->isPlayer = true;
 
-	m_pGravity = new Gravity(this, 1);
+	m_pGravity = new Gravity(this, 30);
 	m_pStateManager->setState(new PlayerState_Default(this));
 
 	initMagChange();
 	initDetectors();
+
+	auto down = new SpriteRenderer(m_pDetectDown, 90);
+	down->setTextureName("BoxFill");
+	down->setColor(Color(1, 0, 1, 1.0f));
 }
 
 void Player::update()
@@ -60,13 +66,18 @@ void Player::update()
 	Vec3 move(x * MOVE_SPEED * GameTime::getDeltaTime(), 0, 0);
 	setPosition(getPosition() + move);
 
+	moveY();
+
 	Vec3 pos(getPosition());
 	float distX = getSize().x * 0.5f;
 	float distY = getSize().y * 0.5f;
 	m_pDetectUp->setPosition(pos + Vec3(0, 1, 0) * distY);
-	m_pDetectDown->setPosition(pos + Vec3(0, -1, 0) * distY);
+	m_pDetectDown->setPosition(pos + Vec3(0, -1.1f, 0) * distY);
 	m_pDetectRight->setPosition(pos + Vec3(1, 0, 0) * distX);
 	m_pDetectLeft->setPosition(pos + Vec3(-1, 0, 0) * distX);
+
+	//if (isSandwich())
+	//	destroy();
 }
 
 void Player::onDestroy()
@@ -109,6 +120,38 @@ bool Player::isDetectLeft()
 	return  m_pDetectLeft->isDetect();
 }
 
+bool Player::canSuperJump()
+{
+	return isSuperJump && m_pDetectDown->isDetect("MagnetN");
+}
+
+bool Player::isSandwich()
+{
+	return (m_pDetectRight->isDetect("Block") || m_pDetectRight->isDetect("MagnetN") || m_pDetectRight->isDetect("MagnetS")) &&
+		(m_pDetectLeft->isDetect("Block") || m_pDetectLeft->isDetect("MagnetN") || m_pDetectLeft->isDetect("MagnetS"));
+}
+
+void Player::Respawn()
+{
+	setPosition(m_RespawnPoint);
+	m_pStateManager->setState(new PlayerState_Default(this));
+}
+
+void Player::SetRespawnPoint(Vec3 pos)
+{
+	m_RespawnPoint = pos;
+}
+
+float Player::GetJumpForce()
+{
+	return m_JumpForce;
+}
+
+void Player::SetJumpForce(float jumpForce)
+{
+	m_JumpForce = jumpForce;
+}
+
 void Player::initMagChange()
 {
 	m_pMagChange = new GameObject(m_pGameMediator);
@@ -133,17 +176,27 @@ void Player::initMagChange()
 
 void Player::initDetectors()
 {
-	float sizeX = getSize().x * 0.8f;
+	float sizeX = getSize().x * 0.9f;
 
-	m_pDetectUp = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectUp = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectUp->setSize(Vec3(sizeX, 6, 0));
 
-	m_pDetectDown = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectDown = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectDown->setSize(Vec3(sizeX, 6, 0));
 
-	m_pDetectRight = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectRight = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectRight->setSize(Vec3(6, sizeX, 0));
 
-	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "Magnet" });
+	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectLeft->setSize(Vec3(6, sizeX, 0));
+}
+
+void Player::moveY()
+{
+	float deltaTime = GameTime::getDeltaTime();
+
+	m_JumpForce -= m_pGravity->getGravSpeed() * deltaTime;
+
+	Vec3 move(0, std::fmaxf(0, m_JumpForce * deltaTime), 0);
+	setPosition(getPosition() + move);
 }

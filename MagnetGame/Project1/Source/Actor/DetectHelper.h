@@ -11,6 +11,7 @@ public:
 	DetectHelper(IGameMediator* pGameMediator, GameObject* pUser, std::initializer_list<std::string> detectTags);
 
 	bool isDetect();
+	bool isDetect(std::string tag);
 
 	virtual void start() override;
 	virtual void update() override;
@@ -24,5 +25,6 @@ private:
 private:
 	bool m_DetectFlag;
 	std::vector<std::string> m_DetectTags;
+	std::vector<std::string> m_CollisionTags;
 	GameObject* m_pUser;
 };

@@ -19,5 +19,6 @@ private:
 	Player* m_pPlayer;
 	Gravity* m_pGravity;
 
-	static const float MAX_SUPERJUMP_FORCE;
+	float m_JumpForce;
+	static const float MAX_JUMP_FORCE;
 };

@@ -15,6 +15,17 @@ bool DetectHelper::isDetect()
 	return m_DetectFlag;
 }
 
+bool DetectHelper::isDetect(std::string tag)
+{
+	int num = 0;
+	for (auto collisionTag : m_CollisionTags) {
+		if (collisionTag == tag)
+			num++;
+	}
+	if (num != 0) return true;
+	return false;
+}
+
 void DetectHelper::start()
 {
 	auto collider = new BoxCollider2D(this);
@@ -26,17 +37,20 @@ void DetectHelper::start()
 
 void DetectHelper::update()
 {
+	m_CollisionTags.clear();
 	m_DetectFlag = false;
 }
 
 void DetectHelper::onCollisionEnter(GameObject * pHit)
 {
+	m_CollisionTags.emplace_back(pHit->getTag());
 	if (compareTags(pHit->getTag()))
 		m_DetectFlag = true;
 }
 
 void DetectHelper::onCollisionStay(GameObject * pHit)
 {
+	m_CollisionTags.emplace_back(pHit->getTag());
 	if (compareTags(pHit->getTag()))
 		m_DetectFlag = true;
 }

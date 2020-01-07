@@ -42,7 +42,10 @@ void Magnet::start()
 	m_pNMapWrite = getGameMediator()->getNMapWrite();
 	m_pSMapWrite = getGameMediator()->getSMapWrite();
 
-	setTag("Magnet");
+	if (m_MagOption == MAGNET_N)
+		setTag("MagnetN");
+	else
+		setTag("MagnetS");
 }
 
 void Magnet::update()
@@ -81,9 +84,15 @@ void Magnet::SetMagOption(MagnetOption magOption)
 	m_MagOption = magOption;
 
 	if (m_MagOption == MAGNET_N)
+	{
 		m_pSprite->setColor(Color(1, 0, 0, 1));
+		setTag("MagnetN");
+	}
 	else
+	{
 		m_pSprite->setColor(Color(0, 0, 1, 1));
+		setTag("MagnetS");
+	}
 }
 
 void Magnet::writeMagMap()

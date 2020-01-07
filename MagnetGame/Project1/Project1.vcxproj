@@ -160,6 +160,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Actor\CheckPoint.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Source\WindowInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Actor\CheckPoint.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
