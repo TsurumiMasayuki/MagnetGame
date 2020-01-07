@@ -3,8 +3,6 @@
 #include <unordered_map>
 #include "Scene\AbstractScene.h"
 
-class RenderManager;
-
 class SceneManager
 {
 public:
@@ -12,7 +10,7 @@ public:
 	~SceneManager();
 
 	void update(float deltaTime);
-	void draw(RenderManager* pRenderManager);
+	void draw();
 
 	void addScene(std::string key, AbstractScene* pAbstractScene);
 	void changeScene(std::string key);

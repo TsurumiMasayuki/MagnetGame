@@ -103,6 +103,12 @@ Vec2 ForceMap::getForce(const Vec2 & position, const Vec2 & size)
 	unsigned int x, y;
 	toMapIndex(position, x, y);
 
+	if (y >= m_HMap.size() || x >= m_HMap.at(y).size() ||
+		y >= m_VMap.size() || x >= m_VMap.at(y).size())
+	{
+		return Vec2::zero();
+	}
+
 	return Vec2(m_HMap.at(y).at(x), m_VMap.at(y).at(x));
 }
 
