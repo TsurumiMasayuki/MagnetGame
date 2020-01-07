@@ -48,8 +48,12 @@ void Game::init()
 	player->setPosition(Vec3(-640 + 96, -360 + 96, 0));
 
 	//“®‚­•¨‘ÌN
-	auto objN = new ObjN(this, 0);
+	auto objN = new ObjN(this);
 	objN->setPosition(Vec3(640 -250, -360 + 144, 0));
+
+	circleEffect = new CircleEffect(this);
+	circleEffect->Cleate(player->getPosition(),10, 5, 2, 15);
+	delete circleEffect;
 
 	m_pTilemap = new Tilemap(this, 32, 32);
 	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
@@ -74,6 +78,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/CircleOutline.png", "CircleOutline");
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
 	TextureManager::loadTexture(L"Assets/Textures/BoxOutline.png", "BoxOutline");
+	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
 
 	GameDevice::initialize();
 }
