@@ -1,15 +1,21 @@
 #pragma once
 #include <d3d11.h>
 #include <string>
+#include "Actor\GameObject.h"
+#include "Utility/Timer.h"
 
-class Particle {
+class Particle:public GameObject {
 public:
-	Particle(float angle);
-	void Init();
-	void Update();
-	void Draw();
+	Particle(float speed,float angle,float duration,float shrinkRate, IGameMediator * pMediator);
+	~Particle();
+	virtual void start() override;
+	virtual void update() override;
+	virtual void onDestroy() override;
+
+	Timer timer;
 
 	int grp;
 	float x, y;
-	float angle, speed;
+	float size_x, size_y;
+	float angle, speed,duration,shrinkRate;
 };
