@@ -56,8 +56,8 @@ std::string CSVReader::getData(unsigned int column, unsigned int row)
 
 std::string CSVReader::getDataClampIndex(unsigned int column, unsigned int row)
 {
-	column = MathUtility::clamp(column, 0, getColumnCount(row) - 1);
 	row = MathUtility::clamp(row, 0, getRowCount() - 1);
+	column = MathUtility::clamp(column, 0, getColumnCount(row) - 1);
 
 	return m_DataList.at(row).at(column);
 }

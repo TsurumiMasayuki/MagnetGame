@@ -112,6 +112,7 @@ void GameObject::objOnDestroy()
 void GameObject::destroy()
 {
 	m_DestroyFlag = true;
+	onDestroy();
 	m_pComponentManager->onDestroy();
 }
 

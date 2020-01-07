@@ -33,11 +33,10 @@ void Block::start()
 		collider->isMove = false;
 		collider->setWidth(m_Width);
 		collider->setHeight(m_Height);
-		collider->layer = PhysicsLayer::Block;
-
-		//物理判定のあるオブジェクトなので障害物マップに書き込み
-		getGameMediator()->getObstacleMap()->writeStaticObstacle(getPosition().toVec2(), getSize().toVec2());
+		collider->layer = PhysicsLayer::Block;	
 	}
+
+	getGameMediator()->getObstacleMap()->writeStaticObstacle(getPosition().toVec2(), getSize().toVec2());
 
 	setSize(Vec3(m_Width, m_Height, 0));
 }

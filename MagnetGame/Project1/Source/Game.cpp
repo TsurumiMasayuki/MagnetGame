@@ -47,7 +47,7 @@ void Game::init()
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	m_pPlayer = new Player(this);
-	m_pPlayer->SetRespawnPoint(Vec3(-544, -264, 0));
+	m_pPlayer->SetRespawnPoint(Vec3(600,250, 0));
 	m_pPlayer->Respawn();
 
 	auto check = new CheckPoint(this, Vec3(-48, 48, 0));
@@ -61,7 +61,7 @@ void Game::init()
 
 	m_pTilemap = new Tilemap(this, 32, 32);
 	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	m_pTilemap->load("Assets/CSV/alfa1-1.csv");
+	m_pTilemap->load("Assets/CSV/alpha1-1.csv");
 
 	m_pObstacleMap = new ObstacleMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow());
 	m_pObstacleMap->setPosition(m_pTilemap->getPosition().toVec2());
@@ -96,20 +96,37 @@ void Game::update()
 	}
 
 	if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
+		delete m_pTilemap;
+
+		m_pGameObjectManager->update();
+
+		//m_pNMapRead->clear();
+		//m_pSMapRead->clear();
+		//m_pNMapWrite->clear();
+		//m_pSMapWrite->clear();
+
+		m_pTilemap = new Tilemap(this, 32, 32);
+		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+		m_pTilemap->load("Assets/CSV/alpha1-2.csv");
+
 		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowWidth(), 0, 0));
-		//Camera::setPosition(Camera::getPosition() - Vec3(Screen::getDisplayWidth(), 0, 0));
 	}
 	if (m_pPlayer->getPosition().x < -Screen::getWindowWidth() / 2) {
+		delete m_pTilemap;
+
+		m_pGameObjectManager->update();
+
+		m_pTilemap = new Tilemap(this, 32, 32);
+		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+		m_pTilemap->load("Assets/CSV/alpha1-1.csv");
+
 		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowWidth(), 0, 0));
-		//Camera::setPosition(Camera::getPosition() + Vec3(Screen::getDisplayWidth(), 0, 0));
 	}
 	if (m_pPlayer->getPosition().y > Screen::getWindowHeight() / 2) {
 		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowHeight(), 0, 0));
-		//Camera::setPosition(Camera::getPosition() - Vec3(Screen::getDisplayWidth(), 0, 0));
 	}
 	if (m_pPlayer->getPosition().y < -Screen::getWindowHeight() / 2) {
 		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowHeight(), 0, 0));
-		//Camera::setPosition(Camera::getPosition() + Vec3(Screen::getDisplayWidth(), 0, 0));
 	}
 
 	GameDevice::update();
@@ -121,6 +138,8 @@ void Game::update()
 	m_pGameObjectManager->update();
 
 	m_pPhysicsWorld->update();
+
+	m_pObstacleMap->clear();
 
 	m_pNMapRead->clear();
 	m_pSMapRead->clear();
