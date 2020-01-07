@@ -3,6 +3,7 @@
 
 #include "Actor\GameObject.h"
 #include "Actor\Player\Player.h"
+#include "Actor/Nobject/ObjN.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Tilemap\Tilemap.h"
 #include "Component\AbstractComponent.h"
@@ -24,6 +25,7 @@
 #include "Device\Camera.h"
 #include "Actor\Magnet\ForceMap.h"
 #include "Actor\Magnet\ObstacleMap.h"
+#include "Utility\Timer.h"
 
 Game::Game()
 {
@@ -45,24 +47,28 @@ void Game::init()
 	auto player = new Player(this);
 	player->setPosition(Vec3(-640 + 96, -360 + 96, 0));
 
-	auto tilemap = new Tilemap(this, 32, 32);
-	tilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	tilemap->load("Assets/CSV/test0.csv");
+	//“®‚­•¨‘ÌN
+	auto objN = new ObjN(this, 0);
+	objN->setPosition(Vec3(640 -250, -360 + 144, 0));
 
-	m_pObstacleMap = new ObstacleMap(32, 32, tilemap->getColumn(), tilemap->getRow());
-	m_pObstacleMap->setPosition(tilemap->getPosition().toVec2());
+	m_pTilemap = new Tilemap(this, 32, 32);
+	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+	m_pTilemap->load("Assets/CSV/test0.csv");
 
-	m_pNMapRead = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
-	m_pNMapRead->setPosition(tilemap->getPosition().toVec2());
+	m_pObstacleMap = new ObstacleMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow());
+	m_pObstacleMap->setPosition(m_pTilemap->getPosition().toVec2());
 
-	m_pNMapWrite = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
-	m_pNMapWrite->setPosition(tilemap->getPosition().toVec2());
+	m_pNMapRead = new ForceMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacleMap);
+	m_pNMapRead->setPosition(m_pTilemap->getPosition().toVec2());
 
-	m_pSMapRead = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
-	m_pSMapRead->setPosition(tilemap->getPosition().toVec2());
+	m_pNMapWrite = new ForceMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacleMap);
+	m_pNMapWrite->setPosition(m_pTilemap->getPosition().toVec2());
 
-	m_pSMapWrite = new ForceMap(32, 32, tilemap->getColumn(), tilemap->getRow(), m_pObstacleMap);
-	m_pSMapWrite->setPosition(tilemap->getPosition().toVec2());
+	m_pSMapRead = new ForceMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacleMap);
+	m_pSMapRead->setPosition(m_pTilemap->getPosition().toVec2());
+
+	m_pSMapWrite = new ForceMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacleMap);
+	m_pSMapWrite->setPosition(m_pTilemap->getPosition().toVec2());
 
 	TextureManager::loadTexture(L"Assets/Textures/CircleFill.png", "CircleFill");
 	TextureManager::loadTexture(L"Assets/Textures/CircleOutline.png", "CircleOutline");
@@ -101,10 +107,7 @@ void Game::draw()
 
 void Game::shutdown()
 {
-	delete m_pGameObjectManager;
-	delete m_pPhysicsWorld;
-	TextureManager::unLoadAll();
-	GameDevice::shutdown();
+	delete m_pTilemap;
 
 	delete m_pNMapRead;
 	delete m_pSMapRead;
@@ -113,6 +116,11 @@ void Game::shutdown()
 	delete m_pSMapWrite;
 
 	delete m_pObstacleMap;
+
+	delete m_pGameObjectManager;
+	delete m_pPhysicsWorld;
+	TextureManager::unLoadAll();
+	GameDevice::shutdown();
 }
 
 void Game::addGameObject(GameObject * pAddObject)
@@ -128,6 +136,11 @@ void Game::removeGameObject(GameObject * pRemoveObject)
 PhysicsWorld * Game::getPhysicsWorld()
 {
 	return m_pPhysicsWorld;
+}
+
+Tilemap * Game::getTilemap()
+{
+	return m_pTilemap;
 }
 
 ForceMap * Game::getNMapRead()
