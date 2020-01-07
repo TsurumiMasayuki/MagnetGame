@@ -16,6 +16,10 @@ Magnet::Magnet(IGameMediator * pGameMediator, MagnetOption magOption, bool isMov
 	setSize(Vec3(width, height, 0));
 }
 
+Magnet::~Magnet()
+{
+}
+
 void Magnet::start()
 {
 	m_pSprite = new SpriteRenderer(this);

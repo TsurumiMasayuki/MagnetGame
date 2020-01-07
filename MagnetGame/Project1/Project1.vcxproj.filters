@@ -58,7 +58,8 @@
     <ClCompile Include="Source\Actor\DetectHelper.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
     <ClCompile Include="Source\Actor\Stage\Stage.cpp" />
-    <ClCompile Include="Source\Actor\Tilemap\Tile.cpp" />
+    <ClCompile Include="Source\Component\AnimSpriteRenderer.cpp" />
+    <ClCompile Include="Source\Component\Tilemap\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -125,7 +126,8 @@
     <ClInclude Include="Source\Actor\DetectHelper.h" />
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
     <ClInclude Include="Source\Actor\Stage\Stage.h" />
-    <ClInclude Include="Source\Actor\Tilemap\Tile.h" />
+    <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
+    <ClInclude Include="Source\Component\Tilemap\Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

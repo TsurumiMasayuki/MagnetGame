@@ -1,12 +1,14 @@
 #include "Tilemap.h"
 #include <sstream>
+#include "Actor\GameObject.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Magnet\Magnet.h"
 #include "Device\File\CSVReader.h"
 #include "Utility\StringUtility.h"
+#include "Component\Tilemap\Tile.h"
 
 Tilemap::Tilemap(IGameMediator* pGameMediator, float cellWidth, float cellHeight)
-	: GameObject(pGameMediator),
+	: m_pGameMediator(pGameMediator),
 	m_CellWidth(cellWidth),
 	m_CellHeight(cellHeight)
 {
@@ -14,6 +16,12 @@ Tilemap::Tilemap(IGameMediator* pGameMediator, float cellWidth, float cellHeight
 
 Tilemap::~Tilemap()
 {
+	for (auto tile : m_TileList)
+	{
+		tile->getUser()->destroy();
+	}
+
+	m_TileList.clear();
 }
 
 void Tilemap::load(std::string csvFileName)
@@ -42,6 +50,16 @@ void Tilemap::load(std::string csvFileName)
 	}
 }
 
+void Tilemap::setPosition(Vec3 pos)
+{
+	m_Position = pos;
+}
+
+Vec3 Tilemap::getPosition()
+{
+	return m_Position;
+}
+
 float Tilemap::getWidth()
 {
 	return m_MapWidth;
@@ -52,20 +70,42 @@ float Tilemap::getHeight()
 	return m_MapHeight;
 }
 
+void Tilemap::addTile(Tile * pTile)
+{
+	m_TileList.emplace_back(pTile);
+}
+
+void Tilemap::removeTile(Tile * pTile)
+{
+	if (m_TileList.size() == 0) return;
+
+	auto itr = std::find(m_TileList.begin(), m_TileList.end(), pTile);
+	if (itr != m_TileList.end())
+	{
+		std::iter_swap(itr, m_TileList.end() - 1);
+		m_TileList.pop_back();
+	}
+}
+
 void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int x, unsigned int y)
 {
-	GameObject* block = nullptr;
+	GameObject* object = nullptr;
 
 	bool hasCollider =
 		reader.getDataClampIndex(x - 1, y) != "0" || reader.getDataClampIndex(x + 1, y) != "0" ||
 		reader.getDataClampIndex(x, y - 1) != "0" || reader.getDataClampIndex(x, y + 1) != "0";
 
 	if (data == "1")
-		block = new Block(m_pGameMediator, "BoxFill", m_CellWidth, m_CellHeight, hasCollider);
+		object = new Block(m_pGameMediator, "BoxFill", m_CellWidth, m_CellHeight, hasCollider);
 
+	if (object != nullptr)
+	{
+		object->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
 
-	if (block != nullptr)
-		block->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
+		//管理用にTileコンポーネントをアタッチ
+		auto tile = new Tile(object);
+		m_TileList.emplace_back(tile);
+	}
 }
 
 void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y)
@@ -123,5 +163,12 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 		0);
 	Vec3 position = tilePos + getPosition();
 
-	object->setPosition(position);
+	if (object != nullptr)
+	{
+		object->setPosition(position);
+
+		//管理用にTileコンポーネントをアタッチ
+		auto tile = new Tile(object);
+		m_TileList.emplace_back(tile);
+	}
 }

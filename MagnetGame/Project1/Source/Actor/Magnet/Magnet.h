@@ -15,6 +15,7 @@ public:
 	};
 
 	Magnet(IGameMediator* pGameMediator, MagnetOption magOption, bool isMove, bool isMagChange, float width, float height);
+	~Magnet();
 
 	virtual void start() override;
 	virtual void update() override;
