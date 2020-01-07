@@ -122,7 +122,7 @@ bool Player::isDetectLeft()
 
 bool Player::canSuperJump()
 {
-	return isSuperJump && m_pDetectDown->isDetect("MagnetN");
+	return isSuperJump && m_pDetectDown->isDetect("MagnetS");
 }
 
 bool Player::isSandwich()
