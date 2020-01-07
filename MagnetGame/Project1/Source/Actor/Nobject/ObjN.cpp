@@ -126,9 +126,9 @@ void ObjN::initMagChange()
 
 #ifdef _DEBUG
 	//デバッグ用範囲描画
-	auto sprite = new SpriteRenderer(m_nMagChange, 90);
+	/*auto sprite = new SpriteRenderer(m_nMagChange, 90);
 	sprite->setTextureName("BoxFill");
-	sprite->setColor(Color(0, 0, 1, 0.5f));
+	sprite->setColor(Color(0, 0, 1, 0.5f));*/
 #endif // _DEBUG
 
 	auto collider = new BoxCollider2D(m_nMagChange);
