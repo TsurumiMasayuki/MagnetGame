@@ -8,6 +8,7 @@
 #include "Physics\PhysicsWorld.h"
 
 class Tilemap;
+class Player;
 
 class Game :
 	public IGameMediator
@@ -49,6 +50,7 @@ private:
 	ForceMap* m_pSMapRead;
 
 	ObstacleMap* m_pObstacleMap;
+	Player* m_pPlayer;
   
 	CircleEffect* circleEffect;
 };

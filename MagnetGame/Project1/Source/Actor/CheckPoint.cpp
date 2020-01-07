@@ -17,6 +17,7 @@ CheckPoint::~CheckPoint()
 void CheckPoint::start()
 {
 	setSize(Vec3(64, 64, 0));
+	setTag("CheckPoint");
 
 	auto sprite = new SpriteRenderer(this);
 	sprite->setTextureName("BoxOutline");

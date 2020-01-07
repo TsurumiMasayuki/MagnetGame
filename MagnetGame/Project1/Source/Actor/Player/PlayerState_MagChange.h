@@ -11,6 +11,7 @@ class PlayerState_MagChange
 {
 public:
 	PlayerState_MagChange(Player* pPlayer);
+	~PlayerState_MagChange();
 
 	virtual void update() override;
 	virtual void onStateEnter() override;
