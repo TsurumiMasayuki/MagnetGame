@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -160,10 +160,13 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
     <ClCompile Include="Source\Actor\DetectHelper.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
+    <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
+    <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\Player.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
@@ -221,11 +224,14 @@
     <ClCompile Include="Source\WindowInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Actor\Effect\Particle.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />
     <ClInclude Include="Source\Actor\DetectHelper.h" />
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
+    <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
+    <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
     <ClInclude Include="Source\Actor\Player\Player.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Default.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />

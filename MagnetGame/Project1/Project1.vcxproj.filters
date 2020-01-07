@@ -60,6 +60,9 @@
     <ClCompile Include="Source\Actor\Stage\Stage.cpp" />
     <ClCompile Include="Source\Component\AnimSpriteRenderer.cpp" />
     <ClCompile Include="Source\Component\Tilemap\Tile.cpp" />
+    <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
+    <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
+    <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -128,6 +131,9 @@
     <ClInclude Include="Source\Actor\Stage\Stage.h" />
     <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
     <ClInclude Include="Source\Component\Tilemap\Tile.h" />
+    <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
+    <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
+    <ClInclude Include="Source\Actor\Effect\Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
