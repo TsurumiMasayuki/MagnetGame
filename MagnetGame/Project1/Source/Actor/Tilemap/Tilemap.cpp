@@ -46,7 +46,7 @@ void Tilemap::load(std::string csvFileName)
 			if (data[0] == 'g')
 				spawnMultiBlock(reader, groupList, x, y);
 			else if (data[0] == 'o')
-				spawnObject(reader, groupList, x, y);
+				spawnObject(reader, data,x, y);
 			else
 				spawnSingleBlock(reader, data, x, y);
 		}
@@ -90,11 +90,17 @@ void Tilemap::removeTile(Tile * pTile)
 	}
 }
 
-void Tilemap::spawnObject(CSVReader & reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y)
+void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, unsigned int y)
 {
 	GameObject* object = nullptr;
 
-	object = new ObjN(m_pGameMediator, 1);
+	std::vector<std::string> split;
+	StringUtility::split(data, '|', split);
+
+	if (split.at(1) == "R")
+		object = new ObjN(m_pGameMediator, 0);
+	else
+		object = new ObjN(m_pGameMediator, 1);
 
 	if (object != nullptr)
 	{
