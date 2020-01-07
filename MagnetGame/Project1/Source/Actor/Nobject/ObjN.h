@@ -9,14 +9,14 @@ class ObjN:
 	public GameObject
 {
 public:
-	ObjN(IGameMediator* nMediator,int dir);
+	ObjN(IGameMediator* nMediator);
 	~ObjN();
 
 	virtual void start() override;
 	virtual void update() override;
 	virtual void onDestroy() override;
 
-	virtual void onCollisionEnter(GameObject*nHit)override;
+	//virtual void onCollisionEnter(GameObject*nHit)override;
 	virtual void onCollisionStay(GameObject*nHit)override;
 
 	Gravity * getGravity();
