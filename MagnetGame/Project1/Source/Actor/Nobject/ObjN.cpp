@@ -6,14 +6,15 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
+#include "Device\Input.h"
 
 const float ObjN::MOVE_SPEED = 64.0f;
 
-ObjN::ObjN(IGameMediator * nMediator, int dir)
+ObjN::ObjN(IGameMediator * nMediator)
 	:GameObject(nMediator)
 {
 	//m_nStateManager = new StateManager();
-	direction = dir;
+	//direction = dir;
 }
 
 ObjN::~ObjN()
@@ -34,26 +35,29 @@ void ObjN::start()
 	collider->isMove = true;
 	collider->setWidth(64);
 	collider->setHeight(64);
-	//collider->layer = PhysicsLayer::Player;
+	collider->layer = PhysicsLayer::Player;
 
 	m_nGravity = new Gravity(this, 1);
 
 	initMagChange();
 	initDetectors();
+
+	direction = 1;
+
+	//setTag("MagChangeN");
 }
 
 void ObjN::update()
 {
-	//m_nStateManager->update();
 
 	//移動処理
 	switch (direction)
 	{
 	case 0:
-		x = 3.0f;
+		x = 1.5f;
 		break;
 	case 1:
-		x = -3.0f;
+		x = -1.5f;
 		break;
 	}
 
@@ -63,9 +67,21 @@ void ObjN::update()
 	Vec3 pos(getPosition());
 	float distX = getSize().x*0.5f;
 	float distY = getSize().y*0.5f;
-	m_nDetectLeft->setPosition(pos + Vec3(-1, 0, 0)*distX);
-	m_nDetectLeft->setPosition(pos + Vec3(1, 0, 0)*distX);
 
+
+	m_nDetectLeft->setPosition(pos + Vec3(-1, 0, 0)*distX);
+	m_nDetectRight->setPosition(pos + Vec3(1, 0, 0)*distX);
+
+	if (isDetectLeft() && direction == 1) {
+		direction = 0;
+	}
+
+	if (isDetectRight() && direction == 0) {
+		direction = 1;
+	}
+
+
+	m_nMagChange->setPosition(getPosition());
 }
 
 void ObjN::onDestroy()
@@ -76,15 +92,10 @@ void ObjN::onDestroy()
 	m_nDetectRight->destroy();
 }
 
-void ObjN::onCollisionEnter(GameObject * nHit)
-{
-	if (nHit->compareTag("Magnet")) {
-		x = -x;
-	}
-}
 
 void ObjN::onCollisionStay(GameObject * nHit)
 {
+
 }
 
 Gravity * ObjN::getGravity()
@@ -111,7 +122,7 @@ void ObjN::initMagChange()
 {
 	m_nMagChange = new GameObject(m_pGameMediator);
 	m_nMagChange->setTag("MagChangeN");
-	m_nMagChange->setSize(Vec3(64, 64, 0));
+	m_nMagChange->setSize(Vec3(96, 96, 0));
 
 #ifdef _DEBUG
 	//デバッグ用範囲描画
@@ -123,8 +134,8 @@ void ObjN::initMagChange()
 	auto collider = new BoxCollider2D(m_nMagChange);
 	collider->isTrigger = true;
 	collider->isMove = false;
-	collider->setWidth(64);
-	collider->setHeight(64);
+	collider->setWidth(96);
+	collider->setHeight(96);
 	collider->layer = PhysicsLayer::None;
 }
 
