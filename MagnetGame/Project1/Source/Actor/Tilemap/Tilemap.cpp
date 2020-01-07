@@ -46,7 +46,7 @@ void Tilemap::load(std::string csvFileName)
 			if (data[0] == 'g')
 				spawnMultiBlock(reader, groupList, x, y);
 			else if (data[0] == 'o')
-				spawnObject(reader, data,x, y);
+				spawnObject(reader, data, x, y);
 			else
 				spawnSingleBlock(reader, data, x, y);
 		}

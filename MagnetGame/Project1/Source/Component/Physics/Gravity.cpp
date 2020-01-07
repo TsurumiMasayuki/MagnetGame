@@ -84,7 +84,8 @@ AbstractComponent::TypeID Gravity::GroundDetector::getType() const
 
 void Gravity::GroundDetector::onCollisionEnter(GameObject * pHit)
 {
-	if (pHit != m_pListner->getUser() && !pHit->compareTag("MagChangeS"))
+	if (pHit != m_pListner->getUser() && !pHit->getCollider()->isTrigger &&
+		!(pHit->compareTag("CheckPoint") || pHit->compareTag("NObj")))
 	{
 		m_pListner->m_isGround = true;
 		m_pListner->m_GravSpeed = 0.0f;
@@ -93,7 +94,8 @@ void Gravity::GroundDetector::onCollisionEnter(GameObject * pHit)
 
 void Gravity::GroundDetector::onCollisionStay(GameObject * pHit)
 {
-	if (pHit != m_pListner->getUser() && !pHit->getCollider()->isTrigger)
+	if (pHit != m_pListner->getUser() && !pHit->getCollider()->isTrigger &&
+		!(pHit->compareTag("CheckPoint") || pHit->compareTag("NObj")))
 	{
 		m_pListner->m_isGround = true;
 		m_pListner->m_GravSpeed = 0.0f;
@@ -102,7 +104,8 @@ void Gravity::GroundDetector::onCollisionStay(GameObject * pHit)
 
 void Gravity::GroundDetector::onCollisionExit(GameObject * pHit)
 {
-	if (pHit != m_pListner->getUser() && !pHit->compareTag("MagChangeS"))
+	if (pHit != m_pListner->getUser() &&
+		!(pHit->compareTag("CheckPoint") || pHit->compareTag("ObjN")))
 	{
 		m_pListner->m_isGround = false;
 	}
