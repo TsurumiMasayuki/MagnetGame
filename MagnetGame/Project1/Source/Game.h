@@ -6,6 +6,7 @@
 #include "Scene\SceneManager.h"
 #include "Actor\IGameMediator.h"
 #include "Physics\PhysicsWorld.h"
+#include "Math\Vec2.h"
 
 class Tilemap;
 class Player;
@@ -55,7 +56,7 @@ private:
 	Player* m_pPlayer;
   
 	CircleEffect* circleEffect;
-
 	bool m_GameEndFlag;
+	Vec2 m_CurrentStage;
 };
 

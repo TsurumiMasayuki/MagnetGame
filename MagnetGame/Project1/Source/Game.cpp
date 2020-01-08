@@ -47,21 +47,23 @@ void Game::init()
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	m_pPlayer = new Player(this);
-	m_pPlayer->SetRespawnPoint(Vec3(600,250, 0));
+	m_pPlayer->SetRespawnPoint(Vec3(-450,-250, 0));
 	m_pPlayer->Respawn();
 
-	auto check = new CheckPoint(this, Vec3(-48, 48, 0));
-	check->setPosition(Vec3(-48, 48, 0));
+	//auto check = new CheckPoint(this, Vec3(-48, 48, 0));
+	//check->setPosition(Vec3(-48, 48, 0));
+
+	m_CurrentStage = Vec2(1, 1);
 
 	//“®‚­•¨‘ÌN
 
 	circleEffect = new CircleEffect(this);
-	circleEffect->Cleate(m_pPlayer->getPosition(),10, 5, 2, 15);
+	circleEffect->Cleate(m_pPlayer->getPosition(), 10, 5, 2, 15);
 	delete circleEffect;
 
 	m_pTilemap = new Tilemap(this, 32, 32);
 	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	m_pTilemap->load("Assets/CSV/alpha1-1.csv");
+	m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 	m_pObstacleMap = new ObstacleMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow());
 	m_pObstacleMap->setPosition(m_pTilemap->getPosition().toVec2());
@@ -92,8 +94,15 @@ void Game::update()
 {
 	if (Input::isKeyDown('R'))
 	{
-		shutdown();
-		init();
+		delete m_pTilemap;
+
+		m_pGameObjectManager->update();
+
+		m_pTilemap = new Tilemap(this, 32, 32);
+		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+		m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
+
+		m_pPlayer->Respawn();
 	}
 
 	GameDevice::update();
@@ -107,6 +116,7 @@ void Game::update()
 
 	if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
 		delete m_pTilemap;
+		m_CurrentStage.y++;
 
 		m_pGameObjectManager->update();
 
@@ -115,12 +125,13 @@ void Game::update()
 
 		m_pTilemap = new Tilemap(this, 32, 32);
 		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-		m_pTilemap->load("Assets/CSV/alpha1-2.csv");
+		m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowWidth(), 0, 0));
 	}
 	if (m_pPlayer->getPosition().x < -Screen::getWindowWidth() / 2) {
 		delete m_pTilemap;
+		m_CurrentStage.y--;
 
 		m_pGameObjectManager->update();
 
@@ -129,7 +140,7 @@ void Game::update()
 
 		m_pTilemap = new Tilemap(this, 32, 32);
 		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-		m_pTilemap->load("Assets/CSV/alpha1-1.csv");
+		m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowWidth(), 0, 0));
 	}

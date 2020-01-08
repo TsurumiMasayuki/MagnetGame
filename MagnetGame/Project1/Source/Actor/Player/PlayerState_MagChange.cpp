@@ -50,4 +50,5 @@ IState * PlayerState_MagChange::nextState()
 {
 	if (m_pTimer->isTime())
 		return new PlayerState_Default(m_pPlayer);
+	return nullptr;
 }
