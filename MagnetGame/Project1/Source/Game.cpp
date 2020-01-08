@@ -85,6 +85,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
 
 	GameDevice::initialize();
+	m_GameEndFlag = false;
 }
 
 void Game::update()
@@ -94,6 +95,15 @@ void Game::update()
 		shutdown();
 		init();
 	}
+
+	GameDevice::update();
+
+	Input::update();
+	SoundManager::update();
+
+	//ゲームが終了していたらオブジェクトの更新を止める
+	if (m_GameEndFlag)
+		return;
 
 	if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
 		delete m_pTilemap;
@@ -129,11 +139,6 @@ void Game::update()
 	if (m_pPlayer->getPosition().y < -Screen::getWindowHeight() / 2) {
 		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowHeight(), 0, 0));
 	}
-
-	GameDevice::update();
-
-	Input::update();
-	SoundManager::update();
 
 	//シーンの更新
 	m_pGameObjectManager->update();
@@ -216,4 +221,9 @@ ForceMap * Game::getSMapWrite()
 ObstacleMap * Game::getObstacleMap()
 {
 	return m_pObstacleMap;
+}
+
+void Game::gameEnd()
+{
+	m_GameEndFlag = true;
 }
