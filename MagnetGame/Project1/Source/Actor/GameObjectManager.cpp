@@ -95,4 +95,6 @@ void GameObjectManager::destroyObjects()
 	}
 
 	destroyList.clear();
+
+	m_GameObjects.shrink_to_fit();
 }

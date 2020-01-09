@@ -24,6 +24,8 @@ public:
 
 	virtual ObstacleMap* getObstacleMap() = 0;
 
+	virtual void gameEnd() = 0;
+
 protected:
 	IGameMediator() {};
 	virtual ~IGameMediator() {};

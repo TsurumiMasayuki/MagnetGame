@@ -37,6 +37,8 @@ public:
 
 	virtual ObstacleMap * getObstacleMap() override;
 
+	virtual void gameEnd() override;
+
 private:
 	GameObjectManager* m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
@@ -54,6 +56,7 @@ private:
 	Player* m_pPlayer;
   
 	CircleEffect* circleEffect;
+	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
 };
 

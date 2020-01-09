@@ -36,7 +36,6 @@ void app()
 	if (unscaledDeltaTime < MIN_FRAME_TIME)
 	{
 		float diff = MIN_FRAME_TIME - unscaledDeltaTime;
-		GameTime::addSleepTime(diff);
 		Sleep(diff * 1000.0f);
 	}
 

@@ -87,6 +87,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
 
 	GameDevice::initialize();
+	m_GameEndFlag = false;
 }
 
 void Game::update()
@@ -104,11 +105,23 @@ void Game::update()
 		m_pPlayer->Respawn();
 	}
 
+	GameDevice::update();
+
+	Input::update();
+	SoundManager::update();
+
+	//ゲームが終了していたらオブジェクトの更新を止める
+	if (m_GameEndFlag)
+		return;
+
 	if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
 		delete m_pTilemap;
 		m_CurrentStage.y++;
 
 		m_pGameObjectManager->update();
+
+		//障害物マップをクリア
+		m_pObstacleMap->clear();
 
 		m_pTilemap = new Tilemap(this, 32, 32);
 		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
@@ -121,6 +134,9 @@ void Game::update()
 		m_CurrentStage.y--;
 
 		m_pGameObjectManager->update();
+
+		//障害物マップをクリア
+		m_pObstacleMap->clear();
 
 		m_pTilemap = new Tilemap(this, 32, 32);
 		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
@@ -135,17 +151,10 @@ void Game::update()
 		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowHeight(), 0, 0));
 	}
 
-	GameDevice::update();
-
-	Input::update();
-	SoundManager::update();
-
 	//シーンの更新
 	m_pGameObjectManager->update();
 
 	m_pPhysicsWorld->update();
-
-	m_pObstacleMap->clear();
 
 	m_pNMapRead->clear();
 	m_pSMapRead->clear();
@@ -223,4 +232,9 @@ ForceMap * Game::getSMapWrite()
 ObstacleMap * Game::getObstacleMap()
 {
 	return m_pObstacleMap;
+}
+
+void Game::gameEnd()
+{
+	m_GameEndFlag = true;
 }
