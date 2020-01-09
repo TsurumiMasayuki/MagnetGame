@@ -66,6 +66,7 @@
     <ClCompile Include="Source\Actor\Effect\CircleEffect.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\GoalObject.cpp" />
     <ClCompile Include="Source\Actor\CheckPoint.cpp" />
+    <ClCompile Include="Source\Component\SpriteAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Source\Actor\Effect\CircleEffect.h" />
     <ClInclude Include="Source\Actor\Tilemap\GoalObject.h" />
     <ClInclude Include="Source\Actor\CheckPoint.h" />
+    <ClInclude Include="Source\Component\SpriteAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
