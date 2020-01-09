@@ -1,5 +1,7 @@
 #include "GameObjectManager.h"
 
+#include <unordered_set>
+
 #include "GameObject.h"
 #include "Def/ManagerConfig.h"
 
@@ -76,17 +78,18 @@ void GameObjectManager::addObjects()
 
 void GameObjectManager::destroyObjects()
 {
-	std::vector<GameObject*> destroyList;
+	//d•¡‚µ‚Ä“ñdíœ‚É‚È‚é‚Ì‚ğ–h~‚·‚é
+	std::unordered_set<GameObject*> destroyList;
 	for (auto gameObject : m_GameObjects)
 	{
 		if (gameObject->isDestroy())
-			destroyList.emplace_back(gameObject);
+			destroyList.emplace(gameObject);
 	}
 
 	for (auto gameObject : m_AddObjects)
 	{
 		if (gameObject->isDestroy())
-			destroyList.emplace_back(gameObject);
+			destroyList.emplace(gameObject);
 	}
 
 	for (auto destroy : destroyList)
