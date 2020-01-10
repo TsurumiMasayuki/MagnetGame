@@ -19,16 +19,22 @@ public:
 	void load(std::string mapFileName);
 
 	Tilemap* getTilemap();
+	ForceMap* getNMapRead();
+	ForceMap* getSMapRead();
+	ForceMap* getNMapWrite();
+	ForceMap* getSMapWrite();
 	ObstacleMap* getObstacle();
-	ForceMap* getForceMapN();
-	ForceMap* getForceMapS();
 
 private:
 	Tilemap* m_pTilemap;
 	ObstacleMap* m_pObstacle;
 
-	ForceMap* m_pForceMapN;
-	ForceMap* m_pForceMapS;
+	ForceMap* m_pNMapWrite;
+	ForceMap* m_pSMapWrite;
+
+	ForceMap* m_pNMapRead;
+	ForceMap* m_pSMapRead;
+
 
 	Vec3 m_Position;
 };

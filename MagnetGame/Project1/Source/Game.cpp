@@ -55,9 +55,10 @@ void Game::init()
 	GameDevice::initialize();
 	m_GameEndFlag = false;
 
-	m_SceneManager.addScene("Title", new Title());
-	m_SceneManager.addScene("GamePlay", new GamePlay());
-	m_SceneManager.changeScene("GamePlay");
+	m_pSceneManager = new SceneManager();
+	m_pSceneManager->addScene("Title", new Title());
+	m_pSceneManager->addScene("GamePlay", new GamePlay());
+	m_pSceneManager->changeScene("GamePlay");
 }
 
 void Game::update()
@@ -71,7 +72,7 @@ void Game::update()
 	if (m_GameEndFlag)
 		return;
 
-	m_SceneManager.update();
+	m_pSceneManager->update();
 }
 
 void Game::draw()
@@ -81,6 +82,7 @@ void Game::draw()
 
 void Game::shutdown()
 {
+	delete m_pSceneManager;
 	TextureManager::unLoadAll();
 	GameDevice::shutdown();
 }

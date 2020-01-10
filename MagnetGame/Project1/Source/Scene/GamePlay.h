@@ -5,6 +5,7 @@
 
 class GameObjectManager;
 class Player;
+class Stage;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -33,17 +34,11 @@ private:
 	GameObjectManager* m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
 
-	Tilemap* m_pTilemap;
-
-	ForceMap* m_pNMapWrite;
-	ForceMap* m_pSMapWrite;
-
-	ForceMap* m_pNMapRead;
-	ForceMap* m_pSMapRead;
-
-	ObstacleMap* m_pObstacleMap;
 	Player* m_pPlayer;
 
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
+
+	Stage* m_pCurrentStage;
+	Stage* m_pNextStage;
 };
