@@ -3,13 +3,13 @@
 #include "Actor\GameObjectManager.h"
 #include "Actor/Effect/CircleEffect.h"
 #include "Scene\AbstractScene.h"
-#include "Scene\SceneManager.h"
 #include "Actor\IGameMediator.h"
 #include "Physics\PhysicsWorld.h"
 #include "Math\Vec2.h"
 
 class Tilemap;
 class Player;
+class SceneManager;
 
 class Game
 {
@@ -25,7 +25,7 @@ public:
 private:
 	GameObjectManager* m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
-	SceneManager m_SceneManager;
+	SceneManager* m_pSceneManager;
 
 	Tilemap* m_pTilemap;
 

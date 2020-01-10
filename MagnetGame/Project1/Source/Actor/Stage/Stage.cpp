@@ -9,16 +9,20 @@ Stage::Stage(IGameMediator* pMediator, float cellWidth, float cellHeight)
 
 	m_pObstacle = new ObstacleMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow());
 
-	m_pForceMapN = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
-	m_pForceMapS = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pNMapRead = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pNMapWrite = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pSMapRead = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pSMapWrite = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
 }
 
 Stage::~Stage()
 {
 	delete m_pTilemap;
 	delete m_pObstacle;
-	delete m_pForceMapN;
-	delete m_pForceMapS;
+	delete m_pNMapRead;
+	delete m_pSMapRead;
+	delete m_pNMapWrite;
+	delete m_pSMapWrite;
 }
 
 void Stage::setPosition(Vec3 pos)
@@ -38,8 +42,10 @@ void Stage::load(std::string mapFileName)
 
 	m_pObstacle->setPosition(m_Position.toVec2());
 
-	m_pForceMapN->setPosition(m_Position.toVec2());
-	m_pForceMapS->setPosition(m_Position.toVec2());
+	m_pNMapRead->setPosition(m_Position.toVec2());
+	m_pSMapRead->setPosition(m_Position.toVec2());
+	m_pNMapWrite->setPosition(m_Position.toVec2());
+	m_pSMapWrite->setPosition(m_Position.toVec2());
 }
 
 Tilemap * Stage::getTilemap()
@@ -47,17 +53,27 @@ Tilemap * Stage::getTilemap()
 	return m_pTilemap;
 }
 
+ForceMap * Stage::getNMapRead()
+{
+	return m_pNMapRead;
+}
+
+ForceMap * Stage::getSMapRead()
+{
+	return m_pNMapWrite;
+}
+
+ForceMap * Stage::getNMapWrite()
+{
+	return m_pSMapRead;
+}
+
+ForceMap * Stage::getSMapWrite()
+{
+	return m_pSMapWrite;
+}
+
 ObstacleMap * Stage::getObstacle()
 {
 	return m_pObstacle;
-}
-
-ForceMap * Stage::getForceMapN()
-{
-	return m_pForceMapN;
-}
-
-ForceMap * Stage::getForceMapS()
-{
-	return m_pForceMapS;
 }

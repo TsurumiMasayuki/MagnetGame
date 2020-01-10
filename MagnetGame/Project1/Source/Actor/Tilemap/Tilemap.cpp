@@ -108,7 +108,6 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 
 		//管理用にTileコンポーネントをアタッチ
 		auto tile = new Tile(object);
-		m_TileList.emplace_back(tile);
 	}
 }
 
@@ -131,7 +130,6 @@ void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int
 
 		//管理用にTileコンポーネントをアタッチ
 		auto tile = new Tile(object);
-		m_TileList.emplace_back(tile);
 	}
 }
 
@@ -196,6 +194,5 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 
 		//管理用にTileコンポーネントをアタッチ
 		auto tile = new Tile(object);
-		m_TileList.emplace_back(tile);
 	}
 }

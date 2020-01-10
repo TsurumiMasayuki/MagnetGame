@@ -6,6 +6,7 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+	m_Scenes.at(m_CurrentScene)->shutdown();
 	for (auto pScene : m_Scenes)
 	{
 		delete pScene.second;
