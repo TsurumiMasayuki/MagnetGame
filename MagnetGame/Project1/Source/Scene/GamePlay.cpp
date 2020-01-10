@@ -42,67 +42,23 @@ void GamePlay::update()
 {
 	if (Input::isKeyDown('R'))
 	{
-		//m_pCurrentStage->load("Assets/CSV/alpha1-1.csv");
+		m_pPreviousStage = m_pCurrentStage;
+		delete m_pPreviousStage;
+		m_pCurrentStage = new Stage(this, 32, 32);
+		m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+		m_pCurrentStage->load("Assets/CSV/alpha1-1.csv");
 	}
-
-	/*if (Input::isKeyDown('R'))
-	{
-		delete m_pTilemap;
-
-		m_pGameObjectManager->update();
-
-		m_pTilemap = new Tilemap(this, 32, 32);
-		m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-		m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
-
-		m_pPlayer->Respawn();
-	}*/
 
 	//ゲームが終了していたらオブジェクトの更新を止める
 	if (m_GameEndFlag)
 		return;
 
-	//if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
-	//	delete m_pTilemap;
-	//	m_CurrentStage.y++;
-
-	//	m_pGameObjectManager->update();
-
-	//	//障害物マップをクリア
-	//	m_pObstacleMap->clear();
-
-	//	m_pTilemap = new Tilemap(this, 32, 32);
-	//	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	//	m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
-
-	//	m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowWidth(), 0, 0));
-	//}
-	//if (m_pPlayer->getPosition().x < -Screen::getWindowWidth() / 2) {
-	//	delete m_pTilemap;
-	//	m_CurrentStage.y--;
-
-	//	m_pGameObjectManager->update();
-
-	//	//障害物マップをクリア
-	//	m_pObstacleMap->clear();
-
-	//	m_pTilemap = new Tilemap(this, 32, 32);
-	//	m_pTilemap->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	//	m_pTilemap->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
-
-	//	m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowWidth(), 0, 0));
-	//}
-	//if (m_pPlayer->getPosition().y > Screen::getWindowHeight() / 2) {
-	//	m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowHeight(), 0, 0));
-	//}
-	//if (m_pPlayer->getPosition().y < -Screen::getWindowHeight() / 2) {
-	//	m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowHeight(), 0, 0));
-	//}
-
 	//シーンの更新
 	m_pGameObjectManager->update();
 
 	m_pPhysicsWorld->update();
+
+	m_pCurrentStage->update();
 }
 
 void GamePlay::draw()
