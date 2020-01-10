@@ -1,10 +1,18 @@
 #include "Title.h"
 
+Title::Title()
+{
+}
+
+Title::~Title()
+{
+}
+
 void Title::init()
 {
 }
 
-void Title::update(float deltaTime)
+void Title::update()
 {
 }
 
