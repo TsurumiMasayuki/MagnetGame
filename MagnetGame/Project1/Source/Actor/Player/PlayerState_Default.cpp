@@ -1,5 +1,6 @@
 #include "PlayerState_Default.h"
 #include "Device\GameInput.h"
+#include "Device\SoundManager.h"
 #include "Actor\Player\Player.h"
 #include "Actor\Player\PlayerState_Jump.h"
 #include "Actor\Player\PlayerState_SuperJump.h"
@@ -31,6 +32,7 @@ IState * PlayerState_Default::nextState()
 		if (m_pPlayer->canSuperJump())
 			return new PlayerState_SuperJump(m_pPlayer);
 		else
+			SoundManager::playSE("jump", 0);
 			return new PlayerState_Jump(m_pPlayer);
 	}
 

@@ -4,8 +4,8 @@
 
 #include "Actor\Player\Player.h"
 #include "Component\Physics\Gravity.h"
-
 #include "Device\GameInput.h"
+#include "Device\SoundManager.h"
 #include "PlayerState_Default.h"
 #include "PlayerState_MagChange.h"
 
@@ -14,6 +14,7 @@ const float PlayerState_SuperJump::MAX_JUMP_FORCE = 500.0f;
 PlayerState_SuperJump::PlayerState_SuperJump(Player* pPlayer)
 	: m_pPlayer(pPlayer), m_pGravity(pPlayer->getGravity())
 {
+	SoundManager::playSE("S_jump",0);
 }
 
 void PlayerState_SuperJump::update()
