@@ -11,8 +11,7 @@
 class Tilemap;
 class Player;
 
-class Game :
-	public IGameMediator
+class Game
 {
 public:
 	Game();
@@ -22,22 +21,6 @@ public:
 	void update();
 	void draw();
 	void shutdown();
-
-	virtual void addGameObject(GameObject* pAddObject) override;
-	virtual void removeGameObject(GameObject * pRemoveObject) override;
-	virtual PhysicsWorld * getPhysicsWorld() override;
-
-	virtual Tilemap * getTilemap() override;
-
-	virtual ForceMap* getNMapRead() override;
-	virtual ForceMap* getSMapRead() override;
-
-	virtual ForceMap* getNMapWrite() override;
-	virtual ForceMap* getSMapWrite() override;
-
-	virtual ObstacleMap * getObstacleMap() override;
-
-	virtual void gameEnd() override;
 
 private:
 	GameObjectManager* m_pGameObjectManager;
