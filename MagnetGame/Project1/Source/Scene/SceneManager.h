@@ -9,7 +9,7 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void update(float deltaTime);
+	void update();
 	void draw();
 
 	void addScene(std::string key, AbstractScene* pAbstractScene);
