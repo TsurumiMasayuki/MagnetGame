@@ -5,7 +5,7 @@
 #include "Actor\Player\Player.h"
 #include "Component\Physics\Gravity.h"
 
-#include "Device\Input.h"
+#include "Device\GameInput.h"
 #include "PlayerState_Default.h"
 #include "PlayerState_MagChange.h"
 
@@ -35,7 +35,7 @@ IState * PlayerState_Jump::nextState()
 		return new PlayerState_Default(m_pPlayer);
 	if (m_pPlayer->GetJumpForce() <= 0 || m_pPlayer->isDetectUp())
 		return new PlayerState_Default(m_pPlayer);
-	if (Input::isKeyDown('Z'))
+	if (GameInput::isMagChange())
 		return new PlayerState_MagChange(m_pPlayer);
 
 	return nullptr;

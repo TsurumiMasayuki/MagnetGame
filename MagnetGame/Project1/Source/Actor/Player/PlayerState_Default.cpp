@@ -1,5 +1,5 @@
 #include "PlayerState_Default.h"
-#include "Device\Input.h"
+#include "Device\GameInput.h"
 #include "Actor\Player\Player.h"
 #include "Actor\Player\PlayerState_Jump.h"
 #include "Actor\Player\PlayerState_SuperJump.h"
@@ -26,7 +26,7 @@ void PlayerState_Default::onStateExit()
 
 IState * PlayerState_Default::nextState()
 {
-	if (Input::isKeyDown(VK_SPACE) && m_pPlayer->isDetectDown())
+	if (GameInput::isJump() && m_pPlayer->isDetectDown())
 	{
 		if (m_pPlayer->canSuperJump())
 			return new PlayerState_SuperJump(m_pPlayer);
@@ -34,7 +34,7 @@ IState * PlayerState_Default::nextState()
 			return new PlayerState_Jump(m_pPlayer);
 	}
 
-	if (Input::isKeyDown('Z'))
+	if (GameInput::isMagChange())
 		return new PlayerState_MagChange(m_pPlayer);
 
 	return nullptr;

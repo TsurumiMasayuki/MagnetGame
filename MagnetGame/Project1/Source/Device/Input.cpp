@@ -10,6 +10,8 @@ BYTE Input::m_PreKeys[256];
 JOYINFOEX Input::m_CurPadInfo;
 JOYINFOEX Input::m_PrePadInfo;
 
+bool Input::m_isPadConnected = false;
+
 #define PRESSED 0x80
 #define JOYSTICK_CENTER 32767.0f
 #define JOYSTICK_MAX 65535.0f
@@ -50,21 +52,24 @@ Vec3 Input::getWorldMousePosition()
 
 bool Input::isPadButtonUp(PAD_BUTTON button)
 {
-	return !(m_CurPadInfo.dwButtons & button) && (m_PrePadInfo.dwButtons & button);
+	return m_isPadConnected && !(m_CurPadInfo.dwButtons & button) && (m_PrePadInfo.dwButtons & button);
 }
 
 bool Input::isPadButton(PAD_BUTTON button)
 {
-	return (m_CurPadInfo.dwButtons & button) && (m_PrePadInfo.dwButtons & button);
+	return m_isPadConnected && (m_CurPadInfo.dwButtons & button) && (m_PrePadInfo.dwButtons & button);
 }
 
 bool Input::isPadButtonDown(PAD_BUTTON button)
 {
-	return (m_CurPadInfo.dwButtons & button) && !(m_PrePadInfo.dwButtons & button);
+	return  m_isPadConnected && (m_CurPadInfo.dwButtons & button) && !(m_PrePadInfo.dwButtons & button);
 }
 
 Vec2 Input::getDPadValue()
 {
+	if (!m_isPadConnected)
+		return Vec2::zero();
+
 	Vec2 axis;
 	//左入力されていたら
 	if (m_CurPadInfo.dwPOV == JOY_POVLEFT)
@@ -99,6 +104,9 @@ Vec2 Input::getDPadValue()
 
 Vec2 Input::getLStickValue()
 {
+	if (!m_isPadConnected)
+		return Vec2::zero();
+
 	Vec2 axis(0, 0);
 	//-JOYSTICK_CENTER ~ +JOYSTICK_CENTERの間に値を修正
 	float centeredX = (m_CurPadInfo.dwXpos - JOYSTICK_CENTER);
@@ -117,6 +125,9 @@ Vec2 Input::getLStickValue()
 
 Vec2 Input::getRStickValue()
 {
+	if (!m_isPadConnected)
+		return Vec2::zero();
+
 	Vec2 axis(0, 0);
 	//-JOYSTICK_CENTER ~ +JOYSTICK_CENTERの間に値を修正
 	float centeredZ = (m_CurPadInfo.dwZpos - JOYSTICK_CENTER);
@@ -149,6 +160,8 @@ void Input::update()
 
 	bool noError = false;
 
+	m_isPadConnected = false;
+
 	//接続されているコントローラーを探す
 	for (int i = 0; i < joyGetNumDevs(); i++)
 	{
@@ -156,12 +169,8 @@ void Input::update()
 		if (joyGetPosEx(i, &m_CurPadInfo) == JOYERR_NOERROR)
 		{
 			noError = true;
+			m_isPadConnected = true;
 			break;
 		}
 	}
-
-	//接続されていなかったら処理を中断
-	if (!noError) return;
-
-	Vec2 axis = getRStickValue();
 }

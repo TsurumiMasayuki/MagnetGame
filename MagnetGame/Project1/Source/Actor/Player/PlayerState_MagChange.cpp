@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "PlayerState_Default.h"
 #include "Utility\Timer.h"
-#include "Device\Input.h"
+#include "Device\GameInput.h"
 
 PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
 	: m_pPlayer(pPlayer), m_pTimer(new Timer(1.0f))
@@ -28,15 +28,7 @@ void PlayerState_MagChange::onStateEnter()
 	m_pMagChange = m_pPlayer->getMagChange();
 	m_pMagChange->setActive(true);
 
-	if (Input::isKey(VK_UP))
-		m_MagChangeDir.y = 1;
-	else if (Input::isKey(VK_DOWN))
-		m_MagChangeDir.y = -1;
-	else if (Input::isKey(VK_RIGHT))
-		m_MagChangeDir.x = 1;
-	else
-		m_MagChangeDir.x = -1;
-
+	m_MagChangeDir = GameInput::getMagChangeDir().toVec3();
 }
 
 void PlayerState_MagChange::onStateExit()
