@@ -3,10 +3,13 @@
 #include "PlayerState_Default.h"
 #include "Utility\Timer.h"
 #include "Device\Input.h"
+#include "Device\SoundManager.h"
 
 PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
 	: m_pPlayer(pPlayer), m_pTimer(new Timer(1.0f))
 {
+
+	SoundManager::playSE("punch",0);
 }
 
 PlayerState_MagChange::~PlayerState_MagChange()

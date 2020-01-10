@@ -1,4 +1,5 @@
 #include "Title.h"
+#include "Device\Input.h"
 
 Title::Title()
 {
@@ -14,6 +15,9 @@ void Title::init()
 
 void Title::update()
 {
+	if (Input::isKeyDown(VK_SPACE)) {
+		
+	}
 }
 
 void Title::draw()

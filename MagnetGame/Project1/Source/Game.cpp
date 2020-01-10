@@ -51,6 +51,16 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
 	TextureManager::loadTexture(L"Assets/Textures/BoxOutline.png", "BoxOutline");
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
+	
+	//BGM’Ç‰Á
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
+
+	//SE’Ç‰Á
+	SoundManager::loadWavFile(L"Assets/Sound/SE/Jump.wav", "jump");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/S_Jump.wav", "S_jump");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/punch.wav", "punch");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/MagChange.wav", "MagChange");
 
 	GameDevice::initialize();
 	m_GameEndFlag = false;

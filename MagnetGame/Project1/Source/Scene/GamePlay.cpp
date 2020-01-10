@@ -11,6 +11,7 @@
 #include "Physics\PhysicsWorld.h"
 
 #include "Device\Input.h"
+#include "Device\SoundManager.h"
 #include "Def\Screen.h"
 
 GamePlay::GamePlay()
@@ -51,6 +52,8 @@ void GamePlay::init()
 
 	m_pSMapWrite = new ForceMap(32, 32, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacleMap);
 	m_pSMapWrite->setPosition(m_pTilemap->getPosition().toVec2());
+
+	SoundManager::playBGM("game2");
 
 	m_GameEndFlag = false;
 }
@@ -124,6 +127,7 @@ void GamePlay::update()
 
 	m_pNMapWrite->clear();
 	m_pSMapWrite->clear();
+
 }
 
 void GamePlay::draw()
