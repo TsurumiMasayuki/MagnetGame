@@ -3,16 +3,10 @@
 #include "Actor\Magnet\ObstacleMap.h"
 #include "Actor\Magnet\ForceMap.h"
 
-Stage::Stage(IGameMediator* pMediator, float cellWidth, float cellHeight)
+Stage::Stage(IGameMediator* pMediator, float cellWidth, float cellHeight) :
+	m_CellWidth(cellWidth), m_CellHeight(cellHeight)
 {
 	m_pTilemap = new Tilemap(pMediator, cellWidth, cellHeight);
-
-	m_pObstacle = new ObstacleMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow());
-
-	m_pNMapRead = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
-	m_pNMapWrite = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
-	m_pSMapRead = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
-	m_pSMapWrite = new ForceMap(cellWidth, cellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
 }
 
 Stage::~Stage()
@@ -40,12 +34,31 @@ void Stage::load(std::string mapFileName)
 	m_pTilemap->setPosition(m_Position);
 	m_pTilemap->load(mapFileName);
 
+	m_pObstacle = new ObstacleMap(m_CellWidth, m_CellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow());
+
+	m_pNMapRead = new ForceMap(m_CellWidth, m_CellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pNMapWrite = new ForceMap(m_CellWidth, m_CellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pSMapRead = new ForceMap(m_CellWidth, m_CellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+	m_pSMapWrite = new ForceMap(m_CellWidth, m_CellHeight, m_pTilemap->getColumn(), m_pTilemap->getRow(), m_pObstacle);
+
 	m_pObstacle->setPosition(m_Position.toVec2());
 
 	m_pNMapRead->setPosition(m_Position.toVec2());
 	m_pSMapRead->setPosition(m_Position.toVec2());
 	m_pNMapWrite->setPosition(m_Position.toVec2());
 	m_pSMapWrite->setPosition(m_Position.toVec2());
+}
+
+void Stage::update()
+{
+	m_pNMapRead->clear();
+	m_pSMapRead->clear();
+
+	m_pNMapWrite->copyTo(*m_pNMapRead);
+	m_pSMapWrite->copyTo(*m_pSMapRead);
+
+	m_pNMapWrite->clear();
+	m_pSMapWrite->clear();
 }
 
 Tilemap * Stage::getTilemap()
@@ -60,12 +73,12 @@ ForceMap * Stage::getNMapRead()
 
 ForceMap * Stage::getSMapRead()
 {
-	return m_pNMapWrite;
+	return m_pSMapRead;
 }
 
 ForceMap * Stage::getNMapWrite()
 {
-	return m_pSMapRead;
+	return m_pNMapWrite;
 }
 
 ForceMap * Stage::getSMapWrite()

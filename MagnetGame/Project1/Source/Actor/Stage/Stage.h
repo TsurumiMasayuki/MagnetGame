@@ -17,6 +17,7 @@ public:
 	Vec3 getPosition();
 
 	void load(std::string mapFileName);
+	void update();
 
 	Tilemap* getTilemap();
 	ForceMap* getNMapRead();
@@ -37,4 +38,7 @@ private:
 
 
 	Vec3 m_Position;
+
+	float m_CellWidth;
+	float m_CellHeight;
 };
