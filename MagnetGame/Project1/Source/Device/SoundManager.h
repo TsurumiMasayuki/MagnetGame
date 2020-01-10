@@ -18,7 +18,7 @@ public:
 	static void update();
 	static void shutdown();
 
-	static void loadWavFile(const WCHAR* filePath , std::string key);
+	static void loadWavFile(const WCHAR* filePath, std::string key);
 	static void playSE(std::string key, UINT loopCount = 0);
 	static void playBGM(std::string key);
 	static void stopBGM();

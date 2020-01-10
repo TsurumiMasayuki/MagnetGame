@@ -7,7 +7,7 @@
 #include "Actor\DetectHelper.h"
 
 #include "PlayerState_Default.h"
-#include "Device\Input.h"
+#include "Device\GameInput.h"
 #include "Device\GameTime.h"
 #include "Device\File\CSVReader.h"
 
@@ -55,14 +55,7 @@ void Player::update()
 {
 	m_pStateManager->update();
 
-	float x = 0.0f;
-
-	if (Input::isKey(VK_LEFT))
-		x -= 1.0f;
-
-	if (Input::isKey(VK_RIGHT))
-		x += 1.0f;
-
+	float x = GameInput::getHorizontal();
 	Vec3 move(x * MOVE_SPEED * GameTime::getDeltaTime(), 0, 0);
 	setPosition(getPosition() + move);
 

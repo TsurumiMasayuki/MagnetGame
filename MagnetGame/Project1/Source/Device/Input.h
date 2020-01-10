@@ -53,5 +53,7 @@ private:
 
 	static JOYINFOEX m_CurPadInfo;
 	static JOYINFOEX m_PrePadInfo;
+
+	static bool m_isPadConnected;
 };
 

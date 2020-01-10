@@ -191,6 +191,7 @@
     <ClCompile Include="Source\Device\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Source\Device\File\CSVReader.cpp" />
     <ClCompile Include="Source\Device\GameDevice.cpp" />
+    <ClCompile Include="Source\Device\GameInput.cpp" />
     <ClCompile Include="Source\Device\GameTime.cpp" />
     <ClCompile Include="Source\Device\Renderer.cpp" />
     <ClCompile Include="Source\Math\RectF.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="Source\Device\Buffer\WVPConstantBuffer.h" />
     <ClInclude Include="Source\Device\File\CSVReader.h" />
     <ClInclude Include="Source\Device\GameDevice.h" />
+    <ClInclude Include="Source\Device\GameInput.h" />
     <ClInclude Include="Source\Device\GameTime.h" />
     <ClInclude Include="Source\Device\IRenderable2D.h" />
     <ClInclude Include="Source\Device\Renderer.h" />

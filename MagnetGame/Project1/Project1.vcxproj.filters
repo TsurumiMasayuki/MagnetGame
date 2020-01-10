@@ -67,6 +67,7 @@
     <ClCompile Include="Source\Actor\Tilemap\GoalObject.cpp" />
     <ClCompile Include="Source\Actor\CheckPoint.cpp" />
     <ClCompile Include="Source\Component\SpriteAnimation.cpp" />
+    <ClCompile Include="Source\Device\GameInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Source\Actor\Tilemap\GoalObject.h" />
     <ClInclude Include="Source\Actor\CheckPoint.h" />
     <ClInclude Include="Source\Component\SpriteAnimation.h" />
+    <ClInclude Include="Source\Device\GameInput.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

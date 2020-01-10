@@ -39,6 +39,7 @@ void ObjN::start()
 
 	m_nGravity = new Gravity(this, 20);
 
+	setTag("ObjN");
 
 	initMagChange();
 	initDetectors();
