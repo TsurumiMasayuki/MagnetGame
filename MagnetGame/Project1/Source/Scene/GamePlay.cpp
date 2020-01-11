@@ -24,6 +24,8 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
+	m_CurrentStage = Vec2(1, 1);
+
 	m_pGameObjectManager = new GameObjectManager();
 
 	m_pPhysicsWorld = new PhysicsWorld(this);
@@ -42,16 +44,47 @@ void GamePlay::update()
 {
 	if (Input::isKeyDown('R'))
 	{
-		m_pPreviousStage = m_pCurrentStage;
-		delete m_pPreviousStage;
+		m_pCurrentStage->clear();
+
+		m_pGameObjectManager->update();
+
+		delete m_pCurrentStage;
+
 		m_pCurrentStage = new Stage(this, 32, 32);
 		m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-		m_pCurrentStage->load("Assets/CSV/alpha1-1.csv");
+		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
+
+		m_pPlayer->Respawn();
 	}
 
-	//ゲームが終了していたらオブジェクトの更新を止める
-	if (m_GameEndFlag)
-		return;
+	if (m_pPlayer->getPosition().x > Screen::getWindowWidth() / 2) {
+		m_CurrentStage.y++;
+		m_pCurrentStage->clear();
+
+		m_pGameObjectManager->update();
+
+		delete m_pCurrentStage;
+
+		m_pCurrentStage = new Stage(this, 32, 32);
+		m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
+
+		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowWidth(), 0, 0));
+	}
+	if (m_pPlayer->getPosition().x < -Screen::getWindowWidth() / 2) {
+		m_CurrentStage.y--;
+		m_pCurrentStage->clear();
+
+		m_pGameObjectManager->update();
+
+		delete m_pCurrentStage;
+
+		m_pCurrentStage = new Stage(this, 32, 32);
+		m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
+		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
+
+		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowWidth(), 0, 0));
+	}
 
 	//シーンの更新
 	m_pGameObjectManager->update();
@@ -69,7 +102,6 @@ void GamePlay::shutdown()
 {
 	delete m_pGameObjectManager;
 	delete m_pCurrentStage;
-	//delete m_pNextStage;
 	delete m_pPhysicsWorld;
 }
 

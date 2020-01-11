@@ -49,6 +49,11 @@ void Stage::load(std::string mapFileName)
 	m_pSMapWrite->setPosition(m_Position.toVec2());
 }
 
+void Stage::clear()
+{
+	m_pTilemap->clear();
+}
+
 void Stage::update()
 {
 	m_pNMapRead->clear();

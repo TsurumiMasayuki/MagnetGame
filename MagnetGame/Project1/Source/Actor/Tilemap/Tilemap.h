@@ -14,6 +14,7 @@ public:
 	~Tilemap();
 
 	void load(std::string csvFileName);
+	void clear();
 
 	void setPosition(Vec3 pos);
 	Vec3 getPosition();

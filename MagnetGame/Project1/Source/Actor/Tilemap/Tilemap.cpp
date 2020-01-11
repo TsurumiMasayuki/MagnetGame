@@ -17,12 +17,7 @@ Tilemap::Tilemap(IGameMediator* pGameMediator, float cellWidth, float cellHeight
 
 Tilemap::~Tilemap()
 {
-	for (auto tile : m_TileList)
-	{
-		tile->getUser()->destroy();
-	}
-
-	m_TileList.clear();
+	clear();
 }
 
 void Tilemap::load(std::string csvFileName)
@@ -51,6 +46,16 @@ void Tilemap::load(std::string csvFileName)
 				spawnSingleBlock(reader, data, x, y);
 		}
 	}
+}
+
+void Tilemap::clear()
+{
+	for (auto tile : m_TileList)
+	{
+		tile->getUser()->destroy();
+	}
+
+	m_TileList.clear();
 }
 
 void Tilemap::setPosition(Vec3 pos)
