@@ -190,11 +190,6 @@ void Renderer::drawSprites()
 	auto pDeviceContext = DirectXManager::getDeviceContext();
 
 	pDeviceContext->IASetInputLayout(m_pSpriteInputLayout);
-
-	auto vertices = m_pSpriteVertices->getBuffer();
-	UINT stride = sizeof(SpriteVertex);
-	UINT offset = 0;
-	pDeviceContext->IASetVertexBuffers(0, 1, &vertices, &stride, &offset);
 	pDeviceContext->IASetIndexBuffer(m_pSpriteIndices->getBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
 	for (auto sprite : m_Sprites)

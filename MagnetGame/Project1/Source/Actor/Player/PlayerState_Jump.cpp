@@ -23,10 +23,12 @@ void PlayerState_Jump::update()
 void PlayerState_Jump::onStateEnter()
 {
 	m_pPlayer->SetJumpForce(MAX_JUMP_FORCE);
+	m_pPlayer->setAnimation("Jump");
 }
 
 void PlayerState_Jump::onStateExit()
 {
+	m_pPlayer->setAnimation("Idle");
 }
 
 IState * PlayerState_Jump::nextState()

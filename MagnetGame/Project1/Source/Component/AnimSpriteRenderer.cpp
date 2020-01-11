@@ -27,6 +27,7 @@ void AnimSpriteRenderer::onUpdate()
 	auto current = m_Animations.at(m_CurrentAnimation);
 	current->update();
 	setUVRect(current->getAnimRect());
+	setPivot(current->getPivot());
 }
 
 AbstractComponent::TypeID AnimSpriteRenderer::getType() const
@@ -38,8 +39,11 @@ void AnimSpriteRenderer::setAnimation(std::string key)
 {	
 #ifdef _DEBUG
 	int find = m_Animations.count(key);
-	assert(find == 0, "İ’è‚³‚ê‚½ƒAƒjƒ[ƒVƒ‡ƒ“–¼‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+	assert(find > 0, "İ’è‚³‚ê‚½ƒAƒjƒ[ƒVƒ‡ƒ“–¼‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
 #endif
+
+	if (m_CurrentAnimation == key)
+		return;
 
 	m_CurrentAnimation = key;
 	m_Animations.at(m_CurrentAnimation)->reset();

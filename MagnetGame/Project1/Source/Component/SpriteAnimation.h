@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Math\RectF.h"
+#include "Math\Vec2.h"
 
 class Timer;
 
@@ -21,6 +22,8 @@ public:
 	std::string getTextureName();
 	//アニメーションの現在の切り取り位置を返します。
 	RectF getAnimRect();
+	//Pivotを返します。
+	Vec2 getPivot();
 
 private:
 	std::string m_TextureName;	//画像の名前
@@ -31,6 +34,9 @@ private:
 	int m_YPos;				//フレーム上の現在位置(縦)
 
 	int m_AnimCount;		//フレーム数
+
+	float m_PivotX;			//ピボット
+	float m_PivotY;			//ピボット
 
 	float m_CellWidth;		//切り取りサイズ(横)
 	float m_CellHeight;		//切り取りサイズ(縦)

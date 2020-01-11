@@ -1,18 +1,27 @@
 #include "GameInput.h"
 #include "Device\Input.h"
+#include <cmath>
+#include "Math\MathUtility.h"
 
 float GameInput::getHorizontal()
 {
 	float move = 0;
-	if (Input::isKey(VK_LEFT) || Input::getLStickValue().x < 0)
+	if (Input::isKey(VK_LEFT))
 	{
 		move -= 1;
 	}
 
-	if (Input::isKey(VK_RIGHT) || Input::getLStickValue().x > 0)
+	if (Input::isKey(VK_RIGHT))
 	{
 		move += 1;
 	}
+
+	//キーボードで入力がされていなかったら
+	if (move == 0)
+	{
+		move = Input::getLStickValue().x;
+	}
+
 
 	return move;
 }
@@ -20,14 +29,20 @@ float GameInput::getHorizontal()
 float GameInput::getVertical()
 {
 	float move = 0;
-	if (Input::isKey(VK_DOWN) || Input::getLStickValue().y < 0)
+	if (Input::isKey(VK_DOWN))
 	{
 		move -= 1;
 	}
 
-	if (Input::isKey(VK_UP) || Input::getLStickValue().y > 0)
+	if (Input::isKey(VK_UP))
 	{
 		move += 1;
+	}
+
+	//キーボードで入力がされていなかったら
+	if (move == 0)
+	{
+		move = Input::getLStickValue().y;
 	}
 
 	return move;
@@ -35,14 +50,24 @@ float GameInput::getVertical()
 
 bool GameInput::isMagChange()
 {
-	//S極パンチの方向入力がされていて、かつボタンも押されていたらTrue
-	return (getHorizontal() != 0 || getVertical() != 0) &&
-		((Input::isKey('Z')) || Input::isPadButton(Input::PAD_BUTTON_B));
+	//ボタン入力がされていたらtrue
+	bool isButtonPressed = (Input::isKey('Z')) || Input::isPadButton(Input::PAD_BUTTON_B);
+	//方向入力がされていたらtrue
+	bool isDirInput = getHorizontal() != 0 || getVertical() != 0;
+
+	return isButtonPressed && isDirInput;
 }
 
 Vec2 GameInput::getMagChangeDir()
 {
-	return Vec2(getHorizontal(), getVertical());
+	float horizontal = getHorizontal();
+	float vertical = getVertical();
+
+	//スティックの傾きが大きい方を返す
+	if (std::fabsf(horizontal) > std::fabsf(vertical))
+		return Vec2(MathUtility::sign(horizontal), 0);
+	else
+		return Vec2(0, MathUtility::sign(vertical));
 }
 
 bool GameInput::isJump()

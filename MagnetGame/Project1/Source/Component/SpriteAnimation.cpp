@@ -49,6 +49,11 @@ RectF SpriteAnimation::getAnimRect()
 {
 	return RectF(m_XPos * m_CellWidth,
 		m_YPos * m_CellHeight,
-		(m_XPos + 1) * m_CellWidth,
-		(m_YPos + 1) * m_CellHeight);
+		m_CellWidth,
+		m_CellHeight);
+}
+
+Vec2 SpriteAnimation::getPivot()
+{
+	return Vec2(m_PivotX, m_PivotY);
 }

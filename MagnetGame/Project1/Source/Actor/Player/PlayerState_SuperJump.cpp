@@ -24,6 +24,7 @@ void PlayerState_SuperJump::update()
 void PlayerState_SuperJump::onStateEnter()
 {
 	m_pPlayer->SetJumpForce(MAX_JUMP_FORCE);
+	m_pPlayer->setAnimation("SJump");
 }
 
 void PlayerState_SuperJump::onStateExit()
