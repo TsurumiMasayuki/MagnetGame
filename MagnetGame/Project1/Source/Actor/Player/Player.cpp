@@ -2,6 +2,8 @@
 #include "Utility\State\StateManager.h"
 
 #include "Component\SpriteRenderer.h"
+#include "Component\AnimSpriteRenderer.h"
+#include "Component\SpriteAnimation.h"
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
@@ -45,10 +47,7 @@ void Player::start()
 
 	initMagChange();
 	initDetectors();
-
-	auto down = new SpriteRenderer(m_pDetectDown, 90);
-	down->setTextureName("BoxFill");
-	down->setColor(Color(1, 0, 1, 1.0f));
+	initAnimations();
 }
 
 void Player::update()
@@ -68,6 +67,11 @@ void Player::update()
 	m_pDetectDown->setPosition(pos + Vec3(0, -1.1f, 0) * distY);
 	m_pDetectRight->setPosition(pos + Vec3(1, 0, 0) * distX);
 	m_pDetectLeft->setPosition(pos + Vec3(-1, 0, 0) * distX);
+
+	if (GameInput::getHorizontal() < 0)
+		m_pAnimRenderer->setFlipX(true);
+	if (GameInput::getHorizontal() > 0)
+		m_pAnimRenderer->setFlipX(false);
 
 	//if (isSandwich())
 	//	destroy();
@@ -128,6 +132,9 @@ void Player::Respawn()
 {
 	setPosition(m_RespawnPoint);
 	m_pStateManager->setState(new PlayerState_Default(this));
+
+	if (m_pAnimRenderer != nullptr)
+		m_pAnimRenderer->setAnimation("Idle");
 }
 
 void Player::SetRespawnPoint(Vec3 pos)
@@ -138,6 +145,11 @@ void Player::SetRespawnPoint(Vec3 pos)
 float Player::GetJumpForce()
 {
 	return m_JumpForce;
+}
+
+void Player::setAnimation(std::string animName)
+{
+	m_pAnimRenderer->setAnimation(animName);
 }
 
 void Player::SetJumpForce(float jumpForce)
@@ -152,12 +164,12 @@ void Player::initMagChange()
 	//m_pMagChange->setActive(false);
 	m_pMagChange->setSize(Vec3(64, 64, 0));
 
-//#ifdef _DEBUG
-	//デバッグ用範囲描画
+	//#ifdef _DEBUG
+		//デバッグ用範囲描画
 	auto sprite = new SpriteRenderer(m_pMagChange, 90);
 	sprite->setTextureName("BoxFill");
 	sprite->setColor(Color(0, 0, 1, 0.5f));
-//#endif
+	//#endif
 
 	auto collider = new BoxCollider2D(m_pMagChange);
 	collider->isTrigger = true;
@@ -182,6 +194,21 @@ void Player::initDetectors()
 
 	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectLeft->setSize(Vec3(6, sizeX, 0));
+}
+
+void Player::initAnimations()
+{
+	m_pAnimRenderer = new AnimSpriteRenderer(this);
+	m_pAnimRenderer->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
+	m_pAnimRenderer->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.1f, 8));
+	m_pAnimRenderer->addAnimation("Jump", new SpriteAnimation("PlayerJump", 224, 32, 0.1f, 7));
+	m_pAnimRenderer->addAnimation("SJump", new SpriteAnimation("PlayerSJump", 224, 40, 0.3f, 7));
+
+	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 5));
+	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 4));
+	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 4));
+
+	m_pAnimRenderer->setAnimation("Idle");
 }
 
 void Player::moveY()

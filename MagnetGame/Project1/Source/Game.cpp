@@ -46,12 +46,22 @@ void Game::init()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 
+	//画像のロード
 	TextureManager::loadTexture(L"Assets/Textures/CircleFill.png", "CircleFill");
 	TextureManager::loadTexture(L"Assets/Textures/CircleOutline.png", "CircleOutline");
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
 	TextureManager::loadTexture(L"Assets/Textures/BoxOutline.png", "BoxOutline");
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
-	
+
+	//プレイヤー
+	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
+	TextureManager::loadTexture(L"Assets/Textures/player_run_right.png", "PlayerRun");
+	TextureManager::loadTexture(L"Assets/Textures/player_jamp_right.png", "PlayerJump");
+	TextureManager::loadTexture(L"Assets/Textures/player_sjamp_right.png", "PlayerSJump");
+	TextureManager::loadTexture(L"Assets/Textures/player_panti_right.png", "PlayerPunch");
+	TextureManager::loadTexture(L"Assets/Textures/player_panti_up.png", "PlayerPunch_Up");
+	TextureManager::loadTexture(L"Assets/Textures/player_panti_down.png", "PlayerPunch_Down");
+
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");

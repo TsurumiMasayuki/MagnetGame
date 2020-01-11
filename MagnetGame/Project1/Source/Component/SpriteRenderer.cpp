@@ -11,7 +11,9 @@
 #include "Device\TextureManager.h"
 #include "Device\ShaderManager.h"
 
+#include "Device\Base\SpriteVertex.h"
 #include "Device\Buffer\SpriteConstantBuffer.h"
+#include "Device\Buffer\VertexBuffer.h"
 #include "Device\Buffer\ConstantBuffer.h"
 
 #include "Actor\GameObject.h"
@@ -20,6 +22,8 @@ using namespace DirectX;
 
 unsigned int SpriteRenderer::componentCount;
 ConstantBuffer* SpriteRenderer::pSpriteCB;
+VertexBuffer* SpriteRenderer::pSpriteVerticesNormal;
+VertexBuffer* SpriteRenderer::pSpriteVerticesInvert;
 
 SpriteRenderer::SpriteRenderer(GameObject * pUser, int drawOrder)
 	: AbstractComponent(pUser),
@@ -33,11 +37,39 @@ SpriteRenderer::SpriteRenderer(GameObject * pUser, int drawOrder)
 	//Renderer‚É“o˜^
 	GameDevice::getRenderer()->addSprite(this);
 
+	//Å‰‚ÌSpriteRenderer‚È‚ç
 	if (componentCount == 0)
 	{
 		pSpriteCB = new ConstantBuffer();
 		SpriteConstantBuffer buffer;
 		pSpriteCB->init(DirectXManager::getDevice(), sizeof(SpriteConstantBuffer), &buffer);
+
+		float width = 0.5f;
+		float height = 0.5f;
+
+		//ŽlŠp‚Ì’¸“_î•ñì¬
+		SpriteVertex vertices[]
+		{
+			{{-width,  height, 0.0f}, {0.0f, 0.0f}},
+			{{ width, -height, 0.0f}, {1.0f, 1.0f}},
+			{{-width, -height, 0.0f}, {0.0f, 1.0f}},
+			{{ width,  height, 0.0f}, {1.0f, 0.0f}},
+		};
+
+		pSpriteVerticesNormal = new VertexBuffer();
+		pSpriteVerticesNormal->init(DirectXManager::getDevice(), sizeof(SpriteVertex) * 4, vertices);
+
+		//ŽlŠp‚Ì’¸“_î•ñì¬
+		SpriteVertex verticesInv[]
+		{
+			{{-width,  height, 0.0f}, {1.0f, 0.0f}},
+			{{ width, -height, 0.0f}, {0.0f, 1.0f}},
+			{{-width, -height, 0.0f}, {1.0f, 1.0f}},
+			{{ width,  height, 0.0f}, {0.0f, 0.0f}},
+		};
+
+		pSpriteVerticesInvert = new VertexBuffer();
+		pSpriteVerticesInvert->init(DirectXManager::getDevice(), sizeof(SpriteVertex) * 4, verticesInv);
 	}
 	componentCount++;
 }
@@ -53,6 +85,12 @@ SpriteRenderer::~SpriteRenderer()
 	{
 		delete pSpriteCB;
 		pSpriteCB = nullptr;
+
+		delete pSpriteVerticesNormal;
+		pSpriteVerticesNormal = nullptr;
+
+		delete pSpriteVerticesInvert;
+		pSpriteVerticesInvert = nullptr;
 	}
 }
 
@@ -119,6 +157,21 @@ void SpriteRenderer::draw()
 	//ƒeƒNƒXƒ`ƒƒ‚ðÝ’è
 	auto texture = TextureManager::getTextureView(m_TextureName);
 	pDeviceContext->PSSetShaderResources(0, 1, &texture);
+
+	auto vertices = pSpriteVerticesInvert->getBuffer();
+	UINT stride = sizeof(SpriteVertex);
+	UINT offset = 0;
+
+	if (m_FlipX)
+	{
+		vertices = pSpriteVerticesInvert->getBuffer();
+	}
+	else
+	{
+		vertices = pSpriteVerticesNormal->getBuffer();
+	}
+
+	pDeviceContext->IASetVertexBuffers(0, 1, &vertices, &stride, &offset);
 
 	pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	pDeviceContext->DrawIndexed(6, 0, 0);

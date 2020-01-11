@@ -6,10 +6,8 @@
 #include "Device\SoundManager.h"
 
 PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
-	: m_pPlayer(pPlayer), m_pTimer(new Timer(1.0f))
+	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.5f))
 {
-
-	SoundManager::playSE("punch",0);
 }
 
 PlayerState_MagChange::~PlayerState_MagChange()
@@ -32,6 +30,16 @@ void PlayerState_MagChange::onStateEnter()
 	m_pMagChange->setActive(true);
 
 	m_MagChangeDir = GameInput::getMagChangeDir().toVec3();
+
+	if (m_MagChangeDir.y == 0)
+		m_pPlayer->setAnimation("PunchLR");
+	if (m_MagChangeDir.x == 0)
+		if (m_MagChangeDir.y == 1)
+			m_pPlayer->setAnimation("PunchUp");
+		else if (m_MagChangeDir.y == -1)
+			m_pPlayer->setAnimation("PunchDown");
+
+	SoundManager::playSE("punch", 0);
 }
 
 void PlayerState_MagChange::onStateExit()

@@ -4,6 +4,7 @@
 class StateManager;
 class Gravity;
 class DetectHelper;
+class AnimSpriteRenderer;
 
 class Player :
 	public GameObject
@@ -31,9 +32,12 @@ public:
 	void SetJumpForce(float jumpForce);
 	float GetJumpForce();
 
+	void setAnimation(std::string animName);
+
 private:
 	void initMagChange();
 	void initDetectors();
+	void initAnimations();
 	void moveY();
 
 public:
@@ -48,6 +52,8 @@ private:
 	DetectHelper* m_pDetectDown;
 	DetectHelper* m_pDetectRight;
 	DetectHelper* m_pDetectLeft;
+
+	AnimSpriteRenderer* m_pAnimRenderer;
 
 	Vec3 m_RespawnPoint;
 	float m_JumpForce;

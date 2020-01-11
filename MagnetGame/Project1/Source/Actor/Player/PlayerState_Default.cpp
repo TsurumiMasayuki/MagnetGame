@@ -14,6 +14,14 @@ PlayerState_Default::PlayerState_Default(Player * pPlayer)
 
 void PlayerState_Default::update()
 {
+	if (GameInput::getHorizontal() == 0)
+	{
+		m_pPlayer->setAnimation("Idle");
+	}
+	else
+	{
+		m_pPlayer->setAnimation("Run");
+	}
 }
 
 void PlayerState_Default::onStateEnter()

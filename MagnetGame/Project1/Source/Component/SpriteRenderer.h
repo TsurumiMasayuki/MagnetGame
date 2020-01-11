@@ -7,6 +7,7 @@
 
 class Renderer;
 class ConstantBuffer;
+class VertexBuffer;
 
 class SpriteRenderer
 	: public AbstractComponent
@@ -51,4 +52,6 @@ private:
 
 	static unsigned int componentCount;
 	static ConstantBuffer* pSpriteCB;
+	static VertexBuffer* pSpriteVerticesNormal;
+	static VertexBuffer* pSpriteVerticesInvert;
 };
