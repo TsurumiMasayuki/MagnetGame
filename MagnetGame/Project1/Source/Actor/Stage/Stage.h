@@ -17,6 +17,7 @@ public:
 	Vec3 getPosition();
 
 	void load(std::string mapFileName);
+	void clear();
 	void update();
 
 	Tilemap* getTilemap();

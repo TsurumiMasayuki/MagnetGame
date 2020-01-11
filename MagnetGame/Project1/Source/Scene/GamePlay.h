@@ -40,5 +40,4 @@ private:
 	Vec2 m_CurrentStage;
 
 	Stage* m_pCurrentStage;
-	Stage* m_pPreviousStage;
 };
