@@ -70,6 +70,8 @@
     <ClCompile Include="Source\Device\GameInput.cpp" />
     <ClCompile Include="Source\Scene\GamePlay.cpp" />
     <ClCompile Include="Source\Scene\Title.cpp" />
+    <ClCompile Include="Source\Actor\Performance\TitlePlayer.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -148,6 +150,8 @@
     <ClInclude Include="Source\Device\GameInput.h" />
     <ClInclude Include="Source\Scene\GamePlay.h" />
     <ClInclude Include="Source\Scene\Title.h" />
+    <ClInclude Include="Source\Actor\Performance\TitlePlayer.h" />
+    <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

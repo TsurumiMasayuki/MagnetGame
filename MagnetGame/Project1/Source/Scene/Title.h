@@ -1,8 +1,13 @@
 #pragma once
 #include "AbstractScene.h"
+#include "Actor\IGameMediator.h"
+
+class GameObjectManager;
+class Deliveryman;
+class TitlePlayer;
 
 class Title : 
-	public AbstractScene {
+	public AbstractScene ,IGameMediator{
 public:
 	Title();
 	~Title();
@@ -12,4 +17,32 @@ public:
 	virtual void shutdown() override;
 	virtual std::string nextScene() override;
 	virtual bool isEnd() override;
+
+	virtual void addGameObject(GameObject * pAddObject) override;
+	virtual void removeGameObject(GameObject * pRemoveObject) override;
+	virtual PhysicsWorld * getPhysicsWorld() override;
+	virtual Tilemap * getTilemap() override;
+	virtual ForceMap * getNMapRead() override;
+	virtual ForceMap * getSMapRead() override;
+	virtual ForceMap * getNMapWrite() override;
+	virtual ForceMap * getSMapWrite() override;
+	virtual ObstacleMap * getObstacleMap() override;
+	virtual void gameEnd() override;
+
+private:
+	GameObjectManager*m_pGameObjectManager;
+	Deliveryman*m_pDeliveryman;
+	TitlePlayer*m_pTitlePlayer;
+	PhysicsWorld* m_pPhysicsWorld;
+
+	enum SceneState
+	{
+		Idle,
+		Delivery,
+		Player,
+		Fade,
+	};
+	SceneState sState;
+
+	bool m_TitleEndFlag;
 };
