@@ -5,6 +5,7 @@
 class GameObjectManager;
 class Deliveryman;
 class TitlePlayer;
+class ObjN;
 
 class Title : 
 	public AbstractScene ,IGameMediator{
@@ -34,6 +35,7 @@ private:
 	Deliveryman*m_pDeliveryman;
 	TitlePlayer*m_pTitlePlayer;
 	PhysicsWorld* m_pPhysicsWorld;
+	ObjN *m_pObjN;
 
 	enum SceneState
 	{

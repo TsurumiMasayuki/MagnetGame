@@ -23,6 +23,7 @@ private:
 
 	static const float MOVE_SPEED;
 	bool isEndFlag;
+	bool m_pMove;
 	enum State
 	{
 		Idle,

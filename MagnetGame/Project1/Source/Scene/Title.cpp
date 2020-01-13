@@ -2,6 +2,8 @@
 #include "Device\Input.h"
 #include"Actor/GameObjectManager.h"
 #include"Actor/Performance/Deliveryman.h"
+#include"Actor/Player/Player.h"
+#include"Actor/Nobject/ObjN.h"
 #include "Physics\PhysicsWorld.h"
 
 Title::Title()
@@ -20,7 +22,7 @@ void Title::init()
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	m_pDeliveryman = new Deliveryman(this);
-	m_pDeliveryman->setPosition(Vec3(0,0,0));
+	m_pDeliveryman->setPosition(Vec3(640,0,0));
 
 	m_TitleEndFlag = false;
 }
@@ -48,7 +50,9 @@ void Title::update()
 
 		break;
 	}
+
 	m_pGameObjectManager->update();
+	m_pPhysicsWorld->update();
 }
 
 void Title::draw()
@@ -58,6 +62,7 @@ void Title::draw()
 void Title::shutdown()
 {
 	delete m_pGameObjectManager;
+	delete m_pPhysicsWorld;
 }
 
 std::string Title::nextScene()
@@ -72,15 +77,17 @@ bool Title::isEnd()
 
 void Title::addGameObject(GameObject * pAddObject)
 {
+	m_pGameObjectManager->add(pAddObject);
 }
 
 void Title::removeGameObject(GameObject * pRemoveObject)
 {
+	m_pGameObjectManager->remove(pRemoveObject);
 }
 
 PhysicsWorld * Title::getPhysicsWorld()
 {
-	return nullptr;
+	return m_pPhysicsWorld;
 }
 
 Tilemap * Title::getTilemap()
