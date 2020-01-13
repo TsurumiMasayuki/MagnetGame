@@ -72,6 +72,8 @@
     <ClCompile Include="Source\Scene\Title.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitlePlayer.cpp" />
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
+    <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
+    <ClCompile Include="Source\Actor\Performance\TitleFade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -152,6 +154,8 @@
     <ClInclude Include="Source\Scene\Title.h" />
     <ClInclude Include="Source\Actor\Performance\TitlePlayer.h" />
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
+    <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
+    <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
