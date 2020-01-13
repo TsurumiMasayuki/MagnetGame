@@ -29,6 +29,7 @@ private:
 		Idle,
 		Move,
 		Anim,
+		Move2,
 	};
 	State state;
 };

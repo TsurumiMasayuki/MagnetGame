@@ -43,7 +43,7 @@ void Deliveryman::start()
 void Deliveryman::update()
 {
 	if (m_pMove) {
-		Vec3 move(-1.5f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
+		Vec3 move(-3.0f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
 		setPosition(getPosition() + move);
 	}
 	Vec3 pos(getPosition());
@@ -64,15 +64,17 @@ void Deliveryman::update()
 	case Deliveryman::Anim:
 		m_pMove = false;
 		if (Input::isKeyDown(VK_SPACE)) {
-			state = State::Move;
+			state = State::Move2;
+		}
+		break;
+	case Deliveryman::Move2:
+		m_pMove = true;
+		if (pos.x <= -340) {
+			destroy();
 		}
 		break;
 	}
 
-	if (pos.x < -640) {
-		isEndFlag = true;
-		destroy();
-	}
 }
 
 void Deliveryman::onDestroy()
