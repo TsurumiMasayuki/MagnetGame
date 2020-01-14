@@ -30,13 +30,13 @@ void GameObjectManager::update()
 		gameObject->checkCollision();
 	}
 
-	for (auto & gameObject : m_AddObjects)
-	{
-		if (!gameObject->isActive()) continue;
+	//for (auto & gameObject : m_AddObjects)
+	//{
+	//	if (!gameObject->isActive()) continue;
 
-		gameObject->objUpdate();
-		gameObject->checkCollision();
-	}
+	//	gameObject->objUpdate();
+	//	gameObject->checkCollision();
+	//}
 
 	addObjects();
 	destroyObjects();
