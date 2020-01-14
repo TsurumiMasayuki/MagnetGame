@@ -51,7 +51,7 @@ void Deliveryman::update()
 	switch (state)
 	{
 	case Deliveryman::Idle:
-		if (Input::isKeyDown(VK_SPACE)) {
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			state = State::Move;
 		}
 		break;
@@ -63,7 +63,7 @@ void Deliveryman::update()
 		break;
 	case Deliveryman::Anim:
 		m_pMove = false;
-		if (Input::isKeyDown(VK_SPACE)) {
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			state = State::Move2;
 		}
 		break;

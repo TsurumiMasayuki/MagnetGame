@@ -4,7 +4,6 @@
 #include"Actor/Performance/Deliveryman.h"
 #include"Actor/Performance/TitlePlayer.h"
 #include "Physics\PhysicsWorld.h"
-#include "Component\SpriteRenderer.h"
 #include "Actor\Performance\TitleBackGround.h"
 #include"Actor/Performance/TitleFade.h"
 
@@ -43,7 +42,7 @@ void Title::update()
 	switch (sState)
 	{
 	case Title::Idle:
-		if (Input::isKeyDown(VK_SPACE)) {
+		if (Input::isKeyDown(VK_SPACE)||Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			sState = SceneState::Delivery;
 		}
 		break;
@@ -60,8 +59,9 @@ void Title::update()
 		break;
 	case Title::Fade:
 		m_pFade->setActive(true);
-		
-		m_pTitleEndFlag = true;
+		if (m_pFade->isEnd()) {
+			m_pTitleEndFlag = true;
+		}
 		break;
 	}
 
@@ -82,7 +82,7 @@ void Title::shutdown()
 
 std::string Title::nextScene()
 {
-	return "GamePlay";
+	return "Entrance";
 }
 
 bool Title::isEnd()

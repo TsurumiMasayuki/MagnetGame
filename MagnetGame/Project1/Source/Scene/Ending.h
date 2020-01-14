@@ -3,17 +3,12 @@
 #include "Actor\IGameMediator.h"
 
 class GameObjectManager;
-class Deliveryman;
-class TitlePlayer;
-class ObjN;
-class TitleBackGround;
-class TitleFade;
 
-class Title :
+class Ending :
 	public AbstractScene, IGameMediator {
 public:
-	Title();
-	~Title();
+	Ending();
+	~Ending();
 	virtual void init() override;
 	virtual void update() override;
 	virtual void draw() override;
@@ -34,21 +29,6 @@ public:
 
 private:
 	GameObjectManager*m_pGameObjectManager;
-	Deliveryman*m_pDeliveryman;
-	TitlePlayer*m_pTitlePlayer;
 	PhysicsWorld* m_pPhysicsWorld;
-	ObjN *m_pObjN;
-	TitleBackGround*m_pBackGround;
-	TitleFade*m_pFade;
-
-	enum SceneState
-	{
-		Idle,
-		Delivery,
-		Player,
-		Fade,
-	};
-	SceneState sState;
-
 	bool m_pTitleEndFlag;
 };

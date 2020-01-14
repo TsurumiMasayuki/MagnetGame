@@ -3,23 +3,18 @@
 #include "Actor\IGameMediator.h"
 
 class GameObjectManager;
-class Deliveryman;
-class TitlePlayer;
-class ObjN;
-class TitleBackGround;
-class TitleFade;
 
-class Title :
+class Entrance :
 	public AbstractScene, IGameMediator {
 public:
-	Title();
-	~Title();
-	virtual void init() override;
-	virtual void update() override;
-	virtual void draw() override;
-	virtual void shutdown() override;
-	virtual std::string nextScene() override;
-	virtual bool isEnd() override;
+	Entrance();
+	~Entrance();
+	virtual void init()override;
+	virtual void update()override;
+	virtual void draw()override;
+	virtual void shutdown()override;
+	virtual std::string nextScene()override;
+	virtual bool isEnd()override;
 
 	virtual void addGameObject(GameObject * pAddObject) override;
 	virtual void removeGameObject(GameObject * pRemoveObject) override;
@@ -34,21 +29,6 @@ public:
 
 private:
 	GameObjectManager*m_pGameObjectManager;
-	Deliveryman*m_pDeliveryman;
-	TitlePlayer*m_pTitlePlayer;
 	PhysicsWorld* m_pPhysicsWorld;
-	ObjN *m_pObjN;
-	TitleBackGround*m_pBackGround;
-	TitleFade*m_pFade;
-
-	enum SceneState
-	{
-		Idle,
-		Delivery,
-		Player,
-		Fade,
-	};
-	SceneState sState;
-
-	bool m_pTitleEndFlag;
+	bool m_pEntranceEndFlag;
 };

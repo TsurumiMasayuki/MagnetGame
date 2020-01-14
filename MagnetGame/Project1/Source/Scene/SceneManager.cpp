@@ -17,6 +17,10 @@ SceneManager::~SceneManager()
 void SceneManager::update()
 {
 	m_Scenes.at(m_CurrentScene)->update();
+
+	if (m_Scenes.at(m_CurrentScene)->isEnd()) {
+		changeScene(m_Scenes.at(m_CurrentScene)->nextScene());
+	}
 }
 
 void SceneManager::draw()
