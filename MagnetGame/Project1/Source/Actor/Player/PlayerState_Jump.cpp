@@ -9,7 +9,7 @@
 #include "PlayerState_Default.h"
 #include "PlayerState_MagChange.h"
 
-const float PlayerState_Jump::MAX_JUMP_FORCE = 256.0f;
+const float PlayerState_Jump::MAX_JUMP_FORCE = 384.0f;
 
 PlayerState_Jump::PlayerState_Jump(Player* pPlayer)
 	: m_pPlayer(pPlayer), m_pGravity(pPlayer->getGravity())
