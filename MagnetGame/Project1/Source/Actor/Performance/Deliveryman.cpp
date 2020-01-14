@@ -37,16 +37,17 @@ void Deliveryman::start()
 	col->layer = PhysicsLayer::Player;
 
 	isEndFlag = false;
+	m_pMove = false;
 }
 
 void Deliveryman::update()
 {
-
-	Vec3 move(1.5f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
-	setPosition(getPosition() + move);
+	if (m_pMove) {
+		Vec3 move(-3.0f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
+		setPosition(getPosition() + move);
+	}
 	Vec3 pos(getPosition());
 	float distX = getSize().x*0.5f;
-
 	switch (state)
 	{
 	case Deliveryman::Idle:
@@ -55,21 +56,25 @@ void Deliveryman::update()
 		}
 		break;
 	case Deliveryman::Move:
-		if (pos.x == 0) {
+		m_pMove = true;
+		if (pos.x <= 0) {
 			state = State::Anim;
 		}
 		break;
 	case Deliveryman::Anim:
+		m_pMove = false;
 		if (Input::isKeyDown(VK_SPACE)) {
-			state = State::Move;
+			state = State::Move2;
+		}
+		break;
+	case Deliveryman::Move2:
+		m_pMove = true;
+		if (pos.x <= -340) {
+			destroy();
 		}
 		break;
 	}
 
-	if (pos.x < -640) {
-		isEndFlag = true;
-		destroy();
-	}
 }
 
 void Deliveryman::onDestroy()

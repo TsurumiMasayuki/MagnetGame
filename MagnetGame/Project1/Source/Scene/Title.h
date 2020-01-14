@@ -5,9 +5,13 @@
 class GameObjectManager;
 class Deliveryman;
 class TitlePlayer;
+class ObjN;
+class SpriteRenderer;
+class TitleBackGround;
+class TitleFade;
 
-class Title : 
-	public AbstractScene ,IGameMediator{
+class Title :
+	public AbstractScene, IGameMediator {
 public:
 	Title();
 	~Title();
@@ -34,6 +38,9 @@ private:
 	Deliveryman*m_pDeliveryman;
 	TitlePlayer*m_pTitlePlayer;
 	PhysicsWorld* m_pPhysicsWorld;
+	ObjN *m_pObjN;
+	TitleBackGround*m_pBackGround;
+	TitleFade*m_pFade;
 
 	enum SceneState
 	{
@@ -44,5 +51,5 @@ private:
 	};
 	SceneState sState;
 
-	bool m_TitleEndFlag;
+	bool m_pTitleEndFlag;
 };
