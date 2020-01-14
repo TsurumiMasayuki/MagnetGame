@@ -30,7 +30,9 @@
 #include "Def\Screen.h"
 
 #include "Scene\Title.h"
+#include "Scene\Entrance.h"
 #include "Scene\GamePlay.h"
+#include "Scene\Ending.h"
 #include "Scene\SceneManager.h"
 
 Game::Game()
@@ -79,8 +81,10 @@ void Game::init()
 
 	m_pSceneManager = new SceneManager();
 	m_pSceneManager->addScene("Title", new Title());
+	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
-	m_pSceneManager->changeScene("GamePlay");
+	m_pSceneManager->addScene("Ending", new Ending());
+	m_pSceneManager->changeScene("Title");
 }
 
 void Game::update()

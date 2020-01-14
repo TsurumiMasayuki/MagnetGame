@@ -61,8 +61,6 @@ void TitlePlayer::update()
 		break;
 	case TitlePlayer::Idle:
 		state = State::Move;
-		if (Input::isKeyDown(VK_SPACE)) {
-		}
 		break;
 	case TitlePlayer::Move:
 		m_pMove = true;

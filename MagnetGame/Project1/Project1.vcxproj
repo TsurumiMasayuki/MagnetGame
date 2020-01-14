@@ -170,6 +170,7 @@
     <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
+    <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleFade.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitlePlayer.cpp" />
@@ -202,6 +203,8 @@
     <ClCompile Include="Source\Physics\CollisionHit2D.cpp" />
     <ClCompile Include="Source\Physics\PhysicsCalc.cpp" />
     <ClCompile Include="Source\Physics\PhysicsWorld.cpp" />
+    <ClCompile Include="Source\Scene\Ending.cpp" />
+    <ClCompile Include="Source\Scene\Entrance.cpp" />
     <ClCompile Include="Source\Scene\GamePlay.cpp" />
     <ClCompile Include="Source\Scene\SceneManager.cpp" />
     <ClCompile Include="Source\Component\AbstractComponent.cpp" />
@@ -246,6 +249,7 @@
     <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
+    <ClInclude Include="Source\Actor\Performance\EventText.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
     <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
     <ClInclude Include="Source\Actor\Performance\TitlePlayer.h" />
@@ -282,6 +286,8 @@
     <ClInclude Include="Source\Physics\PhysicsCalc.h" />
     <ClInclude Include="Source\Physics\PhysicsLayer.h" />
     <ClInclude Include="Source\Physics\PhysicsWorld.h" />
+    <ClInclude Include="Source\Scene\Ending.h" />
+    <ClInclude Include="Source\Scene\Entrance.h" />
     <ClInclude Include="Source\Scene\GamePlay.h" />
     <ClInclude Include="Source\Scene\SceneManager.h" />
     <ClInclude Include="Source\Component\AbstractComponent.h" />
