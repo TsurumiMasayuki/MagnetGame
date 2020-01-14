@@ -16,7 +16,8 @@ public:
 		PAD_BUTTON_LB = 0x00000010l,	//Lボタン
 		PAD_BUTTON_RB = 0x00000020l,	//Rボタン
 		PAD_BUTTON_LT = 0x00000040l,	//Lトリガー
-		PAD_BUTTON_RT = 0x00000080l		//Rトリガー
+		PAD_BUTTON_RT = 0x00000080l,	//Rトリガー
+		PAD_BUTTON_START = 0x00000800l,	//スタートボタン
 	};
 
 	//指定されたキーが離された時にTrueを返します

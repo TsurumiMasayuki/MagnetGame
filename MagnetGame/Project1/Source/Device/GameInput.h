@@ -17,6 +17,9 @@ public:
 	//ジャンプ入力がされたかどうか返します。
 	static bool isJump();
 
+	//ポーズ入力がされたかどうか返します。
+	static bool isPause();
+
 private:
 	GameInput();	//インスタンスの生成を禁止
 };
