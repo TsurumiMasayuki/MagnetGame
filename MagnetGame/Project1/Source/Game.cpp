@@ -56,6 +56,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
 	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
 	TextureManager::loadTexture(L"Assets/Textures/white.png", "white");
+	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
 
 	//ƒvƒŒƒCƒ„[
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");

@@ -3,6 +3,8 @@
 #include "Utility\State\StateManager.h"
 
 #include "Component\SpriteRenderer.h"
+#include "Component/SpriteAnimation.h"
+#include "Component/AnimSpriteRenderer.h"
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
@@ -26,9 +28,9 @@ void ObjN::start()
 {
 	setSize(Vec3(64, 64, 0));
 
-	auto sprite = new SpriteRenderer(this);
-	sprite->setTextureName("BoxOutline");
-	sprite->setColor(Color(0, 255, 0, 1));
+	anim= new AnimSpriteRenderer(this);
+	anim->addAnimation("Walk", new SpriteAnimation("n", 128, 32, 0.08f, 4));
+	anim->setAnimation("Walk");
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -38,6 +40,8 @@ void ObjN::start()
 	collider->layer = PhysicsLayer::Player;
 
 	m_nGravity = new Gravity(this, 20);
+
+
 
 	setTag("ObjN");
 
@@ -73,10 +77,12 @@ void ObjN::update()
 
 	if (isDetectLeft() && direction == 1) {
 		direction = 0;
+		anim->setFlipX(true);
 	}
 
 	if (isDetectRight() && direction == 0) {
 		direction = 1;
+		anim->setFlipX(false);
 	}
 
 
