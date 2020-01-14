@@ -4,6 +4,7 @@
 class StateManager;
 class Gravity;
 class DetectHelper;
+class AnimSpriteRenderer;
 
 class ObjN:
 	public GameObject
@@ -35,6 +36,8 @@ private:
 
 	DetectHelper*m_nDetectRight;
 	DetectHelper*m_nDetectLeft;
+
+	AnimSpriteRenderer* anim;
 
 	static const float MOVE_SPEED;
 
