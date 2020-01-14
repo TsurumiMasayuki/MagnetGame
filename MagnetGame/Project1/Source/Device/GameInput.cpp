@@ -72,3 +72,8 @@ bool GameInput::isJump()
 {
 	return Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A);
 }
+
+bool GameInput::isPause()
+{
+	return Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START);
+}
