@@ -5,6 +5,7 @@ class StateManager;
 class Gravity;
 class DetectHelper;
 class AnimSpriteRenderer;
+class BoxCollider2D;
 
 class Player :
 	public GameObject
@@ -39,14 +40,17 @@ private:
 	void initDetectors();
 	void initAnimations();
 	void moveY();
+	void setMagChange();
 
 public:
 	bool isSuperJump;
+	bool isFlipX;
 
 private:
 	StateManager* m_pStateManager;
 	Gravity* m_pGravity;
 	GameObject* m_pMagChange;
+	BoxCollider2D* m_pMagCollider;
 
 	DetectHelper* m_pDetectUp;
 	DetectHelper* m_pDetectDown;

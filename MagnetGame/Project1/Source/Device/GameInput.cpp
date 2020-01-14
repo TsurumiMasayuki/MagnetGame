@@ -51,11 +51,9 @@ float GameInput::getVertical()
 bool GameInput::isMagChange()
 {
 	//ƒ{ƒ^ƒ““ü—Í‚ª‚³‚ê‚Ä‚¢‚½‚çtrue
-	bool isButtonPressed = (Input::isKey('Z')) || Input::isPadButton(Input::PAD_BUTTON_B);
-	//•ûŒü“ü—Í‚ª‚³‚ê‚Ä‚¢‚½‚çtrue
-	bool isDirInput = getHorizontal() != 0 || getVertical() != 0;
+	bool isButtonPressed = (Input::isKeyDown('Z')) || Input::isPadButtonDown(Input::PAD_BUTTON_B);
 
-	return isButtonPressed && isDirInput;
+	return isButtonPressed;
 }
 
 Vec2 GameInput::getMagChangeDir()
