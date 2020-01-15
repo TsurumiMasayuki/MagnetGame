@@ -28,8 +28,6 @@ Player::~Player()
 
 void Player::start()
 {
-	//‚±‚ê‚ðæ‚É‘‚©‚È‚¢‚ÆƒuƒƒbƒN‚Éˆø‚Á‚©‚©‚é
-	initDetectors();
 	setTag("Player");
 	setSize(Vec3(64, 64, 0));
 
@@ -47,6 +45,7 @@ void Player::start()
 	m_pGravity = new Gravity(this, 80);
 	m_pStateManager->setState(new PlayerState_Default(this));
 
+	initDetectors();
 	initMagChange();
 	initAnimations();
 }
@@ -237,7 +236,7 @@ void Player::setMagChange()
 
 	float size = getSize().x * 0.9f;
 
-	Vec3 MagChangeSize = MagChangeDir.y != 0 ? Vec3(size, 4, 0) : Vec3(4, size, 0);
+	Vec3 MagChangeSize = MagChangeDir.y != 0 ? Vec3(size, 32, 0) : Vec3(4, size, 0);
 	m_pMagChange->setSize(MagChangeSize);
 
 	m_pMagCollider->setWidth(MagChangeSize.x);
