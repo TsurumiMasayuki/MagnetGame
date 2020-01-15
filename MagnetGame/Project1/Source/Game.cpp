@@ -57,6 +57,19 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
 	TextureManager::loadTexture(L"Assets/Textures/white.png", "white");
 	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
+	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
+	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+
+	//画像テキスト
+	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
+	TextureManager::loadTexture(L"Assets/Textures/log_hakase.png", "log_hakase");
+	TextureManager::loadTexture(L"Assets/Textures/log_hakase_black.png", "log_hakase_black");
+	TextureManager::loadTexture(L"Assets/Textures/log_player.png", "log_player");
+	TextureManager::loadTexture(L"Assets/Textures/text0.png", "text0");
+	TextureManager::loadTexture(L"Assets/Textures/text1.png", "text1");
+	TextureManager::loadTexture(L"Assets/Textures/text2.png", "text2");
+	TextureManager::loadTexture(L"Assets/Textures/text3.png", "text3");
+	TextureManager::loadTexture(L"Assets/Textures/text4.png", "text4");
 
 	//プレイヤー
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
