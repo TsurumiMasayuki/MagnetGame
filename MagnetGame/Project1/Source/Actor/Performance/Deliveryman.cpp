@@ -2,6 +2,8 @@
 
 #include "Device\GameTime.h"
 #include "Component\SpriteRenderer.h"
+#include "Component/SpriteAnimation.h"
+#include "Component/AnimSpriteRenderer.h"
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
@@ -25,9 +27,10 @@ void Deliveryman::start()
 	setSize(Vec3(64, 64, 0));
 	state = State::Idle;
 
-	auto sprite = new SpriteRenderer(this);
-	sprite->setTextureName("BoxOutline");
-	sprite->setColor(Color(255, 255, 0, 1));
+	anim = new AnimSpriteRenderer(this);
+	anim->addAnimation("Move", new SpriteAnimation("yagi", 128, 32, 0.12f, 4));
+	anim->setAnimation("Move");
+	anim->setFlipX(true);
 
 	auto col = new BoxCollider2D(this);
 	col->isTrigger = false;
@@ -57,7 +60,7 @@ void Deliveryman::update()
 		break;
 	case Deliveryman::Move:
 		m_pMove = true;
-		if (pos.x <= 0) {
+		if (pos.x <= 300) {
 			state = State::Anim;
 		}
 		break;
@@ -69,7 +72,7 @@ void Deliveryman::update()
 		break;
 	case Deliveryman::Move2:
 		m_pMove = true;
-		if (pos.x <= -340) {
+		if (pos.x <= -670) {
 			destroy();
 		}
 		break;
