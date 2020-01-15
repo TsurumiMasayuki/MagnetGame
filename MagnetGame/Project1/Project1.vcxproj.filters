@@ -156,6 +156,7 @@
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
     <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
+    <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

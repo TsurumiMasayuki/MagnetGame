@@ -4,12 +4,32 @@
 #include "Actor\IGameMediator.h"
 #include "Actor\Magnet\ObstacleMap.h"
 
-Block::Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, bool hasCollider)
+const Vec2 Block::tileImageCoord[11] =
+{
+	Vec2( 0.0f, 0.0f),
+
+	Vec2( 0.166f,  0.0f),
+	Vec2( 0.166f, -0.166f),
+	Vec2( 0.0f, 0.166f),
+	Vec2(-0.166f, 0.166f),
+
+	Vec2( 0.166f,  0.166f),
+
+	Vec2(  0.0f,	0.0f),
+	Vec2( -0.166f,	0.0f),
+	Vec2(  0.0f,	-0.166f),
+	Vec2( -0.166f,	-0.166f),
+
+	Vec2( 0.0f,  0.0f),
+};
+
+Block::Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, TILE_IMAGE_TYPE tileImageType, bool hasCollider)
 	: GameObject(pGameMediator),
 	m_TextureName(textureName),
 	m_Width(width),
 	m_Height(height),
-	m_HasCollider(hasCollider)
+	m_HasCollider(hasCollider),
+	m_TileImageType(tileImageType)
 {
 }
 
@@ -25,6 +45,10 @@ void Block::start()
 	sprite->setTextureName(m_TextureName);
 	sprite->setColor(Color(0.25f, 0.25f, 0.25f, 1));
 
+	//タイル用切り抜きを指定
+	if (m_TileImageType != TILE_IMAGE_TYPE_NONE)
+		sprite->setUVRect(RectF(tileImageCoord[m_TileImageType].x, tileImageCoord[m_TileImageType].y, 0.166f, 0.166f));
+
 	if (m_HasCollider)
 	{
 		//コライダーを作成
@@ -33,7 +57,7 @@ void Block::start()
 		collider->isMove = false;
 		collider->setWidth(m_Width);
 		collider->setHeight(m_Height);
-		collider->layer = PhysicsLayer::Block;	
+		collider->layer = PhysicsLayer::Block;
 	}
 
 	setSize(Vec3(m_Width, m_Height, 0));
