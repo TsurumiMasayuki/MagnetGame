@@ -98,7 +98,7 @@ void Game::init()
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("GamePlay");
 }
 
 void Game::update()
