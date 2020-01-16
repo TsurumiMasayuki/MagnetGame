@@ -39,6 +39,7 @@ void PlayerState_MagChange::onStateEnter()
 		else if (m_MagChangeDir.y == -1)
 			m_pPlayer->setAnimation("PunchDown");
 
+	
 	SoundManager::playSE("punch", 0);
 }
 

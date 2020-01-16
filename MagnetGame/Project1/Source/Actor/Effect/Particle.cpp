@@ -5,10 +5,12 @@
 
 #define PI 3.141525
 
-Particle::Particle(std::string name,Vec3 pos, float speed, float angle, float duration, float shrinkRate, IGameMediator * pMediator) : GameObject(pMediator)
+Particle::Particle(std::string name,Vec3 pos,float size_x,float size_y, float speed, float angle, float duration, float shrinkRate, IGameMediator * pMediator) : GameObject(pMediator)
 {
 	this->name = name;
 	this->pos = pos;
+	this->size_x = size_x;
+	this->size_y = size_y;
 	this->speed = speed;
 	this->angle = angle;
 	this->duration = duration;
@@ -22,7 +24,6 @@ Particle::~Particle()
 
 void Particle::start()
 {
-	size_x = 32,size_y=32;
 	setSize(Vec3(size_x,size_y, 0));
 
 	auto sprite = new SpriteRenderer(this);

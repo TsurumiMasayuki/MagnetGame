@@ -15,6 +15,9 @@ PlayerState_SuperJump::PlayerState_SuperJump(Player* pPlayer)
 	: m_pPlayer(pPlayer), m_pGravity(pPlayer->getGravity())
 {
 	SoundManager::playSE("S_jump",0);
+	superJumpEffect = new SuperJumpEffect(pPlayer->getGameMediator());
+	superJumpEffect->Cleate(pPlayer->getPosition(), 2, 3, 20);
+	delete superJumpEffect;
 }
 
 void PlayerState_SuperJump::update()
