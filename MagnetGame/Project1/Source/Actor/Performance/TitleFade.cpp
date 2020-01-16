@@ -19,15 +19,23 @@ void TitleFade::start()
 	sprite->setTextureName("white");
 
 	alpha = 0;
-	isFade = false;
+	isEndFlag = false;
 }
 
 void TitleFade::update()
 {
-	sprite->setColor(Color(0,0,0,alpha));
+	sprite->setColor(Color(0, 0, 0, alpha));
 	alpha += 0.01f;
+	if (alpha >= 2.0f) {
+		isEndFlag = true;
+	}
 }
 
 void TitleFade::onDestroy()
 {
+}
+
+bool TitleFade::isEnd()
+{
+	return isEndFlag;
 }

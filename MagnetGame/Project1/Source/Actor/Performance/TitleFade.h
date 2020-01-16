@@ -14,8 +14,9 @@ public:
 	virtual void update() override;
 	virtual void onDestroy() override;
 
-	bool isFade;
+	bool isEnd();
 private:
 	SpriteRenderer*sprite;
 	float alpha;
+	bool isEndFlag;
 };

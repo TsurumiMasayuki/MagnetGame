@@ -6,7 +6,7 @@
 #include "Device\SoundManager.h"
 
 PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
-	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.5f))
+	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.25f))
 {
 }
 
@@ -39,6 +39,7 @@ void PlayerState_MagChange::onStateEnter()
 		else if (m_MagChangeDir.y == -1)
 			m_pPlayer->setAnimation("PunchDown");
 
+	
 	SoundManager::playSE("punch", 0);
 }
 

@@ -9,7 +9,7 @@
 #include "PlayerState_Default.h"
 #include "PlayerState_MagChange.h"
 
-const float PlayerState_Jump::MAX_JUMP_FORCE = 256.0f;
+const float PlayerState_Jump::MAX_JUMP_FORCE = 384.0f;
 
 PlayerState_Jump::PlayerState_Jump(Player* pPlayer)
 	: m_pPlayer(pPlayer), m_pGravity(pPlayer->getGravity())
@@ -35,7 +35,7 @@ IState * PlayerState_Jump::nextState()
 {
 	if (MAX_JUMP_FORCE / 2 >= m_pPlayer->GetJumpForce() && m_pPlayer->isDetectDown())
 		return new PlayerState_Default(m_pPlayer);
-	if (m_pPlayer->GetJumpForce() <= 0 || m_pPlayer->isDetectUp())
+	if (m_pPlayer->GetJumpForce() <= 0 /*|| m_pPlayer->isDetectUp()*/)
 		return new PlayerState_Default(m_pPlayer);
 	if (GameInput::isMagChange())
 		return new PlayerState_MagChange(m_pPlayer);

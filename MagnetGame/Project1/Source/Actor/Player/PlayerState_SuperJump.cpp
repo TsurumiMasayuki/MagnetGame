@@ -9,12 +9,15 @@
 #include "PlayerState_Default.h"
 #include "PlayerState_MagChange.h"
 
-const float PlayerState_SuperJump::MAX_JUMP_FORCE = 500.0f;
+const float PlayerState_SuperJump::MAX_JUMP_FORCE = 896.0f;
 
 PlayerState_SuperJump::PlayerState_SuperJump(Player* pPlayer)
 	: m_pPlayer(pPlayer), m_pGravity(pPlayer->getGravity())
 {
 	SoundManager::playSE("S_jump",0);
+	superJumpEffect = new SuperJumpEffect(pPlayer->getGameMediator());
+	superJumpEffect->Cleate(pPlayer->getPosition(), 2, 3, 20);
+	delete superJumpEffect;
 }
 
 void PlayerState_SuperJump::update()
@@ -35,7 +38,7 @@ IState * PlayerState_SuperJump::nextState()
 {
 	if (MAX_JUMP_FORCE / 2 >= m_pPlayer->GetJumpForce() && m_pPlayer->isDetectDown())
 		return new PlayerState_Default(m_pPlayer);
-	if (m_pPlayer->GetJumpForce() <= 0 || m_pPlayer->isDetectUp())
+	if (m_pPlayer->GetJumpForce() <= 0 /*|| m_pPlayer->isDetectUp()*/)
 		return new PlayerState_Default(m_pPlayer);
 	if (GameInput::isMagChange())
 		return new PlayerState_MagChange(m_pPlayer);

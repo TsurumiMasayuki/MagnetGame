@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor\GameObject.h"
+#include "Actor/Effect/MagEffect.h"
 
 class ForceMap;
 class SpriteRenderer;
@@ -31,6 +32,7 @@ private:
 	void readMagMap();
 
 private:
+
 	MagnetOption m_MagOption;
 	ForceMap* m_pNMapWrite;
 	ForceMap* m_pSMapWrite;
@@ -40,6 +42,10 @@ private:
 	bool m_IsMagChange;
 
 	SpriteRenderer* m_pSprite;
+
+	MagEffect* magEffect;
+
+	MagnetOption prevMagOption;
 
 	static const float MAG_MOVE_SPEED;
 };

@@ -24,19 +24,19 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1, 1);
+	m_CurrentStage = Vec2(1, 4);
 
 	m_pGameObjectManager = new GameObjectManager();
 
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	m_pPlayer = new Player(this);
-	m_pPlayer->SetRespawnPoint(Vec3(-450, -250, 0));
+	m_pPlayer->SetRespawnPoint(Vec3(-450, 250, 0));
 	m_pPlayer->Respawn();
 
 	m_pCurrentStage = new Stage(this, 32, 32);
 	m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
-	m_pCurrentStage->load("Assets/CSV/alpha1-1.csv");
+	m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 	m_GameEndFlag = false;
 }
 
@@ -70,6 +70,7 @@ void GamePlay::update()
 		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 		m_pPlayer->setPosition(m_pPlayer->getPosition() - Vec3(Screen::getWindowWidth(), 0, 0));
+		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() + Vec3(50, 0, 0));
 	}
 	if (m_pPlayer->getPosition().x < -Screen::getWindowWidth() / 2) {
 		m_CurrentStage.y--;
@@ -84,6 +85,7 @@ void GamePlay::update()
 		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 		m_pPlayer->setPosition(m_pPlayer->getPosition() + Vec3(Screen::getWindowWidth(), 0, 0));
+		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
 	//シーンの更新

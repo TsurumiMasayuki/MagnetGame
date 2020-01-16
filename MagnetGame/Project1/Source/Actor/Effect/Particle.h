@@ -6,7 +6,7 @@
 
 class Particle:public GameObject {
 public:
-	Particle(std::string name,Vec3 pos,float speed,float angle,float duration,float shrinkRate, IGameMediator * pMediator);
+	Particle(std::string name,Vec3 pos,float size_x,float size_y,float speed,float angle,float duration,float shrinkRate, IGameMediator * pMediator);
 	~Particle();
 	virtual void start() override;
 	virtual void update() override;

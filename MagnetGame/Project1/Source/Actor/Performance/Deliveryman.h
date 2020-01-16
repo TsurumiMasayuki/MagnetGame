@@ -5,6 +5,7 @@
 class StateManager;
 class Gravity;
 class DetectHelper;
+class AnimSpriteRenderer;
 
 class Deliveryman:
 	public GameObject
@@ -20,6 +21,7 @@ public:
 
 	bool IsEnd();
 private:
+	AnimSpriteRenderer*anim;
 
 	static const float MOVE_SPEED;
 	bool isEndFlag;

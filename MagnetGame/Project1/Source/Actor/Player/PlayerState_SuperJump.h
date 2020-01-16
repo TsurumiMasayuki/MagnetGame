@@ -1,5 +1,6 @@
 #pragma once
 #include "Utility\State\IState.h"
+#include "Actor/Effect/SuperJumpEffect.h"
 
 class Player;
 class Gravity;
@@ -18,6 +19,8 @@ public:
 private:
 	Player* m_pPlayer;
 	Gravity* m_pGravity;
+
+	SuperJumpEffect* superJumpEffect;
 
 	float m_JumpForce;
 	static const float MAX_JUMP_FORCE;

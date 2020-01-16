@@ -74,6 +74,11 @@
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleFade.cpp" />
+    <ClCompile Include="Source\Scene\Entrance.cpp" />
+    <ClCompile Include="Source\Scene\Ending.cpp" />
+    <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
+    <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -157,6 +162,11 @@
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
     <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
     <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
+    <ClInclude Include="Source\Scene\Entrance.h" />
+    <ClInclude Include="Source\Scene\Ending.h" />
+    <ClInclude Include="Source\Actor\Performance\EventText.h" />
+    <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
+    <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

@@ -13,10 +13,10 @@
 #include "Device\GameTime.h"
 #include "Device\File\CSVReader.h"
 
-const float Player::MOVE_SPEED = 128.0;
+const float Player::MOVE_SPEED = 256.0;
 
 Player::Player(IGameMediator * pMediator)
-	: GameObject(pMediator), isSuperJump(true)
+	: GameObject(pMediator), isSuperJump(true), isFlipX(false)
 {
 	m_pStateManager = new StateManager();
 }
@@ -42,11 +42,11 @@ void Player::start()
 	collider->layer = PhysicsLayer::Player;
 	collider->isPlayer = true;
 
-	m_pGravity = new Gravity(this, 30);
+	m_pGravity = new Gravity(this, 80);
 	m_pStateManager->setState(new PlayerState_Default(this));
 
-	initMagChange();
 	initDetectors();
+	initMagChange();
 	initAnimations();
 }
 
@@ -69,9 +69,14 @@ void Player::update()
 	m_pDetectLeft->setPosition(pos + Vec3(-1, 0, 0) * distX);
 
 	if (GameInput::getHorizontal() < 0)
-		m_pAnimRenderer->setFlipX(true);
+		isFlipX = true;
 	if (GameInput::getHorizontal() > 0)
-		m_pAnimRenderer->setFlipX(false);
+		isFlipX = false;
+
+	m_pAnimRenderer->setFlipX(isFlipX);
+
+
+	setMagChange();
 
 	//if (isSandwich())
 	//	destroy();
@@ -161,22 +166,22 @@ void Player::initMagChange()
 {
 	m_pMagChange = new GameObject(m_pGameMediator);
 	m_pMagChange->setTag("MagChangeS");
-	//m_pMagChange->setActive(false);
+	m_pMagChange->setActive(false);
 	m_pMagChange->setSize(Vec3(64, 64, 0));
 
 	//#ifdef _DEBUG
 		//デバッグ用範囲描画
 	auto sprite = new SpriteRenderer(m_pMagChange, 90);
 	sprite->setTextureName("BoxFill");
-	sprite->setColor(Color(0, 0, 1, 0.5f));
+	sprite->setColor(Color(0, 0, 1, 1.0f));
 	//#endif
 
-	auto collider = new BoxCollider2D(m_pMagChange);
-	collider->isTrigger = true;
-	collider->isMove = false;
-	collider->setWidth(64);
-	collider->setHeight(64);
-	collider->layer = PhysicsLayer::None;
+	m_pMagCollider = new BoxCollider2D(m_pMagChange);
+	m_pMagCollider->isTrigger = true;
+	m_pMagCollider->isMove = false;
+	m_pMagCollider->setWidth(64);
+	m_pMagCollider->setHeight(4);
+	m_pMagCollider->layer = PhysicsLayer::None;
 }
 
 void Player::initDetectors()
@@ -200,13 +205,13 @@ void Player::initAnimations()
 {
 	m_pAnimRenderer = new AnimSpriteRenderer(this);
 	m_pAnimRenderer->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
-	m_pAnimRenderer->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.1f, 8));
+	m_pAnimRenderer->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
 	m_pAnimRenderer->addAnimation("Jump", new SpriteAnimation("PlayerJump", 224, 32, 0.1f, 7));
 	m_pAnimRenderer->addAnimation("SJump", new SpriteAnimation("PlayerSJump", 224, 40, 0.3f, 7));
 
-	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 5));
-	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 4));
-	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 4));
+	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 3));
+	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 2));
+	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 2));
 
 	m_pAnimRenderer->setAnimation("Idle");
 }
@@ -215,8 +220,25 @@ void Player::moveY()
 {
 	float deltaTime = GameTime::getDeltaTime();
 
-	m_JumpForce -= m_pGravity->getGravSpeed() * deltaTime;
+	m_JumpForce -= m_pGravity->getGravSpeed() * deltaTime *  m_pGravity->getGravSpeed() * deltaTime;
 
 	Vec3 move(0, std::fmaxf(0, m_JumpForce * deltaTime), 0);
 	setPosition(getPosition() + move);
+}
+
+void Player::setMagChange()
+{
+	Vec3 MagChangeDir = GameInput::getMagChangeDir().toVec3();
+	if (MagChangeDir.x == 0 && MagChangeDir.y == 0)
+		MagChangeDir = isFlipX ? Vec3(-1, 0, 0) : Vec3(1, 0, 0);
+	Vec3 MagChangePos = Vec3(getSize().x * MagChangeDir.x, getSize().y * MagChangeDir.y, 0) / 2;
+	m_pMagChange->setPosition(getPosition() + MagChangePos);
+
+	float size = getSize().x * 0.9f;
+
+	Vec3 MagChangeSize = MagChangeDir.y != 0 ? Vec3(size, 32, 0) : Vec3(4, size, 0);
+	m_pMagChange->setSize(MagChangeSize);
+
+	m_pMagCollider->setWidth(MagChangeSize.x);
+	m_pMagCollider->setHeight(MagChangeSize.y);
 }
