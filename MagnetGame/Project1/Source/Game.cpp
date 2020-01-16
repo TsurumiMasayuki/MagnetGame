@@ -61,6 +61,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
 
 	//画像テキスト
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");

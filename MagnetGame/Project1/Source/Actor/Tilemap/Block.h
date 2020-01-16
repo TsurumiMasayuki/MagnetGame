@@ -1,5 +1,6 @@
 #include "Actor\GameObject.h"
 #include "Actor\Tilemap\TileImageType.h"
+#include "Math\Vec2.h"
 
 class Block
 	: public GameObject
@@ -11,6 +12,13 @@ public:
 	virtual void start() override;
 
 private:
+	struct ImageInfo
+	{
+		Vec2 imageCoord;
+		float imageRotation;
+	};
+
+private:
 	float m_Width;
 	float m_Height;
 
@@ -19,5 +27,5 @@ private:
 	std::string m_TextureName;
 	TILE_IMAGE_TYPE m_TileImageType;
 
-	const static Vec2 tileImageCoord[11];
+	const static ImageInfo tileImageCoord[18];
 };

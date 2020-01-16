@@ -3,24 +3,41 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Actor\IGameMediator.h"
 #include "Actor\Magnet\ObstacleMap.h"
+#include "Math\MathUtility.h"
 
-const Vec2 Block::tileImageCoord[11] =
+const Vec2 UVRectSize(1.0f / 7.0f, 1);
+
+const Block::ImageInfo Block::tileImageCoord[18] =
 {
-	Vec2( 0.0f, 0.0f),
+	//デフォルト
+	{ Vec2(0.0f, 0.0f),				0.0f },
 
-	Vec2( 0.166f,  0.0f),
-	Vec2( 0.166f, -0.166f),
-	Vec2( 0.0f, 0.166f),
-	Vec2(-0.166f, 0.166f),
+	//端	
+	{ Vec2(1.0f / 7.0f * 1, 0.0f),   0.0f},	//上
+	{ Vec2(1.0f / 7.0f * 1, 0.0f), 180.0f},	//下
+	{ Vec2(1.0f / 7.0f * 1, 0.0f), 270.0f}, //右
+	{ Vec2(1.0f / 7.0f * 1, 0.0f),  90.0f}, //左
 
-	Vec2( 0.166f,  0.166f),
+	//角						     	 
+	{ Vec2(1.0f / 7.0f * 2, 0.0f), 270.0f},	//右上
+	{ Vec2(1.0f / 7.0f * 2, 0.0f),   0.0f},	//左上
+	{ Vec2(1.0f / 7.0f * 2, 0.0f), 180.0f}, //右下
+	{ Vec2(1.0f / 7.0f * 2, 0.0f),  90.0f}, //左下
 
-	Vec2(  0.0f,	0.0f),
-	Vec2( -0.166f,	0.0f),
-	Vec2(  0.0f,	-0.166f),
-	Vec2( -0.166f,	-0.166f),
+	//コの字					   
+	{ Vec2(1.0f / 7.0f * 3, 0.0f),   0.0f},	//上
+	{ Vec2(1.0f / 7.0f * 3, 0.0f), 180.0f},	//下
+	{ Vec2(1.0f / 7.0f * 3, 0.0f), 270.0f}, //右
+	{ Vec2(1.0f / 7.0f * 3, 0.0f),  90.0f}, //左
 
-	Vec2( 0.0f,  0.0f),
+	//ニの字					   
+	{ Vec2(1.0f / 7.0f * 4, 0.0f),   0.0f},	//上
+	{ Vec2(1.0f / 7.0f * 4, 0.0f), 180.0f},	//下
+	{ Vec2(1.0f / 7.0f * 4, 0.0f), 270.0f}, //右
+	{ Vec2(1.0f / 7.0f * 4, 0.0f),  90.0f}, //左
+
+	//中心					  	  
+	{ Vec2(1.0f / 7.0f * 6, 0.0f), 0.0f},
 };
 
 Block::Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, TILE_IMAGE_TYPE tileImageType, bool hasCollider)
@@ -45,9 +62,18 @@ void Block::start()
 	sprite->setTextureName(m_TextureName);
 	sprite->setColor(Color(0.25f, 0.25f, 0.25f, 1));
 
+	//sprite->setUVRect(RectF(1.0f / 7.0f, 0.0f, UVRectSize.x, UVRectSize.y));
+
 	//タイル用切り抜きを指定
-	if (m_TileImageType != TILE_IMAGE_TYPE_NONE)
-		sprite->setUVRect(RectF(tileImageCoord[m_TileImageType].x, tileImageCoord[m_TileImageType].y, 0.166f, 0.166f));
+	auto imageInfo = tileImageCoord[m_TileImageType];
+	if (m_TileImageType == TILE_IMAGE_TYPE_UPRIGHT)
+	{
+		std::fminf(0, 1);
+	}
+
+	sprite->setUVRect(RectF(imageInfo.imageCoord.x, imageInfo.imageCoord.y, UVRectSize.x, UVRectSize.y));
+
+	setAngleZ(MathUtility::toRadian(imageInfo.imageRotation));
 
 	if (m_HasCollider)
 	{
