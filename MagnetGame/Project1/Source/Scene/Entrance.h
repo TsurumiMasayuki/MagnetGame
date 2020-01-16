@@ -4,6 +4,8 @@
 
 class GameObjectManager;
 class TitleBackGround;
+class EventText;
+class TitlePlayer;
 
 class Entrance :
 	public AbstractScene, IGameMediator {
@@ -32,6 +34,17 @@ private:
 	GameObjectManager*m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
 	TitleBackGround*m_pBackGround;
-	bool m_pEntranceEndFlag;
+	EventText*m_pText;
+	TitlePlayer*m_pTitlePlayer;
 
+	enum State {
+		Idle,
+		Talk,
+		Move,
+		Talk2,
+		Move2,
+	};
+	State state;
+
+	bool m_pEntranceEndFlag;
 };

@@ -8,6 +8,7 @@
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
 #include "Device\Input.h"
+#include"Device/SoundManager.h"
 
 
 const float Deliveryman::MOVE_SPEED = 64.0f;
@@ -56,6 +57,7 @@ void Deliveryman::update()
 	case Deliveryman::Idle:
 		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			state = State::Move;
+			SoundManager::playSE("bike");
 		}
 		break;
 	case Deliveryman::Move:
@@ -68,6 +70,7 @@ void Deliveryman::update()
 		m_pMove = false;
 		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			state = State::Move2;
+			SoundManager::playSE("bike",1);
 		}
 		break;
 	case Deliveryman::Move2:
