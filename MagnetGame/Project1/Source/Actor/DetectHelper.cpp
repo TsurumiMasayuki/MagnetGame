@@ -1,8 +1,10 @@
 #include "DetectHelper.h"
 #include "Component\Physics\BoxCollider2D.h"
+#include "Magnet\Magnet.h"
 
 DetectHelper::DetectHelper(IGameMediator* pGameMediator, GameObject* pUser, std::initializer_list<std::string> detectTags)
-	: GameObject(pGameMediator)
+	: GameObject(pGameMediator),
+	m_pUser(pUser)
 {
 	for (auto tag : detectTags)
 	{
@@ -53,6 +55,11 @@ void DetectHelper::onCollisionStay(GameObject * pHit)
 	m_CollisionTags.emplace_back(pHit->getTag());
 	if (compareTags(pHit->getTag()))
 		m_DetectFlag = true;
+}
+
+GameObject * DetectHelper::getUser()
+{
+	return m_pUser;
 }
 
 bool DetectHelper::compareTags(std::string tag)
