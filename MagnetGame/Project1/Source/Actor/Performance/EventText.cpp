@@ -13,8 +13,8 @@ EventText::~EventText()
 
 void EventText::start()
 {
-	setSize(Vec3(800, 200, 0));
-	setPosition(Vec3(0,-230, 0));
+	setSize(Vec3(1000, 250, 0));
+	setPosition(Vec3(0,-235, 0));
 
 	frame = new SpriteRenderer(this);
 	frame->setTextureName("log_player");

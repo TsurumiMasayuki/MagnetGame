@@ -2,6 +2,7 @@
 #include "Device\Input.h"
 #include"Actor/GameObjectManager.h"
 #include "Physics\PhysicsWorld.h"
+#include"Actor/Performance/TitleBackGround.h"
 
 Entrance::Entrance()
 {
@@ -15,6 +16,7 @@ void Entrance::init()
 {
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
+	m_pBackGround = new TitleBackGround(this, "haikei3");
 	m_pEntranceEndFlag = false;
 }
 
