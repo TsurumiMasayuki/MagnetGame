@@ -16,7 +16,7 @@ void Entrance::init()
 {
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
-	m_pBackGround = new TitleBackGround(this, "haikei3");
+	m_pBackGround = new TitleBackGround(this, "haikei1-3");
 	m_pEntranceEndFlag = false;
 }
 

@@ -60,7 +60,7 @@ void Deliveryman::update()
 		break;
 	case Deliveryman::Move:
 		m_pMove = true;
-		if (pos.x <= 300) {
+		if (pos.x <= 270) {
 			state = State::Anim;
 		}
 		break;

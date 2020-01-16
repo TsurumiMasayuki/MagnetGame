@@ -70,7 +70,7 @@ void TitlePlayer::update()
 		break;
 	case TitlePlayer::Move:
 		m_pMove = true;
-		if (pos.x >= 300) 
+		if (pos.x >= 210) 
 		{
 			anim->setAnimation("Idle");
 			m_pMove = false;
