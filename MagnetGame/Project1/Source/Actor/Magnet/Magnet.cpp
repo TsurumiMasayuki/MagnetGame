@@ -4,7 +4,7 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Device\GameTime.h"
 #include "Actor\IGameMediator.h"
-#include "Actor/Effect/MagEffect.h"
+#include "Actor\DetectHelper.h"
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
 
@@ -53,26 +53,22 @@ void Magnet::update()
 {
 	writeMagMap();
 	readMagMap();
+	if (m_pRider != nullptr)
+		m_pRider->setPosition(m_pRider->getPosition() + Vec3(m_Velocity.x, m_Velocity.y, 0));
 }
 
 void Magnet::onCollisionEnter(GameObject * pHit)
 {
 	if (pHit->compareTag("MagChangeS")) {
 		SetMagOption(MAGNET_S);
-		magEffect = new MagEffect(getGameMediator());
-		magEffect->Cleate(getPosition(), getSize().x, getSize().y, 0, 3, 0, 5);
-
-		delete magEffect;
 	}
 
 
 	if (pHit->compareTag("MagChangeN")) {
 		SetMagOption(MAGNET_N);
-		magEffect = new MagEffect(getGameMediator());
-		magEffect->Cleate(getPosition(), getSize().x, getSize().y, 0, 3, 0, 5);
-		delete magEffect;
 	}
-
+	if (pHit->compareTag("LandDetector"))
+		m_pRider = ((DetectHelper*)pHit)->getUser();
 }
 
 void Magnet::onCollisionStay(GameObject * pHit)
@@ -82,6 +78,12 @@ void Magnet::onCollisionStay(GameObject * pHit)
 
 	if (pHit->compareTag("MagChangeN"))
 		SetMagOption(MAGNET_N);
+}
+
+void Magnet::onCollisionExit(GameObject * pHit)
+{
+	if (pHit->compareTag("LandDetector"))
+		m_pRider = nullptr;
 }
 
 Magnet::MagnetOption Magnet::getMagOpition()
@@ -107,6 +109,11 @@ void Magnet::SetMagOption(MagnetOption magOption)
 	}
 }
 
+Vec2 Magnet::getVelocity()
+{
+	return m_Velocity;
+}
+
 void Magnet::writeMagMap()
 {
 	if (m_IsMove) return;
@@ -124,12 +131,11 @@ void Magnet::readMagMap()
 	int nModifier = m_MagOption == MAGNET_N ? 1 : -1;
 	int sModifier = -nModifier;
 
-	Vec2 move;
-	move += m_pNMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
-	move += m_pSMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
+	m_Velocity = Vec2::zero();
+	m_Velocity += m_pNMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
+	m_Velocity += m_pSMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
 
-	move = move * MAG_MOVE_SPEED * GameTime::getDeltaTime();
+	m_Velocity = m_Velocity * MAG_MOVE_SPEED * GameTime::getDeltaTime();
 
-	setPosition(getPosition() + move.toVec3());
-
+	setPosition(getPosition() + m_Velocity.toVec3());
 }

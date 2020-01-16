@@ -54,7 +54,6 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
 	TextureManager::loadTexture(L"Assets/Textures/BoxOutline.png", "BoxOutline");
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
-	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
 	TextureManager::loadTexture(L"Assets/Textures/white.png", "white");
 	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
 	TextureManager::loadTexture(L"Assets/Textures/superjumpeffect.png", "superjumpeffect");
@@ -62,6 +61,13 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
 	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
+	TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
+	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
+	TextureManager::loadTexture(L"Assets/Textures/haikei1-2.png", "haikei1-2");
+	TextureManager::loadTexture(L"Assets/Textures/haikei1-3.png", "haikei1-3");
+	TextureManager::loadTexture(L"Assets/Textures/haikei2.png", "haikei2");
+	TextureManager::loadTexture(L"Assets/Textures/haikei3.png", "haikei3");
+	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
 
 	//画像テキスト
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
@@ -86,6 +92,7 @@ void Game::init()
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
 
 	//SE追加
 	SoundManager::loadWavFile(L"Assets/Sound/SE/Jump.wav", "jump");

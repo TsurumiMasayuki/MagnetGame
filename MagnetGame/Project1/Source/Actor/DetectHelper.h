@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <initializer_list>
+class Magnet;
 
 class DetectHelper
 	: public GameObject
@@ -19,6 +20,8 @@ public:
 	virtual void onCollisionEnter(GameObject* pHit) override;
 	virtual void onCollisionStay(GameObject* pHit) override;
 
+	GameObject* getUser();
+
 private:
 	bool compareTags(std::string tag);
 
@@ -27,4 +30,5 @@ private:
 	std::vector<std::string> m_DetectTags;
 	std::vector<std::string> m_CollisionTags;
 	GameObject* m_pUser;
+	Magnet* m_pRift;
 };

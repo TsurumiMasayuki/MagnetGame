@@ -3,6 +3,7 @@
 #include "Actor\IGameMediator.h"
 
 class GameObjectManager;
+class TitleBackGround;
 
 class Entrance :
 	public AbstractScene, IGameMediator {
@@ -30,5 +31,7 @@ public:
 private:
 	GameObjectManager*m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
+	TitleBackGround*m_pBackGround;
 	bool m_pEntranceEndFlag;
+
 };

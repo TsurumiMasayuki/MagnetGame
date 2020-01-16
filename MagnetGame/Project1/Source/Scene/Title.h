@@ -9,6 +9,7 @@ class ObjN;
 class TitleBackGround;
 class TitleFade;
 class EventText;
+class TitleLogo;
 
 class Title :
 	public AbstractScene, IGameMediator {
@@ -40,6 +41,7 @@ private:
 	PhysicsWorld* m_pPhysicsWorld;
 	ObjN *m_pObjN;
 	TitleBackGround*m_pBackGround;
+	TitleLogo*m_pTitleLogo;
 	TitleFade*m_pFade;
 	EventText*m_pText;
 
