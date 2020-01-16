@@ -1,5 +1,6 @@
 #include "EventText.h"
 #include "Component\SpriteRenderer.h"
+#include"Device/SoundManager.h"
 
 EventText::EventText(IGameMediator * pMediator)
 	:GameObject(pMediator)
@@ -14,14 +15,14 @@ EventText::~EventText()
 void EventText::start()
 {
 	setSize(Vec3(1280, 180, 0));
-	setPosition(Vec3(0,-270, 0));
+	setPosition(Vec3(0, -270, 0));
 
 	frame = new SpriteRenderer(this);
 	frame->setTextureName("log_player");
 
 	arrow = new SpriteRenderer(this);
-	arrow->setTextureName("log_arrow"); 
-	
+	arrow->setTextureName("log_arrow");
+
 	text = new SpriteRenderer(this);
 	text->setTextureName("text0");
 
@@ -30,7 +31,6 @@ void EventText::start()
 	arrow->setColor(Color(1, 1, 1, 1));
 
 	state = State::Hero;
-	EventNum = 0;
 	alpha = 1;
 	a = 0;
 }
@@ -39,7 +39,7 @@ void EventText::update()
 {
 	a += 0.15f;
 	alpha += cos((double)a);
-	arrow->setColor(Color(1,1,1,alpha));
+	arrow->setColor(Color(1, 1, 1, alpha));
 	switch (EventNum)
 	{
 	case 0:
@@ -62,6 +62,63 @@ void EventText::update()
 		text->setTextureName("text4");
 		state = State::Hero;
 		break;
+	case 5:
+		text->setTextureName("text5");
+		state = State::Hero;
+		break;
+	case 6:
+		text->setTextureName("text6");
+		state = State::Hero;
+		break;
+	case 7:
+		text->setTextureName("text7");
+		state = State::Doctor;
+		break;
+	case 8:
+		text->setTextureName("text8");
+		state = State::Doctor;
+		break;
+	case 9:
+		text->setTextureName("text9");
+		state = State::Hero;
+		break;
+	case 10:
+		text->setTextureName("text10");
+		state = State::Hero;
+		break;
+	case 11:
+		text->setTextureName("text11");
+		state = State::Hero;
+		break;
+	case 12:
+		text->setTextureName("text12");
+		state = State::Hero;
+		break;
+	case 13:
+		text->setTextureName("text13");
+		state = State::Hero;
+		break;
+	case 14:
+		text->setTextureName("text14");
+		state = State::Doctor;
+		break;
+	case 15:
+		text->setTextureName("text15");
+		state = State::Doctor;
+		break;
+	case 16:
+		text->setTextureName("text16");
+		state = State::Doctor;
+		break;
+	case 17:
+		text->setTextureName("text17");
+		state = State::Doctor;
+		break;
+	case 18:
+		text->setTextureName("text18");
+		state = State::Hero;
+		break;
+
 	default:
 		break;
 	}
@@ -97,4 +154,5 @@ int EventText::getEventNum()
 void EventText::addEventNum()
 {
 	EventNum++;
+	SoundManager::playSE("kettei");
 }

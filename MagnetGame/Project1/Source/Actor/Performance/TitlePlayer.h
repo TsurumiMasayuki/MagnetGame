@@ -18,6 +18,7 @@ public:
 	virtual void update() override;
 	virtual void onDestroy() override;
 
+	void initAnimations();
 
 	enum State
 	{
@@ -29,6 +30,7 @@ public:
 	};
 	State state;
 	bool IsEnd();
+	bool isFlipX;
 private:
 	AnimSpriteRenderer*anim;
 
@@ -37,7 +39,10 @@ private:
 	bool m_pMove;
 	float a;
 	bool go;
+	int Num; 
+	float x;
 
 public:
 	void setIsGo(bool value);
+	void setNum(int value);
 };

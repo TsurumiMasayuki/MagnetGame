@@ -74,11 +74,25 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/log_hakase.png", "log_hakase");
 	TextureManager::loadTexture(L"Assets/Textures/log_hakase_black.png", "log_hakase_black");
 	TextureManager::loadTexture(L"Assets/Textures/log_player.png", "log_player");
-	TextureManager::loadTexture(L"Assets/Textures/text0.png", "text0");
-	TextureManager::loadTexture(L"Assets/Textures/text1.png", "text1");
-	TextureManager::loadTexture(L"Assets/Textures/text2.png", "text2");
-	TextureManager::loadTexture(L"Assets/Textures/text3.png", "text3");
-	TextureManager::loadTexture(L"Assets/Textures/text4.png", "text4");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text0.png", "text0");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text1.png", "text1");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text2.png", "text2");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text3.png", "text3");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text4.png", "text4");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text5.png", "text5");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text6.png", "text6");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text7.png", "text7");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text8.png", "text8");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text9.png", "text9");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text10.png", "text10");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text11.png", "text11");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text12.png", "text12");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text13.png", "text13");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text14.png", "text14");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text15.png", "text15");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text16.png", "text16");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text17.png", "text17");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text18.png", "text18");
 
 	//プレイヤー
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
@@ -99,6 +113,9 @@ void Game::init()
 	SoundManager::loadWavFile(L"Assets/Sound/SE/S_Jump.wav", "S_jump");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/punch.wav", "punch");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/MagChange.wav", "MagChange");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/bike.wav", "bike");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/kettei.wav", "kettei");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/door.wav", "door");
 
 	GameDevice::initialize();
 	m_GameEndFlag = false;
@@ -108,7 +125,7 @@ void Game::init()
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-	m_pSceneManager->changeScene("GamePlay");
+	m_pSceneManager->changeScene("Title");
 }
 
 void Game::update()

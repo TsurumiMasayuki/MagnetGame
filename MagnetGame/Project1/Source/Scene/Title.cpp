@@ -37,6 +37,7 @@ void Title::init()
 	m_pDeliveryman->setPosition(Vec3(640, -95, 0));
 
 	m_pTitlePlayer = new TitlePlayer(this);
+	m_pTitlePlayer->setNum(0);
 	m_pTitlePlayer->setPosition(Vec3(40,  -95, 0));
 	m_pTitlePlayer->setActive(false);
 
@@ -63,11 +64,12 @@ void Title::update()
 	case Title::Delivery:
 
 		if (m_pDeliveryman->isDestroy()) {
+			SoundManager::playSE("door");
+			m_pBackGround->setTextureName("opening2");
 			sState = SceneState::Player;
 		}
 		break;
 	case Title::Player:
-		m_pBackGround->setTextureName("opening2");
 
 		m_pTitlePlayer->setActive(true);
 
@@ -108,6 +110,7 @@ void Title::draw()
 void Title::shutdown()
 {
 	m_pTitlePlayer->destroy();
+	SoundManager::stopBGM();
 	delete m_pGameObjectManager;
 	delete m_pPhysicsWorld;
 }
