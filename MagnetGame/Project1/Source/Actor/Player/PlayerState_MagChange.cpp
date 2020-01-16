@@ -6,7 +6,7 @@
 #include "Device\SoundManager.h"
 
 PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
-	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.5f))
+	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.25f))
 {
 }
 

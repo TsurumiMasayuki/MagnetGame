@@ -6,6 +6,7 @@
 #include "Physics\PhysicsWorld.h"
 #include "Actor\Performance\TitleBackGround.h"
 #include"Actor/Performance/TitleFade.h"
+#include"Actor/Performance/EventText.h"
 
 Title::Title()
 {
@@ -26,12 +27,15 @@ void Title::init()
 	m_pFade->setActive(false);
 
 	m_pDeliveryman = new Deliveryman(this);
-	m_pDeliveryman->setPosition(Vec3(640, 0, 0));
+	m_pDeliveryman->setPosition(Vec3(640, -260, 0));
 
 	m_pTitlePlayer = new TitlePlayer(this);
+	m_pTitlePlayer->setPosition(Vec3(40,-260,0));
 	m_pTitlePlayer->setActive(false);
 
-
+	m_pText = new EventText(this);
+	m_pText->setActive(false);
+	m_pText->setEventNum(0);
 
 	m_pTitleEndFlag = false;
 }
@@ -53,12 +57,26 @@ void Title::update()
 		break;
 	case Title::Player:
 		m_pTitlePlayer->setActive(true);
-		if (m_pTitlePlayer->IsEnd()) {
-			sState = SceneState::Fade;
+
+		if (m_pTitlePlayer->getPosition().x>=300) {
+
+			if (m_pText->getEventNum() <= 4) {
+				m_pText->setActive(true);
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pText->addEventNum();
+				}
+			}
+			else if (m_pText->getEventNum() > 4) {
+				m_pText->setActive(false);
+				m_pTitlePlayer->setIsGo(true);
+				sState = SceneState::Fade;
+			} 
 		}
 		break;
 	case Title::Fade:
-		m_pFade->setActive(true);
+		if (m_pTitlePlayer->IsEnd()) {
+			m_pFade->setActive(true);
+		}
 		if (m_pFade->isEnd()) {
 			m_pTitleEndFlag = true;
 		}

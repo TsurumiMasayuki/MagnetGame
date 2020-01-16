@@ -14,11 +14,13 @@ public:
 	virtual void onDestroy() override;
 
 	void setEventNum(int num);
+	int getEventNum();
 	void addEventNum();
 
 private:
 	SpriteRenderer*text;
 	SpriteRenderer*frame;
+	SpriteRenderer*arrow;
 	int EventNum;
 	std::string eventText;
 
@@ -26,6 +28,10 @@ private:
 	{
 		Hero,
 		Doctor,
+		Doctor_Black,
 	};
 	State state;
+
+	float alpha;
+	float a;
 };

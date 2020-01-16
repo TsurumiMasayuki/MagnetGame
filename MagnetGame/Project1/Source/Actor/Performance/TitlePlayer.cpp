@@ -3,6 +3,9 @@
 
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\Physics\Gravity.h"
+#include "Component\SpriteRenderer.h"
+#include "Component/SpriteAnimation.h"
+#include "Component/AnimSpriteRenderer.h"
 #include "Actor\DetectHelper.h"
 #include "Device\Input.h"
 
@@ -23,9 +26,10 @@ void TitlePlayer::start()
 
 	a = 0.0f;
 
-	sprite = new SpriteRenderer(this);
-	sprite->setTextureName("BoxOutline");
-	sprite->setColor(Color(0, 0, 0, a));
+	anim = new AnimSpriteRenderer(this);
+	anim->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
+	anim->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
+	anim->setAnimation("Idle");
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -37,6 +41,7 @@ void TitlePlayer::start()
 	state = State::Alpha;
 
 	isEndFlag = false;
+	go = false;
 	m_pMove = false;
 }
 
@@ -54,17 +59,33 @@ void TitlePlayer::update()
 	{
 	case TitlePlayer::Alpha:
 		a += 0.01f;
-		sprite->setColor(Color(1, 1, 1, a));
-		if (a >= 1.0f) {
+		anim->setColor(Color(1, 1, 1, a));
+		if (a >= 1.5f) {
 			state = State::Idle;
 		}
 		break;
 	case TitlePlayer::Idle:
 		state = State::Move;
+		anim->setAnimation("Run");
 		break;
 	case TitlePlayer::Move:
 		m_pMove = true;
-		if (pos.x >= 640) {
+		if (pos.x >= 300) 
+		{
+			anim->setAnimation("Idle");
+			m_pMove = false;
+			state = State::Idle2;
+		}
+		break;
+	case TitlePlayer::Idle2:
+		if (go) {
+			state = State::Move2;
+			anim->setAnimation("Run");
+			m_pMove = true;
+		}
+		break;
+	case TitlePlayer::Move2:
+		if (pos.x >= 600) {
 			isEndFlag = true;
 		}
 		break;
@@ -78,4 +99,9 @@ void TitlePlayer::onDestroy()
 bool TitlePlayer::IsEnd()
 {
 	return isEndFlag;
+}
+
+void TitlePlayer::setIsGo(bool value)
+{
+	go = value;
 }

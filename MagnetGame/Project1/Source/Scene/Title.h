@@ -8,6 +8,7 @@ class TitlePlayer;
 class ObjN;
 class TitleBackGround;
 class TitleFade;
+class EventText;
 
 class Title :
 	public AbstractScene, IGameMediator {
@@ -40,6 +41,7 @@ private:
 	ObjN *m_pObjN;
 	TitleBackGround*m_pBackGround;
 	TitleFade*m_pFade;
+	EventText*m_pText;
 
 	enum SceneState
 	{

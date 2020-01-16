@@ -209,9 +209,9 @@ void Player::initAnimations()
 	m_pAnimRenderer->addAnimation("Jump", new SpriteAnimation("PlayerJump", 224, 32, 0.1f, 7));
 	m_pAnimRenderer->addAnimation("SJump", new SpriteAnimation("PlayerSJump", 224, 40, 0.3f, 7));
 
-	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 5));
-	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 4));
-	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 4));
+	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 3));
+	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 2));
+	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 2));
 
 	m_pAnimRenderer->setAnimation("Idle");
 }

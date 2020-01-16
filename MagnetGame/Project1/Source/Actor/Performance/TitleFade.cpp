@@ -26,7 +26,7 @@ void TitleFade::update()
 {
 	sprite->setColor(Color(0, 0, 0, alpha));
 	alpha += 0.01f;
-	if (alpha >= 1.0f) {
+	if (alpha >= 2.0f) {
 		isEndFlag = true;
 	}
 }
