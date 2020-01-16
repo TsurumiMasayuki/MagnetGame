@@ -7,7 +7,7 @@ class TitleBackGround
 	:public GameObject
 {
 public:
-	TitleBackGround(IGameMediator*pMediator);
+	TitleBackGround(IGameMediator*pMediator, std::string TextureName);
 	~TitleBackGround();
 
 	virtual void start() override;
@@ -17,4 +17,8 @@ public:
 	bool isFade;
 private:
 	SpriteRenderer*sprite;
+	std::string name;
+
+public:
+	void setTextureName(std::string TextureName);
 };

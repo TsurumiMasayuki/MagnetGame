@@ -48,7 +48,7 @@ void Game::init()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 
-	//‰æ‘œ‚Ìƒ[ƒh
+	//ç”»åƒã®ãƒ­ãƒ¼ãƒ‰
 	TextureManager::loadTexture(L"Assets/Textures/CircleFill.png", "CircleFill");
 	TextureManager::loadTexture(L"Assets/Textures/CircleOutline.png", "CircleOutline");
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
@@ -57,10 +57,13 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
 	TextureManager::loadTexture(L"Assets/Textures/white.png", "white");
 	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
+	TextureManager::loadTexture(L"Assets/Textures/superjumpeffect.png", "superjumpeffect");
+	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	TextureManager::loadTexture(L"Assets/Textures/haikei3.png", "haikei3");
 
-	//‰æ‘œƒeƒLƒXƒg
+	//ç”»åƒãƒ†ã‚­ã‚¹ãƒˆ
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
 	TextureManager::loadTexture(L"Assets/Textures/log_hakase.png", "log_hakase");
 	TextureManager::loadTexture(L"Assets/Textures/log_hakase_black.png", "log_hakase_black");
@@ -71,7 +74,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/text3.png", "text3");
 	TextureManager::loadTexture(L"Assets/Textures/text4.png", "text4");
 
-	//ƒvƒŒƒCƒ„[
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
 	TextureManager::loadTexture(L"Assets/Textures/player_run_right.png", "PlayerRun");
 	TextureManager::loadTexture(L"Assets/Textures/player_jamp_right.png", "PlayerJump");
@@ -80,11 +83,12 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_up.png", "PlayerPunch_Up");
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_down.png", "PlayerPunch_Down");
 
-	//BGM’Ç‰Á
+	//BGMè¿½åŠ 
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
 
-	//SE’Ç‰Á
+	//SEè¿½åŠ 
 	SoundManager::loadWavFile(L"Assets/Sound/SE/Jump.wav", "jump");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/S_Jump.wav", "S_jump");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/punch.wav", "punch");
@@ -108,7 +112,7 @@ void Game::update()
 	Input::update();
 	SoundManager::update();
 
-	//ƒQ[ƒ€‚ªI—¹‚µ‚Ä‚¢‚½‚çƒIƒuƒWƒFƒNƒg‚ÌXV‚ğ~‚ß‚é
+	//ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ã¦ã„ãŸã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ›´æ–°ã‚’æ­¢ã‚ã‚‹
 	if (m_GameEndFlag)
 		return;
 

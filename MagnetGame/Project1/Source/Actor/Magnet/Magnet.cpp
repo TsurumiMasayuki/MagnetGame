@@ -59,10 +59,16 @@ void Magnet::update()
 
 void Magnet::onCollisionEnter(GameObject * pHit)
 {
-	if (pHit->compareTag("MagChangeS"))
+	if (pHit->compareTag("MagChangeS")) {
 		SetMagOption(MAGNET_S);
+		magEffect = new MagEffect(getGameMediator());
+		magEffect->Cleate(getPosition(), getSize().x, getSize().y, 0, 3, 0, 5);
 
-	if (pHit->compareTag("MagChangeN"))
+		delete magEffect;
+	}
+
+
+	if (pHit->compareTag("MagChangeN")) {
 		SetMagOption(MAGNET_N);
 
 	if (pHit->compareTag("LandDetector"))

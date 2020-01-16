@@ -162,7 +162,9 @@
   <ItemGroup>
     <ClCompile Include="Source\Actor\CheckPoint.cpp" />
     <ClCompile Include="Source\Actor\Effect\CircleEffect.cpp" />
+    <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
     <ClCompile Include="Source\Actor\DetectHelper.cpp" />
@@ -240,7 +242,9 @@
   <ItemGroup>
     <ClInclude Include="Source\Actor\CheckPoint.h" />
     <ClInclude Include="Source\Actor\Effect\CircleEffect.h" />
+    <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
+    <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />

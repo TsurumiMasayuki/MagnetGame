@@ -35,6 +35,7 @@ private:
 	void readMagMap();
 
 private:
+
 	MagnetOption m_MagOption;
 	ForceMap* m_pNMapWrite;
 	ForceMap* m_pSMapWrite;
@@ -45,6 +46,10 @@ private:
 
 	SpriteRenderer* m_pSprite;
 	GameObject* m_pRider;
+
+	MagEffect* magEffect;
+
+	MagnetOption prevMagOption;
 
 	static const float MAG_MOVE_SPEED;
 	Vec2 m_Velocity;
