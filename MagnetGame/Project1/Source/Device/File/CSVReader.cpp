@@ -56,8 +56,11 @@ std::string CSVReader::getData(unsigned int column, unsigned int row)
 
 std::string CSVReader::getDataClampIndex(unsigned int column, unsigned int row)
 {
-	row = MathUtility::clamp(row, 0, getRowCount() - 1);
-	column = MathUtility::clamp(column, 0, getColumnCount(row) - 1);
+	//X, Yインデックスを超過していたら空を返す
+	if (row >= getRowCount())
+		return "1";
+	else if (column >= getColumnCount(row))
+		return "1";
 
 	return m_DataList.at(row).at(column);
 }

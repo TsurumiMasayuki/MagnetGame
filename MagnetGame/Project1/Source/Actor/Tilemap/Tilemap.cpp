@@ -1,9 +1,11 @@
 #include "Tilemap.h"
 #include <sstream>
+
 #include "Actor\GameObject.h"
 #include "Actor\Tilemap\Block.h"
 #include "Actor\Magnet\Magnet.h"
 #include "Actor\Nobject\ObjN.h"
+
 #include "Device\File\CSVReader.h"
 #include "Utility\StringUtility.h"
 #include "Component\Tilemap\Tile.h"
@@ -119,15 +121,22 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int x, unsigned int y)
 {
 	GameObject* object = nullptr;
+	bool isLeftExist = reader.getDataClampIndex(x - 1, y)	== "1";
+	bool isRightExist = reader.getDataClampIndex(x + 1, y)	== "1";
+	bool isUpExist = reader.getDataClampIndex(x, y - 1)		== "1";
+	bool isDownExist = reader.getDataClampIndex(x, y + 1)	== "1";
 
-	bool hasCollider =
-		reader.getDataClampIndex(x - 1, y) == "1" && reader.getDataClampIndex(x + 1, y) == "1" &&
-		reader.getDataClampIndex(x, y - 1) == "1" && reader.getDataClampIndex(x, y + 1) == "1";
+	bool hasCollider = !isLeftExist || !isRightExist || !isUpExist || !isDownExist;
 
-	hasCollider = !hasCollider;
+	TILE_IMAGE_TYPE imageType;
+
+	if (!hasCollider)
+		imageType = TILE_IMAGE_TYPE_CENTER;
+	else
+		imageType = getImageType(isUpExist, isDownExist, isRightExist, isLeftExist);
 
 	if (data == "1")
-		object = new Block(m_pGameMediator, "BoxFill", m_CellWidth, m_CellHeight, hasCollider);
+		object = new Block(m_pGameMediator, "BlockTest", m_CellWidth, m_CellHeight, imageType, hasCollider);
 
 	if (object != nullptr)
 	{
@@ -172,7 +181,7 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 	GameObject* object = nullptr;
 	if (split.at(1) == "1")
 	{
-		object = new Block(m_pGameMediator, "BoxOutline", width, height);
+		object = new Block(m_pGameMediator, "BoxOutline", width, height, TILE_IMAGE_TYPE_NONE);
 	}
 	else if (split.at(1) == "N")
 	{
@@ -200,4 +209,64 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 		//管理用にTileコンポーネントをアタッチ
 		auto tile = new Tile(object);
 	}
+}
+
+TILE_IMAGE_TYPE Tilemap::getImageType(bool isUpExist, bool isDownExist, bool isRightExist, bool isLeftExist)
+{
+	TILE_IMAGE_TYPE imageType = TILE_IMAGE_TYPE_NONE;
+
+	if (!isUpExist && isDownExist &&
+		isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_UP;
+	else if (isUpExist && !isDownExist &&
+		isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_DOWN;
+	else if (isUpExist && isDownExist &&
+		!isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_LEFT;
+	else if (isUpExist && isDownExist &&
+		isLeftExist && !isRightExist)
+		imageType = TILE_IMAGE_TYPE_RIGHT;
+
+	else if (!isUpExist && isDownExist &&
+		isLeftExist && !isRightExist)
+		imageType = TILE_IMAGE_TYPE_UPRIGHT;
+
+	else if (!isUpExist && isDownExist &&
+		!isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_UPLEFT;
+
+	else if (isUpExist && !isDownExist &&
+		isLeftExist && !isRightExist)
+		imageType = TILE_IMAGE_TYPE_DOWNRIGHT;
+
+	else if (isUpExist && !isDownExist &&
+		!isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_DOWNLEFT;
+
+	else if (!isUpExist && isDownExist &&
+		!isLeftExist && !isRightExist)
+		imageType = TILE_IMAGE_TYPE_UPCORNER;
+
+	else if (isUpExist && !isDownExist &&
+		!isLeftExist && !isRightExist)
+		imageType = TILE_IMAGE_TYPE_DOWNCORNER;
+
+	else if (!isUpExist && !isDownExist &&
+		isLeftExist && !isRightExist)
+		imageType = TILE_IMAGE_TYPE_RIGHTCORNER;
+
+	else if (!isUpExist && !isDownExist &&
+		!isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_LEFTCORNER;
+
+	else if (!isUpExist && isDownExist &&
+		!isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_UPCOLUMN;
+
+	else if (!isUpExist && !isDownExist &&
+		isLeftExist && isRightExist)
+		imageType = TILE_IMAGE_TYPE_RIGHTCOLUMN;
+
+	return imageType;
 }

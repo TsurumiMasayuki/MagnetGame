@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Math\Vec3.h"
+#include "Actor\Tilemap\TileImageType.h"
 
 class IGameMediator;
 class CSVReader;
@@ -32,6 +33,8 @@ private:
 	void spawnObject(CSVReader& reader, std::string data, unsigned int x, unsigned int y);
 	void spawnSingleBlock(CSVReader& reader, std::string data, unsigned int x, unsigned int y);
 	void spawnMultiBlock(CSVReader& reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y);
+
+	TILE_IMAGE_TYPE getImageType(bool isUpExist, bool isDownExist, bool isRightExist, bool isLeftExist);
 
 private:
 	unsigned int m_Column;

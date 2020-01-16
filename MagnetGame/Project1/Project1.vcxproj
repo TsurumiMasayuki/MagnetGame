@@ -267,6 +267,7 @@
     <ClInclude Include="Source\Actor\Stage\Stage.h" />
     <ClInclude Include="Source\Actor\Tilemap\Block.h" />
     <ClInclude Include="Source\Actor\Tilemap\GoalObject.h" />
+    <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />

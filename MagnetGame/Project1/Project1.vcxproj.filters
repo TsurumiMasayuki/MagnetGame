@@ -162,6 +162,7 @@
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
     <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
+    <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
     <ClInclude Include="Source\Scene\Entrance.h" />
     <ClInclude Include="Source\Scene\Ending.h" />
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
