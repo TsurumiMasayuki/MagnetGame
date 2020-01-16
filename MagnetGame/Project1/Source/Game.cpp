@@ -59,6 +59,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	TextureManager::loadTexture(L"Assets/Textures/haikei3.png", "haikei3");
 
 	//画像テキスト
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
@@ -83,6 +84,7 @@ void Game::init()
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
 
 	//SE追加
 	SoundManager::loadWavFile(L"Assets/Sound/SE/Jump.wav", "jump");
@@ -98,7 +100,7 @@ void Game::init()
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("GamePlay");
 }
 
 void Game::update()

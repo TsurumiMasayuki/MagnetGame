@@ -7,6 +7,7 @@
 #include "Actor\Performance\TitleBackGround.h"
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/EventText.h"
+#include"Device/SoundManager.h"
 
 Title::Title()
 {
@@ -22,7 +23,8 @@ void Title::init()
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
-	m_pBackGround = new TitleBackGround(this);
+	m_pBackGround = new TitleBackGround(this, "opening");
+
 	m_pFade = new TitleFade(this);
 	m_pFade->setActive(false);
 
@@ -30,7 +32,7 @@ void Title::init()
 	m_pDeliveryman->setPosition(Vec3(640, -260, 0));
 
 	m_pTitlePlayer = new TitlePlayer(this);
-	m_pTitlePlayer->setPosition(Vec3(40,-260,0));
+	m_pTitlePlayer->setPosition(Vec3(40, -260, 0));
 	m_pTitlePlayer->setActive(false);
 
 	m_pText = new EventText(this);
@@ -38,6 +40,8 @@ void Title::init()
 	m_pText->setEventNum(0);
 
 	m_pTitleEndFlag = false;
+
+	SoundManager::playBGM("wind");
 }
 
 void Title::update()
@@ -46,7 +50,7 @@ void Title::update()
 	switch (sState)
 	{
 	case Title::Idle:
-		if (Input::isKeyDown(VK_SPACE)||Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			sState = SceneState::Delivery;
 		}
 		break;
@@ -58,7 +62,7 @@ void Title::update()
 	case Title::Player:
 		m_pTitlePlayer->setActive(true);
 
-		if (m_pTitlePlayer->getPosition().x>=300) {
+		if (m_pTitlePlayer->getPosition().x >= 300) {
 
 			if (m_pText->getEventNum() <= 4) {
 				m_pText->setActive(true);
@@ -70,7 +74,7 @@ void Title::update()
 				m_pText->setActive(false);
 				m_pTitlePlayer->setIsGo(true);
 				sState = SceneState::Fade;
-			} 
+			}
 		}
 		break;
 	case Title::Fade:
