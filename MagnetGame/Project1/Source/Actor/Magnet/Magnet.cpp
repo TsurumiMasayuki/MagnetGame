@@ -4,6 +4,7 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Device\GameTime.h"
 #include "Actor\IGameMediator.h"
+#include "Actor/Effect/MagEffect.h"
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
 
@@ -56,11 +57,22 @@ void Magnet::update()
 
 void Magnet::onCollisionEnter(GameObject * pHit)
 {
-	if (pHit->compareTag("MagChangeS"))
+	if (pHit->compareTag("MagChangeS")) {
 		SetMagOption(MAGNET_S);
+		magEffect = new MagEffect(getGameMediator());
+		magEffect->Cleate(getPosition(), getSize().x, getSize().y, 0, 3, 0, 5);
 
-	if (pHit->compareTag("MagChangeN"))
+		delete magEffect;
+	}
+
+
+	if (pHit->compareTag("MagChangeN")) {
 		SetMagOption(MAGNET_N);
+		magEffect = new MagEffect(getGameMediator());
+		magEffect->Cleate(getPosition(), getSize().x, getSize().y, 0, 3, 0, 5);
+		delete magEffect;
+	}
+
 }
 
 void Magnet::onCollisionStay(GameObject * pHit)
@@ -119,4 +131,5 @@ void Magnet::readMagMap()
 	move = move * MAG_MOVE_SPEED * GameTime::getDeltaTime();
 
 	setPosition(getPosition() + move.toVec3());
+
 }

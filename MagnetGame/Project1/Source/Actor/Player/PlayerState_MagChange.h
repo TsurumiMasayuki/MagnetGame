@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility\State\IState.h"
 #include "Math\Vec3.h"
+#include "Actor/Effect/MagEffect.h"
 
 class GameObject;
 class Player;
@@ -23,4 +24,6 @@ private:
 	GameObject* m_pMagChange;
 	Vec3 m_MagChangeDir;
 	Timer* m_pTimer;
+
+	MagEffect* magEffect;
 };

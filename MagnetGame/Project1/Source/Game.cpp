@@ -57,6 +57,9 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
 	TextureManager::loadTexture(L"Assets/Textures/white.png", "white");
 	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
+	TextureManager::loadTexture(L"Assets/Textures/superjumpeffect.png", "superjumpeffect");
+	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
+
 
 	//ƒvƒŒƒCƒ„[
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
