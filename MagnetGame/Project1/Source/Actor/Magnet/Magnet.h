@@ -47,8 +47,6 @@ private:
 	SpriteRenderer* m_pSprite;
 	GameObject* m_pRider;
 
-	MagEffect* magEffect;
-
 	MagnetOption prevMagOption;
 
 	static const float MAG_MOVE_SPEED;
