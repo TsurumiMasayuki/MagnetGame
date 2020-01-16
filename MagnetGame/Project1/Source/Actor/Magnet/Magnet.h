@@ -1,9 +1,10 @@
 #pragma once
 #include "Actor\GameObject.h"
-#include "Actor/Effect/MagEffect.h"
+#include "Math\Vec2.h"
 
 class ForceMap;
 class SpriteRenderer;
+class DetectHelper;
 
 class Magnet
 	: public GameObject
@@ -23,9 +24,11 @@ public:
 
 	virtual void onCollisionEnter(GameObject* pHit) override;
 	virtual void onCollisionStay(GameObject* pHit) override;
+	virtual void onCollisionExit(GameObject* pHit) override;
 
 	MagnetOption getMagOpition();
 	void SetMagOption(MagnetOption magOption);
+	Vec2 getVelocity();
 
 private:
 	void writeMagMap();
@@ -42,10 +45,12 @@ private:
 	bool m_IsMagChange;
 
 	SpriteRenderer* m_pSprite;
+	GameObject* m_pRider;
 
 	MagEffect* magEffect;
 
 	MagnetOption prevMagOption;
 
 	static const float MAG_MOVE_SPEED;
+	Vec2 m_Velocity;
 };

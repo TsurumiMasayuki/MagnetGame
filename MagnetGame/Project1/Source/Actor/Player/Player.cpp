@@ -193,6 +193,7 @@ void Player::initDetectors()
 
 	m_pDetectDown = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectDown->setSize(Vec3(sizeX, 6, 0));
+	m_pDetectDown->setTag("LandDetector");
 
 	m_pDetectRight = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectRight->setSize(Vec3(6, sizeX, 0));
