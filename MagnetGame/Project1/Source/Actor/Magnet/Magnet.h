@@ -27,7 +27,7 @@ public:
 	virtual void onCollisionExit(GameObject* pHit) override;
 
 	MagnetOption getMagOpition();
-	void setMagOption(MagnetOption magOption);
+	void setMagOption(GameObject* pHit);
 	Vec2 getVelocity();
 
 private:
