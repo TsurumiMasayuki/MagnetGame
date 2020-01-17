@@ -16,8 +16,10 @@ public:
 
 private:
 	SpriteRenderer*sprite;
+	SpriteRenderer*back;
 	SpriteRenderer*check;
 	bool isPause;
+	bool isReStart;
 	int pNum;
 	int selectNum;
 	int checkNum;
@@ -29,4 +31,6 @@ public:
 	void setNum(int value);
 	void setPause(bool value);
 	bool IsEnd();
+	bool getReStart();
+	void setReStart(bool value);
 };

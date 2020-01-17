@@ -13,6 +13,9 @@ PauseObject::PauseObject(IGameMediator * pMediator)
 	check = new SpriteRenderer(this, 102);
 	check->setTextureName("check");
 
+	back = new SpriteRenderer(this, 103);
+	back->setTextureName("Back");
+	
 
 	checkNum = 0;
 	pNum = 0;
@@ -20,6 +23,7 @@ PauseObject::PauseObject(IGameMediator * pMediator)
 	prevY = 0;
 	currentY = Input::getLStickValue().y;
 	isPause = true;
+	isReStart = false;
 	isEndFlag = false;
 }
 
@@ -39,6 +43,7 @@ void PauseObject::update()
 		{
 		case 0:
 			sprite->setTextureName("pause");
+			check->setActive(true);
 
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_A) || Input::isKeyDown(VK_SPACE)) {
 				switch (checkNum)
@@ -48,7 +53,7 @@ void PauseObject::update()
 					break;
 				case 1:
 					//リスタート
-					setActive(false);
+					isReStart = true;
 					break;
 				case 2:
 					pNum = 1;
@@ -64,9 +69,14 @@ void PauseObject::update()
 				}
 			}
 
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				setActive(false);
+			}
+
 			break;
 		case 1:
 			sprite->setTextureName("howto");
+			check->setActive(true);
 			if (selectNum > 5) {
 				selectNum = 2;
 			}
@@ -85,6 +95,7 @@ void PauseObject::update()
 			break;
 		case 2:
 			sprite->setTextureName("Mag_Ex");
+			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
 				checkNum = 0;
@@ -93,6 +104,7 @@ void PauseObject::update()
 			break;
 		case 3:
 			sprite->setTextureName("Punch_Ex");
+			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
 				checkNum = 0;
@@ -101,6 +113,7 @@ void PauseObject::update()
 			break;
 		case 4:
 			sprite->setTextureName("N_Ex");
+			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
 				checkNum = 0;
@@ -109,6 +122,7 @@ void PauseObject::update()
 			break;
 		case 5:
 			sprite->setTextureName("Jump_Ex");
+			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
 				checkNum = 0;
@@ -190,4 +204,14 @@ void PauseObject::setPause(bool value)
 bool PauseObject::IsEnd()
 {
 	return isEndFlag;
+}
+
+bool PauseObject::getReStart()
+{
+	return isReStart;
+}
+
+void PauseObject::setReStart(bool value)
+{
+	isReStart = value;
 }
