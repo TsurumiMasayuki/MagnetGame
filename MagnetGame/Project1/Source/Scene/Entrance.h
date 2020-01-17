@@ -6,6 +6,7 @@ class GameObjectManager;
 class TitleBackGround;
 class EventText;
 class TitlePlayer;
+class ButtonTex;
 
 class Entrance :
 	public AbstractScene, IGameMediator {
@@ -36,6 +37,7 @@ private:
 	TitleBackGround*m_pBackGround;
 	EventText*m_pText;
 	TitlePlayer*m_pTitlePlayer;
+	ButtonTex*m_pButton;
 
 	enum State {
 		Idle,

@@ -60,6 +60,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 
 	//マップ系
 	TextureManager::loadTexture(L"Assets/Textures/n_mag_block.png", "NBlock");
@@ -123,6 +124,8 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_right.png", "PlayerPunch");
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_up.png", "PlayerPunch_Up");
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_down.png", "PlayerPunch_Down");
+	TextureManager::loadTexture(L"Assets/Textures/player_idle_up.png", "PlayerIdleUp");
+	TextureManager::loadTexture(L"Assets/Textures/player_idle_down.png", "PlayerIdleDown");
 
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
@@ -148,8 +151,6 @@ void Game::init()
 	m_pSceneManager->addScene("Ending", new Ending());
 
 	m_pSceneManager->changeScene("Ending");
-
-	m_pSceneManager->changeScene("GamePlay");
 
 }
 
