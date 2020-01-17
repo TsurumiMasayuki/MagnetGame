@@ -6,6 +6,7 @@
 #include "Actor\IGameMediator.h"
 #include "Actor\DetectHelper.h"
 #include "Actor\Effect\SpreadEffect.h"
+#include <DirectXColors.h>
 #include "Math\MathUtility.h"
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
@@ -26,11 +27,23 @@ Magnet::~Magnet()
 void Magnet::start()
 {
 	m_pSprite = new SpriteRenderer(this);
-	m_pSprite->setTextureName("BoxFill");
+	if (m_IsMove)
+		m_pSprite->setTextureName("BoxOutline");
+	else
+		m_pSprite->setTextureName("BoxFill");
+
 	if (m_MagOption == MAGNET_N)
 		m_pSprite->setColor(Color(1, 0, 0, 1));
 	else
 		m_pSprite->setColor(Color(0, 0, 1, 1));
+
+	if (!m_IsMagChange)
+	{
+		auto noMagChangeSprite = new SpriteRenderer(this, 110);
+		noMagChangeSprite->setTextureName("Cross");
+		noMagChangeSprite->setColor(Color(DirectX::Colors::Brown));
+		noMagChangeSprite->setUVRect(RectF(0, 0, getSize().x / 64, getSize().y / 64));
+	}
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -87,9 +100,9 @@ Magnet::MagnetOption Magnet::getMagOpition()
 
 void Magnet::setMagOption(GameObject* pHit)
 {
-	//¥—Í•ÏX•s‰Â‚È‚çreturn
+	//ç£åŠ›å¤‰æ›´ä¸å¯ãªã‚‰return
 	if (!m_IsMagChange) return;
-	//•ÏX‚ª–³‚¢‚È‚çreturn
+	//å¤‰æ›´ãŒç„¡ã„ãªã‚‰return
 
 	MagnetOption magOption;
 

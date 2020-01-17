@@ -26,6 +26,7 @@ public:
 	void setTextureName(const std::string textureName);
 	std::string getTextureName();
 
+	Color getColor();
 	void setColor(Color color);
 	void setFlipX(bool flipX);
 	void setFlipY(bool flipY);
