@@ -80,8 +80,12 @@
     <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleLogo.cpp" />
+
+    <ClCompile Include="Source\Actor\PauseObject.cpp" />
+
     <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
     <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -171,8 +175,12 @@
     <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Performance\TitleLogo.h" />
+
+    <ClInclude Include="Source\Actor\PauseObject.h" />
+
     <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
     <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />
+
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

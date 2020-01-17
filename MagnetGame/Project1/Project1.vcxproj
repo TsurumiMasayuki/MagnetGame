@@ -172,6 +172,7 @@
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
+    <ClCompile Include="Source\Actor\PauseObject.cpp" />
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
     <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
+    <ClInclude Include="Source\Actor\PauseObject.h" />
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
