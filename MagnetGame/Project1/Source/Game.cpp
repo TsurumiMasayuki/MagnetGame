@@ -61,6 +61,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
 	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
+	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 
 	//マップ系
 	TextureManager::loadTexture(L"Assets/Textures/n_mag_block.png", "NBlock");
@@ -150,7 +151,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
 
-	m_pSceneManager->changeScene("Ending");
+	m_pSceneManager->changeScene("GamePlay");
 
 }
 
