@@ -20,7 +20,7 @@ private:
 	bool isPause;
 	int pNum;
 	int selectNum;
-	int sNum;
+	int checkNum;
 
 	float prevY,currentY;
 

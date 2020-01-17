@@ -6,17 +6,17 @@
 PauseObject::PauseObject(IGameMediator * pMediator)
 	:GameObject(pMediator)
 {
-	setSize(Vec3(1280,720,0));
+	setSize(Vec3(1280, 720, 0));
 	sprite = new SpriteRenderer(this, 101);
 	sprite->setTextureName("pause");
 
-	check = new SpriteRenderer(this,102);
+	check = new SpriteRenderer(this, 102);
 	check->setTextureName("check");
-	
 
-	sNum = 0;
+
+	checkNum = 0;
 	pNum = 0;
-	selectNum = 0;
+	selectNum = 2;
 	prevY = 0;
 	currentY = Input::getLStickValue().y;
 	isPause = true;
@@ -40,8 +40,8 @@ void PauseObject::update()
 		case 0:
 			sprite->setTextureName("pause");
 
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-				switch (sNum)
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_A) || Input::isKeyDown(VK_SPACE)) {
+				switch (checkNum)
 				{
 				case 0:
 					setActive(false);
@@ -52,8 +52,8 @@ void PauseObject::update()
 					break;
 				case 2:
 					pNum = 1;
-					sNum = 0;
-					selectNum = 0;
+					checkNum = 0;
+					selectNum = 2;
 					break;
 				case 3:
 					setActive(false);
@@ -77,36 +77,46 @@ void PauseObject::update()
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 				pNum = selectNum;
 			}
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)) {
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)||Input::isKeyDown(VK_BACK)) {
 				pNum = 0;
+				checkNum = 0;
+				selectNum = 2;
 			}
 			break;
 		case 2:
 			sprite->setTextureName("Mag_Ex");
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)) {
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
+				checkNum = 0;
+				selectNum = 2;
 			}
 			break;
 		case 3:
 			sprite->setTextureName("Punch_Ex");
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)) {
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
+				checkNum = 0;
+				selectNum = 2;
 			}
 			break;
 		case 4:
 			sprite->setTextureName("N_Ex");
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)) {
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
+				checkNum = 0;
+				selectNum = 2;
 			}
 			break;
 		case 5:
 			sprite->setTextureName("Jump_Ex");
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)) {
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
 				pNum = 1;
+				checkNum = 0;
+				selectNum = 2;
 			}
 			break;
 		}
-		switch (sNum)
+		switch (checkNum)
 		{
 		case 0:
 			check->setTextureName("check");
@@ -123,28 +133,42 @@ void PauseObject::update()
 		default:
 			break;
 		}
-
+#pragma region パッド処理
 		currentY = Input::getLStickValue().y;
 		if (Input::getLStickValue().y > 0) {
-			if (prevY==0) {
-				sNum--;
+			if (prevY == 0) {
+				checkNum--;
 				selectNum++;
 			}
 		}
 		else if (Input::getLStickValue().y < 0) {
 			if (prevY == 0) {
-				sNum++;
+				checkNum++;
 				selectNum--;
 			}
 		}
+#pragma endregion
+
+#pragma region キー入力
+		if (Input::isKeyDown(VK_DOWN)) {
+			checkNum++;
+			selectNum++;
+		}
+		else if (Input::isKeyDown(VK_UP)) {
+			checkNum--;
+			selectNum--;
+		}
+#pragma endregion
+
+
 
 		prevY = currentY;
 
-		if (sNum < 0) {
-			sNum = 3;
+		if (checkNum < 0) {
+			checkNum = 3;
 		}
-		else if (sNum > 3) {
-			sNum = 0;
+		else if (checkNum > 3) {
+			checkNum = 0;
 		}
 	}
 }
