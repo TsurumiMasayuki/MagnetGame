@@ -94,6 +94,18 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text17.png", "text17");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text18.png", "text18");
 
+	//Pause
+	TextureManager::loadTexture(L"Assets/Textures/Pause/howto.png", "howto");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/pause.png", "pause");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Punch_Ex.png", "Punch_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Mag_Ex.png", "Mag_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/N_Ex.png", "N_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Jump_Ex.png", "Jump_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check.png", "check");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check2.png", "check2");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check3.png", "check3");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check4.png", "check4");
+
 	//プレイヤー
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
 	TextureManager::loadTexture(L"Assets/Textures/player_run_right.png", "PlayerRun");
@@ -125,7 +137,7 @@ void Game::init()
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("Ending");
 }
 
 void Game::update()
