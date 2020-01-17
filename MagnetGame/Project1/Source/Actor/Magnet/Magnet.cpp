@@ -7,6 +7,7 @@
 #include "Actor\DetectHelper.h"
 #include "Actor\Effect\SpreadEffect.h"
 #include <DirectXColors.h>
+#include "Math\MathUtility.h"
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
 
@@ -67,8 +68,10 @@ void Magnet::update()
 {
 	writeMagMap();
 	readMagMap();
-	if (m_pRider != nullptr)
-		m_pRider->setPosition(m_pRider->getPosition() + Vec3(m_Velocity.x, m_Velocity.y, 0));
+	if (m_pRider != nullptr) {
+		Vec3 vel = Vec3(m_Velocity.x, MathUtility::clamp(m_Velocity.y, -128.0f, 0), 0);
+		m_pRider->setPosition(m_pRider->getPosition() + vel);
+	}
 }
 
 void Magnet::onCollisionEnter(GameObject * pHit)
@@ -97,9 +100,9 @@ Magnet::MagnetOption Magnet::getMagOpition()
 
 void Magnet::setMagOption(GameObject* pHit)
 {
-	//¥—Í•ÏX•s‰Â‚È‚çreturn
+	//ç£åŠ›å¤‰æ›´ä¸å¯ãªã‚‰return
 	if (!m_IsMagChange) return;
-	//•ÏX‚ª–³‚¢‚È‚çreturn
+	//å¤‰æ›´ãŒç„¡ã„ãªã‚‰return
 
 	MagnetOption magOption;
 

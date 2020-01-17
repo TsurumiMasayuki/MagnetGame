@@ -206,6 +206,8 @@ void Player::initAnimations()
 {
 	m_pAnimRenderer = new AnimSpriteRenderer(this);
 	m_pAnimRenderer->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
+	m_pAnimRenderer->addAnimation("IdleUp", new SpriteAnimation("PlayerIdleUp", 160, 32, 0.1f, 1));
+	m_pAnimRenderer->addAnimation("IdleDown", new SpriteAnimation("PlayerIdleDown", 160, 32, 0.1f, 1));
 	m_pAnimRenderer->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
 	m_pAnimRenderer->addAnimation("Jump", new SpriteAnimation("PlayerJump", 224, 32, 0.1f, 7));
 	m_pAnimRenderer->addAnimation("SJump", new SpriteAnimation("PlayerSJump", 224, 40, 0.3f, 7));
