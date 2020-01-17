@@ -164,6 +164,7 @@
     <ClCompile Include="Source\Actor\Effect\CircleEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Source\Actor\Tilemap\GoalObject.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
     <ClCompile Include="Source\Component\AnimSpriteRenderer.cpp" />
+    <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
     <ClCompile Include="Source\Component\Physics\CircleCollider2D.cpp" />
     <ClCompile Include="Source\Component\Physics\BoxCollder2D.cpp" />
@@ -246,6 +248,7 @@
     <ClInclude Include="Source\Actor\Effect\CircleEffect.h" />
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
+    <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
@@ -272,6 +275,7 @@
     <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
+    <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />
     <ClInclude Include="Source\Component\Physics\CircleCollider2D.h" />
     <ClInclude Include="Source\Component\Physics\BoxCollider2D.h" />

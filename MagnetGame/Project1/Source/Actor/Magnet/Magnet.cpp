@@ -5,6 +5,9 @@
 #include "Device\GameTime.h"
 #include "Actor\IGameMediator.h"
 #include "Actor\DetectHelper.h"
+#include "Actor\Effect\SpreadEffect.h"
+#include <DirectXColors.h>
+#include "Math\MathUtility.h"
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
 
@@ -24,11 +27,23 @@ Magnet::~Magnet()
 void Magnet::start()
 {
 	m_pSprite = new SpriteRenderer(this);
-	m_pSprite->setTextureName("BoxFill");
+	if (m_IsMove)
+		m_pSprite->setTextureName("BoxOutline");
+	else
+		m_pSprite->setTextureName("BoxFill");
+
 	if (m_MagOption == MAGNET_N)
 		m_pSprite->setColor(Color(1, 0, 0, 1));
 	else
 		m_pSprite->setColor(Color(0, 0, 1, 1));
+
+	if (!m_IsMagChange)
+	{
+		auto noMagChangeSprite = new SpriteRenderer(this, 110);
+		noMagChangeSprite->setTextureName("Cross");
+		noMagChangeSprite->setColor(Color(DirectX::Colors::Brown));
+		noMagChangeSprite->setUVRect(RectF(0, 0, getSize().x / 64, getSize().y / 64));
+	}
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -53,31 +68,23 @@ void Magnet::update()
 {
 	writeMagMap();
 	readMagMap();
-	if (m_pRider != nullptr)
-		m_pRider->setPosition(m_pRider->getPosition() + Vec3(m_Velocity.x, m_Velocity.y, 0));
+	if (m_pRider != nullptr) {
+		Vec3 vel = Vec3(m_Velocity.x, MathUtility::clamp(m_Velocity.y, -128.0f, 0), 0);
+		m_pRider->setPosition(m_pRider->getPosition() + vel);
+	}
 }
 
 void Magnet::onCollisionEnter(GameObject * pHit)
 {
-	if (pHit->compareTag("MagChangeS")) {
-		SetMagOption(MAGNET_S);
-	}
+	setMagOption(pHit);
 
-
-	if (pHit->compareTag("MagChangeN")) {
-		SetMagOption(MAGNET_N);
-	}
 	if (pHit->compareTag("LandDetector"))
 		m_pRider = ((DetectHelper*)pHit)->getUser();
 }
 
 void Magnet::onCollisionStay(GameObject * pHit)
 {
-	if (pHit->compareTag("MagChangeS"))
-		SetMagOption(MAGNET_S);
-
-	if (pHit->compareTag("MagChangeN"))
-		SetMagOption(MAGNET_N);
+	setMagOption(pHit);
 }
 
 void Magnet::onCollisionExit(GameObject * pHit)
@@ -91,21 +98,42 @@ Magnet::MagnetOption Magnet::getMagOpition()
 	return m_MagOption;
 }
 
-void Magnet::SetMagOption(MagnetOption magOption)
+void Magnet::setMagOption(GameObject* pHit)
 {
+	//磁力変更不可ならreturn
 	if (!m_IsMagChange) return;
+	//変更が無いならreturn
+
+	MagnetOption magOption;
+
+	if (pHit->compareTag("MagChangeS"))
+		magOption = MAGNET_S;
+	else if (pHit->compareTag("MagChangeN"))
+		magOption = MAGNET_N;
+	else
+		return;
+
+	if (m_MagOption == magOption) return;
 
 	m_MagOption = magOption;
+	Vec3 effectDir = (getPosition() - pHit->getPosition()).normalized();
+	effectDir.x *= pHit->getSize().x / 2;
+	effectDir.y *= pHit->getSize().y / 2;
+	Vec3 effectPos = pHit->getPosition() + effectDir;
 
 	if (m_MagOption == MAGNET_N)
 	{
 		m_pSprite->setColor(Color(1, 0, 0, 1));
 		setTag("MagnetN");
+		auto effect = new SpreadEffect(m_pGameMediator, Color(1, 0.3f, 0, 1));
+		effect->setPosition(effectPos);
 	}
 	else
 	{
 		m_pSprite->setColor(Color(0, 0, 1, 1));
 		setTag("MagnetS");
+		auto effect = new SpreadEffect(m_pGameMediator, Color(0.3f, 0.5f, 1.0f, 1));
+		effect->setPosition(effectPos);
 	}
 }
 

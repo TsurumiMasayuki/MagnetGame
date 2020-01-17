@@ -1,4 +1,6 @@
 #pragma once
+#include "Math\Vec2.h"
+
 //タイル画像のタイプ
 enum TILE_IMAGE_TYPE
 {
@@ -25,4 +27,10 @@ enum TILE_IMAGE_TYPE
 	TILE_IMAGE_TYPE_LEFTCOLUMN,	 //左向きニの字
 
 	TILE_IMAGE_TYPE_CENTER,		//中心
+};
+
+struct ImageInfo
+{
+	Vec2 imageCoord;
+	float imageRotation;
 };

@@ -7,7 +7,7 @@
 
 const Vec2 UVRectSize(1.0f / 7.0f, 1);
 
-const Block::ImageInfo Block::tileImageCoord[18] =
+const ImageInfo Block::tileImageCoord[18] =
 {
 	//デフォルト
 	{ Vec2(0.0f, 0.0f),				0.0f },

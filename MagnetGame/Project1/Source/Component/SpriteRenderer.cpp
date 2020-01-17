@@ -187,6 +187,11 @@ std::string SpriteRenderer::getTextureName()
 	return m_TextureName;
 }
 
+Color SpriteRenderer::getColor()
+{
+	return m_Color;
+}
+
 void SpriteRenderer::setColor(Color color)
 {
 	m_Color = color;
