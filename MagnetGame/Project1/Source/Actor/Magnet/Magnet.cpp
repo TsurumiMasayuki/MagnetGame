@@ -5,6 +5,7 @@
 #include "Device\GameTime.h"
 #include "Actor\IGameMediator.h"
 #include "Actor\DetectHelper.h"
+#include "Actor\Effect\SpreadEffect.h"
 
 const float Magnet::MAG_MOVE_SPEED = 128.0f;
 
@@ -59,25 +60,15 @@ void Magnet::update()
 
 void Magnet::onCollisionEnter(GameObject * pHit)
 {
-	if (pHit->compareTag("MagChangeS")) {
-		SetMagOption(MAGNET_S);
-	}
+	setMagOption(pHit);
 
-
-	if (pHit->compareTag("MagChangeN")) {
-		SetMagOption(MAGNET_N);
-	}
 	if (pHit->compareTag("LandDetector"))
 		m_pRider = ((DetectHelper*)pHit)->getUser();
 }
 
 void Magnet::onCollisionStay(GameObject * pHit)
 {
-	if (pHit->compareTag("MagChangeS"))
-		SetMagOption(MAGNET_S);
-
-	if (pHit->compareTag("MagChangeN"))
-		SetMagOption(MAGNET_N);
+	setMagOption(pHit);
 }
 
 void Magnet::onCollisionExit(GameObject * pHit)
@@ -91,21 +82,42 @@ Magnet::MagnetOption Magnet::getMagOpition()
 	return m_MagOption;
 }
 
-void Magnet::SetMagOption(MagnetOption magOption)
+void Magnet::setMagOption(GameObject* pHit)
 {
+	//Ž¥—Í•ÏX•s‰Â‚È‚çreturn
 	if (!m_IsMagChange) return;
+	//•ÏX‚ª–³‚¢‚È‚çreturn
+
+	MagnetOption magOption;
+
+	if (pHit->compareTag("MagChangeS"))
+		magOption = MAGNET_S;
+	else if (pHit->compareTag("MagChangeN"))
+		magOption = MAGNET_N;
+	else
+		return;
+
+	if (m_MagOption == magOption) return;
 
 	m_MagOption = magOption;
+	Vec3 effectDir = (getPosition() - pHit->getPosition()).normalized();
+	effectDir.x *= pHit->getSize().x / 2;
+	effectDir.y *= pHit->getSize().y / 2;
+	Vec3 effectPos = pHit->getPosition() + effectDir;
 
 	if (m_MagOption == MAGNET_N)
 	{
 		m_pSprite->setColor(Color(1, 0, 0, 1));
 		setTag("MagnetN");
+		auto effect = new SpreadEffect(m_pGameMediator, Color(1, 0.3f, 0, 1));
+		effect->setPosition(effectPos);
 	}
 	else
 	{
 		m_pSprite->setColor(Color(0, 0, 1, 1));
 		setTag("MagnetS");
+		auto effect = new SpreadEffect(m_pGameMediator, Color(0.3f, 0.5f, 1.0f, 1));
+		effect->setPosition(effectPos);
 	}
 }
 
