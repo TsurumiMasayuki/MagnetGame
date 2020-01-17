@@ -60,6 +60,15 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
 	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+
+	//マップ系
+	TextureManager::loadTexture(L"Assets/Textures/n_mag_block.png", "NBlock");
+	TextureManager::loadTexture(L"Assets/Textures/n_block_stop.png", "NBlockStop");
+	TextureManager::loadTexture(L"Assets/Textures/s_mag_block.png", "SBlock");
+	TextureManager::loadTexture(L"Assets/Textures/s_block_stop.png", "SBlockStop");
+
+	TextureManager::loadTexture(L"Assets/Textures/Cross.png", "Cross");
+
 	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
 	TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
@@ -125,7 +134,7 @@ void Game::init()
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("GamePlay");
 }
 
 void Game::update()

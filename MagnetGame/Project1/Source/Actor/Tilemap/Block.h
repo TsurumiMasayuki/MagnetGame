@@ -12,13 +12,6 @@ public:
 	virtual void start() override;
 
 private:
-	struct ImageInfo
-	{
-		Vec2 imageCoord;
-		float imageRotation;
-	};
-
-private:
 	float m_Width;
 	float m_Height;
 
