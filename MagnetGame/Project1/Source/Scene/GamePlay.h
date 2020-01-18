@@ -46,4 +46,6 @@ private:
 	Vec2 m_CurrentStage;
 
 	Stage* m_pCurrentStage;
+
+	std::string nScene;
 };

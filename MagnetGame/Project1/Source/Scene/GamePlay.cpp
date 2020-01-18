@@ -41,11 +41,13 @@ void GamePlay::init()
 	m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
-	m_pBackGround = new TitleBackGround(this,"haikei3");
-	m_pBackGround->setActive(false);
+	m_pBackGround = new TitleBackGround(this,"haikei2");
+	m_pBackGround->setActive(true);
 
 	m_pPause = new PauseObject(this);
 	m_pPause->setActive(false);
+
+	nScene = "Ending";
 
 	m_GameEndFlag = false;
 }
@@ -122,12 +124,12 @@ void GamePlay::shutdown()
 
 std::string GamePlay::nextScene()
 {
-	return std::string();
+	return nScene;
 }
 
 bool GamePlay::isEnd()
 {
-	return false;
+	return m_GameEndFlag;
 }
 
 void GamePlay::addGameObject(GameObject * pAddObject)
@@ -196,6 +198,11 @@ void GamePlay::Pause()
 
 			m_pPause->setActive(false);
 		}
+	}
+
+	if (m_pPause->IsEnd()) {
+		nScene = "Title";
+		m_GameEndFlag = true;
 	}
 
 }
