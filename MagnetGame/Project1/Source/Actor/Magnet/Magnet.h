@@ -4,6 +4,7 @@
 
 class ForceMap;
 class SpriteRenderer;
+class MultiSpriteRenderer;
 class DetectHelper;
 
 class Magnet
@@ -44,7 +45,8 @@ private:
 	bool m_IsMove;
 	bool m_IsMagChange;
 
-	SpriteRenderer* m_pSprite;
+	SpriteRenderer* m_pNoMagChange;
+	MultiSpriteRenderer* m_pSprite;
 	GameObject* m_pRider;
 
 	MagnetOption prevMagOption;

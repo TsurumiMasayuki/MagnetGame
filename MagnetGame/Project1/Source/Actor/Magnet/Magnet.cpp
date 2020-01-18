@@ -1,6 +1,7 @@
 #include "Magnet.h"
 #include "ForceMap.h"
 #include "Component\SpriteRenderer.h"
+#include "Component\MultiSpriteRenderer.h"
 #include "Component\Physics\BoxCollider2D.h"
 #include "Device\GameTime.h"
 #include "Actor\IGameMediator.h"
@@ -26,24 +27,21 @@ Magnet::~Magnet()
 
 void Magnet::start()
 {
-	m_pSprite = new SpriteRenderer(this);
-	if (m_IsMove)
-		m_pSprite->setTextureName("BoxOutline");
-	else
-		m_pSprite->setTextureName("BoxFill");
-
-	if (m_MagOption == MAGNET_N)
-		m_pSprite->setColor(Color(1, 0, 0, 1));
-	else
-		m_pSprite->setColor(Color(0, 0, 1, 1));
-
 	if (!m_IsMagChange)
 	{
 		auto noMagChangeSprite = new SpriteRenderer(this, 110);
 		noMagChangeSprite->setTextureName("Cross");
-		noMagChangeSprite->setColor(Color(DirectX::Colors::Brown));
-		noMagChangeSprite->setUVRect(RectF(0, 0, getSize().x / 64, getSize().y / 64));
+		noMagChangeSprite->setColor(Color(DirectX::Colors::MediumPurple));
+		noMagChangeSprite->setUVRect(RectF(0, 0, getSize().x / 32, getSize().y / 32));
 	}
+
+	m_pSprite = new MultiSpriteRenderer(this, 32);
+	std::string stopTexture = m_IsMove ? "" : "Stop";
+
+	if (m_MagOption == MAGNET_N)
+		m_pSprite->setTextureName("NBlock" + stopTexture);
+	else
+		m_pSprite->setTextureName("SBlock" + stopTexture);
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -68,7 +66,8 @@ void Magnet::update()
 {
 	writeMagMap();
 	readMagMap();
-	if (m_pRider != nullptr) {
+	if (m_pRider != nullptr)
+	{
 		Vec3 vel = Vec3(m_Velocity.x, MathUtility::clamp(m_Velocity.y, -128.0f, 0), 0);
 		m_pRider->setPosition(m_pRider->getPosition() + vel);
 	}
@@ -123,18 +122,23 @@ void Magnet::setMagOption(GameObject* pHit)
 
 	if (m_MagOption == MAGNET_N)
 	{
-		m_pSprite->setColor(Color(1, 0, 0, 1));
 		setTag("MagnetN");
 		auto effect = new SpreadEffect(m_pGameMediator, Color(1, 0.3f, 0, 1));
 		effect->setPosition(effectPos);
 	}
 	else
 	{
-		m_pSprite->setColor(Color(0, 0, 1, 1));
 		setTag("MagnetS");
 		auto effect = new SpreadEffect(m_pGameMediator, Color(0.3f, 0.5f, 1.0f, 1));
 		effect->setPosition(effectPos);
 	}
+
+	std::string stopTexture = m_IsMove ? "" : "Stop";
+
+	if (m_MagOption == MAGNET_N)
+		m_pSprite->setTextureName("NBlock" + stopTexture);
+	else
+		m_pSprite->setTextureName("SBlock" + stopTexture);
 }
 
 Vec2 Magnet::getVelocity()
