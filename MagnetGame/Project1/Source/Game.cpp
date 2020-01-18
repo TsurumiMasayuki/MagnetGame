@@ -71,7 +71,7 @@ void Game::init()
 
 	TextureManager::loadTexture(L"Assets/Textures/Cross.png", "Cross");
 
-	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
+	TextureManager::loadTexture(L"Assets/Textures/fieldblock.png", "BlockTest");
 	TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-2.png", "haikei1-2");
