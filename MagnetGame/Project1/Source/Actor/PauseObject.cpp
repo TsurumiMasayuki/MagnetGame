@@ -152,13 +152,13 @@ void PauseObject::update()
 		if (Input::getLStickValue().y > 0) {
 			if (prevY == 0) {
 				checkNum--;
-				selectNum++;
+				selectNum--;
 			}
 		}
 		else if (Input::getLStickValue().y < 0) {
 			if (prevY == 0) {
 				checkNum++;
-				selectNum--;
+				selectNum++;
 			}
 		}
 #pragma endregion
