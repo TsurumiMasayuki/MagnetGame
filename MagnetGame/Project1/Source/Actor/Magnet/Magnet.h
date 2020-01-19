@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor\GameObject.h"
+#include "Utility\Color.h"
 #include "Math\Vec2.h"
 
 class ForceMap;
@@ -34,6 +35,7 @@ public:
 private:
 	void writeMagMap();
 	void readMagMap();
+	void magForceEffect(const Vec2& currentForce, const Vec2& previousForce, Color effectColor);
 
 private:
 
@@ -53,4 +55,7 @@ private:
 
 	static const float MAG_MOVE_SPEED;
 	Vec2 m_Velocity;
+
+	Vec2 m_PreNForce;
+	Vec2 m_PreSForce;
 };

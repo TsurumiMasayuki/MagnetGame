@@ -7,6 +7,7 @@
 #include "Actor\IGameMediator.h"
 #include "Actor\DetectHelper.h"
 #include "Actor\Effect\SpreadEffect.h"
+#include "Actor\Effect\LineEffect.h"
 #include <DirectXColors.h>
 #include "Math\MathUtility.h"
 
@@ -163,11 +164,52 @@ void Magnet::readMagMap()
 	int nModifier = m_MagOption == MAGNET_N ? 1 : -1;
 	int sModifier = -nModifier;
 
-	m_Velocity = Vec2::zero();
-	m_Velocity += m_pNMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
-	m_Velocity += m_pSMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
+	Vec2 curNForce;
+	Vec2 curSForce;
 
-	m_Velocity = m_Velocity * MAG_MOVE_SPEED * GameTime::getDeltaTime();
+	m_Velocity = Vec2::zero();
+	curNForce = m_pNMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
+	curSForce = m_pSMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
+
+	m_Velocity = (curNForce + curSForce) * MAG_MOVE_SPEED * GameTime::getDeltaTime();
 
 	setPosition(getPosition() + m_Velocity.toVec3());
+
+	Color nColor = Color(DirectX::Colors::Red);
+	nColor.a = 0.5f;
+	magForceEffect(curNForce, m_PreNForce, nColor);
+
+	Color sColor = Color(DirectX::Colors::Blue);
+	sColor.a = 0.5f;
+	magForceEffect(curSForce, m_PreSForce, sColor);
+
+	m_PreNForce = curNForce;
+	m_PreSForce = curSForce;
+}
+
+void Magnet::magForceEffect(const Vec2& currentForce, const Vec2& previousForce, Color effectColor)
+{
+	float curSignX = MathUtility::sign(currentForce.x);
+	float preSignX = MathUtility::sign(previousForce.x);
+
+	//横方向の力を受けたら
+	if (curSignX != preSignX && m_Velocity.x != 0)
+	{
+		float particleAngle = curSignX > 0 ? 0 : 180;
+
+		auto effect = new LineEffect(m_pGameMediator, 90, particleAngle, 0.2f, getSize().y, 10, effectColor);
+		effect->setPosition(getPosition());
+	}
+
+	float curSignY = MathUtility::sign(currentForce.y);
+	float preSignY = MathUtility::sign(previousForce.y);
+
+	//縦方向の力を受けたら
+	if (curSignY != preSignY && m_Velocity.y != 0)
+	{
+		float particleAngle = curSignY > 0 ? 90 : 270;
+
+		auto effect = new LineEffect(m_pGameMediator, 0, particleAngle, 0.2f, getSize().x, 10, effectColor);
+		effect->setPosition(getPosition());
+	}
 }
