@@ -62,6 +62,8 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
 	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
+	TextureManager::loadTexture(L"Assets/Textures/letter.png", "letter");
+
 #pragma region 背景
 	TextureManager::loadTexture(L"Assets/Textures/op_house.png", "op_house");
 	TextureManager::loadTexture(L"Assets/Textures/op_house_open.png", "op_house_open");
@@ -185,7 +187,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
 
-	m_pSceneManager->changeScene("Entrance");
+	m_pSceneManager->changeScene("Title");
 
 }
 

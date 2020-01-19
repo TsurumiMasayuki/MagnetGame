@@ -42,6 +42,7 @@ void Deliveryman::start()
 
 	isEndFlag = false;
 	m_pMove = false;
+	Cnt = 0;
 }
 
 void Deliveryman::update()
@@ -62,13 +63,14 @@ void Deliveryman::update()
 		break;
 	case Deliveryman::Move:
 		m_pMove = true;
-		if (pos.x <= 270) {
+		if (pos.x <= 105) {
 			state = State::Anim;
 		}
 		break;
 	case Deliveryman::Anim:
 		m_pMove = false;
-		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+		Cnt++;
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)||Cnt>=90) {
 			state = State::Move2;
 			SoundManager::playSE("bike",1);
 		}

@@ -22,4 +22,6 @@ private:
 public:
 	void setTextureName(std::string TextureName);
 	void setFade(bool value);
+	bool getFade();
+	float getAlpha();
 };

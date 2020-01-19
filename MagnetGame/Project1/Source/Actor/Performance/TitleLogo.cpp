@@ -26,13 +26,13 @@ void TitleLogo::update()
 {
 	sprite->setTextureName(name);
 
-	if (isFade&&alpha>=0) {
-		alpha-=0.01f;
-		if (alpha <= 0) {
+	if (isFade&&alpha>0) {
+		alpha-=0.005f;
+		if (alpha < -0.4f) {
 			alpha = 0;
 		}
 	}
-	if (!isFade&&alpha<=1) {
+	if (!isFade&&alpha<1) {
 		alpha+=0.005f;
 
 		if (alpha >= 1) {
@@ -54,4 +54,14 @@ void TitleLogo::setTextureName(std::string TextureName)
 void TitleLogo::setFade(bool value)
 {
 	isFade = value;
+}
+
+bool TitleLogo::getFade()
+{
+	return isFade;
+}
+
+float TitleLogo::getAlpha()
+{
+	return alpha;
 }

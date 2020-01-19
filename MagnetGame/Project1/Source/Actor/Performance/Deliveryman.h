@@ -34,4 +34,5 @@ private:
 		Move2,
 	};
 	State state;
+	int Cnt;
 };

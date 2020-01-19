@@ -32,7 +32,7 @@ void Particle::start()
 {
 	setSize(Vec3(size_x, size_y, 0));
 
-	auto sprite = new SpriteRenderer(this, 100);
+	auto sprite = new SpriteRenderer(this, 97);
 	sprite->setTextureName(name);
 	sprite->setColor(color);
 

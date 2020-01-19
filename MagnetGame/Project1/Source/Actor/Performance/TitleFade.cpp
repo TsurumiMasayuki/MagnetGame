@@ -39,3 +39,8 @@ bool TitleFade::isEnd()
 {
 	return isEndFlag;
 }
+
+float TitleFade::getAlpha()
+{
+	return alpha;
+}

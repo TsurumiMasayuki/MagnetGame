@@ -3,22 +3,18 @@
 
 class SpriteRenderer;
 
-class TitleFade
+class Letter
 	:public GameObject
 {
 public:
-	TitleFade(IGameMediator*pMediator);
-	~TitleFade();
+	Letter(IGameMediator *pMediator);
+	~Letter();
 
 	virtual void start() override;
 	virtual void update() override;
 	virtual void onDestroy() override;
 
-	bool isEnd();
 private:
+
 	SpriteRenderer*sprite;
-	float alpha;
-	bool isEndFlag;
-public:
-	float getAlpha();
 };

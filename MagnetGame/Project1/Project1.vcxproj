@@ -180,6 +180,7 @@
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
     <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
     <ClCompile Include="Source\Actor\Performance\Item.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Letter.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleFade.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleHane.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
     <ClInclude Include="Source\Actor\Performance\Item.h" />
+    <ClInclude Include="Source\Actor\Performance\Letter.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
     <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
     <ClInclude Include="Source\Actor\Performance\TitleHane.h" />

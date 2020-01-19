@@ -90,6 +90,7 @@
     <ClCompile Include="Source\Actor\Effect\LineEffect.cpp" />
     <ClCompile Include="Source\Actor\Performance\Item.cpp" />
     <ClCompile Include="Source\Actor\Effect\SmokeEffect.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Letter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Source\Actor\Effect\LineEffect.h" />
     <ClInclude Include="Source\Actor\Performance\Item.h" />
     <ClInclude Include="Source\Actor\Effect\SmokeEffect.h" />
+    <ClInclude Include="Source\Actor\Performance\Letter.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
