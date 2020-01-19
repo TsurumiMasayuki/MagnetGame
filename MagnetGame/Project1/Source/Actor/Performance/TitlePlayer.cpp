@@ -10,7 +10,7 @@
 #include "Actor\DetectHelper.h"
 #include "Device\Input.h"
 
-const float TitlePlayer::MOVE_SPEED = 128.0f;
+const float TitlePlayer::MOVE_SPEED = 256.0f;
 
 TitlePlayer::TitlePlayer(IGameMediator * nMediator)
 	:GameObject(nMediator)
@@ -35,6 +35,7 @@ void TitlePlayer::start()
 	go = false;
 	m_pMove = false;
 	canMove = false;
+	isGrobe = false;
 }
 
 void TitlePlayer::update()
@@ -69,6 +70,13 @@ void TitlePlayer::update()
 			if (pos.x >= 210)
 			{
 				anim->setAnimation("FirstIdle");
+				if (!isGrobe) {
+					anim->setAnimation("FirstIdle");
+				}
+				else {
+					anim->setAnimation("GrobeIdle");
+				}
+				
 				m_pMove = false;
 				state = State::Idle2;
 			}
@@ -96,6 +104,12 @@ void TitlePlayer::update()
 		{
 			m_pMove = false;
 			anim->setAnimation("FirstIdle");
+			if (!isGrobe) {
+				anim->setAnimation("FirstIdle");
+			}
+			else {
+				anim->setAnimation("GrobeIdle");
+			}
 			Num = 2;
 		}
 		break;
@@ -105,6 +119,13 @@ void TitlePlayer::update()
 
 			if (GameInput::getHorizontal() == 0) {
 				anim->setAnimation("FirstIdle");
+
+				if (!isGrobe) {
+					anim->setAnimation("FirstIdle");
+				}
+				else {
+					anim->setAnimation("GrobeIdle");
+				}
 			}
 			else {
 				anim->setAnimation("FirstRun");
@@ -130,7 +151,7 @@ void TitlePlayer::update()
 	default:
 		break;
 	}
-	Vec3 move(x*3.0f * MOVE_SPEED * GameTime::getDeltaTime(), 0, 0);
+	Vec3 move(x * MOVE_SPEED * GameTime::getDeltaTime(), 0, 0);
 	setPosition(getPosition() + move);
 }
 
@@ -143,7 +164,7 @@ void TitlePlayer::initAnimations()
 	anim = new AnimSpriteRenderer(this);
 	anim->addAnimation("FirstIdle", new SpriteAnimation("FirstIdle", 160, 32, 0.1f, 5));
 	anim->addAnimation("FirstRun", new SpriteAnimation("FirstRun", 256, 32, 0.08f, 8));
-
+	anim->addAnimation("GrobeIdle", new SpriteAnimation("GrobeIdle",160,32,0.1f,5));
 	anim->setAnimation("FirstIdle");
 }
 
@@ -166,4 +187,9 @@ void TitlePlayer::setNum(int value)
 void TitlePlayer::setCanMove(bool value)
 {
 	canMove = value;
+}
+
+void TitlePlayer::setIsGrobe(bool value)
+{
+	isGrobe = value;
 }

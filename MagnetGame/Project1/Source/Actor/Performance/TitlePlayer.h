@@ -38,6 +38,7 @@ private:
 	bool isEndFlag;
 	bool m_pMove;
 	bool canMove;
+	bool isGrobe;
 	float a;
 	bool go;
 	int Num; 
@@ -47,4 +48,5 @@ public:
 	void setIsGo(bool value);
 	void setNum(int value);
 	void setCanMove(bool value);
+	void setIsGrobe(bool value);
 };

@@ -89,7 +89,9 @@ void Entrance::update()
 			m_pButton->setActive(true);
 			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -100, 0));
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pButton->setActive(false);
 				state = State::Small;
+				m_pTitlePlayer->setIsGrobe(true);
 				m_pTitlePlayer->setCanMove(false);
 				m_pItem->setActive(false);
 			}
@@ -106,14 +108,15 @@ void Entrance::update()
 
 		if (m_pTitlePlayer->getSize().x <= 64) {
 			state = State::Talk2;
+			
 		}
 
 		break;
 	case Entrance::Talk2:
-		if (m_pText->getEventNum() <= 18) {
+		if (m_pText->getEventNum() <= 21) {
 			m_pText->setActive(true);
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-				if (m_pText->getEventNum() != 16) {
+				if (m_pText->getEventNum() != 21) {
 					m_pText->addEventNum();
 				}
 				else {
@@ -122,12 +125,12 @@ void Entrance::update()
 				}
 			}
 		}
-		else if (m_pText->getEventNum() > 18) {
+		else if (m_pText->getEventNum() > 21) {
 			m_pText->setActive(false);
 			state = State::Move2;
 			m_pTitlePlayer->setCanMove(true);
 		}
-		if (m_pText->getEventNum() ==18 ) {
+		if (m_pText->getEventNum() ==21 ) {
 			m_pBackGround->setTextureName("haikei1-2");
 		}
 		break;

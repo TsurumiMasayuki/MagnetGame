@@ -100,7 +100,7 @@ void EventText::update()
 		break;
 	case 14:
 		text->setTextureName("text14");
-		state = State::Doctor;
+		state = State::Hero;
 		break;
 	case 15:
 		text->setTextureName("text15");
@@ -116,7 +116,19 @@ void EventText::update()
 		break;
 	case 18:
 		text->setTextureName("text18");
+		state = State::Doctor;
+		break;
+	case 19:
+		text->setTextureName("text19");
+		state = State::Doctor;
+		break;
+	case 20:
+		text->setTextureName("text20");
 		state = State::Hero;
+		break;
+	case 21:
+		text->setTextureName("text21");
+		state = State::Doctor;
 		break;
 
 	default:
