@@ -165,6 +165,7 @@
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
     <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
+    <ClCompile Include="Source\Actor\Effect\Title_Cloud.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
     <ClCompile Include="Source\Actor\Magnet\Magnet.cpp" />
     <ClCompile Include="Source\Actor\DetectHelper.cpp" />
@@ -175,8 +176,10 @@
     <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleFade.cpp" />
+    <ClCompile Include="Source\Actor\Performance\TitleHane.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleLogo.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitlePlayer.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Title_Sprite.cpp" />
     <ClCompile Include="Source\Actor\Player\Player.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
@@ -246,6 +249,7 @@
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
     <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
+    <ClInclude Include="Source\Actor\Effect\Title_Cloud.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
     <ClInclude Include="Source\Actor\Magnet\ForceMap.h" />
     <ClInclude Include="Source\Actor\Magnet\Magnet.h" />
@@ -257,8 +261,10 @@
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
     <ClInclude Include="Source\Actor\Performance\TitleFade.h" />
+    <ClInclude Include="Source\Actor\Performance\TitleHane.h" />
     <ClInclude Include="Source\Actor\Performance\TitleLogo.h" />
     <ClInclude Include="Source\Actor\Performance\TitlePlayer.h" />
+    <ClInclude Include="Source\Actor\Performance\Title_Sprite.h" />
     <ClInclude Include="Source\Actor\Player\Player.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Default.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />

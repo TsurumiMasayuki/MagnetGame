@@ -10,6 +10,8 @@ class TitleBackGround;
 class TitleFade;
 class EventText;
 class TitleLogo;
+class TitleHane;
+class Title_Sprite;
 
 class Title :
 	public AbstractScene, IGameMediator {
@@ -44,6 +46,8 @@ private:
 	TitleLogo*m_pTitleLogo;
 	TitleFade*m_pFade;
 	EventText*m_pText;
+	TitleHane*hane;
+	Title_Sprite*title_sprite;
 
 	enum SceneState
 	{
