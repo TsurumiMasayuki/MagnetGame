@@ -160,7 +160,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
 
-	m_pSceneManager->changeScene("GamePlay");
+	m_pSceneManager->changeScene("Title");
 
 }
 
