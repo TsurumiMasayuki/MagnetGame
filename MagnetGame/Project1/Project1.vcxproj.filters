@@ -80,6 +80,9 @@
     <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleLogo.cpp" />
+    <ClCompile Include="Source\Actor\Performance\TitleHane.cpp" />
+    <ClCompile Include="Source\Actor\Effect\Title_Cloud.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Title_Sprite.cpp" />
     <ClCompile Include="Source\Actor\PauseObject.cpp" />
     <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
     <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
@@ -173,6 +176,9 @@
     <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Performance\TitleLogo.h" />
+    <ClInclude Include="Source\Actor\Performance\TitleHane.h" />
+    <ClInclude Include="Source\Actor\Effect\Title_Cloud.h" />
+    <ClInclude Include="Source\Actor\Performance\Title_Sprite.h" />
     <ClInclude Include="Source\Actor\PauseObject.h" />
     <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
     <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />

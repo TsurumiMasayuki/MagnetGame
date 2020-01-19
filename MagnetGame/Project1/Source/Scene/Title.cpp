@@ -8,6 +8,8 @@
 #include "Actor\Performance\TitleLogo.h"
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/EventText.h"
+#include "Actor/Performance/TitleHane.h"
+#include "Actor/Performance/Title_Sprite.h"
 #include"Device/SoundManager.h"
 
 Title::Title()
@@ -24,14 +26,14 @@ void Title::init()
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
-	m_pBackGround = new TitleBackGround(this, "opening");
+	m_pBackGround = new TitleBackGround(this, "op_house");
 
 	m_pFade = new TitleFade(this);
 	m_pFade->setActive(false);	
 	
 	m_pTitleLogo = new TitleLogo(this, "title");
-	m_pTitleLogo->setSize(Vec3(500, 125, 0));
-	m_pTitleLogo->setPosition(Vec3(0, 240, 0));
+	m_pTitleLogo->setSize(Vec3(620, 180, 0));
+	m_pTitleLogo->setPosition(Vec3(-250, 240, 0));
 
 	m_pDeliveryman = new Deliveryman(this);
 	m_pDeliveryman->setPosition(Vec3(640, -95, 0));
@@ -44,6 +46,12 @@ void Title::init()
 	m_pText = new EventText(this);
 	m_pText->setActive(false);
 	m_pText->setEventNum(0);
+
+	hane = new TitleHane(this);
+	hane->setPosition(Vec3(310,120, 0));
+
+	title_sprite = new Title_Sprite(this);
+	title_sprite->setPosition(Vec3(0, 0, 0));
 
 	m_pTitleEndFlag = false;
 
@@ -65,7 +73,7 @@ void Title::update()
 
 		if (m_pDeliveryman->isDestroy()) {
 			SoundManager::playSE("door");
-			m_pBackGround->setTextureName("opening2");
+			m_pBackGround->setTextureName("op_house_open");
 			sState = SceneState::Player;
 		}
 		break;
