@@ -17,7 +17,8 @@ Magnet::Magnet(IGameMediator * pGameMediator, MagnetOption magOption, bool isMov
 	: GameObject(pGameMediator),
 	m_MagOption(magOption),
 	m_IsMove(isMove),
-	m_IsMagChange(isMagChange)
+	m_IsMagChange(isMagChange),
+	m_PrePosition(getPosition())
 {
 	setSize(Vec3(width, height, 0));
 }
@@ -69,9 +70,11 @@ void Magnet::update()
 	readMagMap();
 	if (m_pRider != nullptr)
 	{
-		Vec3 vel = Vec3(m_Velocity.x, MathUtility::clamp(m_Velocity.y, -128.0f, 0), 0);
-		m_pRider->setPosition(m_pRider->getPosition() + vel);
+		Vec3 vel = getPosition() - m_PrePosition;
+		Vec3 move = Vec3(vel.x, MathUtility::clamp(m_Velocity.y, -128.0f, 0), 0);
+		m_pRider->setPosition(m_pRider->getPosition() + move);
 	}
+	m_PrePosition = getPosition();
 }
 
 void Magnet::onCollisionEnter(GameObject * pHit)

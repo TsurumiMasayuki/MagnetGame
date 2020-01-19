@@ -67,6 +67,7 @@ void Player::update()
 	m_pDetectDown->setPosition(pos + Vec3(0, -1.1f, 0) * distY);
 	m_pDetectRight->setPosition(pos + Vec3(1, 0, 0) * distX);
 	m_pDetectLeft->setPosition(pos + Vec3(-1, 0, 0) * distX);
+	m_pDetectMid->setPosition(pos + Vec3(0, 0, 0));
 
 	if (GameInput::getHorizontal() < 0)
 		isFlipX = true;
@@ -78,8 +79,8 @@ void Player::update()
 
 	setMagChange();
 
-	//if (isSandwich())
-	//	destroy();
+	if (isSandwich())
+		Respawn();
 }
 
 void Player::onDestroy()
@@ -90,6 +91,7 @@ void Player::onDestroy()
 	m_pDetectDown->destroy();
 	m_pDetectRight->destroy();
 	m_pDetectLeft->destroy();
+	m_pDetectMid->destroy();
 }
 
 Gravity * Player::getGravity()
@@ -129,8 +131,7 @@ bool Player::canSuperJump()
 
 bool Player::isSandwich()
 {
-	return (m_pDetectRight->isDetect("Block") || m_pDetectRight->isDetect("MagnetN") || m_pDetectRight->isDetect("MagnetS")) &&
-		(m_pDetectLeft->isDetect("Block") || m_pDetectLeft->isDetect("MagnetN") || m_pDetectLeft->isDetect("MagnetS"));
+	return m_pDetectMid->isDetect();
 }
 
 void Player::Respawn()
@@ -200,6 +201,9 @@ void Player::initDetectors()
 
 	m_pDetectLeft = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectLeft->setSize(Vec3(6, sizeX, 0));
+
+	m_pDetectMid = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
+	m_pDetectMid->setSize(Vec3(16, 16, 0));
 }
 
 void Player::initAnimations()

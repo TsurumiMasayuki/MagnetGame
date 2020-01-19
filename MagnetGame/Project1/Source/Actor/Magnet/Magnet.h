@@ -55,6 +55,8 @@ private:
 
 	static const float MAG_MOVE_SPEED;
 	Vec2 m_Velocity;
+	Vec3 m_PrePosition;
+	Vec2 m_Movement;
 
 	Vec2 m_PreNForce;
 	Vec2 m_PreSForce;
