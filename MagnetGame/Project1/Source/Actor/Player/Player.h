@@ -56,6 +56,7 @@ private:
 	DetectHelper* m_pDetectDown;
 	DetectHelper* m_pDetectRight;
 	DetectHelper* m_pDetectLeft;
+	DetectHelper* m_pDetectMid;
 
 	AnimSpriteRenderer* m_pAnimRenderer;
 
