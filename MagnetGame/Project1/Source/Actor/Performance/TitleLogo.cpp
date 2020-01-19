@@ -15,7 +15,7 @@ TitleLogo::~TitleLogo()
 void TitleLogo::start()
 {
 
-	sprite = new SpriteRenderer(this);
+	sprite = new SpriteRenderer(this,101);
 	sprite->setTextureName(name);
 
 	isFade = false;

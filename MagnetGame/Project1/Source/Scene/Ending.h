@@ -3,6 +3,7 @@
 #include "Actor\IGameMediator.h"
 
 class GameObjectManager;
+class PauseObject;
 
 class Ending :
 	public AbstractScene, IGameMediator {
@@ -30,5 +31,8 @@ public:
 private:
 	GameObjectManager*m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
+
+	PauseObject*m_pPause;
+
 	bool m_pTitleEndFlag;
 };

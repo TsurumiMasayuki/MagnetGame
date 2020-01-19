@@ -6,6 +6,8 @@
 class GameObjectManager;
 class Player;
 class Stage;
+class PauseObject;
+class TitleBackGround;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -35,9 +37,15 @@ private:
 	PhysicsWorld* m_pPhysicsWorld;
 
 	Player* m_pPlayer;
+	TitleBackGround*m_pBackGround;
+	PauseObject*m_pPause;
+
+	void Pause();
 
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
 
 	Stage* m_pCurrentStage;
+
+	std::string nScene;
 };

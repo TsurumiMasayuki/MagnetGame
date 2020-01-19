@@ -11,8 +11,11 @@
 #include "Physics\PhysicsWorld.h"
 
 #include "Device\Input.h"
+#include"Device/GameTime.h"
 #include "Def\Screen.h"
 #include "Actor\Stage\Stage.h"
+#include"Actor/PauseObject.h"
+#include"Actor/Performance/TitleBackGround.h"
 
 GamePlay::GamePlay()
 {
@@ -37,6 +40,15 @@ void GamePlay::init()
 	m_pCurrentStage = new Stage(this, 32, 32);
 	m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
+
+	m_pBackGround = new TitleBackGround(this,"haikei2");
+	m_pBackGround->setActive(true);
+
+	m_pPause = new PauseObject(this);
+	m_pPause->setActive(false);
+
+	nScene = "Ending";
+
 	m_GameEndFlag = false;
 }
 
@@ -88,6 +100,9 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
+	//ポーズの処理
+	Pause();
+
 	//シーンの更新
 	m_pGameObjectManager->update();
 
@@ -109,12 +124,12 @@ void GamePlay::shutdown()
 
 std::string GamePlay::nextScene()
 {
-	return std::string();
+	return nScene;
 }
 
 bool GamePlay::isEnd()
 {
-	return false;
+	return m_GameEndFlag;
 }
 
 void GamePlay::addGameObject(GameObject * pAddObject)
@@ -165,4 +180,29 @@ ObstacleMap * GamePlay::getObstacleMap()
 void GamePlay::gameEnd()
 {
 	m_GameEndFlag = true;
+}
+
+void GamePlay::Pause()
+{
+	if (!m_pPause->isActive()) {
+		GameTime::timeScale = 1.0f;
+		if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
+			m_pPause->setActive(true);
+			m_pPause->setReStart(false);
+		}
+	}
+	else {
+
+		if (m_pPause->getReStart()) {
+			//↓リスタート時の処理を書いて
+
+			m_pPause->setActive(false);
+		}
+	}
+
+	if (m_pPause->IsEnd()) {
+		nScene = "Title";
+		m_GameEndFlag = true;
+	}
+
 }

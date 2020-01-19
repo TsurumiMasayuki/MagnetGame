@@ -164,6 +164,7 @@
     <ClCompile Include="Source\Actor\Effect\CircleEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Title_Cloud.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
@@ -172,6 +173,8 @@
     <ClCompile Include="Source\Actor\Magnet\ObstacleMap.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
+    <ClCompile Include="Source\Actor\PauseObject.cpp" />
+    <ClCompile Include="Source\Actor\Performance\ButtonTex.cpp" />
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
     <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
@@ -190,6 +193,7 @@
     <ClCompile Include="Source\Actor\Tilemap\GoalObject.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
     <ClCompile Include="Source\Component\AnimSpriteRenderer.cpp" />
+    <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
     <ClCompile Include="Source\Component\Physics\CircleCollider2D.cpp" />
     <ClCompile Include="Source\Component\Physics\BoxCollder2D.cpp" />
@@ -248,6 +252,7 @@
     <ClInclude Include="Source\Actor\Effect\CircleEffect.h" />
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
+    <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Title_Cloud.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
@@ -257,6 +262,8 @@
     <ClInclude Include="Source\Actor\Magnet\ObstacleMap.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
+    <ClInclude Include="Source\Actor\PauseObject.h" />
+    <ClInclude Include="Source\Actor\Performance\ButtonTex.h" />
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
@@ -276,6 +283,7 @@
     <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
     <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
+    <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />
     <ClInclude Include="Source\Component\Physics\CircleCollider2D.h" />
     <ClInclude Include="Source\Component\Physics\BoxCollider2D.h" />

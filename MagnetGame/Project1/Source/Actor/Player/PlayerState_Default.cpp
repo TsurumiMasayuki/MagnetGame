@@ -14,7 +14,15 @@ PlayerState_Default::PlayerState_Default(Player * pPlayer)
 
 void PlayerState_Default::update()
 {
-	if (GameInput::getHorizontal() == 0)
+	if (GameInput::getVertical() > 0&& GameInput::getHorizontal() == 0)
+	{
+		m_pPlayer->setAnimation("IdleUp");
+	}
+	else if (GameInput::getVertical() < 0&& GameInput::getHorizontal() == 0)
+	{
+		m_pPlayer->setAnimation("IdleDown");
+	}
+	else if (GameInput::getHorizontal() == 0)
 	{
 		m_pPlayer->setAnimation("Idle");
 	}
@@ -41,7 +49,7 @@ IState * PlayerState_Default::nextState()
 			return new PlayerState_SuperJump(m_pPlayer);
 		else
 			SoundManager::playSE("jump", 0);
-			return new PlayerState_Jump(m_pPlayer);
+		return new PlayerState_Jump(m_pPlayer);
 	}
 
 	if (GameInput::isMagChange())

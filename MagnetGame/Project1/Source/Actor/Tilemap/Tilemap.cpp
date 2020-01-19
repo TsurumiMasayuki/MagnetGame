@@ -260,8 +260,8 @@ TILE_IMAGE_TYPE Tilemap::getImageType(bool isUpExist, bool isDownExist, bool isR
 		!isLeftExist && isRightExist)
 		imageType = TILE_IMAGE_TYPE_LEFTCORNER;
 
-	else if (!isUpExist && isDownExist &&
-		!isLeftExist && isRightExist)
+	else if (isUpExist && isDownExist &&
+		!isLeftExist && !isRightExist)
 		imageType = TILE_IMAGE_TYPE_UPCOLUMN;
 
 	else if (!isUpExist && !isDownExist &&

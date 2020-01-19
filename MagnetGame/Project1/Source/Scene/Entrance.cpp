@@ -6,6 +6,7 @@
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/EventText.h"
 #include"Actor/Performance/TitlePlayer.h"
+#include"Actor/Performance/ButtonTex.h"
 #include"Device/SoundManager.h"
 
 
@@ -30,6 +31,9 @@ void Entrance::init()
 	m_pTitlePlayer = new TitlePlayer(this);
 	m_pTitlePlayer->setPosition(Vec3(-660, -283, 0));
 	m_pTitlePlayer->setNum(1);
+
+	m_pButton = new ButtonTex(this);
+	m_pButton->setActive(false);
 
 	state = State::Idle;
 
@@ -97,10 +101,15 @@ void Entrance::update()
 		}
 		break;
 	case Entrance::Move2:
-		if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 585) {
+		if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 500) {
+			m_pButton->setActive(true);
+			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -200, 0));
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 				m_pEntranceEndFlag = true;
 			}
+		}
+		else {
+			m_pButton->setActive(false);
 		}
 		break;
 	default:

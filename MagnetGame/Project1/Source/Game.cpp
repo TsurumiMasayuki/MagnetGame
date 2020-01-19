@@ -64,6 +64,20 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/op_tree.png", "op_tree");
 	TextureManager::loadTexture(L"Assets/Textures/op_huusya.png", "op_huusya");
 	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
+	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
+	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
+
+	//マップ系
+	TextureManager::loadTexture(L"Assets/Textures/n_mag_block.png", "NBlock");
+	TextureManager::loadTexture(L"Assets/Textures/n_block_stop.png", "NBlockStop");
+	TextureManager::loadTexture(L"Assets/Textures/s_mag_block.png", "SBlock");
+	TextureManager::loadTexture(L"Assets/Textures/s_block_stop.png", "SBlockStop");
+
+	TextureManager::loadTexture(L"Assets/Textures/Cross.png", "Cross");
+
+	TextureManager::loadTexture(L"Assets/Textures/fieldblock.png", "BlockTest");
+	TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-2.png", "haikei1-2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-3.png", "haikei1-3");
@@ -100,6 +114,18 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text17.png", "text17");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text18.png", "text18");
 
+	//Pause
+	TextureManager::loadTexture(L"Assets/Textures/Pause/howto.png", "howto");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/pause.png", "pause");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Punch_Ex.png", "Punch_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Mag_Ex.png", "Mag_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/N_Ex.png", "N_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Jump_Ex.png", "Jump_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check.png", "check");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check2.png", "check2");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check3.png", "check3");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check4.png", "check4");
+
 	//プレイヤー
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_right.png", "PlayerIdle");
 	TextureManager::loadTexture(L"Assets/Textures/player_run_right.png", "PlayerRun");
@@ -108,6 +134,8 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_right.png", "PlayerPunch");
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_up.png", "PlayerPunch_Up");
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_down.png", "PlayerPunch_Down");
+	TextureManager::loadTexture(L"Assets/Textures/player_idle_up.png", "PlayerIdleUp");
+	TextureManager::loadTexture(L"Assets/Textures/player_idle_down.png", "PlayerIdleDown");
 
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
@@ -131,7 +159,9 @@ void Game::init()
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-	m_pSceneManager->changeScene("Title");
+
+	m_pSceneManager->changeScene("GamePlay");
+
 }
 
 void Game::update()
