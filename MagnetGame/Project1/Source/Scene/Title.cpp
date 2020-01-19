@@ -10,7 +10,10 @@
 #include"Actor/Performance/EventText.h"
 #include "Actor/Performance/TitleHane.h"
 #include "Actor/Performance/Title_Sprite.h"
+#include "Actor/Effect/Title_Cloud.h"
 #include"Device/SoundManager.h"
+#include "Utility/Timer.h"
+#include "Actor/Effect/SmokeEffect.h"
 
 Title::Title()
 {
@@ -18,6 +21,10 @@ Title::Title()
 
 Title::~Title()
 {
+	delete timer;
+	delete smoketimer;
+	delete title_cloud;
+	delete smokeEffect;
 }
 
 void Title::init()
@@ -32,7 +39,7 @@ void Title::init()
 	m_pFade->setActive(false);	
 	
 	m_pTitleLogo = new TitleLogo(this, "title");
-	m_pTitleLogo->setSize(Vec3(620, 180, 0));
+	m_pTitleLogo->setSize(Vec3(620, 130, 0));
 	m_pTitleLogo->setPosition(Vec3(-250, 240, 0));
 
 	m_pDeliveryman = new Deliveryman(this);
@@ -54,6 +61,15 @@ void Title::init()
 	title_sprite->setPosition(Vec3(0, 0, 0));
 
 	m_pTitleEndFlag = false;
+
+	timer = new Timer(3);
+	smoketimer = new Timer(1);
+	
+	title_cloud = new Title_Cloud(this);
+	title_cloud->Cleate(0.1f, 30, 0, 2);
+
+	smokeEffect = new SmokeEffect(this);
+	smokeEffect->Cleate(Vec3(-310, 100, 0),3,0.5f,2);
 
 	SoundManager::playBGM("wind");
 }
@@ -109,6 +125,17 @@ void Title::update()
 
 	m_pGameObjectManager->update();
 	m_pPhysicsWorld->update();
+
+	timer->update();
+	smoketimer->update();
+	if (timer->isTime()) {
+		title_cloud->Cleate(0.1f, 30, 0, 2);
+		timer->reset();
+	}
+	if (smoketimer->isTime()) {
+		smokeEffect->Cleate(Vec3(-310, 100, 0), 3, 0.5f, 2);
+		smoketimer->reset();
+	}
 }
 
 void Title::draw()

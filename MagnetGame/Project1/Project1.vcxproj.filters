@@ -88,6 +88,7 @@
     <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
     <ClCompile Include="Source\Actor\Performance\ButtonTex.cpp" />
     <ClCompile Include="Source\Actor\Performance\Item.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SmokeEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />
     <ClInclude Include="Source\Actor\Performance\ButtonTex.h" />
     <ClInclude Include="Source\Actor\Performance\Item.h" />
+    <ClInclude Include="Source\Actor\Effect\SmokeEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
