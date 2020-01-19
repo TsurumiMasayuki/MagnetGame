@@ -10,6 +10,7 @@
 #include"Actor/Performance/EventText.h"
 #include "Actor/Performance/TitleHane.h"
 #include "Actor/Performance/Title_Sprite.h"
+#include"Actor/Performance/Letter.h"
 #include "Actor/Effect/Title_Cloud.h"
 #include"Device/SoundManager.h"
 #include "Utility/Timer.h"
@@ -43,11 +44,11 @@ void Title::init()
 	m_pTitleLogo->setPosition(Vec3(-250, 240, 0));
 
 	m_pDeliveryman = new Deliveryman(this);
-	m_pDeliveryman->setPosition(Vec3(640, -95, 0));
+	m_pDeliveryman->setPosition(Vec3(640, -135, 0));
 
 	m_pTitlePlayer = new TitlePlayer(this);
 	m_pTitlePlayer->setNum(0);
-	m_pTitlePlayer->setPosition(Vec3(40,  -95, 0));
+	m_pTitlePlayer->setPosition(Vec3(-160,  -135, 0));
 	m_pTitlePlayer->setActive(false);
 
 	m_pText = new EventText(this);
@@ -71,6 +72,11 @@ void Title::init()
 	smokeEffect = new SmokeEffect(this);
 	smokeEffect->Cleate(Vec3(-310, 100, 0),3,0.5f,2);
 
+	m_pLetter = new Letter(this);
+	m_pLetter->setPosition(Vec3(105,-120,0));
+	m_pLetter->setActive(false);
+
+	Cnt = 0;
 	SoundManager::playBGM("wind");
 }
 
@@ -86,7 +92,12 @@ void Title::update()
 		}
 		break;
 	case Title::Delivery:
-
+		if (m_pDeliveryman->getPosition().x <= 105) {
+			m_pLetter->setActive(true);
+		}
+		if (m_pTitleLogo->getAlpha() <= 0.0f) {
+			m_pTitleLogo->setActive(false);
+		}
 		if (m_pDeliveryman->isDestroy()) {
 			SoundManager::playSE("door");
 			m_pBackGround->setTextureName("op_house_open");
@@ -97,8 +108,8 @@ void Title::update()
 
 		m_pTitlePlayer->setActive(true);
 
-		if (m_pTitlePlayer->getPosition().x >= 200) {
-
+		if (m_pTitlePlayer->getPosition().x >= 90) {
+			m_pLetter->setActive(false); 
 			if (m_pText->getEventNum() <= 4) {
 				m_pText->setActive(true);
 				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
@@ -113,12 +124,30 @@ void Title::update()
 		}
 		break;
 	case Title::Fade:
-		if (m_pTitlePlayer->IsEnd()) {
+		Cnt++;
+		if (m_pTitlePlayer->IsEnd()&&Cnt<=120) {
+			m_pTitleLogo->setFade(false);
+		}
+
+		if (m_pTitlePlayer->getPosition().x >= 550&&Cnt <= 240) {
+			m_pTitleLogo->setActive(true);
 			m_pTitleLogo->setFade(false);
 			m_pFade->setActive(true);
 		}
+
+		if (m_pTitleLogo->isActive()) {
+			if (m_pTitleLogo->getAlpha() >= 1.0f) {
+				m_pTitleLogo->setFade(true);
+			}
+			if (m_pTitleLogo->getFade()) {
+				if (m_pTitleLogo->getAlpha() <0.0f) {
+					m_pTitleEndFlag = true;
+				}
+			}
+		}
+
 		if (m_pFade->isEnd()) {
-			m_pTitleEndFlag = true;
+			//m_pTitleEndFlag = true;
 		}
 		break;
 	}

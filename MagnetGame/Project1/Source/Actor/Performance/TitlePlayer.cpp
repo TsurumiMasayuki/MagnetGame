@@ -42,7 +42,7 @@ void TitlePlayer::update()
 {
 
 	if (m_pMove) {
-		Vec3 move(3.0f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
+		Vec3 move(1.0f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
 		setPosition(getPosition() + move);
 	}
 
@@ -67,7 +67,7 @@ void TitlePlayer::update()
 			break;
 		case TitlePlayer::Move:
 			m_pMove = true;
-			if (pos.x >= 210)
+			if (pos.x >= 95)
 			{
 				anim->setAnimation("FirstIdle");
 				if (!isGrobe) {
