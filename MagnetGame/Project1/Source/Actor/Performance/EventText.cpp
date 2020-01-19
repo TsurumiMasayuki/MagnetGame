@@ -17,13 +17,13 @@ void EventText::start()
 	setSize(Vec3(1280, 180, 0));
 	setPosition(Vec3(0, -270, 0));
 
-	frame = new SpriteRenderer(this);
+	frame = new SpriteRenderer(this,110);
 	frame->setTextureName("log_player");
 
-	arrow = new SpriteRenderer(this);
+	arrow = new SpriteRenderer(this,112);
 	arrow->setTextureName("log_arrow");
 
-	text = new SpriteRenderer(this);
+	text = new SpriteRenderer(this,111);
 	text->setTextureName("text0");
 
 	text->setColor(Color(1, 1, 1, 1));
@@ -88,11 +88,11 @@ void EventText::update()
 		break;
 	case 11:
 		text->setTextureName("text11");
-		state = State::Hero;
+		state = State::Doctor;
 		break;
 	case 12:
 		text->setTextureName("text12");
-		state = State::Hero;
+		state = State::Doctor;
 		break;
 	case 13:
 		text->setTextureName("text13");

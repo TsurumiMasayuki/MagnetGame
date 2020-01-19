@@ -10,7 +10,7 @@
 #include "Actor\DetectHelper.h"
 #include "Device\Input.h"
 
-const float TitlePlayer::MOVE_SPEED = 64.0f;
+const float TitlePlayer::MOVE_SPEED = 128.0f;
 
 TitlePlayer::TitlePlayer(IGameMediator * nMediator)
 	:GameObject(nMediator)
@@ -34,6 +34,7 @@ void TitlePlayer::start()
 	isEndFlag = false;
 	go = false;
 	m_pMove = false;
+	canMove = false;
 }
 
 void TitlePlayer::update()
@@ -61,13 +62,13 @@ void TitlePlayer::update()
 			break;
 		case TitlePlayer::Idle:
 			state = State::Move;
-			anim->setAnimation("Run");
+			anim->setAnimation("FirstRun");
 			break;
 		case TitlePlayer::Move:
 			m_pMove = true;
 			if (pos.x >= 210)
 			{
-				anim->setAnimation("Idle");
+				anim->setAnimation("FirstIdle");
 				m_pMove = false;
 				state = State::Idle2;
 			}
@@ -75,7 +76,7 @@ void TitlePlayer::update()
 		case TitlePlayer::Idle2:
 			if (go) {
 				state = State::Move2;
-				anim->setAnimation("Run");
+				anim->setAnimation("FirstRun");
 				m_pMove = true;
 			}
 			break;
@@ -87,38 +88,43 @@ void TitlePlayer::update()
 		}
 		break;
 	case 1:
-		if (pos.x <= -560) {
+		if (pos.x <= -410) {
 			m_pMove = true;
-			anim->setAnimation("Run");
+			anim->setAnimation("FirstRun");
 		}
-		else if(pos.x>-560)
+		else if(pos.x>-410)
 		{
 			m_pMove = false;
-			anim->setAnimation("Idle");
+			anim->setAnimation("FirstIdle");
 			Num = 2;
 		}
 		break;
 	case 2:
-		x = GameInput::getHorizontal(); 
-		
-		if (GameInput::getHorizontal() == 0) {
-			anim->setAnimation("Idle");
+		if (canMove) {
+			x = GameInput::getHorizontal();
+
+			if (GameInput::getHorizontal() == 0) {
+				anim->setAnimation("FirstIdle");
+			}
+			else {
+				anim->setAnimation("FirstRun");
+			}
+
+			if (GameInput::getHorizontal() < 0)
+				isFlipX = true;
+			if (GameInput::getHorizontal() > 0)
+				isFlipX = false;
+			anim->setFlipX(isFlipX);
+
+			if (pos.x <= -608) {
+				setPosition(Vec3(-608, -283, 0));
+			}
+			else if (pos.x >= 608) {
+				setPosition(Vec3(608, -283, 0));
+			}
 		}
 		else {
-			anim->setAnimation("Run");
-		}
-
-		if (GameInput::getHorizontal() < 0)
-			isFlipX = true;
-		if (GameInput::getHorizontal() > 0)
-			isFlipX = false;
-		anim->setFlipX(isFlipX);
-
-		if (pos.x <= -608) {
-			setPosition(Vec3(-608,-283,0));
-		}
-		else if (pos.x>=608) {
-			setPosition(Vec3(608, -283, 0));
+			x = 0;
 		}
 		break;
 	default:
@@ -135,10 +141,10 @@ void TitlePlayer::onDestroy()
 void TitlePlayer::initAnimations()
 {
 	anim = new AnimSpriteRenderer(this);
-	anim->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
-	anim->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
+	anim->addAnimation("FirstIdle", new SpriteAnimation("FirstIdle", 160, 32, 0.1f, 5));
+	anim->addAnimation("FirstRun", new SpriteAnimation("FirstRun", 256, 32, 0.08f, 8));
 
-	anim->setAnimation("Idle");
+	anim->setAnimation("FirstIdle");
 }
 
 
@@ -155,4 +161,9 @@ void TitlePlayer::setIsGo(bool value)
 void TitlePlayer::setNum(int value)
 {
 	Num = value;
+}
+
+void TitlePlayer::setCanMove(bool value)
+{
+	canMove = value;
 }

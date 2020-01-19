@@ -15,7 +15,7 @@ void TitleFade::start()
 {
 	setSize(Vec3(1280, 720, 0));
 
-	sprite = new SpriteRenderer(this);
+	sprite = new SpriteRenderer(this,129);
 	sprite->setTextureName("white");
 
 	alpha = 0;

@@ -87,6 +87,7 @@
     <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
     <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
     <ClCompile Include="Source\Actor\Performance\ButtonTex.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
     <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />
     <ClInclude Include="Source\Actor\Performance\ButtonTex.h" />
+    <ClInclude Include="Source\Actor\Performance\Item.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

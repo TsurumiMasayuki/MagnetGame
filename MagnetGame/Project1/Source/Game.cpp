@@ -64,7 +64,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/op_tree.png", "op_tree");
 	TextureManager::loadTexture(L"Assets/Textures/op_huusya.png", "op_huusya");
 	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
-	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	//TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
 	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 
@@ -77,7 +77,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Cross.png", "Cross");
 
 	TextureManager::loadTexture(L"Assets/Textures/fieldblock.png", "BlockTest");
-	TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
+	//TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-2.png", "haikei1-2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-3.png", "haikei1-3");
@@ -136,6 +136,16 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_down.png", "PlayerPunch_Down");
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_up.png", "PlayerIdleUp");
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_down.png", "PlayerIdleDown");
+	//プレイヤー(何もない状態)
+	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_idle_right_first.png", "FirstIdle");
+	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_run_right_first.png", "FirstRun");
+	//プレイヤー(グローブのみ)
+	//TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/.png", "");
+
+	//アイテム
+	TextureManager::loadTexture(L"Assets/Textures/grobe.png", "grobe");
+	TextureManager::loadTexture(L"Assets/Textures/butu.png", "butu");
+
 
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
@@ -160,7 +170,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
 
-	m_pSceneManager->changeScene("GamePlay");
+	m_pSceneManager->changeScene("Title");
 
 }
 
