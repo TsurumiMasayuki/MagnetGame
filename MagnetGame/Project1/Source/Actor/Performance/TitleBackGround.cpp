@@ -16,7 +16,7 @@ void TitleBackGround::start()
 {
 	setSize(Vec3(1280, 720, 0));
 
-    sprite = new SpriteRenderer(this,99);
+    sprite = new SpriteRenderer(this,102);
 	sprite->setTextureName(name);
 
 	isFade = false;
