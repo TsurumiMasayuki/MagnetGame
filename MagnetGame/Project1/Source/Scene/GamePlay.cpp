@@ -41,7 +41,7 @@ void GamePlay::init()
 	m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
-	m_pBackGround = new TitleBackGround(this,"haikei2");
+	m_pBackGround = new TitleBackGround(this,"haikei6");
 	m_pBackGround->setActive(true);
 
 	m_pPause = new PauseObject(this);
