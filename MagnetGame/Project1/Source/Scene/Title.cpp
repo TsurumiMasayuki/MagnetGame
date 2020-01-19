@@ -8,7 +8,12 @@
 #include "Actor\Performance\TitleLogo.h"
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/EventText.h"
+#include "Actor/Performance/TitleHane.h"
+#include "Actor/Performance/Title_Sprite.h"
+#include "Actor/Effect/Title_Cloud.h"
 #include"Device/SoundManager.h"
+#include "Utility/Timer.h"
+#include "Actor/Effect/SmokeEffect.h"
 
 Title::Title()
 {
@@ -16,6 +21,10 @@ Title::Title()
 
 Title::~Title()
 {
+	delete timer;
+	delete smoketimer;
+	delete title_cloud;
+	delete smokeEffect;
 }
 
 void Title::init()
@@ -24,14 +33,14 @@ void Title::init()
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
-	m_pBackGround = new TitleBackGround(this, "opening");
+	m_pBackGround = new TitleBackGround(this, "op_house");
 
 	m_pFade = new TitleFade(this);
 	m_pFade->setActive(false);	
 	
 	m_pTitleLogo = new TitleLogo(this, "title");
-	m_pTitleLogo->setSize(Vec3(500, 125, 0));
-	m_pTitleLogo->setPosition(Vec3(0, 240, 0));
+	m_pTitleLogo->setSize(Vec3(620, 130, 0));
+	m_pTitleLogo->setPosition(Vec3(-250, 240, 0));
 
 	m_pDeliveryman = new Deliveryman(this);
 	m_pDeliveryman->setPosition(Vec3(640, -95, 0));
@@ -45,7 +54,22 @@ void Title::init()
 	m_pText->setActive(false);
 	m_pText->setEventNum(0);
 
+	hane = new TitleHane(this);
+	hane->setPosition(Vec3(310,120, 0));
+
+	title_sprite = new Title_Sprite(this);
+	title_sprite->setPosition(Vec3(0, 0, 0));
+
 	m_pTitleEndFlag = false;
+
+	timer = new Timer(3);
+	smoketimer = new Timer(1);
+	
+	title_cloud = new Title_Cloud(this);
+	title_cloud->Cleate(0.1f, 30, 0, 2);
+
+	smokeEffect = new SmokeEffect(this);
+	smokeEffect->Cleate(Vec3(-310, 100, 0),3,0.5f,2);
 
 	SoundManager::playBGM("wind");
 }
@@ -65,7 +89,7 @@ void Title::update()
 
 		if (m_pDeliveryman->isDestroy()) {
 			SoundManager::playSE("door");
-			m_pBackGround->setTextureName("opening2");
+			m_pBackGround->setTextureName("op_house_open");
 			sState = SceneState::Player;
 		}
 		break;
@@ -101,6 +125,17 @@ void Title::update()
 
 	m_pGameObjectManager->update();
 	m_pPhysicsWorld->update();
+
+	timer->update();
+	smoketimer->update();
+	if (timer->isTime()) {
+		title_cloud->Cleate(0.1f, 30, 0, 2);
+		timer->reset();
+	}
+	if (smoketimer->isTime()) {
+		smokeEffect->Cleate(Vec3(-310, 100, 0), 3, 0.5f, 2);
+		smoketimer->reset();
+	}
 }
 
 void Title::draw()

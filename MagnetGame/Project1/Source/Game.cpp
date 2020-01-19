@@ -59,7 +59,12 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/superjumpeffect.png", "superjumpeffect");
 	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
-	TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
+	TextureManager::loadTexture(L"Assets/Textures/op_house.png", "op_house");
+	TextureManager::loadTexture(L"Assets/Textures/op_house_open.png", "op_house_open");
+	TextureManager::loadTexture(L"Assets/Textures/op_tree.png", "op_tree");
+	TextureManager::loadTexture(L"Assets/Textures/op_huusya.png", "op_huusya");
+	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
+	//TextureManager::loadTexture(L"Assets/Textures/op.png", "opening");
 	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 
@@ -72,13 +77,17 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Cross.png", "Cross");
 
 	TextureManager::loadTexture(L"Assets/Textures/fieldblock.png", "BlockTest");
-	TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
+	//TextureManager::loadTexture(L"Assets/Textures/op2.png", "opening2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-2.png", "haikei1-2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei1-3.png", "haikei1-3");
 	TextureManager::loadTexture(L"Assets/Textures/haikei2.png", "haikei2");
 	TextureManager::loadTexture(L"Assets/Textures/haikei3.png", "haikei3");
 	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
+	TextureManager::loadTexture(L"Assets/Textures/op_hane.png", "hane");
+	TextureManager::loadTexture(L"Assets/Textures/cloud1.png", "cloud1");
+	TextureManager::loadTexture(L"Assets/Textures/cloud2.png", "cloud2");
+	TextureManager::loadTexture(L"Assets/Textures/op_background.png", "op_background");
 
 	//画像テキスト
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
@@ -127,6 +136,16 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/player_panti_down.png", "PlayerPunch_Down");
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_up.png", "PlayerIdleUp");
 	TextureManager::loadTexture(L"Assets/Textures/player_idle_down.png", "PlayerIdleDown");
+	//プレイヤー(何もない状態)
+	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_idle_right_first.png", "FirstIdle");
+	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_run_right_first.png", "FirstRun");
+	//プレイヤー(グローブのみ)
+	//TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/.png", "");
+
+	//アイテム
+	TextureManager::loadTexture(L"Assets/Textures/grobe.png", "grobe");
+	TextureManager::loadTexture(L"Assets/Textures/butu.png", "butu");
+
 
 	//BGM追加
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
@@ -151,7 +170,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
 
-	m_pSceneManager->changeScene("GamePlay");
+	m_pSceneManager->changeScene("Title");
 
 }
 

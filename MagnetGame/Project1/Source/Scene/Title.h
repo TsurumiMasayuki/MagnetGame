@@ -10,6 +10,11 @@ class TitleBackGround;
 class TitleFade;
 class EventText;
 class TitleLogo;
+class TitleHane;
+class Title_Sprite;
+class Title_Cloud;
+class Timer;
+class SmokeEffect;
 
 class Title :
 	public AbstractScene, IGameMediator {
@@ -44,6 +49,12 @@ private:
 	TitleLogo*m_pTitleLogo;
 	TitleFade*m_pFade;
 	EventText*m_pText;
+	TitleHane*hane;
+	Title_Sprite*title_sprite;
+	Title_Cloud*title_cloud;
+	Timer * timer;
+	Timer * smoketimer;
+	SmokeEffect*smokeEffect;
 
 	enum SceneState
 	{

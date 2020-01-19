@@ -7,6 +7,7 @@ class TitleBackGround;
 class EventText;
 class TitlePlayer;
 class ButtonTex;
+class Item;
 
 class Entrance :
 	public AbstractScene, IGameMediator {
@@ -38,11 +39,13 @@ private:
 	EventText*m_pText;
 	TitlePlayer*m_pTitlePlayer;
 	ButtonTex*m_pButton;
+	Item*m_pItem;
 
 	enum State {
 		Idle,
 		Talk,
 		Move,
+		Small,
 		Talk2,
 		Move2,
 	};

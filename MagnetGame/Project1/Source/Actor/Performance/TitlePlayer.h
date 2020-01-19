@@ -37,6 +37,7 @@ private:
 	static const float MOVE_SPEED;
 	bool isEndFlag;
 	bool m_pMove;
+	bool canMove;
 	float a;
 	bool go;
 	int Num; 
@@ -45,4 +46,5 @@ private:
 public:
 	void setIsGo(bool value);
 	void setNum(int value);
+	void setCanMove(bool value);
 };
