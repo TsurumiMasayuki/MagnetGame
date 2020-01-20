@@ -42,6 +42,8 @@ private:
 	PauseObject*m_pPause;
 	EventText*m_pText;
 
+	void Pause();
+	void ReadRespawnData();
 
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;

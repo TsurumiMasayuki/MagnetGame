@@ -13,6 +13,7 @@
 #include "Device\Input.h"
 #include"Device/GameTime.h"
 #include"Device/SoundManager.h"
+#include "Device\File\CSVReader.h"
 #include "Def\Screen.h"
 #include "Actor\Stage\Stage.h"
 #include"Actor/PauseObject.h"
@@ -63,7 +64,7 @@ void GamePlay::update()
 {
 	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart())
 	{
-		//�|�[�Y�̏���
+		//ポーズの処理
 		m_pPause->setReStart(false);
 		m_pPause->setActive(false);
 
@@ -77,6 +78,7 @@ void GamePlay::update()
 		m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
+		ReadRespawnData();
 		m_pPlayer->Respawn();
 	}
 
@@ -115,12 +117,12 @@ void GamePlay::update()
 		m_GameEndFlag = true;
 	}
 
-	//�|�[�Y�̍X�V����
+	//ポーズの更新処理
 	Pause();
-	//�e�L�X�g�̍X�V����
+	//テキストの更新処理
 	TextUpdate();
 
-	//�V�[���̍X�V
+	//シーンの更新
 	m_pGameObjectManager->update();
 
 	m_pPhysicsWorld->update();
@@ -255,4 +257,18 @@ void GamePlay::TextUpdate()
 		}
 	}
 
+void GamePlay::ReadRespawnData()
+{
+	CSVReader reader;
+	reader.open("Assets/CSV/respawn.csv");
+
+	for (unsigned int y = 0; y < reader.getRowCount(); y++)
+	{
+		for (unsigned int x = 0; x < reader.getColumnCount(y); x++)
+		{
+			int num = atoi(reader.getData(0, y).c_str());
+			if (m_CurrentStage.y == num)
+				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0));
+		}
+	}
 }
