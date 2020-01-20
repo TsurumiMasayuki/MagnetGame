@@ -181,7 +181,7 @@ void Title::shutdown()
 
 std::string Title::nextScene()
 {
-	return "Entrance";
+	return "Road";
 }
 
 bool Title::isEnd()

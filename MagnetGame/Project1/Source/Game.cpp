@@ -30,6 +30,7 @@
 #include "Def\Screen.h"
 
 #include "Scene\Title.h"
+#include"Scene/Road.h"
 #include "Scene\Entrance.h"
 #include "Scene\GamePlay.h"
 #include "Scene\Ending.h"
@@ -79,7 +80,6 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/op_background.png", "op_background");
 #pragma endregion
 
-
 #pragma region マップ系
 	TextureManager::loadTexture(L"Assets/Textures/n_mag_block.png", "NBlock");
 	TextureManager::loadTexture(L"Assets/Textures/n_block_stop.png", "NBlockStop");
@@ -92,7 +92,6 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/cloud1.png", "cloud1");
 	TextureManager::loadTexture(L"Assets/Textures/cloud2.png", "cloud2");
 #pragma endregion
-
 
 #pragma region テキスト
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
@@ -136,7 +135,6 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check4.png", "check4");
 #pragma endregion
 
-
 #pragma region プレイヤー
 	TextureManager::loadTexture(L"Assets/Textures/Player/player_idle_right.png", "PlayerIdle");
 	TextureManager::loadTexture(L"Assets/Textures/Player/player_run_right.png", "PlayerRun");
@@ -150,11 +148,11 @@ void Game::init()
 	//プレイヤー(何もない状態)
 	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_idle_right_first.png", "FirstIdle");
 	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_run_right_first.png", "FirstRun");
-	//プレイヤー(グローブのみ)
-	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_grobe.png", "GrobeIdle");
+	//プレイヤー(グローブのみ)    
+	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_grobe.png", "GrobeIdle_L");
+	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_right_grobe.png", "GrobeIdle");
 	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_jump_grobe.png", "GrobeJump");
 #pragma endregion
-
 
 #pragma region アイテム
 	TextureManager::loadTexture(L"Assets/Textures/grobe.png", "grobe");
@@ -182,10 +180,11 @@ void Game::init()
 
 	m_pSceneManager = new SceneManager();
 	m_pSceneManager->addScene("Title", new Title());
+	m_pSceneManager->addScene("Road", new Road());
 	m_pSceneManager->addScene("Entrance", new Entrance());
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
-
+  
 	m_pSceneManager->changeScene("GamePlay");
 
 }

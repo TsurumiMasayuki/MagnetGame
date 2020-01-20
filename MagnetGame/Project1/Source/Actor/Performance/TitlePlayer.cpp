@@ -146,6 +146,15 @@ void TitlePlayer::update()
 			x = 0;
 		}
 		break;
+	case 3:
+		if (pos.x >= 640) {
+			m_pMove = false;
+		}
+		else{
+			m_pMove = true;
+		}
+		anim->setAnimation("FirstRun");
+		break;
 	default:
 		break;
 	}

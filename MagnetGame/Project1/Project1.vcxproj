@@ -221,6 +221,7 @@
     <ClCompile Include="Source\Scene\Ending.cpp" />
     <ClCompile Include="Source\Scene\Entrance.cpp" />
     <ClCompile Include="Source\Scene\GamePlay.cpp" />
+    <ClCompile Include="Source\Scene\Road.cpp" />
     <ClCompile Include="Source\Scene\SceneManager.cpp" />
     <ClCompile Include="Source\Component\AbstractComponent.cpp" />
     <ClCompile Include="Source\Component\ComponentManager.cpp" />
@@ -320,6 +321,7 @@
     <ClInclude Include="Source\Scene\Ending.h" />
     <ClInclude Include="Source\Scene\Entrance.h" />
     <ClInclude Include="Source\Scene\GamePlay.h" />
+    <ClInclude Include="Source\Scene\Road.h" />
     <ClInclude Include="Source\Scene\SceneManager.h" />
     <ClInclude Include="Source\Component\AbstractComponent.h" />
     <ClInclude Include="Source\Component\ComponentManager.h" />
