@@ -131,6 +131,86 @@ void EventText::update()
 		state = State::Doctor;
 		break;
 
+	case 30:
+		text->setTextureName("text30");
+		state = State::Doctor;
+		break;
+	case 31:
+		text->setTextureName("text31");
+		state = State::Doctor;
+		break;
+	case 32:
+		text->setTextureName("text32");
+		state = State::Doctor;
+		break;
+	case 33:
+		text->setTextureName("text33");
+		state = State::Doctor;
+		break;
+	case 34:
+		text->setTextureName("text34");
+		state = State::Doctor;
+		break;
+	case 35:
+		text->setTextureName("text35");
+		state = State::Doctor;
+		break;
+	case 36:
+		text->setTextureName("text36");
+		state = State::Doctor;
+		break;
+	case 37:
+		break;
+	case 38:
+		break;
+	case 39:
+		break;
+	case 40:
+		break;
+	case 50:
+		text->setTextureName("text50");
+		state = State::Hero;
+		break;
+	case 51:
+		text->setTextureName("text51");
+		state = State::Doctor;
+		break;
+	case 52:
+		text->setTextureName("text52");
+		state = State::Doctor;
+		break;
+	case 53:
+		text->setTextureName("text53");
+		state = State::Hero;
+		break;
+	case 54:
+		text->setTextureName("text54");
+		state = State::Doctor;
+		break;
+	case 55:
+		text->setTextureName("text55");
+		state = State::Hero;
+		break;
+	case 56:
+		text->setTextureName("text56");
+		state = State::Hero;
+		break;
+	case 57:
+		text->setTextureName("text57");
+		state = State::Doctor;
+		break;
+	case 58:
+		text->setTextureName("text58");
+		state = State::Hero;
+		break;
+	case 59:
+		text->setTextureName("text59");
+		state = State::Doctor;
+		break;
+	case 60:
+		text->setTextureName("text60");
+		state = State::Hero;
+		break;
 	default:
 		break;
 	}

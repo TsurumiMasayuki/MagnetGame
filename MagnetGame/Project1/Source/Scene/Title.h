@@ -16,6 +16,7 @@ class Title_Cloud;
 class Timer;
 class SmokeEffect;
 class Letter;
+class ButtonTex;
 
 class Title :
 	public AbstractScene, IGameMediator {
@@ -57,6 +58,7 @@ private:
 	Timer * smoketimer;
 	SmokeEffect*smokeEffect;
 	Letter*m_pLetter;
+	ButtonTex*m_pButton;
 
 	enum SceneState
 	{
@@ -69,4 +71,5 @@ private:
 
 	bool m_pTitleEndFlag;
 	int Cnt;
+	float Alpha;
 };

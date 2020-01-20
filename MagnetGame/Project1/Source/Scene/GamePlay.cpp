@@ -12,10 +12,12 @@
 
 #include "Device\Input.h"
 #include"Device/GameTime.h"
+#include"Device/SoundManager.h"
 #include "Def\Screen.h"
 #include "Actor\Stage\Stage.h"
 #include"Actor/PauseObject.h"
 #include"Actor/Performance/TitleBackGround.h"
+#include"Actor/Performance/EventText.h"
 
 GamePlay::GamePlay()
 {
@@ -27,7 +29,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1, 1);
+	m_CurrentStage = Vec2(1,11);
 
 	m_pGameObjectManager = new GameObjectManager();
 
@@ -41,21 +43,30 @@ void GamePlay::init()
 	m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
-	m_pBackGround = new TitleBackGround(this,"haikei6");
+	m_pBackGround = new TitleBackGround(this, "haikei6");
 	m_pBackGround->setActive(true);
 
 	m_pPause = new PauseObject(this);
 	m_pPause->setActive(false);
 
+	m_pText = new EventText(this);
+	m_pText->setEventNum(30);
+	m_pText->setActive(false);
+
 	nScene = "Ending";
 
+	NowStageNum = 0;
 	m_GameEndFlag = false;
 }
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R'))
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart())
 	{
+		//ポーズの処理
+		m_pPause->setReStart(false);
+		m_pPause->setActive(false);
+
 		m_pCurrentStage->clear();
 
 		m_pGameObjectManager->update();
@@ -100,8 +111,14 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	//ポーズの処理
+	if (Input::isKeyDown('Q')||m_CurrentStage.y>=12) {
+		m_GameEndFlag = true;
+	}
+
+	//ポーズの更新処理
 	Pause();
+	//テキストの更新処理
+	TextUpdate();
 
 	//シーンの更新
 	m_pGameObjectManager->update();
@@ -117,6 +134,7 @@ void GamePlay::draw()
 
 void GamePlay::shutdown()
 {
+	SoundManager::stopBGM();
 	delete m_pGameObjectManager;
 	delete m_pCurrentStage;
 	delete m_pPhysicsWorld;
@@ -191,18 +209,50 @@ void GamePlay::Pause()
 			m_pPause->setReStart(false);
 		}
 	}
-	else {
-
-		if (m_pPause->getReStart()) {
-			//↓リスタート時の処理を書いて
-
-			m_pPause->setActive(false);
-		}
-	}
 
 	if (m_pPause->IsEnd()) {
 		nScene = "Title";
 		m_GameEndFlag = true;
+	}
+
+}
+
+void GamePlay::TextUpdate()
+{
+	NowStageNum = (int)m_CurrentStage.y;
+	if (m_pPlayer->getPosition().x >= -600) {
+		switch (NowStageNum)
+		{
+		case 4:
+			if (m_pText->getEventNum() <= 33) {
+				GameTime::timeScale = 0.0f;
+				m_pText->setActive(true);
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pText->addEventNum();
+				}
+			}
+			else if (m_pText->getEventNum() > 33) {
+				m_pText->setActive(false);
+				GameTime::timeScale = 1.0f;
+			}
+			break;
+		case 6:
+			if (m_pText->getEventNum() <= 36) {
+				GameTime::timeScale = 0.0f;
+				m_pText->setActive(true);
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pText->addEventNum();
+				}
+			}
+			else if (m_pText->getEventNum() > 36) {
+				m_pText->setActive(false);
+				GameTime::timeScale = 1.0f;
+			}
+			break;
+		default:
+			m_pText->setActive(false);
+			break;
+		}
 	}
 
 }

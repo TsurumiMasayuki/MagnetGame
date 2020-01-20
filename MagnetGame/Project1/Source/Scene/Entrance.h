@@ -49,6 +49,7 @@ private:
 		Move,
 		Small,
 		Talk2,
+		Explain,
 		Move2,
 	};
 	State state;

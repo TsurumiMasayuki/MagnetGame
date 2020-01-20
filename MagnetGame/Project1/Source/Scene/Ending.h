@@ -3,7 +3,10 @@
 #include "Actor\IGameMediator.h"
 
 class GameObjectManager;
-class PauseObject;
+class TitleBackGround;
+class EventText;
+class TitlePlayer;
+class TitleFade;
 
 class Ending :
 	public AbstractScene, IGameMediator {
@@ -32,7 +35,23 @@ private:
 	GameObjectManager*m_pGameObjectManager;
 	PhysicsWorld* m_pPhysicsWorld;
 
-	PauseObject*m_pPause;
+	TitleBackGround*m_pBackGround;
+	EventText*m_pText;
+	TitlePlayer*m_pPlayer;
+	TitleFade*m_pFade;
+
+	enum EndingState
+	{
+		Open,
+		Idle,
+		Talk,
+		Big,
+		Talk2,
+		Move,
+	};
+
+	EndingState eState;
 
 	bool m_pTitleEndFlag;
+	int Cnt;
 };

@@ -1,8 +1,12 @@
 #include "Ending.h"
 #include "Device\Input.h"
 #include "Device\GameTime.h"
+#include"Device/SoundManager.h"
 #include"Actor/GameObjectManager.h"
-#include"Actor/PauseObject.h"
+#include"Actor/Performance/TitleBackGround.h"
+#include"Actor/Performance/EventText.h"
+#include"Actor/Performance/TitlePlayer.h"
+#include"Actor/Performance/TitleFade.h"
 #include "Physics\PhysicsWorld.h"
 
 Ending::Ending()
@@ -18,30 +22,94 @@ void Ending::init()
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
-	m_pPause = new PauseObject(this);
-	m_pPause->setActive(false);
+	m_pBackGround = new TitleBackGround(this, "ending");
 
+	m_pText = new EventText(this);
+	m_pText->setEventNum(50);
+	m_pText->setActive(false);
+
+	m_pPlayer = new TitlePlayer(this);
+	m_pPlayer->setPosition(Vec3(-530,-260,0));
+	m_pPlayer->setNum(4);
+	m_pPlayer->setActive(false);
+
+	m_pFade = new TitleFade(this);
+	m_pFade->setActive(false);
+
+	eState = EndingState::Open;
+	Cnt = 0;
 	m_pTitleEndFlag = false;
 }
 
 void Ending::update()
 {
-	/*if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-		m_pTitleEndFlag = true;
-	}*/
-	if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
-		m_pPause->setActive(true);
-	}
-
-	if (!m_pPause->isActive()) {
-		GameTime::timeScale = 1.0f;
-	}
-	if (m_pPause->IsEnd()) {
-		m_pTitleEndFlag = true;
-	}
-
 	m_pGameObjectManager->update();
 	m_pPhysicsWorld->update();
+
+	float size = 0.5f;
+
+	
+	switch (eState)
+	{
+	case Ending::Open:
+		Cnt++;
+		if (Cnt == 120) {
+			SoundManager::playSE("open");
+			m_pBackGround->setTextureName("ending_open");
+		}
+		if (Cnt >= 180) {
+			eState = EndingState::Idle;
+		}
+		
+		break;
+	case Ending::Idle:
+		m_pPlayer->setActive(true);
+		if (m_pPlayer->getPosition().x >= -300) {
+			eState = EndingState::Talk;
+		}
+		break;
+	case Ending::Talk:
+		m_pText->setActive(true);
+		if (m_pText->getEventNum() <= 55) {
+			m_pText->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pText->addEventNum();
+			}
+		}
+		else if (m_pText->getEventNum() > 55) {
+			m_pText->setActive(false);
+			eState = EndingState::Big;
+		}
+		break;
+	case Ending::Big:
+		m_pPlayer->setSize(Vec3(m_pPlayer->getSize().x + size,
+			m_pPlayer->getSize().y + size,
+			0));
+		m_pPlayer->setPosition(Vec3(m_pPlayer->getPosition().x, m_pPlayer->getPosition().y + size / 2, 0));
+
+		if (m_pPlayer->getSize().x>=160) {
+			eState = EndingState::Talk2;
+		}
+		break;
+	case Ending::Talk2:
+		m_pText->setActive(true);
+		if (m_pText->getEventNum() <= 60) {
+			m_pText->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pText->addEventNum();
+			}
+		}
+		else if (m_pText->getEventNum() > 60) {
+			m_pText->setActive(false);
+			eState = EndingState::Move;
+		}
+		break;
+	case Ending::Move:
+		m_pFade->setActive(true);
+		break;
+	default:
+		break;
+	}
 }
 
 void Ending::draw()
