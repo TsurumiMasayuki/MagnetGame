@@ -179,6 +179,7 @@
     <ClCompile Include="Source\Actor\Performance\ButtonTex.cpp" />
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
     <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
+    <ClCompile Include="Source\Actor\Performance\ExText.cpp" />
     <ClCompile Include="Source\Actor\Performance\Item.cpp" />
     <ClCompile Include="Source\Actor\Performance\Letter.cpp" />
     <ClCompile Include="Source\Actor\Performance\TitleBackGround.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="Source\Actor\Performance\ButtonTex.h" />
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
+    <ClInclude Include="Source\Actor\Performance\ExText.h" />
     <ClInclude Include="Source\Actor\Performance\Item.h" />
     <ClInclude Include="Source\Actor\Performance\Letter.h" />
     <ClInclude Include="Source\Actor\Performance\TitleBackGround.h" />
