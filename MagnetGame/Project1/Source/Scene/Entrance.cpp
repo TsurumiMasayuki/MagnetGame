@@ -8,6 +8,7 @@
 #include"Actor/Performance/TitlePlayer.h"
 #include"Actor/Performance/ButtonTex.h"
 #include"Actor/Performance/Item.h"
+#include"Actor/Performance/ExText.h"
 #include"Device/SoundManager.h"
 
 
@@ -39,6 +40,8 @@ void Entrance::init()
 	m_pItem = new Item(this,"grobe");
 	m_pItem->setPosition(Vec3(10,-267,0));
 
+	m_pExText = new ExText(this, "Mag_Ex");
+	m_pExText->setActive(false);
 
 	state = State::Idle;
 
@@ -128,22 +131,32 @@ void Entrance::update()
 		else if (m_pText->getEventNum() > 21) {
 			m_pText->setActive(false);
 			state = State::Move2;
-			m_pTitlePlayer->setCanMove(true);
 		}
 		if (m_pText->getEventNum() ==21 ) {
 			m_pBackGround->setTextureName("haikei1-2");
 		}
 		break;
 	case Entrance::Move2:
-		if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 440) {
-			m_pButton->setActive(true);
-			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
+
+		if (m_pExText->getStateNum() == 0) {
+			m_pExText->setActive(true);
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-				m_pEntranceEndFlag = true;
+				m_pExText->addStateNum();
+				m_pExText->setActive(false);
+				m_pTitlePlayer->setCanMove(true);
 			}
 		}
 		else {
-			m_pButton->setActive(false);
+			if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 440) {
+				m_pButton->setActive(true);
+				m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pEntranceEndFlag = true;
+				}
+			}
+			else {
+				m_pButton->setActive(false);
+			}
 		}
 		break;
 	default:

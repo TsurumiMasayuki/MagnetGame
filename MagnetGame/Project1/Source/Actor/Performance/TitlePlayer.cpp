@@ -69,7 +69,6 @@ void TitlePlayer::update()
 			m_pMove = true;
 			if (pos.x >= 95)
 			{
-				anim->setAnimation("FirstIdle");
 				if (!isGrobe) {
 					anim->setAnimation("FirstIdle");
 				}
@@ -103,7 +102,6 @@ void TitlePlayer::update()
 		else if(pos.x>-410)
 		{
 			m_pMove = false;
-			anim->setAnimation("FirstIdle");
 			if (!isGrobe) {
 				anim->setAnimation("FirstIdle");
 			}
@@ -118,12 +116,12 @@ void TitlePlayer::update()
 			x = GameInput::getHorizontal();
 
 			if (GameInput::getHorizontal() == 0) {
-				anim->setAnimation("FirstIdle");
 
 				if (!isGrobe) {
 					anim->setAnimation("FirstIdle");
 				}
 				else {
+
 					anim->setAnimation("GrobeIdle");
 				}
 			}
