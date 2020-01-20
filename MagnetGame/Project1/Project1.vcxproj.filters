@@ -92,6 +92,7 @@
     <ClCompile Include="Source\Actor\Effect\SmokeEffect.cpp" />
     <ClCompile Include="Source\Actor\Performance\Letter.cpp" />
     <ClCompile Include="Source\Actor\Performance\ExText.cpp" />
+    <ClCompile Include="Source\Scene\Road.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Source\Actor\Effect\SmokeEffect.h" />
     <ClInclude Include="Source\Actor\Performance\Letter.h" />
     <ClInclude Include="Source\Actor\Performance\ExText.h" />
+    <ClInclude Include="Source\Scene\Road.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
