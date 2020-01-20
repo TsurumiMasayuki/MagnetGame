@@ -30,7 +30,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1,11);
+	m_CurrentStage = Vec2(1, 1);
 
 	m_pGameObjectManager = new GameObjectManager();
 
@@ -113,7 +113,7 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q')||m_CurrentStage.y>=12) {
+	if (Input::isKeyDown('Q') || m_CurrentStage.y >= 12) {
 		m_GameEndFlag = true;
 	}
 
@@ -219,6 +219,23 @@ void GamePlay::Pause()
 
 }
 
+void GamePlay::ReadRespawnData()
+{
+	CSVReader reader;
+	reader.open("Assets/CSV/respawn.csv");
+
+	for (unsigned int y = 0; y < reader.getRowCount(); y++)
+	{
+		for (unsigned int x = 0; x < reader.getColumnCount(y); x++)
+		{
+			int num = atoi(reader.getData(0, y).c_str());
+			if (m_CurrentStage.y == num)
+				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0));
+		}
+	}
+
+}
+
 void GamePlay::TextUpdate()
 {
 	NowStageNum = (int)m_CurrentStage.y;
@@ -256,19 +273,6 @@ void GamePlay::TextUpdate()
 			break;
 		}
 	}
-
-void GamePlay::ReadRespawnData()
-{
-	CSVReader reader;
-	reader.open("Assets/CSV/respawn.csv");
-
-	for (unsigned int y = 0; y < reader.getRowCount(); y++)
-	{
-		for (unsigned int x = 0; x < reader.getColumnCount(y); x++)
-		{
-			int num = atoi(reader.getData(0, y).c_str());
-			if (m_CurrentStage.y == num)
-				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0));
-		}
-	}
 }
+
+

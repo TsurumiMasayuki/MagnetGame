@@ -106,6 +106,9 @@ void Ending::update()
 		break;
 	case Ending::Move:
 		m_pFade->setActive(true);
+		if (m_pFade->getAlpha() >= 5.0f) {
+			m_pTitleEndFlag = true;
+		}
 		break;
 	default:
 		break;
