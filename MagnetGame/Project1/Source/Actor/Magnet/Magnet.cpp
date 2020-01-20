@@ -29,7 +29,7 @@ Magnet::~Magnet()
 
 void Magnet::start()
 {
-	if (!m_IsMagChange)
+	if (!m_IsMove)
 	{
 		auto noMagChangeSprite = new SpriteRenderer(this, 110);
 		noMagChangeSprite->setTextureName("Cross");
@@ -38,12 +38,12 @@ void Magnet::start()
 	}
 
 	m_pSprite = new MultiSpriteRenderer(this, 32);
-	std::string stopTexture = m_IsMove ? "" : "Stop";
+	std::string lockTexture = m_IsMagChange ? "" : "Stop";
 
 	if (m_MagOption == MAGNET_N)
-		m_pSprite->setTextureName("NBlock" + stopTexture);
+		m_pSprite->setTextureName("NBlock" + lockTexture);
 	else
-		m_pSprite->setTextureName("SBlock" + stopTexture);
+		m_pSprite->setTextureName("SBlock" + lockTexture);
 
 	auto collider = new BoxCollider2D(this);
 	collider->isTrigger = false;
@@ -137,12 +137,12 @@ void Magnet::setMagOption(GameObject* pHit)
 		effect->setPosition(effectPos);
 	}
 
-	std::string stopTexture = m_IsMove ? "" : "Stop";
+	std::string lockTexture = m_IsMagChange ? "" : "Stop";
 
 	if (m_MagOption == MAGNET_N)
-		m_pSprite->setTextureName("NBlock" + stopTexture);
+		m_pSprite->setTextureName("NBlock" + lockTexture);
 	else
-		m_pSprite->setTextureName("SBlock" + stopTexture);
+		m_pSprite->setTextureName("SBlock" + lockTexture);
 }
 
 Vec2 Magnet::getVelocity()
@@ -200,7 +200,7 @@ void Magnet::magForceEffect(const Vec2& currentForce, const Vec2& previousForce,
 	{
 		float particleAngle = curSignX > 0 ? 0 : 180;
 
-		auto effect = new LineEffect(m_pGameMediator, 90, particleAngle, 0.2f, getSize().y, 10, effectColor);
+		auto effect = new LineEffect(m_pGameMediator, 90, particleAngle, 0.5f, getSize().y, 20, effectColor);
 		effect->setPosition(getPosition());
 	}
 
@@ -212,7 +212,7 @@ void Magnet::magForceEffect(const Vec2& currentForce, const Vec2& previousForce,
 	{
 		float particleAngle = curSignY > 0 ? 90 : 270;
 
-		auto effect = new LineEffect(m_pGameMediator, 0, particleAngle, 0.2f, getSize().x, 10, effectColor);
+		auto effect = new LineEffect(m_pGameMediator, 0, particleAngle, 0.5f, getSize().x, 20, effectColor);
 		effect->setPosition(getPosition());
 	}
 }
