@@ -22,6 +22,27 @@ void ExText::start()
 
 void ExText::update()
 {
+
+	switch (stateNum)
+	{
+	case 0:
+		name = "Mag_Ex";
+		break;
+	case 1:
+		name = "Punch_Ex";
+		break;
+	case 2:
+		name = "sousa";
+		break;
+	case 3:
+		name = "N_Ex";
+		break;
+	case 4:
+		name = "Jump_Ex";
+		break;
+	default:
+		break;
+	}
 	sprite->setTextureName(name);
 }
 

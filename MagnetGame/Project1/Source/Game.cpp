@@ -63,21 +63,32 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 	TextureManager::loadTexture(L"Assets/Textures/letter.png", "letter");
+	TextureManager::loadTexture(L"Assets/Textures/PushA.png", "PushA");
 
 #pragma region 背景
-	TextureManager::loadTexture(L"Assets/Textures/op_house.png", "op_house");
-	TextureManager::loadTexture(L"Assets/Textures/op_house_open.png", "op_house_open");
-	TextureManager::loadTexture(L"Assets/Textures/op_tree.png", "op_tree");
-	TextureManager::loadTexture(L"Assets/Textures/op_huusya.png", "op_huusya");
-	TextureManager::loadTexture(L"Assets/Textures/haikei1.png", "haikei1-1");
-	TextureManager::loadTexture(L"Assets/Textures/haikei1-2.png", "haikei1-2");
-	TextureManager::loadTexture(L"Assets/Textures/haikei1-3.png", "haikei1-3");
-	TextureManager::loadTexture(L"Assets/Textures/haikei2.png", "haikei2");
-	TextureManager::loadTexture(L"Assets/Textures/haikei3.png", "haikei3");
-	TextureManager::loadTexture(L"Assets/Textures/haikei4.png", "haikei4");
-	TextureManager::loadTexture(L"Assets/Textures/haikei5.png", "haikei5");
-	TextureManager::loadTexture(L"Assets/Textures/haikei6.png", "haikei6");
-	TextureManager::loadTexture(L"Assets/Textures/op_background.png", "op_background");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei1.png", "haikei1-0");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei1-4.png", "haikei1-1");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei1-2.png", "haikei1-2");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei1-3.png", "haikei1-3");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei2.png", "haikei2");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei3.png", "haikei3");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei4.png", "haikei4");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei5.png", "haikei5");
+	TextureManager::loadTexture(L"Assets/Textures/background/haikei6.png", "haikei6");
+	TextureManager::loadTexture(L"Assets/Textures/background/ending.png", "ending");
+	TextureManager::loadTexture(L"Assets/Textures/background/ending_open.png", "ending_open");
+#pragma endregion
+
+#pragma region Opening
+	TextureManager::loadTexture(L"Assets/Textures/opening/op_background.png", "op_background");
+	TextureManager::loadTexture(L"Assets/Textures/opening/op_house.png", "op_house");
+	TextureManager::loadTexture(L"Assets/Textures/opening/op_house_open.png", "op_house_open");
+	TextureManager::loadTexture(L"Assets/Textures/opening/op_tree.png", "op_tree");
+	TextureManager::loadTexture(L"Assets/Textures/opening/op_huusya.png", "op_huusya");
+	TextureManager::loadTexture(L"Assets/Textures/opening/op_hane.png", "hane");
+	TextureManager::loadTexture(L"Assets/Textures/opening/cloud1.png", "cloud1");
+	TextureManager::loadTexture(L"Assets/Textures/opening/cloud2.png", "cloud2");
+	TextureManager::loadTexture(L"Assets/Textures/opening/title.png", "title");
 #pragma endregion
 
 #pragma region マップ系
@@ -87,10 +98,6 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/s_block_stop.png", "SBlockStop");
 	TextureManager::loadTexture(L"Assets/Textures/Cross.png", "Cross");
 	TextureManager::loadTexture(L"Assets/Textures/fieldblock.png", "BlockTest");
-	TextureManager::loadTexture(L"Assets/Textures/title.png", "title");
-	TextureManager::loadTexture(L"Assets/Textures/op_hane.png", "hane");
-	TextureManager::loadTexture(L"Assets/Textures/cloud1.png", "cloud1");
-	TextureManager::loadTexture(L"Assets/Textures/cloud2.png", "cloud2");
 #pragma endregion
 
 #pragma region テキスト
@@ -120,11 +127,32 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text19.png", "text19");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text20.png", "text20");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text21.png", "text21");
+
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text30.png", "text30");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text31.png", "text31");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text32.png", "text32");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text33.png", "text33");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text34.png", "text34");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text35.png", "text35");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text36.png", "text36");
+
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text50.png", "text50");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text51.png", "text51");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text52.png", "text52");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text53.png", "text53");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text54.png", "text54");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text55.png", "text55");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text56.png", "text56");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text57.png", "text57");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text58.png", "text58");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text59.png", "text59");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text60.png", "text60");
 #pragma endregion
 
 #pragma region Pause
 	TextureManager::loadTexture(L"Assets/Textures/Pause/howto.png", "howto");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/pause.png", "pause");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/sousa.png", "sousa");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/Punch_Ex.png", "Punch_Ex");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/Mag_Ex.png", "Mag_Ex");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/N_Ex.png", "N_Ex");
@@ -133,6 +161,11 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check2.png", "check2");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check3.png", "check3");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check4.png", "check4");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check5.png", "check5");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check6.png", "check6");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check7.png", "check7");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check8.png", "check8");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/check9.png", "check9");
 #pragma endregion
 
 #pragma region プレイヤー
@@ -147,7 +180,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Player/player_idle_down.png", "PlayerIdleDown");
 	//プレイヤー(何もない状態)
 	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_idle_right_first.png", "FirstIdle");
-	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_run_right_first.png", "FirstRun");
+	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_run_first_right.png", "FirstRun");
 	//プレイヤー(グローブのみ)    
 	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_grobe.png", "GrobeIdle_L");
 	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_right_grobe.png", "GrobeIdle");
@@ -159,14 +192,13 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/butu.png", "butu");
 #pragma endregion
 
-
-
-	//BGM追加
+#pragma region BGM
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
+#pragma endregion
 
-	//SE追加
+#pragma region SE
 	SoundManager::loadWavFile(L"Assets/Sound/SE/Jump.wav", "jump");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/S_Jump.wav", "S_jump");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/punch.wav", "punch");
@@ -174,6 +206,9 @@ void Game::init()
 	SoundManager::loadWavFile(L"Assets/Sound/SE/bike.wav", "bike");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/kettei.wav", "kettei");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/door.wav", "door");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/open.wav", "open");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/walk.wav", "walk");
+#pragma endregion
 
 	GameDevice::initialize();
 	m_GameEndFlag = false;

@@ -37,10 +37,11 @@ void Entrance::init()
 	m_pButton = new ButtonTex(this);
 	m_pButton->setActive(false);
 
-	m_pItem = new Item(this,"grobe");
-	m_pItem->setPosition(Vec3(10,-267,0));
+	m_pItem = new Item(this, "grobe");
+	m_pItem->setPosition(Vec3(10, -267, 0));
 
 	m_pExText = new ExText(this, "Mag_Ex");
+	m_pExText->setStateNum(0);
 	m_pExText->setActive(false);
 
 	state = State::Idle;
@@ -88,7 +89,7 @@ void Entrance::update()
 	case Entrance::Move:
 		m_pTitlePlayer->setNum(2);
 		m_pTitlePlayer->setCanMove(true);
-		if (m_pTitlePlayer->getPosition().x <= 76 && m_pTitlePlayer->getPosition().x >=-76) {
+		if (m_pTitlePlayer->getPosition().x <= 76 && m_pTitlePlayer->getPosition().x >= -76) {
 			m_pButton->setActive(true);
 			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -100, 0));
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
@@ -104,14 +105,14 @@ void Entrance::update()
 		}
 		break;
 	case Entrance::Small:
-		m_pTitlePlayer->setSize(Vec3(m_pTitlePlayer->getSize().x-size,
-			                         m_pTitlePlayer->getSize().y-size,
-			                         0));
-		m_pTitlePlayer->setPosition(Vec3(m_pTitlePlayer->getPosition().x,m_pTitlePlayer->getPosition().y-(size/2),0));
+		m_pTitlePlayer->setSize(Vec3(m_pTitlePlayer->getSize().x - size,
+			m_pTitlePlayer->getSize().y - size,
+			0));
+		m_pTitlePlayer->setPosition(Vec3(m_pTitlePlayer->getPosition().x, m_pTitlePlayer->getPosition().y - (size / 2), 0));
 
 		if (m_pTitlePlayer->getSize().x <= 64) {
 			state = State::Talk2;
-			
+
 		}
 
 		break;
@@ -130,34 +131,41 @@ void Entrance::update()
 		}
 		else if (m_pText->getEventNum() > 21) {
 			m_pText->setActive(false);
-			state = State::Move2;
+			state = State::Explain;
 		}
-		if (m_pText->getEventNum() ==21 ) {
+		if (m_pText->getEventNum() == 21) {
 			m_pBackGround->setTextureName("haikei1-2");
 		}
 		break;
-	case Entrance::Move2:
+	case Entrance::Explain:
+		m_pExText->setActive(true);
 
-		if (m_pExText->getStateNum() == 0) {
-			m_pExText->setActive(true);
+		if (m_pExText->getStateNum() < 2) {
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 				m_pExText->addStateNum();
-				m_pExText->setActive(false);
-				m_pTitlePlayer->setCanMove(true);
 			}
 		}
 		else {
-			if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 440) {
-				m_pButton->setActive(true);
-				m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-					m_pEntranceEndFlag = true;
-				}
-			}
-			else {
-				m_pButton->setActive(false);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				state = State::Move2;
+				m_pExText->setActive(false);
 			}
 		}
+		break;
+	case Entrance::Move2:
+		m_pTitlePlayer->setCanMove(true);
+
+		if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 440) {
+			m_pButton->setActive(true);
+			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pEntranceEndFlag = true;
+			}
+		}
+		else {
+			m_pButton->setActive(false);
+		}
+
 		break;
 	default:
 		break;

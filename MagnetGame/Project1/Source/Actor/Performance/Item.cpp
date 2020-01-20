@@ -16,6 +16,7 @@ void Item::start()
 	setSize(Vec3(96,96,0));
 	sprite = new SpriteRenderer(this, 101);
 	sprite->setTextureName(name);
+	
 }
 
 void Item::update()
