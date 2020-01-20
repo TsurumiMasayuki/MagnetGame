@@ -63,7 +63,11 @@ void Block::start()
 
 	//タイル用切り抜きを指定
 	auto imageInfo = tileImageCoord[m_TileImageType];
-	sprite->setUVRect(RectF(imageInfo.imageCoord.x, imageInfo.imageCoord.y, UVRectSize.x, UVRectSize.y));
+	if (m_TileImageType != TILE_IMAGE_TYPE::TILE_IMAGE_TYPE_CENTER)
+		sprite->setUVRect(RectF(imageInfo.imageCoord.x, imageInfo.imageCoord.y, UVRectSize.x, UVRectSize.y));
+	else
+		sprite->setUVRect(RectF(1.0f / 5.0f * 4.5f, 0.0f, 0.01f, 0.01f));
+
 	setAngleZ(MathUtility::toRadian(imageInfo.imageRotation));
 
 	if (m_HasCollider)

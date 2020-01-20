@@ -67,7 +67,7 @@ void Title::init()
 	smoketimer = new Timer(1);
 	
 	title_cloud = new Title_Cloud(this);
-	title_cloud->Cleate(0.1f, 30, 0, 2);
+	title_cloud->Cleate(32, 30, 0, 2);
 
 	smokeEffect = new SmokeEffect(this);
 	smokeEffect->Cleate(Vec3(-310, 100, 0),3,0.5f,2);
@@ -158,7 +158,7 @@ void Title::update()
 	timer->update();
 	smoketimer->update();
 	if (timer->isTime()) {
-		title_cloud->Cleate(0.1f, 30, 0, 2);
+		title_cloud->Cleate(32.0f, 30, 0, 2);
 		timer->reset();
 	}
 	if (smoketimer->isTime()) {

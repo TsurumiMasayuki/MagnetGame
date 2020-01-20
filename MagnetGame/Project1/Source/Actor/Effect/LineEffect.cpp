@@ -27,8 +27,8 @@ void LineEffect::start()
 	Vec3 linePosR = getPosition() + particlePos;
 	Vec3 linePosL = getPosition() - particlePos;
 
-	new Particle("BoxFill", linePosR, 8, 8, 16, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
-	new Particle("BoxFill", linePosL, 8, 8, 16, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
+	new Particle("BoxFill", linePosR, 8, 8, 64, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
+	new Particle("BoxFill", linePosL, 8, 8, 64, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
 
 	m_ParticleCount += 2;
 }
@@ -48,8 +48,8 @@ void LineEffect::update()
 	Vec3 linePosR = getPosition() + particlePos;
 	Vec3 linePosL = getPosition() - particlePos;
 
-	new Particle("BoxFill", linePosR, 8, 8, 16, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
-	new Particle("BoxFill", linePosL, 8, 8, 16, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
+	new Particle("BoxFill", linePosR, 8, 8, 64, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
+	new Particle("BoxFill", linePosL, 8, 8, 64, m_ParticleAngle, 0.3f, 0, m_Color, m_pGameMediator);
 
 	m_ParticleCount += 2;
 }
