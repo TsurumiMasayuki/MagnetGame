@@ -32,7 +32,7 @@ void Particle::start()
 {
 	setSize(Vec3(size_x, size_y, 0));
 
-	auto sprite = new SpriteRenderer(this, 97);
+	auto sprite = new SpriteRenderer(this, 101);
 	sprite->setTextureName(name);
 	sprite->setColor(color);
 
@@ -46,8 +46,8 @@ void Particle::start()
 
 void Particle::update()
 {
-	x += cos(angle) * speed;
-	y += sin(angle) * speed;
+	x = cos(angle) * speed;
+	y = sin(angle) * speed;
 	Vec3 move(x, y, 0);
 	setPosition(getPosition() + move * GameTime::getDeltaTime());
 

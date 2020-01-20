@@ -59,7 +59,6 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/superjumpeffect.png", "superjumpeffect");
 	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
-	TextureManager::loadTexture(L"Assets/Textures/BlockTest.png", "BlockTest");
 	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 	TextureManager::loadTexture(L"Assets/Textures/letter.png", "letter");
@@ -187,7 +186,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
 
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("GamePlay");
 
 }
 
