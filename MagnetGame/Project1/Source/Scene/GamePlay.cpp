@@ -12,6 +12,7 @@
 
 #include "Device\Input.h"
 #include"Device/GameTime.h"
+#include "Device\File\CSVReader.h"
 #include "Def\Screen.h"
 #include "Actor\Stage\Stage.h"
 #include"Actor/PauseObject.h"
@@ -41,7 +42,7 @@ void GamePlay::init()
 	m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 	m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
-	m_pBackGround = new TitleBackGround(this,"haikei6");
+	m_pBackGround = new TitleBackGround(this, "haikei6");
 	m_pBackGround->setActive(true);
 
 	m_pPause = new PauseObject(this);
@@ -66,6 +67,7 @@ void GamePlay::update()
 		m_pCurrentStage->setPosition(Vec3(40 * 32 / -2, 23 * 32 / 2, 0));
 		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
+		ReadRespawnData();
 		m_pPlayer->Respawn();
 	}
 
@@ -205,4 +207,20 @@ void GamePlay::Pause()
 		m_GameEndFlag = true;
 	}
 
+}
+
+void GamePlay::ReadRespawnData()
+{
+	CSVReader reader;
+	reader.open("Assets/CSV/respawn.csv");
+
+	for (unsigned int y = 0; y < reader.getRowCount(); y++)
+	{
+		for (unsigned int x = 0; x < reader.getColumnCount(y); x++)
+		{
+			int num = atoi(reader.getData(0, y).c_str());
+			if (m_CurrentStage.y == num)
+				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0));
+		}
+	}
 }
