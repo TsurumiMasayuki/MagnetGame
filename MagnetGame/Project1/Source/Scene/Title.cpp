@@ -64,14 +64,19 @@ void Title::init()
 
 	m_pTitleEndFlag = false;
 
-	timer = new Timer(3);
+	timer = new Timer(6);
 	smoketimer = new Timer(1);
 	
 	title_cloud = new Title_Cloud(this);
-	title_cloud->Cleate(32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(-400,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(-800,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(0,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(400,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(200,200,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(600,250,0),32, 30, 0, 2);
 
 	smokeEffect = new SmokeEffect(this);
-	smokeEffect->Cleate(Vec3(-310, 100, 0),3,0.5f,2);
+	smokeEffect->Cleate(Vec3(-310, 100, 0),100,0.5f,2);
 
 	m_pLetter = new Letter(this);
 	m_pLetter->setPosition(Vec3(105,-120,0));
@@ -171,7 +176,7 @@ void Title::update()
 		timer->reset();
 	}
 	if (smoketimer->isTime()) {
-		smokeEffect->Cleate(Vec3(-310, 100, 0), 3, 0.5f, 2);
+		smokeEffect->Cleate(Vec3(-310, 100, 0), 100, 0.5f, 2);
 		smoketimer->reset();
 	}
 }
