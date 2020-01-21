@@ -30,7 +30,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1, 200);
+	m_CurrentStage = Vec2(1,105);
 
 	m_pGameObjectManager = new GameObjectManager();
 
@@ -113,7 +113,7 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q') || m_CurrentStage.y >= 12) {
+	if (Input::isKeyDown('Q') || m_CurrentStage.y == 12) {
 		m_GameEndFlag = true;
 	}
 
@@ -256,16 +256,18 @@ void GamePlay::TextUpdate()
 			}
 			break;
 		case 6:
-			if (m_pText->getEventNum() <= 36) {
-				GameTime::timeScale = 0.0f;
-				m_pText->setActive(true);
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-					m_pText->addEventNum();
+			if (m_pPlayer->isSuperJump) {
+				if (m_pText->getEventNum() <= 36) {
+					GameTime::timeScale = 0.0f;
+					m_pText->setActive(true);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+						m_pText->addEventNum();
+					}
 				}
-			}
-			else if (m_pText->getEventNum() > 36) {
-				m_pText->setActive(false);
-				GameTime::timeScale = 1.0f;
+				else if (m_pText->getEventNum() > 36) {
+					m_pText->setActive(false);
+					GameTime::timeScale = 1.0f;
+				}
 			}
 			break;
 		default:

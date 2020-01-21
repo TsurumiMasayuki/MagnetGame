@@ -39,6 +39,8 @@ void Ending::init()
 	eState = EndingState::Open;
 	Cnt = 0;
 	m_pTitleEndFlag = false;
+
+	SoundManager::playBGM("ending");
 }
 
 void Ending::update()
@@ -121,6 +123,7 @@ void Ending::draw()
 
 void Ending::shutdown()
 {
+	SoundManager::stopBGM();
 	GameTime::timeScale = 1.0f;
 	delete m_pGameObjectManager;
 	delete m_pPhysicsWorld;

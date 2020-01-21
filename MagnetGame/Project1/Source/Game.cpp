@@ -196,6 +196,7 @@ void Game::init()
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/ending.wav", "ending");
 #pragma endregion
 
 #pragma region SE
@@ -220,7 +221,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
   
-	m_pSceneManager->changeScene("Ending");
+	m_pSceneManager->changeScene("GamePlay");
 
 }
 
