@@ -131,6 +131,7 @@ bool Player::canSuperJump()
 
 bool Player::isSandwich()
 {
+	if (m_pDetectMid == nullptr)return false;
 	return m_pDetectMid->isDetect();
 }
 
