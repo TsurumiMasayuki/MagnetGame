@@ -37,7 +37,7 @@ void GamePlay::init()
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	m_pPlayer = new Player(this);
-	m_pPlayer->SetRespawnPoint(Vec3(-450, 250, 0));
+	ReadRespawnData();
 	m_pPlayer->Respawn();
 
 	m_pCurrentStage = new Stage(this, 32, 32);
@@ -230,7 +230,7 @@ void GamePlay::ReadRespawnData()
 		{
 			int num = atoi(reader.getData(0, y).c_str());
 			if (m_CurrentStage.y == num)
-				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0));
+				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0) * 32);
 		}
 	}
 
