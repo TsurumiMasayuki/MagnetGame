@@ -7,6 +7,7 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
+#include "Actor\Player\PlayerState_Respawn.h"
 
 #include "PlayerState_Default.h"
 #include "Device\GameInput.h"
@@ -16,7 +17,7 @@
 const float Player::MOVE_SPEED = 256.0;
 
 Player::Player(IGameMediator * pMediator)
-	: GameObject(pMediator), isSuperJump(false), isFlipX(false)
+	: GameObject(pMediator), isSuperJump(false), isFlipX(false), m_IsRestart(false)
 {
 	m_pStateManager = new StateManager();
 }
@@ -79,8 +80,11 @@ void Player::update()
 
 	setMagChange();
 
-	if (isSandwich())
-		Respawn();
+	if (isSandwich() && !m_IsRestart)
+	{
+		m_pStateManager->setState(new PlayerState_Respawn(this));
+		m_IsRestart = true;
+	}
 }
 
 void Player::onDestroy()
@@ -137,7 +141,9 @@ bool Player::isSandwich()
 void Player::Respawn()
 {
 	setPosition(m_RespawnPoint);
-	m_pStateManager->setState(new PlayerState_Default(this));
+	m_pStateManager->forceSetState(new PlayerState_Default(this));
+
+	m_IsRestart = false;
 
 	if (m_pAnimRenderer != nullptr)
 	{
