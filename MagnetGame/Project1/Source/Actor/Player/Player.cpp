@@ -181,12 +181,12 @@ void Player::initMagChange()
 	m_pMagChange->setActive(false);
 	m_pMagChange->setSize(Vec3(64, 64, 0));
 
-	//#ifdef _DEBUG
-		//デバッグ用範囲描画
+#ifdef _DEBUG
+	//デバッグ用範囲描画
 	auto sprite = new SpriteRenderer(m_pMagChange, 90);
 	sprite->setTextureName("BoxFill");
 	sprite->setColor(Color(0, 0, 1, 1.0f));
-	//#endif
+#endif
 
 	m_pMagCollider = new BoxCollider2D(m_pMagChange);
 	m_pMagCollider->isTrigger = true;
