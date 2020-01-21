@@ -7,5 +7,5 @@ public:
 	Boots(IGameMediator* pGameMediator);
 
 	virtual void start() override;
-	virtual void onCollisionEnter(GameObject* pHit) override;
+	virtual void onCollisionStay(GameObject* pHit) override;
 };

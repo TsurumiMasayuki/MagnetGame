@@ -106,10 +106,10 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 	StringUtility::split(data, '|', split);
 
 	float speed = 1.0f;
-	//‘¬“x‚Ìİ’è‚ª‚ ‚é‚©‚Ç‚¤‚©
+	//é€Ÿåº¦ã®è¨­å®šãŒã‚ã‚‹ã‹ã©ã†ã‹
 	if (split.size() > 2)
 	{
-		//‘¬“x‚ğæ“¾
+		//é€Ÿåº¦ã‚’å–å¾—
 		speed = strtof(split.at(2).c_str(), nullptr);
 	}
 
@@ -117,14 +117,14 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 		object = new ObjN(m_pGameMediator, 0, speed);
 	else if (split.at(1) == "L")
 		object = new ObjN(m_pGameMediator, 1, speed);
-	else if (split.at(0) == "B")
+	else if (split.at(1) == "B")
 		object = new Boots(m_pGameMediator);
 
 	if (object != nullptr)
 	{
 		object->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
 
-		//ŠÇ——p‚ÉTileƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+		//ç®¡ç†ç”¨ã«Tileã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
 		auto tile = new Tile(object);
 	}
 }
@@ -153,7 +153,7 @@ void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int
 	{
 		object->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
 
-		//ŠÇ——p‚ÉTileƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+		//ç®¡ç†ç”¨ã«Tileã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
 		auto tile = new Tile(object);
 	}
 }
@@ -217,7 +217,7 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 	{
 		object->setPosition(position);
 
-		//ŠÇ——p‚ÉTileƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+		//ç®¡ç†ç”¨ã«Tileã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
 		auto tile = new Tile(object);
 	}
 }

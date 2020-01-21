@@ -194,7 +194,7 @@ void Game::init()
 
 #pragma region アイテム
 	TextureManager::loadTexture(L"Assets/Textures/glove.png", "grobe");
-	TextureManager::loadTexture(L"Assets/Textures/boots.png", "butu");
+	TextureManager::loadTexture(L"Assets/Textures/boots.png", "boots");
 #pragma endregion
 
 #pragma region BGM
