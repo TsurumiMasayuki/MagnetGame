@@ -17,7 +17,7 @@
 const float Player::MOVE_SPEED = 256.0;
 
 Player::Player(IGameMediator * pMediator)
-	: GameObject(pMediator), isSuperJump(false), isFlipX(false), m_IsRestart(false)
+	: GameObject(pMediator), isSuperJump(true), isFlipX(false), m_IsRestart(false)
 {
 	m_pStateManager = new StateManager();
 }

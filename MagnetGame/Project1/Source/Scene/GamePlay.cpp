@@ -114,7 +114,7 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q') || m_CurrentStage.y == 12) {
+	if (Input::isKeyDown('Q') || m_CurrentStage.y == 17) {
 		m_GameEndFlag = true;
 	}
 
