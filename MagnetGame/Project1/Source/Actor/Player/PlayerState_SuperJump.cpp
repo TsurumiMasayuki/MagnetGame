@@ -14,7 +14,7 @@ const float PlayerState_SuperJump::MAX_JUMP_FORCE = 896.0f;
 PlayerState_SuperJump::PlayerState_SuperJump(Player* pPlayer)
 	: m_pPlayer(pPlayer), m_pGravity(pPlayer->getGravity())
 {
-	SoundManager::playSE("S_jump",0);
+	SoundManager::playSE("S_jump", 0);
 	superJumpEffect = new SuperJumpEffect(pPlayer->getGameMediator());
 	superJumpEffect->Cleate(pPlayer->getPosition(), 2, 3, 20);
 	delete superJumpEffect;
@@ -27,7 +27,7 @@ void PlayerState_SuperJump::update()
 void PlayerState_SuperJump::onStateEnter()
 {
 	m_pPlayer->SetJumpForce(MAX_JUMP_FORCE);
-	m_pPlayer->setAnimation("SJump");
+	m_pPlayer->setAnimation("GBSJump");
 }
 
 void PlayerState_SuperJump::onStateExit()
