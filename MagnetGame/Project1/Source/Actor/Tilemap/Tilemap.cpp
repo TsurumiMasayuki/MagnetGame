@@ -105,10 +105,18 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 	std::vector<std::string> split;
 	StringUtility::split(data, '|', split);
 
+	float speed = 1.0f;
+	//‘¬“x‚ÌÝ’è‚ª‚ ‚é‚©‚Ç‚¤‚©
+	if (split.size() > 2)
+	{
+		//‘¬“x‚ðŽæ“¾
+		speed = strtof(split.at(2).c_str(), nullptr);
+	}
+
 	if (split.at(1) == "R")
-		object = new ObjN(m_pGameMediator, 0);
+		object = new ObjN(m_pGameMediator, 0, speed);
 	else if (split.at(1) == "L")
-		object = new ObjN(m_pGameMediator, 1);
+		object = new ObjN(m_pGameMediator, 1, speed);
 	else if (split.at(0) == "B")
 		object = new Boots(m_pGameMediator);
 

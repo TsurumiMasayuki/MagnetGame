@@ -6,11 +6,11 @@ class Gravity;
 class DetectHelper;
 class AnimSpriteRenderer;
 
-class ObjN:
+class ObjN :
 	public GameObject
 {
 public:
-	ObjN(IGameMediator* nMediator,int dir);
+	ObjN(IGameMediator* nMediator, int dir, float speedModifier);
 	~ObjN();
 
 	virtual void start() override;
@@ -41,6 +41,7 @@ private:
 
 	static const float MOVE_SPEED;
 
+	float m_SpeedModifier;
 	int direction;
 	float x;
 };
