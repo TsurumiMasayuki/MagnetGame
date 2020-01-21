@@ -201,6 +201,7 @@ void Game::init()
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/ending.wav", "ending");
 #pragma endregion
 
 #pragma region SE
