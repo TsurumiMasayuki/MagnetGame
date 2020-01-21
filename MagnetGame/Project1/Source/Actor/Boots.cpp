@@ -3,9 +3,8 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\SpriteRenderer.h"
 
-Boots::Boots(IGameMediator * pGameMediator, Player * pPlayer) :
-	GameObject(pGameMediator),
-	m_pPlayer(pPlayer)
+Boots::Boots(IGameMediator * pGameMediator) :
+	GameObject(pGameMediator)
 {
 }
 
@@ -26,6 +25,6 @@ void Boots::start()
 void Boots::onCollisionEnter(GameObject * pHit)
 {
 	if (pHit->getTag() != "Player")return;
-	m_pPlayer->isSuperJump = true;
+	((Player*)pHit)->isSuperJump = true;
 	this->setActive(false);
 }
