@@ -134,7 +134,7 @@ void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int
 	TILE_IMAGE_TYPE imageType;
 
 	if (!hasCollider)
-		imageType = TILE_IMAGE_TYPE_CENTER;
+		imageType = getImageTypeDiag(reader, x, y);
 	else
 		imageType = getImageType(isUpExist, isDownExist, isRightExist, isLeftExist);
 
@@ -270,6 +270,34 @@ TILE_IMAGE_TYPE Tilemap::getImageType(bool isUpExist, bool isDownExist, bool isR
 	else if (!isUpExist && !isDownExist &&
 		isLeftExist && isRightExist)
 		imageType = TILE_IMAGE_TYPE_RIGHTCOLUMN;
+
+	return imageType;
+}
+
+TILE_IMAGE_TYPE Tilemap::getImageTypeDiag(CSVReader& reader, unsigned int x, unsigned int y)
+{
+	bool isUpLeftExist = reader.getDataClampIndex(x - 1, y - 1) == "1";
+	bool isUpRightExist = reader.getDataClampIndex(x + 1, y - 1) == "1";
+	bool isDownLeftExist = reader.getDataClampIndex(x - 1, y + 1) == "1";
+	bool isDownRightExist = reader.getDataClampIndex(x + 1, y + 1) == "1";
+
+	TILE_IMAGE_TYPE imageType = TILE_IMAGE_TYPE_CENTER;
+	
+	if (!isUpLeftExist && isUpRightExist &&
+		isDownLeftExist && isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVUPLEFT;
+
+	else if (isUpLeftExist && !isUpRightExist &&
+		isDownLeftExist && isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVUPRIGHT;
+
+	else if (isUpLeftExist && isUpRightExist &&
+		!isDownLeftExist && isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVDOWNLEFT;
+
+	else if (isUpLeftExist && isUpRightExist &&
+		isDownLeftExist && !isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVDOWNRIGHT;
 
 	return imageType;
 }

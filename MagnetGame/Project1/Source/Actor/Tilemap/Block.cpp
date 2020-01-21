@@ -7,7 +7,7 @@
 
 const Vec2 UVRectSize(1.0f / 5.0f, 1);
 
-const ImageInfo Block::tileImageCoord[18] =
+const ImageInfo Block::tileImageCoord[22] =
 {
 	//デフォルト
 	{ Vec2(0.0f, 0.0f),				0.0f },
@@ -24,6 +24,12 @@ const ImageInfo Block::tileImageCoord[18] =
 	{ Vec2(1.0f / 5.0f * 1, 0.0f), 180.0f}, //右下
 	{ Vec2(1.0f / 5.0f * 1, 0.0f),  90.0f}, //左下
 
+	//内角
+	{ Vec2(1.0f / 5.0f * 4, 0.0f),  270.0f},	//逆右上
+	{ Vec2(1.0f / 5.0f * 4, 0.0f),    0.0f},	//逆左上
+	{ Vec2(1.0f / 5.0f * 4, 0.0f),  180.0f},	//逆右下
+	{ Vec2(1.0f / 5.0f * 4, 0.0f),   90.0f},	//逆左下
+
 	//コの字					   
 	{ Vec2(1.0f / 5.0f * 2, 0.0f),   0.0f},	//上
 	{ Vec2(1.0f / 5.0f * 2, 0.0f), 180.0f},	//下
@@ -37,7 +43,7 @@ const ImageInfo Block::tileImageCoord[18] =
 	{ Vec2(1.0f / 5.0f * 3, 0.0f),  90.0f}, //左
 
 	//中心					  	  
-	{ Vec2(1.0f / 5.0f * 4, 0.0f), 0.0f},
+	{ Vec2(1.0f / 5.0f * 4.5, 0.0f), 0.0f},
 };
 
 Block::Block(IGameMediator* pGameMediator, std::string textureName, float width, float height, TILE_IMAGE_TYPE tileImageType, bool hasCollider)
