@@ -8,6 +8,7 @@ class Title_Cloud {
 public:
 	Title_Cloud(IGameMediator* pMediator);
 	void Cleate(float speed, float duration, float shrinkRate, float amount);
+	void Cleate2(Vec3 pos,float speed, float duration, float shrinkRate, float amount);
 
 	Particle* particle;
 
