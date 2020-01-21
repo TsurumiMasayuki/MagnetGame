@@ -11,6 +11,7 @@
 #include "Actor/Performance/TitleHane.h"
 #include "Actor/Performance/Title_Sprite.h"
 #include"Actor/Performance/Letter.h"
+#include"Actor/Performance/ButtonTex.h"
 #include "Actor/Effect/Title_Cloud.h"
 #include"Device/SoundManager.h"
 #include "Utility/Timer.h"
@@ -76,19 +77,27 @@ void Title::init()
 	m_pLetter->setPosition(Vec3(105,-120,0));
 	m_pLetter->setActive(false);
 
+	m_pButton = new ButtonTex(this);
+	m_pButton->setTextureName("PushA");
+
 	Cnt = 0;
+	Alpha = 0;
 	SoundManager::playBGM("wind");
 }
 
 void Title::update()
 {
-
+	m_pButton->setSize(Vec3(1280, 800, 0));
+	m_pButton->setTextureName("PushA");
 	switch (sState)
 	{
 	case Title::Idle:
+		Alpha += 0.06f;
+		m_pButton->setAlpha(cos(Alpha)+sin(Alpha));
 		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 			sState = SceneState::Delivery;
 			m_pTitleLogo->setFade(true);
+			m_pButton->setActive(false);
 		}
 		break;
 	case Title::Delivery:
@@ -181,7 +190,7 @@ void Title::shutdown()
 
 std::string Title::nextScene()
 {
-	return "Entrance";
+	return "Road";
 }
 
 bool Title::isEnd()

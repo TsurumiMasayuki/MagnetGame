@@ -27,6 +27,13 @@ private:
 	float prevY,currentY;
 
 	bool isEndFlag;
+	enum PauseState
+	{
+		Pause,
+		HowTo,
+		None
+	};
+	PauseState pState;
 public:
 	void setNum(int value);
 	void setPause(bool value);

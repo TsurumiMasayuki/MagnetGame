@@ -17,4 +17,9 @@ public:
 private:
 	SpriteRenderer*sprite;
 
+	std::string name;
+	float alpha;
+public:
+	void setTextureName(std::string TextureName);
+	void setAlpha(float value);
 };

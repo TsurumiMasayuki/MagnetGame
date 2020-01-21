@@ -7,15 +7,16 @@ PauseObject::PauseObject(IGameMediator * pMediator)
 	:GameObject(pMediator)
 {
 	setSize(Vec3(1280, 720, 0));
-	sprite = new SpriteRenderer(this, 101);
+	sprite = new SpriteRenderer(this, 148);
 	sprite->setTextureName("pause");
 
-	check = new SpriteRenderer(this, 102);
+	check = new SpriteRenderer(this, 149);
 	check->setTextureName("check");
 
-	back = new SpriteRenderer(this, 103);
+	back = new SpriteRenderer(this, 150);
 	back->setTextureName("Back");
 	
+	pState = PauseState::Pause;
 
 	checkNum = 0;
 	pNum = 0;
@@ -55,12 +56,17 @@ void PauseObject::update()
 					//リスタート
 					isReStart = true;
 					break;
-				case 2:
+				case 2://ルール
+					pState = PauseState::HowTo;
 					pNum = 1;
 					checkNum = 0;
 					selectNum = 2;
 					break;
-				case 3:
+				case 3://ソウサ
+					//sprite->setTextureName("");
+					pNum = 6;
+					break;
+				case 4://タイトルへ
 					setActive(false);
 					isEndFlag = true;
 					break;
@@ -91,6 +97,7 @@ void PauseObject::update()
 				pNum = 0;
 				checkNum = 0;
 				selectNum = 2;
+				pState = PauseState::Pause;
 			}
 			break;
 		case 2:
@@ -129,23 +136,57 @@ void PauseObject::update()
 				selectNum = 2;
 			}
 			break;
+		case 6:
+			sprite->setTextureName("sousa");
+			check->setActive(false);
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				pNum = 0;
+				checkNum = 0;
+				selectNum = 2;
+				pState = PauseState::Pause;
+			}
+			break;
 		}
-		switch (checkNum)
-		{
-		case 0:
-			check->setTextureName("check");
-			break;
-		case 1:
-			check->setTextureName("check2");
-			break;
-		case 2:
-			check->setTextureName("check3");
-			break;
-		case 3:
-			check->setTextureName("check4");
-			break;
-		default:
-			break;
+		if (pState == PauseState::Pause) {
+			switch (checkNum)
+			{
+			case 0:
+				check->setTextureName("check");
+				break;
+			case 1:
+				check->setTextureName("check2");
+				break;
+			case 2:
+				check->setTextureName("check3");
+				break;
+			case 3:
+				check->setTextureName("check4");
+				break;
+			case 4:
+				check->setTextureName("check5");
+				break;
+			default:
+				break;
+			}
+		}
+		if(pState==PauseState::HowTo){
+			switch (checkNum)
+			{
+			case 0:
+				check->setTextureName("check6");
+				break;
+			case 1:
+				check->setTextureName("check7");
+				break;
+			case 2:
+				check->setTextureName("check8");
+				break;
+			case 3:
+				check->setTextureName("check9");
+				break;
+			default:
+				break;
+			}
 		}
 #pragma region パッド処理
 		currentY = Input::getLStickValue().y;
@@ -174,16 +215,33 @@ void PauseObject::update()
 		}
 #pragma endregion
 
+		switch (pState)
+		{
+		case PauseObject::Pause:
+			if (checkNum < 0) {
+				checkNum = 4;
+			}
+			else if (checkNum > 4) {
+				checkNum = 0;
+			}
+			break;
+		case PauseObject::HowTo:
+			if (checkNum < 0) {
+				checkNum = 3;
+			}
+			else if (checkNum > 3) {
+				checkNum = 0;
+			}
+			break;
+		case PauseObject::None:
+			break;
+		default:
+			break;
+		}
 
 
 		prevY = currentY;
 
-		if (checkNum < 0) {
-			checkNum = 3;
-		}
-		else if (checkNum > 3) {
-			checkNum = 0;
-		}
 	}
 }
 

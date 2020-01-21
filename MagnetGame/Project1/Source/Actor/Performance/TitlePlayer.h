@@ -20,6 +20,12 @@ public:
 
 	void initAnimations();
 
+	
+	bool IsEnd();
+	bool isFlipX;
+private:
+	AnimSpriteRenderer*anim;
+	
 	enum State
 	{
 		Alpha = 0,
@@ -29,10 +35,14 @@ public:
 		Move2,
 	};
 	State state;
-	bool IsEnd();
-	bool isFlipX;
-private:
-	AnimSpriteRenderer*anim;
+
+	enum EndingState {
+		eAlpha,
+		eMove,
+		eIdle,
+
+	};
+	EndingState eState;
 
 	static const float MOVE_SPEED;
 	bool isEndFlag;
@@ -41,8 +51,10 @@ private:
 	bool isGrobe;
 	float a;
 	bool go;
-	int Num; 
+	int Num;
+	int seCnt;
 	float x;
+	float y;
 
 public:
 	void setIsGo(bool value);

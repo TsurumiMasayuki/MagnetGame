@@ -8,6 +8,7 @@ class Player;
 class Stage;
 class PauseObject;
 class TitleBackGround;
+class EventText;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -39,8 +40,8 @@ private:
 	Player* m_pPlayer;
 	TitleBackGround*m_pBackGround;
 	PauseObject*m_pPause;
+	EventText*m_pText;
 
-	void Pause();
 
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
@@ -48,4 +49,11 @@ private:
 	Stage* m_pCurrentStage;
 
 	std::string nScene;
+
+	int NowStageNum;
+
+private:
+	void TextUpdate();
+	void Pause();
+	void ReadRespawnData();
 };
