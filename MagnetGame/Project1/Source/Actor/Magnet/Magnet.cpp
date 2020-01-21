@@ -174,7 +174,7 @@ void Magnet::readMagMap()
 	curNForce = m_pNMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * nModifier;
 	curSForce = m_pSMapRead->getForce(getPosition().toVec2(), getSize().toVec2()) * sModifier;
 
-	m_Velocity = (curNForce + curSForce) * MAG_MOVE_SPEED * GameTime::getDeltaTime();
+	m_Velocity = (curNForce + curSForce).normalized() * MAG_MOVE_SPEED * GameTime::getDeltaTime();
 
 	setPosition(getPosition() + m_Velocity.toVec3());
 
