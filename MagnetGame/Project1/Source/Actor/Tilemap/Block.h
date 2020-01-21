@@ -20,5 +20,5 @@ private:
 	std::string m_TextureName;
 	TILE_IMAGE_TYPE m_TileImageType;
 
-	const static ImageInfo tileImageCoord[18];
+	const static ImageInfo tileImageCoord[22];
 };

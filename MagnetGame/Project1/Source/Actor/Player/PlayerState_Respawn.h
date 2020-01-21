@@ -8,6 +8,7 @@ class PlayerState_Respawn
 {
 public:
 	PlayerState_Respawn(Player* pPlayer);
+	~PlayerState_Respawn();
 
 	virtual void update() override;
 	virtual void onStateEnter() override;

@@ -35,6 +35,7 @@ private:
 	void spawnMultiBlock(CSVReader& reader, std::vector<std::string>& groupList, unsigned int x, unsigned int y);
 
 	TILE_IMAGE_TYPE getImageType(bool isUpExist, bool isDownExist, bool isRightExist, bool isLeftExist);
+	TILE_IMAGE_TYPE getImageTypeDiag(CSVReader& reader, unsigned int x, unsigned int y);
 
 private:
 	unsigned int m_Column;

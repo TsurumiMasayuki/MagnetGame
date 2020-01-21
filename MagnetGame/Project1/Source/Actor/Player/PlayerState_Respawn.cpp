@@ -10,6 +10,11 @@ PlayerState_Respawn::PlayerState_Respawn(Player * pPlayer)
 {
 }
 
+PlayerState_Respawn::~PlayerState_Respawn()
+{
+	GameTime::timeScale = 1.0f;
+}
+
 void PlayerState_Respawn::update()
 {
 	m_UnscaledTime += GameTime::getUnscaledDeltaTime();
