@@ -109,7 +109,7 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 		object = new ObjN(m_pGameMediator, 0);
 	else if (split.at(1) == "L")
 		object = new ObjN(m_pGameMediator, 1);
-	else if (split.at(0) == "B")
+	else if (split.at(1) == "B")
 		object = new Boots(m_pGameMediator);
 
 	if (object != nullptr)

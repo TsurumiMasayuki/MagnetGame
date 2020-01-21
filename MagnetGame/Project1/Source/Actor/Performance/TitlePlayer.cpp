@@ -136,7 +136,12 @@ void TitlePlayer::update()
 				}
 			}
 			else {
-				anim->setAnimation("FirstRun");
+				if (!isGrobe) {
+					anim->setAnimation("FirstRun");
+				}
+				else {
+					anim->setAnimation("GrobeRun");
+				}
 				seCnt++;
 				if (seCnt % 45 == 0) {
 					seCnt = 0;
@@ -222,7 +227,8 @@ void TitlePlayer::initAnimations()
 	anim = new AnimSpriteRenderer(this);
 	anim->addAnimation("FirstIdle", new SpriteAnimation("FirstIdle", 160, 32, 0.1f, 5));
 	anim->addAnimation("FirstRun", new SpriteAnimation("FirstRun", 256, 32, 0.08f, 8));
-	anim->addAnimation("GrobeIdle", new SpriteAnimation("GrobeIdle",160,32,0.1f,5));
+	anim->addAnimation("GrobeIdle", new SpriteAnimation("GloveIdle",160,32,0.1f,5));
+	anim->addAnimation("GrobeRun", new SpriteAnimation("GloveRun", 256, 32, 0.08f, 8));
 	anim->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
 	anim->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
 	anim->setAnimation("FirstIdle");
