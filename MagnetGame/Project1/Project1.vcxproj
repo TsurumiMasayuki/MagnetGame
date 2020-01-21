@@ -166,7 +166,6 @@
     <ClCompile Include="Source\Actor\Effect\LineEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
-    <ClCompile Include="Source\Actor\Effect\RespawnEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SmokeEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SpreadEffectReverse.cpp" />
@@ -264,7 +263,6 @@
     <ClInclude Include="Source\Actor\Effect\LineEffect.h" />
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
-    <ClInclude Include="Source\Actor\Effect\RespawnEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SmokeEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SpreadEffectReverse.h" />
