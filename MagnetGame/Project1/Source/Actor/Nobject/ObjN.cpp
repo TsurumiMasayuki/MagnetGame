@@ -12,8 +12,9 @@
 
 const float ObjN::MOVE_SPEED = 64.0f;
 
-ObjN::ObjN(IGameMediator * nMediator, int dir)
-	:GameObject(nMediator)
+ObjN::ObjN(IGameMediator * nMediator, int dir, float speedModifier)
+	:GameObject(nMediator),
+	m_SpeedModifier(speedModifier)
 {
 	//m_nStateManager = new StateManager();
 	direction = dir;
@@ -64,7 +65,7 @@ void ObjN::update()
 		break;
 	}
 
-	Vec3 move(x*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
+	Vec3 move(x * MOVE_SPEED * m_SpeedModifier * GameTime::getDeltaTime(), 0, 0);
 	setPosition(getPosition() + move);
 
 	Vec3 pos(getPosition());
