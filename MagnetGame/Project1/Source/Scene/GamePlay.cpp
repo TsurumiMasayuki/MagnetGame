@@ -63,7 +63,7 @@ void GamePlay::init()
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart())
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart()||m_pPlayer->isSandwich())
 	{
 		//ポーズの処理
 		m_pPause->setReStart(false);
@@ -114,7 +114,7 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q') || m_CurrentStage.y == 12) {
+	if (Input::isKeyDown('Q') || m_CurrentStage.y == 17) {
 		m_GameEndFlag = true;
 	}
 
