@@ -206,7 +206,6 @@ void GamePlay::gameEnd()
 void GamePlay::Pause()
 {
 	if (!m_pPause->isActive()) {
-		GameTime::timeScale = 1.0f;
 		if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
 			m_pPause->setActive(true);
 			m_pPause->setReStart(false);

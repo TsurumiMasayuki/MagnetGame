@@ -166,8 +166,10 @@
     <ClCompile Include="Source\Actor\Effect\LineEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\MagEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Particle.cpp" />
+    <ClCompile Include="Source\Actor\Effect\RespawnEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SmokeEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\SpreadEffect.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SpreadEffectReverse.cpp" />
     <ClCompile Include="Source\Actor\Effect\SuperJumpEffect.cpp" />
     <ClCompile Include="Source\Actor\Effect\Title_Cloud.cpp" />
     <ClCompile Include="Source\Actor\Magnet\ForceMap.cpp" />
@@ -193,6 +195,7 @@
     <ClCompile Include="Source\Actor\Player\PlayerState_Default.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Jump.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_MagChange.cpp" />
+    <ClCompile Include="Source\Actor\Player\PlayerState_Respawn.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_SuperJump.cpp" />
     <ClCompile Include="Source\Actor\Stage\Stage.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Block.cpp" />
@@ -261,8 +264,10 @@
     <ClInclude Include="Source\Actor\Effect\LineEffect.h" />
     <ClInclude Include="Source\Actor\Effect\MagEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Particle.h" />
+    <ClInclude Include="Source\Actor\Effect\RespawnEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SmokeEffect.h" />
     <ClInclude Include="Source\Actor\Effect\SpreadEffect.h" />
+    <ClInclude Include="Source\Actor\Effect\SpreadEffectReverse.h" />
     <ClInclude Include="Source\Actor\Effect\SuperJumpEffect.h" />
     <ClInclude Include="Source\Actor\Effect\Title_Cloud.h" />
     <ClInclude Include="Source\Actor\IGameMediator.h" />
@@ -289,6 +294,7 @@
     <ClInclude Include="Source\Actor\Player\PlayerState_Default.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Jump.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_MagChange.h" />
+    <ClInclude Include="Source\Actor\Player\PlayerState_Respawn.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_SuperJump.h" />
     <ClInclude Include="Source\Actor\Stage\Stage.h" />
     <ClInclude Include="Source\Actor\Tilemap\Block.h" />

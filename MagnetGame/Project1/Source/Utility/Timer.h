@@ -4,7 +4,7 @@ class Timer
 {
 public:
 	Timer();
-	Timer(float maxTime);
+	Timer(float maxTime, bool useUnscaledTime = false);
 	~Timer();
 
 	void update();
@@ -22,5 +22,7 @@ public:
 private:
 	float mCurrentTime;
 	float mMaxTime;
+
+	bool m_UseUnscaledTime;
 };
 

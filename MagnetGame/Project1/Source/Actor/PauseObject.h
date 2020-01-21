@@ -15,6 +15,9 @@ public:
 	virtual void onDestroy()override;
 
 private:
+	void exit();
+
+private:
 	SpriteRenderer*sprite;
 	SpriteRenderer*back;
 	SpriteRenderer*check;
