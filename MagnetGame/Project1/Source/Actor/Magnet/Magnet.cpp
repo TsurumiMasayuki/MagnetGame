@@ -33,7 +33,7 @@ void Magnet::start()
 	{
 		auto noMagChangeSprite = new SpriteRenderer(this, 110);
 		noMagChangeSprite->setTextureName("Cross");
-		noMagChangeSprite->setColor(Color(DirectX::Colors::MediumPurple));
+		noMagChangeSprite->setColor(Color(DirectX::Colors::White));
 		noMagChangeSprite->setUVRect(RectF(0, 0, getSize().x / 32, getSize().y / 32));
 	}
 
