@@ -63,7 +63,7 @@ void GamePlay::init()
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart())
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart()||m_pPlayer->isSandwich())
 	{
 		//ポーズの処理
 		m_pPause->setReStart(false);
