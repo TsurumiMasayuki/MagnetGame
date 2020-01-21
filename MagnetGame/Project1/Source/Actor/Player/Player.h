@@ -62,6 +62,7 @@ private:
 
 	Vec3 m_RespawnPoint;
 	float m_JumpForce;
+	bool m_IsRestart;
 
 	static const float MOVE_SPEED;
 };
