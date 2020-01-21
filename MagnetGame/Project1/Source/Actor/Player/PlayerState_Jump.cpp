@@ -23,12 +23,18 @@ void PlayerState_Jump::update()
 void PlayerState_Jump::onStateEnter()
 {
 	m_pPlayer->SetJumpForce(MAX_JUMP_FORCE);
-	m_pPlayer->setAnimation("Jump");
+	if (!m_pPlayer->isSuperJump)
+		m_pPlayer->setAnimation("Jump");
+	else
+		m_pPlayer->setAnimation("GBJump");
 }
 
 void PlayerState_Jump::onStateExit()
 {
-	m_pPlayer->setAnimation("Idle");
+	if (!m_pPlayer->isSuperJump)
+		m_pPlayer->setAnimation("Idle");
+	else
+		m_pPlayer->setAnimation("GBIdle");
 }
 
 IState * PlayerState_Jump::nextState()

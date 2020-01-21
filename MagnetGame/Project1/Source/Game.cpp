@@ -179,23 +179,29 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Player/player_idle_up.png", "PlayerIdleUp");
 	TextureManager::loadTexture(L"Assets/Textures/Player/player_idle_down.png", "PlayerIdleDown");
 	//プレイヤー(何もない状態)
-	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_idle_right_first.png", "FirstIdle");
+	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_idle_first_right.png", "FirstIdle");
 	TextureManager::loadTexture(L"Assets/Textures/FirstPlayer/player_run_first_right.png", "FirstRun");
-	//プレイヤー(グローブのみ)    
-	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_grobe.png", "GrobeIdle_L");
-	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_idle_right_grobe.png", "GrobeIdle");
-	TextureManager::loadTexture(L"Assets/Textures/GrobePlayer/player_jump_grobe.png", "GrobeJump");
+	//プレイヤー(グローブのみ)
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_idle_glove.png", "GloveIdle");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_idle_up_glove.png", "GloveIdleUp");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_idle_down_glove.png", "GloveIdleDown");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_run_glove.png", "GloveRun");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_jump_glove.png", "GloveJump");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_punch_glove.png", "GlovePunch");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_punch_up_glove.png", "GlovePunch_Up");
+	TextureManager::loadTexture(L"Assets/Textures/GlovePlayer/player_punch_down_glove.png", "GlovePunch_Down");
 #pragma endregion
 
 #pragma region アイテム
-	TextureManager::loadTexture(L"Assets/Textures/grobe.png", "grobe");
-	TextureManager::loadTexture(L"Assets/Textures/butu.png", "butu");
+	TextureManager::loadTexture(L"Assets/Textures/glove.png", "grobe");
+	TextureManager::loadTexture(L"Assets/Textures/boots.png", "butu");
 #pragma endregion
 
 #pragma region BGM
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game.wav", "game");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/game2.wav", "game2");
 	SoundManager::loadWavFile(L"Assets/Sound/BGM/wind.wav", "wind");
+	SoundManager::loadWavFile(L"Assets/Sound/BGM/ending.wav", "ending");
 #pragma endregion
 
 #pragma region SE
@@ -220,7 +226,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
   
-	m_pSceneManager->changeScene("Ending");
+	m_pSceneManager->changeScene("GamePlay");
 
 }
 

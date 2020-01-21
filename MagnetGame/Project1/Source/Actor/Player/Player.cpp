@@ -140,7 +140,12 @@ void Player::Respawn()
 	m_pStateManager->setState(new PlayerState_Default(this));
 
 	if (m_pAnimRenderer != nullptr)
-		m_pAnimRenderer->setAnimation("Idle");
+	{
+		if (!isSuperJump)
+			m_pAnimRenderer->setAnimation("Idle");
+		else
+			m_pAnimRenderer->setAnimation("GBIdle");
+	}
 }
 
 void Player::SetRespawnPoint(Vec3 pos)
@@ -209,16 +214,24 @@ void Player::initDetectors()
 void Player::initAnimations()
 {
 	m_pAnimRenderer = new AnimSpriteRenderer(this);
-	m_pAnimRenderer->addAnimation("Idle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
-	m_pAnimRenderer->addAnimation("IdleUp", new SpriteAnimation("PlayerIdleUp", 160, 32, 0.1f, 1));
-	m_pAnimRenderer->addAnimation("IdleDown", new SpriteAnimation("PlayerIdleDown", 160, 32, 0.1f, 1));
-	m_pAnimRenderer->addAnimation("Run", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
-	m_pAnimRenderer->addAnimation("Jump", new SpriteAnimation("PlayerJump", 224, 32, 0.1f, 7));
-	m_pAnimRenderer->addAnimation("SJump", new SpriteAnimation("PlayerSJump", 224, 40, 0.3f, 7));
+	m_pAnimRenderer->addAnimation("GBIdle", new SpriteAnimation("PlayerIdle", 160, 32, 0.1f, 5));
+	m_pAnimRenderer->addAnimation("GBIdleUp", new SpriteAnimation("PlayerIdleUp", 160, 32, 0.1f, 1));
+	m_pAnimRenderer->addAnimation("GBIdleDown", new SpriteAnimation("PlayerIdleDown", 160, 32, 0.1f, 1));
+	m_pAnimRenderer->addAnimation("GBRun", new SpriteAnimation("PlayerRun", 256, 32, 0.08f, 8));
+	m_pAnimRenderer->addAnimation("GBJump", new SpriteAnimation("PlayerJump", 224, 32, 0.1f, 7));
+	m_pAnimRenderer->addAnimation("GBSJump", new SpriteAnimation("PlayerSJump", 224, 40, 0.3f, 7));
+	m_pAnimRenderer->addAnimation("GBPunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 3));
+	m_pAnimRenderer->addAnimation("GBPunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 2));
+	m_pAnimRenderer->addAnimation("GBPunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 2));
 
-	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("PlayerPunch", 160, 32, 0.1f, 3));
-	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("PlayerPunch_Up", 128, 32, 0.125f, 2));
-	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("PlayerPunch_Down", 128, 32, 0.125f, 2));
+	m_pAnimRenderer->addAnimation("Idle", new SpriteAnimation("GloveIdle", 160, 32, 0.1f, 5));
+	m_pAnimRenderer->addAnimation("IdleUp", new SpriteAnimation("GloveIdleUp", 160, 32, 0.1f, 1));
+	m_pAnimRenderer->addAnimation("IdleDown", new SpriteAnimation("GloveIdleDown", 160, 32, 0.1f, 1));
+	m_pAnimRenderer->addAnimation("Run", new SpriteAnimation("GloveRun", 256, 32, 0.08f, 8));
+	m_pAnimRenderer->addAnimation("Jump", new SpriteAnimation("GloveJump", 224, 32, 0.1f, 7));
+	m_pAnimRenderer->addAnimation("PunchLR", new SpriteAnimation("GlovePunch", 160, 32, 0.1f, 3));
+	m_pAnimRenderer->addAnimation("PunchUp", new SpriteAnimation("GlovePunch_Up", 128, 32, 0.125f, 2));
+	m_pAnimRenderer->addAnimation("PunchDown", new SpriteAnimation("GlovePunch_Down", 128, 32, 0.125f, 2));
 
 	m_pAnimRenderer->setAnimation("Idle");
 }

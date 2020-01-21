@@ -14,21 +14,33 @@ PlayerState_Default::PlayerState_Default(Player * pPlayer)
 
 void PlayerState_Default::update()
 {
-	if (GameInput::getVertical() > 0&& GameInput::getHorizontal() == 0)
+	if (GameInput::getVertical() > 0 && GameInput::getHorizontal() == 0)
 	{
-		m_pPlayer->setAnimation("IdleUp");
+		if (!m_pPlayer->isSuperJump)
+			m_pPlayer->setAnimation("IdleUp");
+		else
+			m_pPlayer->setAnimation("GBIdleUp");
 	}
-	else if (GameInput::getVertical() < 0&& GameInput::getHorizontal() == 0)
+	else if (GameInput::getVertical() < 0 && GameInput::getHorizontal() == 0)
 	{
-		m_pPlayer->setAnimation("IdleDown");
+		if (!m_pPlayer->isSuperJump)
+			m_pPlayer->setAnimation("IdleDown");
+		else
+			m_pPlayer->setAnimation("GBIdleDown");
 	}
 	else if (GameInput::getHorizontal() == 0)
 	{
-		m_pPlayer->setAnimation("Idle");
+		if (!m_pPlayer->isSuperJump)
+			m_pPlayer->setAnimation("Idle");
+		else
+			m_pPlayer->setAnimation("GBIdle");
 	}
 	else
 	{
-		m_pPlayer->setAnimation("Run");
+		if (!m_pPlayer->isSuperJump)
+			m_pPlayer->setAnimation("Run");
+		else
+			m_pPlayer->setAnimation("GBRun");
 	}
 }
 

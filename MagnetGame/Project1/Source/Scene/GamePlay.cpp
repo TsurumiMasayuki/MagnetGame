@@ -32,12 +32,13 @@ void GamePlay::init()
 {
 	m_CurrentStage = Vec2(1, 1);
 
+
 	m_pGameObjectManager = new GameObjectManager();
 
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
 	m_pPlayer = new Player(this);
-	m_pPlayer->SetRespawnPoint(Vec3(-450, 250, 0));
+	ReadRespawnData();
 	m_pPlayer->Respawn();
 
 	m_pCurrentStage = new Stage(this, 32, 32);
@@ -113,7 +114,7 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q') || m_CurrentStage.y >= 12) {
+	if (Input::isKeyDown('Q') || m_CurrentStage.y == 12) {
 		m_GameEndFlag = true;
 	}
 
@@ -229,7 +230,7 @@ void GamePlay::ReadRespawnData()
 		{
 			int num = atoi(reader.getData(0, y).c_str());
 			if (m_CurrentStage.y == num)
-				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0));
+				m_pPlayer->SetRespawnPoint(Vec3(atoi(reader.getData(1, y).c_str()), atoi(reader.getData(2, y).c_str()), 0) * 32);
 		}
 	}
 
@@ -255,16 +256,18 @@ void GamePlay::TextUpdate()
 			}
 			break;
 		case 6:
-			if (m_pText->getEventNum() <= 36) {
-				GameTime::timeScale = 0.0f;
-				m_pText->setActive(true);
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-					m_pText->addEventNum();
+			if (m_pPlayer->isSuperJump) {
+				if (m_pText->getEventNum() <= 36) {
+					GameTime::timeScale = 0.0f;
+					m_pText->setActive(true);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+						m_pText->addEventNum();
+					}
 				}
-			}
-			else if (m_pText->getEventNum() > 36) {
-				m_pText->setActive(false);
-				GameTime::timeScale = 1.0f;
+				else if (m_pText->getEventNum() > 36) {
+					m_pText->setActive(false);
+					GameTime::timeScale = 1.0f;
+				}
 			}
 			break;
 		default:
