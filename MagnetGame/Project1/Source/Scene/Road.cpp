@@ -6,6 +6,8 @@
 #include"Actor/Performance/EventText.h"
 #include"Actor/Performance/TitleBackGround.h"
 #include"Actor/Performance/TitlePlayer.h"
+#include"Actor/Performance/FadeOut.h"
+#include"Actor/Performance/TitleFade.h"
 
 Road::Road()
 {
@@ -17,22 +19,34 @@ Road::~Road()
 
 void Road::init()
 {
+
 	m_pGameObjectManager = new GameObjectManager();
 	m_pPhysicsWorld = new PhysicsWorld(this);
 
+	m_pFadeIn = new TitleFade(this);
+	m_pFadeIn->setActive(false);
+
+	m_pFadeOut = new FadeOut(this);
 	m_pBackGround = new TitleBackGround(this, "haikei5");
 
 	m_pRoadPlayer = new TitlePlayer(this);
 	m_pRoadPlayer->setPosition(Vec3(-660, -280, 0));
 	m_pRoadPlayer->setNum(3);
 
+
 	m_pRoadEndFlag = false;
 }
 
 void Road::update()
 {
+	if (m_pFadeOut->getAlpha() <= -2.0f) {
+		m_pFadeOut->setActive(false);
+	}
 	m_pRoadPlayer->setSize(Vec3(160, 160, 0));
-	if (m_pRoadPlayer->getPosition().x >= 640) {
+	if (m_pRoadPlayer->getPosition().x >= 500) {
+		m_pFadeIn->setActive(true);
+	}
+	if (m_pFadeIn->getAlpha()>=2.0f) {
 		m_pRoadEndFlag = true;
 	}
 	m_pGameObjectManager->update();

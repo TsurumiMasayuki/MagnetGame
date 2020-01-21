@@ -7,6 +7,8 @@
 #include"Actor/Performance/EventText.h"
 #include"Actor/Performance/TitlePlayer.h"
 #include"Actor/Performance/TitleFade.h"
+#include"Actor/Performance/EndTex.h"
+#include"Actor/Performance/ButtonTex.h"
 #include "Physics\PhysicsWorld.h"
 
 Ending::Ending()
@@ -39,6 +41,13 @@ void Ending::init()
 	eState = EndingState::Open;
 	Cnt = 0;
 	m_pTitleEndFlag = false;
+
+	m_pEndingTexture = new EndTex(this);
+	m_pEndingTexture->setActive(false);
+
+	m_pButton = new ButtonTex(this);
+	m_pButton->setTextureName("PushA");
+	m_pButton->setActive(false);
 
 	SoundManager::playBGM("ending");
 }
@@ -108,8 +117,33 @@ void Ending::update()
 		break;
 	case Ending::Move:
 		m_pFade->setActive(true);
-		if (m_pFade->getAlpha() >= 5.0f) {
-			m_pTitleEndFlag = true;
+		if (m_pFade->getAlpha() >= 3.0f) {
+			eState = EndingState::Talk3;
+		}
+		break;
+	case Ending::Talk3:
+
+		m_pText->setActive(true);
+		if (m_pText->getEventNum() <= 70) {
+			m_pText->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pText->addEventNum();
+			}
+		}
+		else if (m_pText->getEventNum() > 70) {
+			m_pText->setActive(false);
+			eState = EndingState::EndText;
+		}
+		break;
+	case Ending::EndText:
+		m_pEndingTexture->setActive(true);
+		if (m_pEndingTexture->getAlpha() >= 2.0f) {
+			m_pButton->setActive(true);
+			m_pButton->setTextureName("PushA_E");
+			m_pButton->setSize(Vec3(1280, 800, 0));
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pTitleEndFlag = true;
+			}
 		}
 		break;
 	default:

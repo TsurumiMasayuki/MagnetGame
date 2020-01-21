@@ -64,6 +64,10 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 	TextureManager::loadTexture(L"Assets/Textures/letter.png", "letter");
 	TextureManager::loadTexture(L"Assets/Textures/PushA.png", "PushA");
+	TextureManager::loadTexture(L"Assets/Textures/PushA_Ending.png", "PushA_E");
+	TextureManager::loadTexture(L"Assets/Textures/rog_name.png", "Name");
+	TextureManager::loadTexture(L"Assets/Textures/log_name_player.png", "lop");
+	TextureManager::loadTexture(L"Assets/Textures/log_name_doctor.png", "beard");
 
 #pragma region 背景
 	TextureManager::loadTexture(L"Assets/Textures/background/haikei1.png", "haikei1-0");
@@ -77,6 +81,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/background/haikei6.png", "haikei6");
 	TextureManager::loadTexture(L"Assets/Textures/background/ending.png", "ending");
 	TextureManager::loadTexture(L"Assets/Textures/background/ending_open.png", "ending_open");
+	TextureManager::loadTexture(L"Assets/Textures/background/fin.png", "fin");
 #pragma endregion
 
 #pragma region Opening
@@ -147,6 +152,16 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text58.png", "text58");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text59.png", "text59");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text60.png", "text60");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text61.png", "text61");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text62.png", "text62");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text63.png", "text63");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text64.png", "text64");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text65.png", "text65");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text66.png", "text66");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text67.png", "text67");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text68.png", "text68");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text69.png", "text69");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text70.png", "text70");
 #pragma endregion
 
 #pragma region Pause
@@ -226,7 +241,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
   
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("GamePlay");
 
 }
 
