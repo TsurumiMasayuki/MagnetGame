@@ -3,11 +3,12 @@
 #include "Device\GameTime.h"
 
 Timer::Timer()
+	: m_UseUnscaledTime(false)
 {
 }
 
-Timer::Timer(float maxTime)
-	: mMaxTime(maxTime), mCurrentTime(0.0f)
+Timer::Timer(float maxTime, bool useUnscaledTime)
+	: mMaxTime(maxTime), mCurrentTime(0.0f), m_UseUnscaledTime(useUnscaledTime)
 {
 }
 
@@ -17,7 +18,10 @@ Timer::~Timer()
 
 void Timer::update()
 {
-	mCurrentTime += GameTime::getDeltaTime();
+	if (!m_UseUnscaledTime)
+		mCurrentTime += GameTime::getDeltaTime();
+	else
+		mCurrentTime += GameTime::getUnscaledDeltaTime();
 }
 
 void Timer::setMaxTime(float value)

@@ -20,7 +20,7 @@ void SpreadEffect::start()
 
 	for (int i = 0; i < count; ++i)
 	{
-		new Particle("CircleFill", getPosition(), 32, 32, 10.0f, angle * i, 0.25f, 16.0f / 0.25f / 60.0f, m_Color, m_pGameMediator);
+		new Particle("CircleFill", getPosition(), 32, 32, 64.0f, angle * i, 1.5f, 64.0f / 1.5f / 60.0f, m_Color, m_pGameMediator, true);
 	}
 
 	destroy();

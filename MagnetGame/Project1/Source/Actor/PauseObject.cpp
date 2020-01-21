@@ -50,7 +50,7 @@ void PauseObject::update()
 				switch (checkNum)
 				{
 				case 0:
-					setActive(false);
+					exit();
 					break;
 				case 1:
 					//リスタート
@@ -76,7 +76,7 @@ void PauseObject::update()
 			}
 
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
-				setActive(false);
+				exit();
 			}
 
 			break;
@@ -247,6 +247,12 @@ void PauseObject::update()
 
 void PauseObject::onDestroy()
 {
+}
+
+void PauseObject::exit()
+{
+	setActive(false);
+	GameTime::timeScale = 1.0f;
 }
 
 void PauseObject::setNum(int value)

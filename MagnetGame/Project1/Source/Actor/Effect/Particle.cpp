@@ -10,7 +10,9 @@ Particle::Particle(std::string name, Vec3 pos, float size_x, float size_y, float
 {
 }
 
-Particle::Particle(std::string name, Vec3 pos, float size_x, float size_y, float speed, float angle, float duration, float shrinkRate, Color color, IGameMediator * pMediator) : GameObject(pMediator)
+Particle::Particle(std::string name, Vec3 pos, float size_x, float size_y, float speed, float angle, float duration, float shrinkRate, Color color, IGameMediator * pMediator, bool useUnscaledTime)
+	: GameObject(pMediator),
+	m_UseUnscaledTime(useUnscaledTime)
 {
 	this->name = name;
 	this->pos = pos;
@@ -36,7 +38,7 @@ void Particle::start()
 	sprite->setTextureName(name);
 	sprite->setColor(color);
 
-	timer = new Timer(duration);
+	timer = new Timer(duration, m_UseUnscaledTime);
 
 	angle = angle * (PI / 180);
 	setPosition(Vec3(pos.x, pos.y, 0));
@@ -49,7 +51,11 @@ void Particle::update()
 	x = cos(angle) * speed;
 	y = sin(angle) * speed;
 	Vec3 move(x, y, 0);
-	setPosition(getPosition() + move * GameTime::getDeltaTime());
+
+	if (!m_UseUnscaledTime)
+		setPosition(getPosition() + move * GameTime::getDeltaTime());
+	else
+		setPosition(getPosition() + move * GameTime::getUnscaledDeltaTime());
 
 	size_x -= shrinkRate;
 	size_y -= shrinkRate;

@@ -94,6 +94,9 @@
     <ClCompile Include="Source\Actor\Performance\ExText.cpp" />
     <ClCompile Include="Source\Scene\Road.cpp" />
     <ClCompile Include="Source\Actor\Boots.cpp" />
+    <ClCompile Include="Source\Actor\Effect\SpreadEffectReverse.cpp" />
+    <ClCompile Include="Source\Actor\Effect\RespawnEffect.cpp" />
+    <ClCompile Include="Source\Actor\Player\PlayerState_Respawn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -197,6 +200,9 @@
     <ClInclude Include="Source\Actor\Performance\ExText.h" />
     <ClInclude Include="Source\Scene\Road.h" />
     <ClInclude Include="Source\Actor\Boots.h" />
+    <ClInclude Include="Source\Actor\Effect\SpreadEffectReverse.h" />
+    <ClInclude Include="Source\Actor\Effect\RespawnEffect.h" />
+    <ClInclude Include="Source\Actor\Player\PlayerState_Respawn.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />
