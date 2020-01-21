@@ -9,6 +9,8 @@ class Stage;
 class PauseObject;
 class TitleBackGround;
 class EventText;
+class TitleFade;
+class FadeOut;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -41,7 +43,8 @@ private:
 	TitleBackGround*m_pBackGround;
 	PauseObject*m_pPause;
 	EventText*m_pText;
-
+	FadeOut*m_pFadeOut;
+	TitleFade*m_pFadeIn;
 
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
@@ -56,4 +59,5 @@ private:
 	void TextUpdate();
 	void Pause();
 	void ReadRespawnData();
+	void Fade();
 };

@@ -17,13 +17,13 @@ void EventText::start()
 	setSize(Vec3(1280, 180, 0));
 	setPosition(Vec3(0, -270, 0));
 
-	frame = new SpriteRenderer(this,110);
+	frame = new SpriteRenderer(this,310);
 	frame->setTextureName("log_player");
 
-	arrow = new SpriteRenderer(this,112);
+	arrow = new SpriteRenderer(this,312);
 	arrow->setTextureName("log_arrow");
 
-	text = new SpriteRenderer(this,111);
+	text = new SpriteRenderer(this,311);
 	text->setTextureName("text0");
 
 	text->setColor(Color(1, 1, 1, 1));
@@ -159,14 +159,6 @@ void EventText::update()
 		text->setTextureName("text36");
 		state = State::Doctor;
 		break;
-	case 37:
-		break;
-	case 38:
-		break;
-	case 39:
-		break;
-	case 40:
-		break;
 	case 50:
 		text->setTextureName("text50");
 		state = State::Hero;
@@ -209,6 +201,46 @@ void EventText::update()
 		break;
 	case 60:
 		text->setTextureName("text60");
+		state = State::Hero;
+		break;
+	case 61:
+		text->setTextureName("text61");
+		state = State::Doctor;
+		break;
+	case 62:
+		text->setTextureName("text62");
+		state = State::Hero;
+		break;
+	case 63:
+		text->setTextureName("text63");
+		state = State::Doctor;
+		break;
+	case 64:
+		text->setTextureName("text64");
+		state = State::Hero;
+		break;
+	case 65:
+		text->setTextureName("text65");
+		state = State::Hero;
+		break;
+	case 66:
+		text->setTextureName("text66");
+		state = State::Hero;
+		break;
+	case 67:
+		text->setTextureName("text67");
+		state = State::Doctor;
+		break;
+	case 68:
+		text->setTextureName("text68");
+		state = State::Doctor;
+		break;
+	case 69:
+		text->setTextureName("text69");
+		state = State::Doctor;
+		break;
+	case 70:
+		text->setTextureName("text70");
 		state = State::Hero;
 		break;
 	default:
