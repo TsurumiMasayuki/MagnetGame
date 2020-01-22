@@ -131,6 +131,18 @@ void EventText::update()
 		state = State::Doctor;
 		break;
 
+	case 27:
+		text->setTextureName("text27");
+		state = State::Doctor;
+		break;
+	case 28:
+		text->setTextureName("text28");
+		state = State::Doctor;
+		break;
+	case 29:
+		text->setTextureName("text29");
+		state = State::Doctor;
+		break;
 	case 30:
 		text->setTextureName("text30");
 		state = State::Doctor;

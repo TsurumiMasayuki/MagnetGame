@@ -6,16 +6,9 @@ class Board
 {
 	public:
 		Board(IGameMediator*pMediator);
+		~Board();
 
 		virtual void start()override;
 		virtual void onCollisionStay(GameObject*pHit)override;
-
-private:
-	bool isHint;
-	int hintCnt;
-public:
-	bool getIsHint();
-	void setIsHint(bool value);
-	int getHintCnt();
-	void setHintCnt(int value);
+		virtual void onCollisionExit(GameObject*pHit)override;
 };

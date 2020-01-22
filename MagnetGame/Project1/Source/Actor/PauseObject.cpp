@@ -54,8 +54,8 @@ void PauseObject::update()
 					break;
 				case 1:
 					//リスタート
+					exit();
 					isReStart = true;
-					GameTime::timeScale = 1.0f;
 					break;
 				case 2://ルール
 					pState = PauseState::HowTo;

@@ -13,6 +13,7 @@ class TitleFade;
 class FadeOut;
 class ButtonTex;
 class ExText;
+class Hint;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -49,7 +50,9 @@ private:
 	TitleFade*m_pFadeIn;
 	ExText*m_pExText;
 	ButtonTex*m_pButton;
+	Hint *m_pHint;
 
+	bool m_canPause;
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
 
@@ -64,4 +67,5 @@ private:
 	void Pause();
 	void ReadRespawnData();
 	void Fade();
+	void HintUpdate();
 };
