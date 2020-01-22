@@ -19,6 +19,8 @@
 #include"Actor/PauseObject.h"
 #include"Actor/Performance/TitleBackGround.h"
 #include"Actor/Performance/EventText.h"
+#include"Actor/Performance/FadeOut.h"
+#include"Actor/Performance/TitleFade.h"
 
 GamePlay::GamePlay()
 {
@@ -55,6 +57,11 @@ void GamePlay::init()
 	m_pText->setEventNum(30);
 	m_pText->setActive(false);
 
+	m_pFadeIn = new TitleFade(this);
+	m_pFadeIn->setActive(false);
+	
+	m_pFadeOut = new FadeOut(this);
+
 	nScene = "Ending";
 
 	NowStageNum = 0;
@@ -63,7 +70,7 @@ void GamePlay::init()
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart()||m_pPlayer->isSandwich())
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart() || m_pPlayer->isSandwich())
 	{
 		//ポーズの処理
 		m_pPause->setReStart(false);
@@ -114,14 +121,21 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q') || m_CurrentStage.y == 17) {
-		m_GameEndFlag = true;
+	if (m_CurrentStage.y == 18) {
+		if (m_pPlayer->getPosition().x <= 350 && m_pPlayer->getPosition().x >= 280) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pFadeIn->setActive(true);
+			}
+		}
 	}
 
 	//ポーズの更新処理
 	Pause();
 	//テキストの更新処理
 	TextUpdate();
+
+	//フェード
+	Fade();
 
 	//シーンの更新
 	m_pGameObjectManager->update();
@@ -234,6 +248,17 @@ void GamePlay::ReadRespawnData()
 		}
 	}
 
+}
+
+void GamePlay::Fade()
+{
+	if (m_pFadeOut->getAlpha() <= -2.0f) {
+		m_pFadeOut->setActive(false);
+	}
+
+	if (m_pFadeIn->getAlpha() >= 2.0f) {
+		m_GameEndFlag = true;
+	}
 }
 
 void GamePlay::TextUpdate()

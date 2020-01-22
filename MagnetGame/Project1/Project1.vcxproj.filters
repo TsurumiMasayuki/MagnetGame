@@ -96,6 +96,10 @@
     <ClCompile Include="Source\Actor\Boots.cpp" />
     <ClCompile Include="Source\Actor\Effect\SpreadEffectReverse.cpp" />
     <ClCompile Include="Source\Actor\Player\PlayerState_Respawn.cpp" />
+    <ClCompile Include="Source\Actor\Performance\FadeOut.cpp" />
+    <ClCompile Include="Source\Actor\Performance\EndTex.cpp" />
+    <ClCompile Include="Source\Actor\Performance\NameTexture.cpp" />
+    <ClCompile Include="Source\Actor\Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -201,6 +205,10 @@
     <ClInclude Include="Source\Actor\Boots.h" />
     <ClInclude Include="Source\Actor\Effect\SpreadEffectReverse.h" />
     <ClInclude Include="Source\Actor\Player\PlayerState_Respawn.h" />
+    <ClInclude Include="Source\Actor\Performance\FadeOut.h" />
+    <ClInclude Include="Source\Actor\Performance\EndTex.h" />
+    <ClInclude Include="Source\Actor\Performance\NameTexture.h" />
+    <ClInclude Include="Source\Actor\Board.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

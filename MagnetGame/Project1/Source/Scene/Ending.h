@@ -7,6 +7,8 @@ class TitleBackGround;
 class EventText;
 class TitlePlayer;
 class TitleFade;
+class EndTex;
+class ButtonTex;
 
 class Ending :
 	public AbstractScene, IGameMediator {
@@ -39,6 +41,8 @@ private:
 	EventText*m_pText;
 	TitlePlayer*m_pPlayer;
 	TitleFade*m_pFade;
+	EndTex*m_pEndingTexture;
+	ButtonTex*m_pButton;
 
 	enum EndingState
 	{
@@ -48,6 +52,8 @@ private:
 		Big,
 		Talk2,
 		Move,
+		Talk3,
+		EndText,
 	};
 
 	EndingState eState;

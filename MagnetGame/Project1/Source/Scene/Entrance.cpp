@@ -9,6 +9,8 @@
 #include"Actor/Performance/ButtonTex.h"
 #include"Actor/Performance/Item.h"
 #include"Actor/Performance/ExText.h"
+#include"Actor/Performance/FadeOut.h"
+#include"Actor/Performance/TitleFade.h"
 #include"Device/SoundManager.h"
 
 
@@ -35,6 +37,7 @@ void Entrance::init()
 	m_pTitlePlayer->setNum(1);
 
 	m_pButton = new ButtonTex(this);
+	m_pButton->setTextureName("A");
 	m_pButton->setActive(false);
 
 	m_pItem = new Item(this, "grobe");
@@ -43,6 +46,11 @@ void Entrance::init()
 	m_pExText = new ExText(this, "Mag_Ex");
 	m_pExText->setStateNum(0);
 	m_pExText->setActive(false);
+
+	m_pFadeOut = new FadeOut(this);
+
+	m_pFadeIn = new TitleFade(this);
+	m_pFadeIn->setActive(false);
 
 	state = State::Idle;
 
@@ -59,6 +67,10 @@ void Entrance::update()
 	m_pPhysicsWorld->update();
 
 	float size = 0.5f;
+
+	if (m_pFadeOut->getAlpha() <= -2.0f) {
+		m_pFadeOut->setActive(false);
+	}
 
 	switch (state)
 	{
@@ -159,11 +171,15 @@ void Entrance::update()
 			m_pButton->setActive(true);
 			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
 			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-				m_pEntranceEndFlag = true;
+				m_pFadeIn->setActive(true);
 			}
 		}
 		else {
 			m_pButton->setActive(false);
+		}
+
+		if (m_pFadeIn->getAlpha() >= 3.0f) {
+			m_pEntranceEndFlag = true;
 		}
 
 		break;

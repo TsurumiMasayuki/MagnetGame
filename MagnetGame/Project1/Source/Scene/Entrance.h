@@ -9,6 +9,8 @@ class TitlePlayer;
 class ButtonTex;
 class Item;
 class ExText;
+class FadeOut;
+class TitleFade;
 
 class Entrance :
 	public AbstractScene, IGameMediator {
@@ -42,6 +44,8 @@ private:
 	ButtonTex*m_pButton;
 	Item*m_pItem;
 	ExText*m_pExText;
+	FadeOut*m_pFadeOut;
+	TitleFade*m_pFadeIn;
 
 	enum State {
 		Idle,
