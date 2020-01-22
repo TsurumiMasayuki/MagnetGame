@@ -8,6 +8,8 @@
 #include "Component\Physics\Gravity.h"
 #include "Actor\DetectHelper.h"
 #include "Actor\Player\PlayerState_Respawn.h"
+#include "Actor\Effect\SpreadEffect.h"
+#include <DirectXColors.h>
 
 #include "PlayerState_Default.h"
 #include "Device\GameInput.h"
@@ -17,7 +19,7 @@
 const float Player::MOVE_SPEED = 256.0;
 
 Player::Player(IGameMediator * pMediator)
-	: GameObject(pMediator), isSuperJump(false), isFlipX(false), m_IsRestart(false)
+	: GameObject(pMediator), isSuperJump(false), isFlipX(false), m_IsRestart(false), isRespawn(false)
 {
 	m_pStateManager = new StateManager();
 }
@@ -143,6 +145,8 @@ void Player::Respawn()
 {
 	setPosition(m_RespawnPoint);
 	m_pStateManager->forceSetState(new PlayerState_Default(this));
+	auto effect = new SpreadEffect(getGameMediator(), Color(DirectX::Colors::LightCyan));
+	effect->setPosition(getPosition());
 
 	m_IsRestart = false;
 
