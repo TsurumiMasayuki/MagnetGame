@@ -37,7 +37,7 @@ void Entrance::init()
 	m_pTitlePlayer->setNum(1);
 
 	m_pButton = new ButtonTex(this);
-	m_pButton->setTextureName("A");
+	m_pButton->setTextureName("X");
 	m_pButton->setActive(false);
 
 	m_pItem = new Item(this, "grobe");
@@ -104,7 +104,7 @@ void Entrance::update()
 		if (m_pTitlePlayer->getPosition().x <= 76 && m_pTitlePlayer->getPosition().x >= -76) {
 			m_pButton->setActive(true);
 			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -100, 0));
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pButton->setActive(false);
 				state = State::Small;
 				m_pTitlePlayer->setIsGrobe(true);
@@ -168,10 +168,16 @@ void Entrance::update()
 		m_pTitlePlayer->setCanMove(true);
 
 		if (m_pTitlePlayer->getPosition().x <= 635 && m_pTitlePlayer->getPosition().x >= 440) {
-			m_pButton->setActive(true);
-			m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-				m_pFadeIn->setActive(true);
+			if (!m_pFadeIn->isActive()) {
+				m_pButton->setActive(true);
+				m_pButton->setPosition(Vec3(m_pTitlePlayer->getPosition().x, -120, 0));
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+					m_pFadeIn->setActive(true);
+					m_pButton->setActive(false);
+				}
+			}
+			else {
+
 			}
 		}
 		else {

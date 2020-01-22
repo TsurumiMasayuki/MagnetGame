@@ -21,7 +21,7 @@ void EventText::start()
 	frame->setTextureName("log_player");
 
 	arrow = new SpriteRenderer(this,312);
-	arrow->setTextureName("log_arrow");
+	arrow->setTextureName("log_arrow_A");
 
 	text = new SpriteRenderer(this,311);
 	text->setTextureName("text0");
