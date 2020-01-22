@@ -63,6 +63,11 @@ void Player::update()
 	Vec3 move(x * MOVE_SPEED * GameTime::getDeltaTime(), 0, 0);
 	setPosition(getPosition() + move);
 
+	if (isDetectUp())
+		isHitHead = true;
+	if (isDetectDown())
+		isHitHead = false;
+
 	moveY();
 
 	Vec3 pos(getPosition());
@@ -254,8 +259,16 @@ void Player::moveY()
 	float deltaTime = GameTime::getDeltaTime();
 
 	m_JumpForce -= m_pGravity->getGravSpeed() * deltaTime *  m_pGravity->getGravSpeed() * deltaTime;
+	if (isDetectUp())
+		m_JumpForce -= 10;
 
-	Vec3 move(0, std::fmaxf(0, m_JumpForce * deltaTime), 0);
+	float y = m_JumpForce;
+
+	if (isHitHead) {
+		y = std::fminf(m_pGravity->getGravSpeed(), m_JumpForce);
+	}
+
+	Vec3 move(0, std::fmaxf(0, y * deltaTime), 0);
 	setPosition(getPosition() + move);
 }
 
