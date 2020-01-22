@@ -64,6 +64,7 @@ private:
 
 	Vec3 m_RespawnPoint;
 	float m_JumpForce;
+	bool isHitHead;
 
 	static const float MOVE_SPEED;
 

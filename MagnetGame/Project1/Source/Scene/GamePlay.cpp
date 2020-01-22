@@ -36,7 +36,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1, 1);
+	m_CurrentStage = Vec2(1, 6);
 
 
 	m_pGameObjectManager = new GameObjectManager();
