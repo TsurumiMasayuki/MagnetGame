@@ -1,5 +1,6 @@
 #include "Title.h"
 #include "Device\Input.h"
+#include"Device/GameTime.h"
 #include"Actor/GameObjectManager.h"
 #include"Actor/Performance/Deliveryman.h"
 #include"Actor/Performance/TitlePlayer.h"
@@ -12,6 +13,8 @@
 #include "Actor/Performance/Title_Sprite.h"
 #include"Actor/Performance/Letter.h"
 #include"Actor/Performance/ButtonTex.h"
+#include"Actor/Performance/FadeOut.h"
+#include"Actor/Performance/NameTexture.h"
 #include "Actor/Effect/Title_Cloud.h"
 #include"Device/SoundManager.h"
 #include "Utility/Timer.h"
@@ -52,9 +55,6 @@ void Title::init()
 	m_pTitlePlayer->setPosition(Vec3(-160,  -135, 0));
 	m_pTitlePlayer->setActive(false);
 
-	m_pText = new EventText(this);
-	m_pText->setActive(false);
-	m_pText->setEventNum(0);
 
 	hane = new TitleHane(this);
 	hane->setPosition(Vec3(310,120, 0));
@@ -64,14 +64,19 @@ void Title::init()
 
 	m_pTitleEndFlag = false;
 
-	timer = new Timer(3);
+	timer = new Timer(6);
 	smoketimer = new Timer(1);
 	
 	title_cloud = new Title_Cloud(this);
-	title_cloud->Cleate(32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(-400,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(-800,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(0,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(400,300,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(200,200,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(600,250,0),32, 30, 0, 2);
 
 	smokeEffect = new SmokeEffect(this);
-	smokeEffect->Cleate(Vec3(-310, 100, 0),3,0.5f,2);
+	smokeEffect->Cleate(Vec3(-310, 100, 0),100,0.5f,2);
 
 	m_pLetter = new Letter(this);
 	m_pLetter->setPosition(Vec3(105,-120,0));
@@ -79,6 +84,18 @@ void Title::init()
 
 	m_pButton = new ButtonTex(this);
 	m_pButton->setTextureName("PushA");
+
+	m_pFadeOut = new FadeOut(this);
+
+	m_pNameTex = new NameTexture(this);
+	m_pNameTex->setActive(false);
+
+	m_pText = new EventText(this);
+	m_pText->setEventNum(0);
+	m_pText->setActive(false);
+
+	GameTime::timeScale = 1.0f;
+
 
 	Cnt = 0;
 	Alpha = 0;
@@ -89,6 +106,10 @@ void Title::update()
 {
 	m_pButton->setSize(Vec3(1280, 800, 0));
 	m_pButton->setTextureName("PushA");
+
+	if (m_pFadeOut->getAlpha() <= -2.0f) {
+		m_pFadeOut->setActive(false);
+	}
 	switch (sState)
 	{
 	case Title::Idle:
@@ -121,12 +142,16 @@ void Title::update()
 			m_pLetter->setActive(false); 
 			if (m_pText->getEventNum() <= 4) {
 				m_pText->setActive(true);
+				m_pNameTex->setActive(true);
+
 				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 					m_pText->addEventNum();
+					m_pNameTex->setEventNum(m_pText->getEventNum());
 				}
 			}
 			else if (m_pText->getEventNum() > 4) {
 				m_pText->setActive(false);
+				m_pNameTex->setActive(false);
 				m_pTitlePlayer->setIsGo(true);
 				sState = SceneState::Fade;
 			}
@@ -171,7 +196,7 @@ void Title::update()
 		timer->reset();
 	}
 	if (smoketimer->isTime()) {
-		smokeEffect->Cleate(Vec3(-310, 100, 0), 3, 0.5f, 2);
+		smokeEffect->Cleate(Vec3(-310, 100, 0), 100, 0.5f, 2);
 		smoketimer->reset();
 	}
 }

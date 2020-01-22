@@ -19,6 +19,8 @@
 #include"Actor/PauseObject.h"
 #include"Actor/Performance/TitleBackGround.h"
 #include"Actor/Performance/EventText.h"
+#include"Actor/Performance/FadeOut.h"
+#include"Actor/Performance/TitleFade.h"
 
 GamePlay::GamePlay()
 {
@@ -31,6 +33,7 @@ GamePlay::~GamePlay()
 void GamePlay::init()
 {
 	m_CurrentStage = Vec2(1, 1);
+
 
 	m_pGameObjectManager = new GameObjectManager();
 
@@ -54,6 +57,11 @@ void GamePlay::init()
 	m_pText->setEventNum(30);
 	m_pText->setActive(false);
 
+	m_pFadeIn = new TitleFade(this);
+	m_pFadeIn->setActive(false);
+	
+	m_pFadeOut = new FadeOut(this);
+
 	nScene = "Ending";
 
 	NowStageNum = 0;
@@ -62,7 +70,7 @@ void GamePlay::init()
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart()||m_pPlayer->isSandwich())
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart() || m_pPlayer->isSandwich())
 	{
 		//ポーズの処理
 		m_pPause->setReStart(false);
@@ -113,14 +121,21 @@ void GamePlay::update()
 		m_pPlayer->SetRespawnPoint(m_pPlayer->getPosition() - Vec3(50, 0, 0));
 	}
 
-	if (Input::isKeyDown('Q') || m_CurrentStage.y >= 12) {
-		m_GameEndFlag = true;
+	if (m_CurrentStage.y == 18) {
+		if (m_pPlayer->getPosition().x <= 350 && m_pPlayer->getPosition().x >= 280) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pFadeIn->setActive(true);
+			}
+		}
 	}
 
 	//ポーズの更新処理
 	Pause();
 	//テキストの更新処理
 	TextUpdate();
+
+	//フェード
+	Fade();
 
 	//シーンの更新
 	m_pGameObjectManager->update();
@@ -205,7 +220,6 @@ void GamePlay::gameEnd()
 void GamePlay::Pause()
 {
 	if (!m_pPause->isActive()) {
-		GameTime::timeScale = 1.0f;
 		if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
 			m_pPause->setActive(true);
 			m_pPause->setReStart(false);
@@ -236,6 +250,17 @@ void GamePlay::ReadRespawnData()
 
 }
 
+void GamePlay::Fade()
+{
+	if (m_pFadeOut->getAlpha() <= -2.0f) {
+		m_pFadeOut->setActive(false);
+	}
+
+	if (m_pFadeIn->getAlpha() >= 2.0f) {
+		m_GameEndFlag = true;
+	}
+}
+
 void GamePlay::TextUpdate()
 {
 	NowStageNum = (int)m_CurrentStage.y;
@@ -256,16 +281,18 @@ void GamePlay::TextUpdate()
 			}
 			break;
 		case 6:
-			if (m_pText->getEventNum() <= 36) {
-				GameTime::timeScale = 0.0f;
-				m_pText->setActive(true);
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-					m_pText->addEventNum();
+			if (m_pPlayer->isSuperJump) {
+				if (m_pText->getEventNum() <= 36) {
+					GameTime::timeScale = 0.0f;
+					m_pText->setActive(true);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+						m_pText->addEventNum();
+					}
 				}
-			}
-			else if (m_pText->getEventNum() > 36) {
-				m_pText->setActive(false);
-				GameTime::timeScale = 1.0f;
+				else if (m_pText->getEventNum() > 36) {
+					m_pText->setActive(false);
+					GameTime::timeScale = 1.0f;
+				}
 			}
 			break;
 		default:

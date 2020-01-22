@@ -105,18 +105,26 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 	std::vector<std::string> split;
 	StringUtility::split(data, '|', split);
 
+	float speed = 1.0f;
+	//é€Ÿåº¦ã®è¨­å®šãŒã‚ã‚‹ã‹ã©ã†ã‹
+	if (split.size() > 2)
+	{
+		//é€Ÿåº¦ã‚’å–å¾—
+		speed = strtof(split.at(2).c_str(), nullptr);
+	}
+
 	if (split.at(1) == "R")
-		object = new ObjN(m_pGameMediator, 0);
+		object = new ObjN(m_pGameMediator, 0, speed);
 	else if (split.at(1) == "L")
-		object = new ObjN(m_pGameMediator, 1);
-	else if (split.at(0) == "B")
+		object = new ObjN(m_pGameMediator, 1, speed);
+	else if (split.at(1) == "B")
 		object = new Boots(m_pGameMediator);
 
 	if (object != nullptr)
 	{
 		object->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
 
-		//ŠÇ——p‚ÉTileƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+		//ç®¡ç†ç”¨ã«Tileã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
 		auto tile = new Tile(object);
 	}
 }
@@ -134,7 +142,7 @@ void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int
 	TILE_IMAGE_TYPE imageType;
 
 	if (!hasCollider)
-		imageType = TILE_IMAGE_TYPE_CENTER;
+		imageType = getImageTypeDiag(reader, x, y);
 	else
 		imageType = getImageType(isUpExist, isDownExist, isRightExist, isLeftExist);
 
@@ -145,7 +153,7 @@ void Tilemap::spawnSingleBlock(CSVReader& reader, std::string data, unsigned int
 	{
 		object->setPosition(Vec3(x * m_CellWidth + m_CellWidth * 0.5f, -(y * m_CellHeight + m_CellHeight * 0.5f), 0) + getPosition());
 
-		//ŠÇ——p‚ÉTileƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+		//ç®¡ç†ç”¨ã«Tileã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
 		auto tile = new Tile(object);
 	}
 }
@@ -209,7 +217,7 @@ void Tilemap::spawnMultiBlock(CSVReader& reader, std::vector<std::string>& group
 	{
 		object->setPosition(position);
 
-		//ŠÇ——p‚ÉTileƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+		//ç®¡ç†ç”¨ã«Tileã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
 		auto tile = new Tile(object);
 	}
 }
@@ -270,6 +278,34 @@ TILE_IMAGE_TYPE Tilemap::getImageType(bool isUpExist, bool isDownExist, bool isR
 	else if (!isUpExist && !isDownExist &&
 		isLeftExist && isRightExist)
 		imageType = TILE_IMAGE_TYPE_RIGHTCOLUMN;
+
+	return imageType;
+}
+
+TILE_IMAGE_TYPE Tilemap::getImageTypeDiag(CSVReader& reader, unsigned int x, unsigned int y)
+{
+	bool isUpLeftExist = reader.getDataClampIndex(x - 1, y - 1) == "1";
+	bool isUpRightExist = reader.getDataClampIndex(x + 1, y - 1) == "1";
+	bool isDownLeftExist = reader.getDataClampIndex(x - 1, y + 1) == "1";
+	bool isDownRightExist = reader.getDataClampIndex(x + 1, y + 1) == "1";
+
+	TILE_IMAGE_TYPE imageType = TILE_IMAGE_TYPE_CENTER;
+	
+	if (!isUpLeftExist && isUpRightExist &&
+		isDownLeftExist && isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVUPLEFT;
+
+	else if (isUpLeftExist && !isUpRightExist &&
+		isDownLeftExist && isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVUPRIGHT;
+
+	else if (isUpLeftExist && isUpRightExist &&
+		!isDownLeftExist && isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVDOWNLEFT;
+
+	else if (isUpLeftExist && isUpRightExist &&
+		isDownLeftExist && !isDownRightExist)
+		imageType = TILE_IMAGE_TYPE_INVDOWNRIGHT;
 
 	return imageType;
 }

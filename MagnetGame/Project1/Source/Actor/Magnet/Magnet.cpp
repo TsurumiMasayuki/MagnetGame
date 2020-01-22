@@ -29,16 +29,16 @@ Magnet::~Magnet()
 
 void Magnet::start()
 {
-	if (!m_IsMove)
+	if (!m_IsMagChange)
 	{
 		auto noMagChangeSprite = new SpriteRenderer(this, 110);
 		noMagChangeSprite->setTextureName("Cross");
-		noMagChangeSprite->setColor(Color(DirectX::Colors::MediumPurple));
+		noMagChangeSprite->setColor(Color(DirectX::Colors::White));
 		noMagChangeSprite->setUVRect(RectF(0, 0, getSize().x / 32, getSize().y / 32));
 	}
 
 	m_pSprite = new MultiSpriteRenderer(this, 32);
-	std::string lockTexture = m_IsMagChange ? "" : "Stop";
+	std::string lockTexture = m_IsMove ? "" : "Stop";
 
 	if (m_MagOption == MAGNET_N)
 		m_pSprite->setTextureName("NBlock" + lockTexture);
@@ -137,7 +137,7 @@ void Magnet::setMagOption(GameObject* pHit)
 		effect->setPosition(effectPos);
 	}
 
-	std::string lockTexture = m_IsMagChange ? "" : "Stop";
+	std::string lockTexture = m_IsMove ? "" : "Stop";
 
 	if (m_MagOption == MAGNET_N)
 		m_pSprite->setTextureName("NBlock" + lockTexture);

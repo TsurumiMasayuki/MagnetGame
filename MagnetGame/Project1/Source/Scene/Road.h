@@ -6,6 +6,8 @@ class GameObjectManager;
 class TitleBackGround;
 class EventText;
 class TitlePlayer;
+class FadeOut;
+class TitleFade;
 
 class Road:
 	public AbstractScene,IGameMediator{
@@ -38,6 +40,8 @@ private:
 	TitleBackGround*m_pBackGround;
 	EventText*m_pText;
 	TitlePlayer*m_pRoadPlayer;
+	FadeOut*m_pFadeOut;
+	TitleFade*m_pFadeIn;
 
 	bool m_pRoadEndFlag;
 };

@@ -6,7 +6,7 @@ TitleHane::TitleHane( IGameMediator * pMediator):GameObject(pMediator)
 
 void TitleHane::start()
 {
-	sprite = new SpriteRenderer(this,98);
+	sprite = new SpriteRenderer(this,102);
 	setSize(300);
 	sprite->setTextureName("hane");
 	angle = 0;

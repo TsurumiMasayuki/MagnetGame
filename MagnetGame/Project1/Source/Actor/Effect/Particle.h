@@ -10,7 +10,7 @@ class Particle :
 {
 public:
 	Particle(std::string name, Vec3 pos, float size_x, float size_y, float speed, float angle, float duration, float shrinkRate, IGameMediator * pMediator);
-	Particle(std::string name, Vec3 pos, float size_x, float size_y, float speed, float angle, float duration, float shrinkRate, Color color, IGameMediator * pMediator);
+	Particle(std::string name, Vec3 pos, float size_x, float size_y, float speed, float angle, float duration, float shrinkRate, Color color, IGameMediator * pMediator, bool useUnscaledTime = false);
 	~Particle();
 
 	virtual void start() override;
@@ -20,6 +20,7 @@ public:
 private:
 	Timer* timer;
 	Color color;
+	bool m_UseUnscaledTime;
 
 	std::string name;
 	Vec3 pos;

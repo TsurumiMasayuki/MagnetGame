@@ -17,6 +17,8 @@ class Timer;
 class SmokeEffect;
 class Letter;
 class ButtonTex;
+class FadeOut;
+class NameTexture;
 
 class Title :
 	public AbstractScene, IGameMediator {
@@ -59,6 +61,8 @@ private:
 	SmokeEffect*smokeEffect;
 	Letter*m_pLetter;
 	ButtonTex*m_pButton;
+	FadeOut*m_pFadeOut;
+	NameTexture*m_pNameTex;
 
 	enum SceneState
 	{
