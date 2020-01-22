@@ -48,7 +48,7 @@ void Title::init()
 	m_pTitleLogo->setPosition(Vec3(-250, 240, 0));
 
 	m_pDeliveryman = new Deliveryman(this);
-	m_pDeliveryman->setPosition(Vec3(640, -135, 0));
+	m_pDeliveryman->setPosition(Vec3(700, -135, 0));
 
 	m_pTitlePlayer = new TitlePlayer(this);
 	m_pTitlePlayer->setNum(0);
