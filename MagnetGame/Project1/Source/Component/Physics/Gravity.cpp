@@ -28,7 +28,7 @@ void Gravity::onStart()
 	auto collider = new BoxCollider2D(m_pGroundDetector);
 	collider->isTrigger = true;
 	collider->isMove = true;
-	collider->setWidth(m_pUser->getSize().x * 0.8f);
+	collider->setWidth(m_pUser->getSize().x * 0.6f);
 	collider->setHeight(6);
 
 	m_DetectorDistance = m_pUser->getSize().y * 0.5f;
