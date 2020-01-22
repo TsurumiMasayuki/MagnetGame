@@ -70,7 +70,7 @@ void GamePlay::init()
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart() || m_pPlayer->isSandwich())
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart() || (m_pPlayer->isSandwich() && m_pPlayer->isRespawn))
 	{
 		//ポーズの処理
 		m_pPause->setReStart(false);
@@ -87,6 +87,7 @@ void GamePlay::update()
 		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 		ReadRespawnData();
+		m_pPlayer->isRespawn = false;
 		m_pPlayer->Respawn();
 	}
 
