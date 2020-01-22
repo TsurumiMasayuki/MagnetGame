@@ -117,6 +117,7 @@ void Entrance::update()
 		}
 		break;
 	case Entrance::Small:
+		m_pTitlePlayer->setIsGrobe(true);
 		m_pTitlePlayer->setSize(Vec3(m_pTitlePlayer->getSize().x - size,
 			m_pTitlePlayer->getSize().y - size,
 			0));
