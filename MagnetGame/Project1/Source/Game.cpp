@@ -69,6 +69,7 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/rog_name.png", "Name");
 	TextureManager::loadTexture(L"Assets/Textures/log_name_player.png", "lop");
 	TextureManager::loadTexture(L"Assets/Textures/log_name_doctor.png", "beard");
+	TextureManager::loadTexture(L"Assets/Textures/kanban.png", "kanban");
 
 #pragma region 背景
 	TextureManager::loadTexture(L"Assets/Textures/background/haikei1.png", "haikei1-0");
@@ -248,7 +249,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
   
-	m_pSceneManager->changeScene("Entrance");
+	m_pSceneManager->changeScene("GamePlay");
 
 }
 

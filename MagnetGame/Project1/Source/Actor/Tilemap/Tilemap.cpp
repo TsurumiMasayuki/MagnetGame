@@ -6,6 +6,7 @@
 #include "Actor\Magnet\Magnet.h"
 #include "Actor\Nobject\ObjN.h"
 #include "Actor\Boots.h"
+#include"Actor/Board.h"
 
 #include "Device\File\CSVReader.h"
 #include "Utility\StringUtility.h"
@@ -119,6 +120,8 @@ void Tilemap::spawnObject(CSVReader & reader, std::string data, unsigned int x, 
 		object = new ObjN(m_pGameMediator, 1, speed);
 	else if (split.at(1) == "B")
 		object = new Boots(m_pGameMediator);
+	else if (split.at(1) == "H")
+		object = new Board(m_pGameMediator);
 
 	if (object != nullptr)
 	{
