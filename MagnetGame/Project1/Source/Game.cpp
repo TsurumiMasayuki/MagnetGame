@@ -50,17 +50,18 @@ void Game::init()
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 
 	//画像のロード
+	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
+	TextureManager::loadTexture(L"Assets/Textures/X.png", "X");
+	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
 	TextureManager::loadTexture(L"Assets/Textures/CircleFill.png", "CircleFill");
 	TextureManager::loadTexture(L"Assets/Textures/CircleOutline.png", "CircleOutline");
 	TextureManager::loadTexture(L"Assets/Textures/BoxFill.png", "BoxFill");
 	TextureManager::loadTexture(L"Assets/Textures/BoxOutline.png", "BoxOutline");
 	TextureManager::loadTexture(L"Assets/Textures/smoke.png", "smoke");
 	TextureManager::loadTexture(L"Assets/Textures/white.png", "white");
-	TextureManager::loadTexture(L"Assets/Textures/N.png", "n");
 	TextureManager::loadTexture(L"Assets/Textures/superjumpeffect.png", "superjumpeffect");
 	TextureManager::loadTexture(L"Assets/Textures/mageffect.png", "mageffect");
 	TextureManager::loadTexture(L"Assets/Textures/yagi.png", "yagi");
-	TextureManager::loadTexture(L"Assets/Textures/A.png", "A");
 	TextureManager::loadTexture(L"Assets/Textures/Back.png", "Back");
 	TextureManager::loadTexture(L"Assets/Textures/letter.png", "letter");
 	TextureManager::loadTexture(L"Assets/Textures/PushA.png", "PushA");
@@ -107,6 +108,7 @@ void Game::init()
 
 #pragma region テキスト
 	TextureManager::loadTexture(L"Assets/Textures/log_arrow.png", "log_arrow");
+	TextureManager::loadTexture(L"Assets/Textures/log_arrow_A.png", "log_arrow_A");
 	TextureManager::loadTexture(L"Assets/Textures/log_hakase.png", "log_hakase");
 	TextureManager::loadTexture(L"Assets/Textures/log_hakase_black.png", "log_hakase_black");
 	TextureManager::loadTexture(L"Assets/Textures/log_player.png", "log_player");
@@ -168,10 +170,15 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Pause/howto.png", "howto");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/pause.png", "pause");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/sousa.png", "sousa");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/sousa_Text.png", "sousa_Text");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/Punch_Ex.png", "Punch_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Punch_Ex_Text.png", "Punch_Ex_Text");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/Mag_Ex.png", "Mag_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Mag_Ex_Text.png", "Mag_Ex_Text");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/N_Ex.png", "N_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/N_Ex_Text.png", "N_Ex_Text");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/Jump_Ex.png", "Jump_Ex");
+	TextureManager::loadTexture(L"Assets/Textures/Pause/Jump_Ex_Text.png", "Jump_Ex_Text");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check.png", "check");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check2.png", "check2");
 	TextureManager::loadTexture(L"Assets/Textures/Pause/check3.png", "check3");
@@ -241,7 +248,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
   
-	m_pSceneManager->changeScene("Title");
+	m_pSceneManager->changeScene("Entrance");
 
 }
 
