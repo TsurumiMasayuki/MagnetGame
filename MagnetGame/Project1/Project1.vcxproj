@@ -184,6 +184,7 @@
     <ClCompile Include="Source\Actor\Performance\EventText.cpp" />
     <ClCompile Include="Source\Actor\Performance\ExText.cpp" />
     <ClCompile Include="Source\Actor\Performance\FadeOut.cpp" />
+    <ClCompile Include="Source\Actor\Performance\Hint.cpp" />
     <ClCompile Include="Source\Actor\Performance\Item.cpp" />
     <ClCompile Include="Source\Actor\Performance\Letter.cpp" />
     <ClCompile Include="Source\Actor\Performance\NameTexture.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="Source\Actor\Performance\EventText.h" />
     <ClInclude Include="Source\Actor\Performance\ExText.h" />
     <ClInclude Include="Source\Actor\Performance\FadeOut.h" />
+    <ClInclude Include="Source\Actor\Performance\Hint.h" />
     <ClInclude Include="Source\Actor\Performance\Item.h" />
     <ClInclude Include="Source\Actor\Performance\Letter.h" />
     <ClInclude Include="Source\Actor\Performance\NameTexture.h" />

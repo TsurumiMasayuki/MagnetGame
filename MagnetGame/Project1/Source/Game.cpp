@@ -136,6 +136,9 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text20.png", "text20");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text21.png", "text21");
 
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text27.png", "text27");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text28.png", "text28");
+	TextureManager::loadTexture(L"Assets/Textures/Performance/text29.png", "text29");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text30.png", "text30");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text31.png", "text31");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text32.png", "text32");
@@ -166,6 +169,29 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text69.png", "text69");
 	TextureManager::loadTexture(L"Assets/Textures/Performance/text70.png", "text70");
 #pragma endregion
+
+#pragma region ヒント
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hinto.png", "hinto");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint1.png", "hint1");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint2.png", "hint2");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint3.png", "hint3");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint4.png", "hint4");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint5.png", "hint5");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint6.png", "hint6");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint7.png", "hint7");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint8.png", "hint8");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint9.png", "hint9");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint10.png", "hint10");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint11.png", "hint11");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint12.png", "hint12");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint13.png", "hint13");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint14.png", "hint14");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint15.png", "hint15");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint16.png", "hint16");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint17.png", "hint17");
+	TextureManager::loadTexture(L"Assets/Textures/HintText/hint18.png", "hint18");
+#pragma endregion
+
 
 #pragma region Pause
 	TextureManager::loadTexture(L"Assets/Textures/Pause/howto.png", "howto");
@@ -249,7 +275,7 @@ void Game::init()
 	m_pSceneManager->addScene("GamePlay", new GamePlay());
 	m_pSceneManager->addScene("Ending", new Ending());
   
-	m_pSceneManager->changeScene("GamePlay");
+	m_pSceneManager->changeScene("Title");
 
 }
 

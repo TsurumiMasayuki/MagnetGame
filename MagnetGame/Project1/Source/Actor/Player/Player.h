@@ -66,4 +66,9 @@ private:
 	float m_JumpForce;
 
 	static const float MOVE_SPEED;
+
+
+public:
+	bool m_isHint;
+
 };

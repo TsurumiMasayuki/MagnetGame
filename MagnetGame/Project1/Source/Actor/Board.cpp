@@ -10,6 +10,10 @@ Board::Board(IGameMediator * pMediator)
 
 }
 
+Board::~Board()
+{
+}
+
 void Board::start()
 {
 	setSize(Vec3(64, 64, 0));
@@ -24,33 +28,16 @@ void Board::start()
 	collider->isTrigger = true;
 
 	setPosition(Vec3(getPosition().x, getPosition().y - 16, 0));
-	isHint = false;
-	hintCnt=0;
 }
 
 void Board::onCollisionStay(GameObject * pHit)
 {
-	if (pHit->getTag() != "Player")return;
-	if (Input::isPadButtonDown(Input::PAD_BUTTON_X) || Input::isKeyDown(VK_SPACE)) {
-		isHint = true;
-	}
+	if (pHit->getTag() != "Player") return;
+		((Player*)pHit)->m_isHint = true;
 }
 
-bool Board::getIsHint()
+void Board::onCollisionExit(GameObject * pHit)
 {
-	return isHint;
-}
-
-void Board::setIsHint(bool value)
-{
-	isHint = value;
-}
-
-int Board::getHintCnt()
-{
-	return 0;
-}
-
-void Board::setHintCnt(int value)
-{
+	if (pHit->getTag() != "Player") return;
+	((Player*)pHit)->m_isHint = false;
 }

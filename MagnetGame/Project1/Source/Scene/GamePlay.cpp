@@ -23,6 +23,7 @@
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/ExText.h"
 #include"Actor/Performance/ButtonTex.h"
+#include"Actor/Performance/Hint.h"
 #include"Actor/Board.h"
 
 GamePlay::GamePlay()
@@ -35,7 +36,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1, 6);
+	m_CurrentStage = Vec2(1, 1);
 
 
 	m_pGameObjectManager = new GameObjectManager();
@@ -57,7 +58,7 @@ void GamePlay::init()
 	m_pPause->setActive(false);
 
 	m_pText = new EventText(this);
-	m_pText->setEventNum(30);
+	m_pText->setEventNum(27);
 	m_pText->setActive(false);
 
 	m_pFadeIn = new TitleFade(this);
@@ -73,12 +74,15 @@ void GamePlay::init()
 	m_pButton->setTextureName("X");
 	m_pButton->setActive(false);
 
-	
+	m_pHint = new Hint(this);
+	m_pHint->setHintNum(1);
+	m_pHint->setActive(false);
 
 	nScene = "Ending";
 
 	NowStageNum = 0;
 	m_GameEndFlag = false;
+	m_canPause = true;
 }
 
 void GamePlay::update()
@@ -88,6 +92,12 @@ void GamePlay::update()
 		//ポーズの処理
 		m_pPause->setReStart(false);
 		m_pPause->setActive(false);
+
+		//ヒント
+		m_pHint->setActive(false);
+		m_pPlayer->m_isHint = false;
+
+		GameTime::timeScale = 1.0f;
 
 		m_pCurrentStage->clear();
 
@@ -150,6 +160,9 @@ void GamePlay::update()
 
 	//フェード
 	Fade();
+
+	//ヒント
+	HintUpdate();
 
 	//シーンの更新
 	m_pGameObjectManager->update();
@@ -233,16 +246,22 @@ void GamePlay::gameEnd()
 
 void GamePlay::Pause()
 {
-	if (!m_pPause->isActive()) {
-		if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
-			m_pPause->setActive(true);
-			m_pPause->setReStart(false);
+	if (m_canPause) {
+		if (!m_pPause->isActive()) {
+			if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
+				m_pPause->setActive(true);
+				m_pPause->setReStart(false);
+			}
 		}
-	}
+		else {
 
-	if (m_pPause->IsEnd()) {
-		nScene = "Title";
-		m_GameEndFlag = true;
+			m_pButton->setActive(false);
+		}
+
+		if (m_pPause->IsEnd()) {
+			nScene = "Title";
+			m_GameEndFlag = true;
+		}
 	}
 
 }
@@ -275,6 +294,39 @@ void GamePlay::Fade()
 	}
 }
 
+void GamePlay::HintUpdate()
+{
+
+	if (m_pHint->isActive()) {
+		GameTime::timeScale = 0.0f;
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X) || Input::isPadButtonDown(Input::PAD_BUTTON_Y)) {
+			m_pHint->setActive(false);
+			GameTime::timeScale = 1.0f;
+			m_canPause = true;
+		}
+	}
+	else {
+		if (m_pPlayer->m_isHint) {
+			if (!m_pPause->isActive()&&!m_pText->isActive()) {
+				m_pButton->setActive(true);
+			}
+			if (!m_pText->isActive()) {
+				m_pButton->setPosition(Vec3(m_pPlayer->getPosition().x, m_pPlayer->getPosition().y + 96, 0));
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+					m_pButton->setActive(false);
+					m_pHint->setActive(true);
+					m_pHint->setHintNum((int)m_CurrentStage.y);
+					GameTime::timeScale = 0.0f;
+					m_canPause = false;
+				}
+			}
+		}
+		else {
+			m_pButton->setActive(false);
+		}
+	}
+}
+
 void GamePlay::TextUpdate()
 {
 
@@ -282,6 +334,24 @@ void GamePlay::TextUpdate()
 	if (m_pPlayer->getPosition().x >= -600) {
 		switch (NowStageNum)
 		{
+		case 1:
+			if (m_pPlayer->getPosition().x >= -450) {
+				if (m_pText->getEventNum() <= 30) {
+					m_pButton->setActive(false);
+					GameTime::timeScale = 0.0f;
+					m_pText->setActive(true);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+						m_pText->addEventNum();
+					}
+				}
+				else if (m_pText->getEventNum() > 30) {
+					GameTime::timeScale = 1.0f;
+					m_pText->setActive(false);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					}
+				}
+			}
+			break;
 		case 4:
 			if (m_pText->getEventNum() <= 33) {
 				GameTime::timeScale = 0.0f;
@@ -295,9 +365,9 @@ void GamePlay::TextUpdate()
 			}
 			else if (m_pText->getEventNum() > 33) {
 				m_pText->setActive(false);
+				GameTime::timeScale = 1.0f;
 				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 					m_pExText->setActive(false);
-					GameTime::timeScale = 1.0f;
 				}
 			}
 			break;
@@ -317,9 +387,9 @@ void GamePlay::TextUpdate()
 				}
 				else if (m_pText->getEventNum() > 36) {
 					m_pText->setActive(false);
+					GameTime::timeScale = 1.0f;
 					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 						m_pExText->setActive(false);
-						GameTime::timeScale = 1.0f;
 					}
 				}
 			}

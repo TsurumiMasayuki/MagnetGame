@@ -51,6 +51,8 @@ void Player::start()
 	initDetectors();
 	initMagChange();
 	initAnimations();
+
+	m_isHint = false;
 }
 
 void Player::update()
