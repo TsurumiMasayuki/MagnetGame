@@ -71,6 +71,8 @@ IState * PlayerState_MagChange::nextState()
 			return new PlayerState_Default(m_pPlayer);
 		if (m_pPlayer->GetJumpForce() <= 0)
 			return new PlayerState_Default(m_pPlayer);
+		if (m_pPlayer->isDetectUp() && m_pPlayer->isDetectDown())
+			return new PlayerState_Default(m_pPlayer);
 	}
 	return nullptr;
 }

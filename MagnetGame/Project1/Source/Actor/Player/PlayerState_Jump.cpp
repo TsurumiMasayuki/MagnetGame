@@ -45,6 +45,8 @@ IState * PlayerState_Jump::nextState()
 		return new PlayerState_Default(m_pPlayer);
 	if (MAX_JUMP_FORCE / 2 >= m_pPlayer->GetJumpForce() && m_pPlayer->isDetectUp())
 		return new PlayerState_Default(m_pPlayer);
+	if (m_pPlayer->isDetectUp() && m_pPlayer->isDetectDown())
+		return new PlayerState_Default(m_pPlayer);
 	if (GameInput::isMagChange())
 		return new PlayerState_MagChange(m_pPlayer);
 

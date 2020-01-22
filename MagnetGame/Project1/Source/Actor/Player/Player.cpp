@@ -199,7 +199,7 @@ void Player::initMagChange()
 
 void Player::initDetectors()
 {
-	float sizeX = getSize().x * 0.9f;
+	float sizeX = getSize().x * 0.8f;
 
 	m_pDetectUp = new DetectHelper(m_pGameMediator, this, { "Block", "MagnetN", "MagnetS" });
 	m_pDetectUp->setSize(Vec3(sizeX, 6, 0));
