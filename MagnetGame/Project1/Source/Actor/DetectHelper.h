@@ -19,6 +19,7 @@ public:
 
 	virtual void onCollisionEnter(GameObject* pHit) override;
 	virtual void onCollisionStay(GameObject* pHit) override;
+	virtual void onCollisionExit(GameObject* pHit) override;
 
 	GameObject* getUser();
 
