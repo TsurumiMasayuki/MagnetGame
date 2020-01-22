@@ -21,6 +21,8 @@
 #include"Actor/Performance/EventText.h"
 #include"Actor/Performance/FadeOut.h"
 #include"Actor/Performance/TitleFade.h"
+#include"Actor/Performance/ExText.h"
+#include"Actor/Performance/ButtonTex.h"
 
 GamePlay::GamePlay()
 {
@@ -32,7 +34,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::init()
 {
-	m_CurrentStage = Vec2(1, 1);
+	m_CurrentStage = Vec2(1, 6);
 
 
 	m_pGameObjectManager = new GameObjectManager();
@@ -62,6 +64,14 @@ void GamePlay::init()
 	
 	m_pFadeOut = new FadeOut(this);
 
+	m_pExText = new ExText(this, "N_Ex_Text");
+	m_pExText->setStateNum(3);
+	m_pExText->setActive(false);
+
+	m_pButton = new ButtonTex(this);
+	m_pButton->setTextureName("X");
+	m_pButton->setActive(false);
+
 	nScene = "Ending";
 
 	NowStageNum = 0;
@@ -70,7 +80,7 @@ void GamePlay::init()
 
 void GamePlay::update()
 {
-	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart() || m_pPlayer->isSandwich())
+	if (Input::isKeyDown('R') || Input::isPadButtonDown(Input::PAD_BUTTON_Y) || m_pPause->getReStart() || (m_pPlayer->isSandwich() && m_pPlayer->isRespawn))
 	{
 		//ポーズの処理
 		m_pPause->setReStart(false);
@@ -87,6 +97,7 @@ void GamePlay::update()
 		m_pCurrentStage->load("Assets/CSV/alpha" + std::to_string((int)m_CurrentStage.x) + "-" + std::to_string((int)m_CurrentStage.y) + ".csv");
 
 		ReadRespawnData();
+		m_pPlayer->isRespawn = false;
 		m_pPlayer->Respawn();
 	}
 
@@ -263,6 +274,7 @@ void GamePlay::Fade()
 
 void GamePlay::TextUpdate()
 {
+
 	NowStageNum = (int)m_CurrentStage.y;
 	if (m_pPlayer->getPosition().x >= -600) {
 		switch (NowStageNum)
@@ -273,25 +285,49 @@ void GamePlay::TextUpdate()
 				m_pText->setActive(true);
 				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 					m_pText->addEventNum();
+					if (m_pText->getEventNum() == 34) {
+						m_pExText->setActive(true);
+					}
 				}
 			}
 			else if (m_pText->getEventNum() > 33) {
 				m_pText->setActive(false);
-				GameTime::timeScale = 1.0f;
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pExText->setActive(false);
+					GameTime::timeScale = 1.0f;
+				}
 			}
 			break;
 		case 6:
 			if (m_pPlayer->isSuperJump) {
+				m_pButton->setActive(false);
 				if (m_pText->getEventNum() <= 36) {
 					GameTime::timeScale = 0.0f;
 					m_pText->setActive(true);
 					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
 						m_pText->addEventNum();
+						if (m_pText->getEventNum() == 37) {
+							m_pExText->setActive(true);
+							m_pExText->setStateNum(4);
+						}
 					}
 				}
 				else if (m_pText->getEventNum() > 36) {
 					m_pText->setActive(false);
-					GameTime::timeScale = 1.0f;
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+						m_pExText->setActive(false);
+						GameTime::timeScale = 1.0f;
+					}
+				}
+			}
+			else {
+				if (m_pPlayer->getPosition().x >= -324 && m_pPlayer->getPosition().x <= -196
+					&& m_pPlayer->getPosition().y <= -264 && m_pPlayer->getPosition().y >= -328) {
+					m_pButton->setActive(true);
+					m_pButton->setPosition(Vec3(m_pPlayer->getPosition().x,m_pPlayer->getPosition().y+96,0));
+				}
+				else {
+					m_pButton->setActive(false);
 				}
 			}
 			break;

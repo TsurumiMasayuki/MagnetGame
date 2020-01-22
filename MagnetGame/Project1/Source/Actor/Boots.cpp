@@ -29,7 +29,7 @@ void Boots::start()
 void Boots::onCollisionStay(GameObject * pHit)
 {
 	if (pHit->getTag() != "Player")return;
-	if (Input::isPadButtonDown(Input::PAD_BUTTON_A) || Input::isKeyDown(VK_SPACE)) {
+	if (Input::isPadButtonDown(Input::PAD_BUTTON_X) || Input::isKeyDown(VK_SPACE)) {
 		((Player*)pHit)->isSuperJump = true;
 		this->setActive(false);
 	}

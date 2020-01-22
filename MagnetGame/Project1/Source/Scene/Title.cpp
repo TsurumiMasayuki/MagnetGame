@@ -68,12 +68,12 @@ void Title::init()
 	smoketimer = new Timer(1);
 	
 	title_cloud = new Title_Cloud(this);
-	title_cloud->Cleate2(Vec3(-400,300,0),32, 30, 0, 2);
-	title_cloud->Cleate2(Vec3(-800,300,0),32, 30, 0, 2);
-	title_cloud->Cleate2(Vec3(0,300,0),32, 30, 0, 2);
-	title_cloud->Cleate2(Vec3(400,300,0),32, 30, 0, 2);
-	title_cloud->Cleate2(Vec3(200,200,0),32, 30, 0, 2);
-	title_cloud->Cleate2(Vec3(600,250,0),32, 30, 0, 2);
+	title_cloud->Cleate2(Vec3(-400,300,0),32, 100, 0, 1);
+	title_cloud->Cleate2(Vec3(-800,300,0),32, 100, 0, 1);
+	title_cloud->Cleate2(Vec3(0,300,0),32, 100, 0, 1);
+	title_cloud->Cleate2(Vec3(400,300,0),32,100, 0, 1);
+	title_cloud->Cleate2(Vec3(200,200,0),32, 100, 0, 1);
+	title_cloud->Cleate2(Vec3(600,250,0),32, 100, 0, 1);
 
 	smokeEffect = new SmokeEffect(this);
 	smokeEffect->Cleate(Vec3(-310, 100, 0),100,0.5f,2);
@@ -192,7 +192,7 @@ void Title::update()
 	timer->update();
 	smoketimer->update();
 	if (timer->isTime()) {
-		title_cloud->Cleate(32.0f, 30, 0, 2);
+		title_cloud->Cleate(32.0f, 100, 0, 2);
 		timer->reset();
 	}
 	if (smoketimer->isTime()) {

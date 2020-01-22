@@ -45,6 +45,8 @@ private:
 public:
 	bool isSuperJump;
 	bool isFlipX;
+	bool isRespawn;
+	bool m_IsRestart;
 
 private:
 	StateManager* m_pStateManager;
@@ -62,7 +64,6 @@ private:
 
 	Vec3 m_RespawnPoint;
 	float m_JumpForce;
-	bool m_IsRestart;
 
 	static const float MOVE_SPEED;
 };

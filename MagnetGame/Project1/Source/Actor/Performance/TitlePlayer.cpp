@@ -163,7 +163,14 @@ void TitlePlayer::update()
 			}
 		}
 		else {
-			x = 0;
+			x = 0; 
+			if (!isGrobe) {
+				anim->setAnimation("FirstIdle");
+			}
+			else {
+
+				anim->setAnimation("GrobeIdle");
+			}
 		}
 		break;
 	case 3://RoadƒV[ƒ“‚Ì—p

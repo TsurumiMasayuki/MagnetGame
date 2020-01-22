@@ -13,6 +13,7 @@ PlayerState_Respawn::PlayerState_Respawn(Player * pPlayer)
 PlayerState_Respawn::~PlayerState_Respawn()
 {
 	GameTime::timeScale = 1.0f;
+	m_pPlayer->isRespawn = true;
 }
 
 void PlayerState_Respawn::update()
@@ -30,7 +31,6 @@ void PlayerState_Respawn::onStateEnter()
 void PlayerState_Respawn::onStateExit()
 {
 	GameTime::timeScale = 1.0f;
-	m_pPlayer->Respawn();
 }
 
 IState * PlayerState_Respawn::nextState()
