@@ -33,7 +33,7 @@ const ImageInfo tileImageCoord[9] =
 	{ Vec2(1.0f / 4.0f * 1, 0.0f),  90.0f}, //ç∂â∫
 				  
 	//íÜêS			  	  
-	{ Vec2(1.0f / 4.0f * 2, 0.0f),	0.0f},
+	{ Vec2(1.0f / 4.0f * 0, 0.0f),	0.0f},
 };
 
 
