@@ -14,10 +14,10 @@ void Hint::start()
 {
 	setSize(Vec3(1280, 720, 0));
 
-	sprite = new SpriteRenderer(this, 300);
+	sprite = new SpriteRenderer(this, 320);
 	name = "hinto";
 	sprite->setTextureName(name);
-	text = new SpriteRenderer(this, 301);
+	text = new SpriteRenderer(this, 321);
 	text->setTextureName(name);
 
 

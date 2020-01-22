@@ -3,6 +3,7 @@
 #include "Component\Physics\BoxCollider2D.h"
 #include "Component\SpriteRenderer.h"
 #include"Device/Input.h"
+#include"Device/SoundManager.h"
 
 Boots::Boots(IGameMediator * pGameMediator) :
 	GameObject(pGameMediator)
@@ -31,6 +32,7 @@ void Boots::onCollisionStay(GameObject * pHit)
 	if (pHit->getTag() != "Player")return;
 	if (Input::isPadButtonDown(Input::PAD_BUTTON_X) || Input::isKeyDown(VK_SPACE)) {
 		((Player*)pHit)->isSuperJump = true;
+		SoundManager::playSE("get");
 		this->setActive(false);
 	}
 }

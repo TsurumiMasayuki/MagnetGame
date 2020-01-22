@@ -11,6 +11,7 @@ class Item;
 class ExText;
 class FadeOut;
 class TitleFade;
+class NameTexture;
 
 class Entrance :
 	public AbstractScene, IGameMediator {
@@ -46,6 +47,7 @@ private:
 	ExText*m_pExText;
 	FadeOut*m_pFadeOut;
 	TitleFade*m_pFadeIn;
+	NameTexture*m_pNameTex;
 
 	enum State {
 		Idle,

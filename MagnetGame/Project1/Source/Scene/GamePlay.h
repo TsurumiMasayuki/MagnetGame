@@ -14,6 +14,8 @@ class FadeOut;
 class ButtonTex;
 class ExText;
 class Hint;
+class NameTexture;
+class BackGround;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -51,6 +53,8 @@ private:
 	ExText*m_pExText;
 	ButtonTex*m_pButton;
 	Hint *m_pHint;
+	NameTexture*m_pNameTex;
+	BackGround*m_bg;
 
 	bool m_canPause;
 	bool m_GameEndFlag;

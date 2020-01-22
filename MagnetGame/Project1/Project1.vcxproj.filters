@@ -101,6 +101,7 @@
     <ClCompile Include="Source\Actor\Performance\NameTexture.cpp" />
     <ClCompile Include="Source\Actor\Board.cpp" />
     <ClCompile Include="Source\Actor\Performance\Hint.cpp" />
+    <ClCompile Include="Source\Actor\Performance\BackGround.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene\AbstractScene.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Source\Actor\Performance\NameTexture.h" />
     <ClInclude Include="Source\Actor\Board.h" />
     <ClInclude Include="Source\Actor\Performance\Hint.h" />
+    <ClInclude Include="Source\Actor\Performance\BackGround.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpritePS.hlsl" />

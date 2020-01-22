@@ -24,6 +24,8 @@
 #include"Actor/Performance/ExText.h"
 #include"Actor/Performance/ButtonTex.h"
 #include"Actor/Performance/Hint.h"
+#include"Actor/Performance/NameTexture.h"
+#include"Actor/Performance/BackGround.h"
 #include"Actor/Board.h"
 
 GamePlay::GamePlay()
@@ -77,6 +79,12 @@ void GamePlay::init()
 	m_pHint = new Hint(this);
 	m_pHint->setHintNum(1);
 	m_pHint->setActive(false);
+
+	m_pNameTex = new NameTexture(this);
+	m_pNameTex->setActive(false);
+
+	m_bg = new BackGround(this, "enddoor_open");
+	m_bg->setActive(false);
 
 	nScene = "Ending";
 
@@ -146,11 +154,23 @@ void GamePlay::update()
 	}
 
 	if (m_CurrentStage.y == 18) {
+		m_bg->setActive(true);
+		m_bg->setTextureName("enddoor_open");
 		if (m_pPlayer->getPosition().x <= 350 && m_pPlayer->getPosition().x >= 280) {
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pFadeIn->setActive(true);
 			}
 		}
+	}
+	else if (m_CurrentStage.y == 1) {
+
+		m_bg->setActive(true);
+		m_bg->setPosition(Vec3(-250,-175,0));
+		m_bg->setTextureName("firstdoor_open");
+		
+	}
+	else {
+		m_bg->setActive(false);
 	}
 
 	//ポーズの更新処理
@@ -249,6 +269,7 @@ void GamePlay::Pause()
 	if (m_canPause) {
 		if (!m_pPause->isActive()) {
 			if (Input::isKeyDown(VK_ESCAPE) || Input::isPadButtonDown(Input::PAD_BUTTON_START)) {
+				SoundManager::playSE("pause");
 				m_pPause->setActive(true);
 				m_pPause->setReStart(false);
 			}
@@ -296,33 +317,65 @@ void GamePlay::Fade()
 
 void GamePlay::HintUpdate()
 {
-
-	if (m_pHint->isActive()) {
-		GameTime::timeScale = 0.0f;
-		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X) || Input::isPadButtonDown(Input::PAD_BUTTON_Y)) {
-			m_pHint->setActive(false);
-			GameTime::timeScale = 1.0f;
-			m_canPause = true;
-		}
-	}
-	else {
-		if (m_pPlayer->m_isHint) {
-			if (!m_pPause->isActive()&&!m_pText->isActive()) {
-				m_pButton->setActive(true);
-			}
-			if (!m_pText->isActive()) {
-				m_pButton->setPosition(Vec3(m_pPlayer->getPosition().x, m_pPlayer->getPosition().y + 96, 0));
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
-					m_pButton->setActive(false);
-					m_pHint->setActive(true);
-					m_pHint->setHintNum((int)m_CurrentStage.y);
-					GameTime::timeScale = 0.0f;
-					m_canPause = false;
-				}
+	if (m_CurrentStage.y != 6) {
+		if (m_pHint->isActive()) {
+			GameTime::timeScale = 0.0f;
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+				m_pHint->setActive(false);
+				GameTime::timeScale = 1.0f;
+				SoundManager::playSE("kettei");
+				m_canPause = true;
 			}
 		}
 		else {
-			m_pButton->setActive(false);
+			if (m_pPlayer->m_isHint) {
+				if (!m_pPause->isActive() && !m_pText->isActive()) {
+					m_pButton->setActive(true);
+				}
+				if (!m_pText->isActive()) {
+					m_pButton->setPosition(Vec3(m_pPlayer->getPosition().x, m_pPlayer->getPosition().y + 96, 0));
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+						SoundManager::playSE("kettei");
+						m_pButton->setActive(false);
+						m_pHint->setActive(true);
+						m_pHint->setHintNum((int)m_CurrentStage.y);
+						GameTime::timeScale = 0.0f;
+						m_canPause = false;
+					}
+				}
+			}
+			else {
+				m_pButton->setActive(false);
+			}
+		}
+	}
+	else {
+		if (m_pHint->isActive()) {
+			GameTime::timeScale = 0.0f;
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+				m_pHint->setActive(false);
+				GameTime::timeScale = 1.0f;
+				SoundManager::playSE("kettei");
+				m_canPause = true;
+			}
+		}
+		else {
+			if (m_pPlayer->m_isHint) {
+				if (!m_pPause->isActive() && !m_pText->isActive()) {
+					m_pButton->setActive(true);
+				}
+				if (!m_pText->isActive()) {
+					m_pButton->setPosition(Vec3(m_pPlayer->getPosition().x, m_pPlayer->getPosition().y + 96, 0));
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+						SoundManager::playSE("kettei");
+						m_pButton->setActive(false);
+						m_pHint->setActive(true);
+						m_pHint->setHintNum((int)m_CurrentStage.y);
+						GameTime::timeScale = 0.0f;
+						m_canPause = false;
+					}
+				}
+			}
 		}
 	}
 }
@@ -340,15 +393,16 @@ void GamePlay::TextUpdate()
 					m_pButton->setActive(false);
 					GameTime::timeScale = 0.0f;
 					m_pText->setActive(true);
-					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pNameTex->setActive(true);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 						m_pText->addEventNum();
+						m_pNameTex->setEventNum(m_pText->getEventNum());
 					}
 				}
 				else if (m_pText->getEventNum() > 30) {
 					GameTime::timeScale = 1.0f;
 					m_pText->setActive(false);
-					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-					}
+					m_pNameTex->setActive(false);
 				}
 			}
 			break;
@@ -356,8 +410,10 @@ void GamePlay::TextUpdate()
 			if (m_pText->getEventNum() <= 33) {
 				GameTime::timeScale = 0.0f;
 				m_pText->setActive(true);
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pNameTex->setActive(true);
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 					m_pText->addEventNum();
+					m_pNameTex->setEventNum(m_pText->getEventNum());
 					if (m_pText->getEventNum() == 34) {
 						m_pExText->setActive(true);
 					}
@@ -366,7 +422,8 @@ void GamePlay::TextUpdate()
 			else if (m_pText->getEventNum() > 33) {
 				m_pText->setActive(false);
 				GameTime::timeScale = 1.0f;
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				m_pNameTex->setActive(false);
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 					m_pExText->setActive(false);
 				}
 			}
@@ -377,8 +434,10 @@ void GamePlay::TextUpdate()
 				if (m_pText->getEventNum() <= 36) {
 					GameTime::timeScale = 0.0f;
 					m_pText->setActive(true);
-					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pNameTex->setActive(true);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 						m_pText->addEventNum();
+						m_pNameTex->setEventNum(m_pText->getEventNum());
 						if (m_pText->getEventNum() == 37) {
 							m_pExText->setActive(true);
 							m_pExText->setStateNum(4);
@@ -388,7 +447,8 @@ void GamePlay::TextUpdate()
 				else if (m_pText->getEventNum() > 36) {
 					m_pText->setActive(false);
 					GameTime::timeScale = 1.0f;
-					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+					m_pNameTex->setActive(false);
+					if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 						m_pExText->setActive(false);
 					}
 				}

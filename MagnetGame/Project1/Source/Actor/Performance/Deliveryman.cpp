@@ -56,7 +56,7 @@ void Deliveryman::update()
 	switch (state)
 	{
 	case Deliveryman::Idle:
-		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 			state = State::Move;
 			SoundManager::playSE("bike");
 		}
@@ -70,7 +70,7 @@ void Deliveryman::update()
 	case Deliveryman::Anim:
 		m_pMove = false;
 		Cnt++;
-		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)||Cnt>=90) {
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)||Cnt>=90) {
 			state = State::Move2;
 			SoundManager::playSE("bike",1);
 		}

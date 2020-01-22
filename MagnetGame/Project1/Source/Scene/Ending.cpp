@@ -9,6 +9,7 @@
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/EndTex.h"
 #include"Actor/Performance/ButtonTex.h"
+#include"Actor/Performance/NameTexture.h"
 #include "Physics\PhysicsWorld.h"
 
 Ending::Ending()
@@ -46,8 +47,14 @@ void Ending::init()
 	m_pEndingTexture->setActive(false);
 
 	m_pButton = new ButtonTex(this);
-	m_pButton->setTextureName("PushA");
+	m_pButton->setTextureName("PushX");
 	m_pButton->setActive(false);
+
+	m_pNameTex = new NameTexture(this);
+	m_pNameTex->setActive(false);
+
+	m_camera = false;
+	frameCnt = 0;
 
 	SoundManager::playBGM("ending");
 }
@@ -83,12 +90,15 @@ void Ending::update()
 		m_pText->setActive(true);
 		if (m_pText->getEventNum() <= 55) {
 			m_pText->setActive(true);
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			m_pNameTex->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pText->addEventNum();
+				m_pNameTex->setEventNum(m_pText->getEventNum());
 			}
 		}
 		else if (m_pText->getEventNum() > 55) {
 			m_pText->setActive(false);
+			m_pNameTex->setActive(false);
 			eState = EndingState::Big;
 		}
 		break;
@@ -106,12 +116,15 @@ void Ending::update()
 		m_pText->setActive(true);
 		if (m_pText->getEventNum() <= 60) {
 			m_pText->setActive(true);
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			m_pNameTex->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pText->addEventNum();
+				m_pNameTex->setEventNum(m_pText->getEventNum());
 			}
 		}
 		else if (m_pText->getEventNum() > 60) {
 			m_pText->setActive(false);
+			m_pNameTex->setActive(false);
 			eState = EndingState::Move;
 		}
 		break;
@@ -123,25 +136,42 @@ void Ending::update()
 		break;
 	case Ending::Talk3:
 
-		m_pText->setActive(true);
-		if (m_pText->getEventNum() <= 70) {
+		if (!m_camera) {
 			m_pText->setActive(true);
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
-				m_pText->addEventNum();
+			if (m_pText->getEventNum() <= 70) {
+				m_pText->setActive(true);
+				m_pNameTex->setActive(true);
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+					if (m_pText->getEventNum() == 67) {
+						m_camera = true;
+					}
+					m_pText->addEventNum();
+					m_pNameTex->setEventNum(m_pText->getEventNum());
+
+				}
+
+			}
+			else if (m_pText->getEventNum() > 70) {
+				m_pText->setActive(false);
+				m_pNameTex->setActive(false);
+				eState = EndingState::EndText;
 			}
 		}
-		else if (m_pText->getEventNum() > 70) {
-			m_pText->setActive(false);
-			eState = EndingState::EndText;
+		else {
+			frameCnt++;
+			if (frameCnt >= 180) {
+				SoundManager::playSE("camera");
+				m_camera = false;
+			}
 		}
 		break;
 	case Ending::EndText:
 		m_pEndingTexture->setActive(true);
 		if (m_pEndingTexture->getAlpha() >= 2.0f) {
 			m_pButton->setActive(true);
-			m_pButton->setTextureName("PushA_E");
+			m_pButton->setTextureName("PushX_E");
 			m_pButton->setSize(Vec3(1280, 800, 0));
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pTitleEndFlag = true;
 			}
 		}
