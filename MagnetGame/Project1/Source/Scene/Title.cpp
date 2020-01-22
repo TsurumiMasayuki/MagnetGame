@@ -1,5 +1,6 @@
 #include "Title.h"
 #include "Device\Input.h"
+#include"Device/GameTime.h"
 #include"Actor/GameObjectManager.h"
 #include"Actor/Performance/Deliveryman.h"
 #include"Actor/Performance/TitlePlayer.h"
@@ -92,6 +93,9 @@ void Title::init()
 	m_pText = new EventText(this);
 	m_pText->setEventNum(0);
 	m_pText->setActive(false);
+
+	GameTime::timeScale = 1.0f;
+
 
 	Cnt = 0;
 	Alpha = 0;

@@ -203,6 +203,7 @@
     <ClCompile Include="Source\Actor\Tilemap\Block.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\GoalObject.cpp" />
     <ClCompile Include="Source\Actor\Tilemap\Tilemap.cpp" />
+    <ClCompile Include="Source\Actor\Board.cpp" />
     <ClCompile Include="Source\Component\AnimSpriteRenderer.cpp" />
     <ClCompile Include="Source\Component\MultiSpriteRenderer.cpp" />
     <ClCompile Include="Source\Component\Physics\AbstractCollider2D.cpp" />
@@ -305,6 +306,7 @@
     <ClInclude Include="Source\Actor\Tilemap\GoalObject.h" />
     <ClInclude Include="Source\Actor\Tilemap\TileImageType.h" />
     <ClInclude Include="Source\Actor\Tilemap\Tilemap.h" />
+    <ClInclude Include="Source\Actor\Board.h" />
     <ClInclude Include="Source\Component\AnimSpriteRenderer.h" />
     <ClInclude Include="Source\Component\MultiSpriteRenderer.h" />
     <ClInclude Include="Source\Component\Physics\AbstractCollider2D.h" />
