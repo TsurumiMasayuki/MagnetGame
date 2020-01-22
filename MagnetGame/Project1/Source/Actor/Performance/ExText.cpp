@@ -1,5 +1,6 @@
 #include "ExText.h"
 #include "Component\SpriteRenderer.h"
+#include"Device/SoundManager.h"
 
 ExText::ExText(IGameMediator * pMediator, std::string TextureName)
 	:GameObject(pMediator)
@@ -65,6 +66,7 @@ void ExText::setStateNum(int value)
 void ExText::addStateNum()
 {
 	stateNum++;
+	SoundManager::playSE("kettei");
 }
 
 int ExText::getStateNum()

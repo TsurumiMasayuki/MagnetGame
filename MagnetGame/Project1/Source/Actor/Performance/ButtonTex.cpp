@@ -14,7 +14,7 @@ void ButtonTex::start()
 {
 	setSize(Vec3(64, 64, 0));
 
-	sprite = new SpriteRenderer(this, 410);
+	sprite = new SpriteRenderer(this, 310);
 	sprite->setTextureName(name);
 	//name="A";
 	alpha = 1;

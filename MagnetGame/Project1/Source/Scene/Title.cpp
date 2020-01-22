@@ -105,7 +105,7 @@ void Title::init()
 void Title::update()
 {
 	m_pButton->setSize(Vec3(1280, 800, 0));
-	m_pButton->setTextureName("PushA");
+	m_pButton->setTextureName("PushX");
 
 	if (m_pFadeOut->getAlpha() <= -2.0f) {
 		m_pFadeOut->setActive(false);
@@ -115,7 +115,7 @@ void Title::update()
 	case Title::Idle:
 		Alpha += 0.06f;
 		m_pButton->setAlpha(cos(Alpha)+sin(Alpha));
-		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+		if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 			sState = SceneState::Delivery;
 			m_pTitleLogo->setFade(true);
 			m_pButton->setActive(false);
@@ -144,7 +144,7 @@ void Title::update()
 				m_pText->setActive(true);
 				m_pNameTex->setActive(true);
 
-				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+				if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 					m_pText->addEventNum();
 					m_pNameTex->setEventNum(m_pText->getEventNum());
 				}

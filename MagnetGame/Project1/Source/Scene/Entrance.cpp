@@ -11,6 +11,7 @@
 #include"Actor/Performance/ExText.h"
 #include"Actor/Performance/FadeOut.h"
 #include"Actor/Performance/TitleFade.h"
+#include"Actor/Performance/NameTexture.h"
 #include"Device/SoundManager.h"
 
 
@@ -52,6 +53,9 @@ void Entrance::init()
 	m_pFadeIn = new TitleFade(this);
 	m_pFadeIn->setActive(false);
 
+	m_pNameTex = new NameTexture(this);
+	m_pNameTex->setActive(false);
+
 	state = State::Idle;
 
 	m_pEntranceEndFlag = false;
@@ -84,12 +88,15 @@ void Entrance::update()
 	case Entrance::Talk:
 		if (m_pText->getEventNum() <= 9) {
 			m_pText->setActive(true);
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			m_pNameTex->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pText->addEventNum();
+				m_pNameTex->setEventNum(m_pText->getEventNum());
 			}
 		}
 		else if (m_pText->getEventNum() > 9) {
 			m_pText->setActive(false);
+			m_pNameTex->setActive(false);
 			state = State::Move;
 		}
 
@@ -110,6 +117,7 @@ void Entrance::update()
 				m_pTitlePlayer->setIsGrobe(true);
 				m_pTitlePlayer->setCanMove(false);
 				m_pItem->setActive(false);
+				SoundManager::playSE("get");
 			}
 		}
 		else {
@@ -132,9 +140,11 @@ void Entrance::update()
 	case Entrance::Talk2:
 		if (m_pText->getEventNum() <= 21) {
 			m_pText->setActive(true);
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			m_pNameTex->setActive(true);
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				if (m_pText->getEventNum() != 21) {
 					m_pText->addEventNum();
+					m_pNameTex->setEventNum(m_pText->getEventNum());
 				}
 				else {
 					SoundManager::playBGM("game2");
@@ -143,23 +153,28 @@ void Entrance::update()
 			}
 		}
 		else if (m_pText->getEventNum() > 21) {
+			m_pNameTex->setActive(false);
 			m_pText->setActive(false);
 			state = State::Explain;
 		}
 		if (m_pText->getEventNum() == 21) {
 			m_pBackGround->setTextureName("haikei1-2");
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+				SoundManager::playSE("open");
+			}
+
 		}
 		break;
 	case Entrance::Explain:
 		m_pExText->setActive(true);
 
 		if (m_pExText->getStateNum() < 2) {
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				m_pExText->addStateNum();
 			}
 		}
 		else {
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
 				state = State::Move2;
 				m_pExText->setActive(false);
 			}

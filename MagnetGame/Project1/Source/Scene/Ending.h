@@ -9,6 +9,7 @@ class TitlePlayer;
 class TitleFade;
 class EndTex;
 class ButtonTex;
+class NameTexture;
 
 class Ending :
 	public AbstractScene, IGameMediator {
@@ -43,6 +44,7 @@ private:
 	TitleFade*m_pFade;
 	EndTex*m_pEndingTexture;
 	ButtonTex*m_pButton;
+	NameTexture*m_pNameTex;
 
 	enum EndingState
 	{
@@ -59,5 +61,7 @@ private:
 	EndingState eState;
 
 	bool m_pTitleEndFlag;
+	bool m_camera;
+	int frameCnt;
 	int Cnt;
 };

@@ -66,6 +66,8 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/letter.png", "letter");
 	TextureManager::loadTexture(L"Assets/Textures/PushA.png", "PushA");
 	TextureManager::loadTexture(L"Assets/Textures/PushA_Ending.png", "PushA_E");
+	TextureManager::loadTexture(L"Assets/Textures/PushX.png", "PushX");
+	TextureManager::loadTexture(L"Assets/Textures/PushX_Ending.png", "PushX_E");
 	TextureManager::loadTexture(L"Assets/Textures/rog_name.png", "Name");
 	TextureManager::loadTexture(L"Assets/Textures/log_name_player.png", "lop");
 	TextureManager::loadTexture(L"Assets/Textures/log_name_doctor.png", "beard");
@@ -84,6 +86,10 @@ void Game::init()
 	TextureManager::loadTexture(L"Assets/Textures/background/ending.png", "ending");
 	TextureManager::loadTexture(L"Assets/Textures/background/ending_open.png", "ending_open");
 	TextureManager::loadTexture(L"Assets/Textures/background/fin.png", "fin");
+	TextureManager::loadTexture(L"Assets/Textures/background/enddoor.png", "enddoor");
+	TextureManager::loadTexture(L"Assets/Textures/background/enddoor_open.png", "enddoor_open");
+	TextureManager::loadTexture(L"Assets/Textures/background/firstdoor.png", "firstdoor");
+	TextureManager::loadTexture(L"Assets/Textures/background/firstdoor_open.png", "firstdoor_open");
 #pragma endregion
 
 #pragma region Opening
@@ -263,6 +269,10 @@ void Game::init()
 	SoundManager::loadWavFile(L"Assets/Sound/SE/door.wav", "door");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/open.wav", "open");
 	SoundManager::loadWavFile(L"Assets/Sound/SE/walk.wav", "walk");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/get.wav", "get");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/pause.wav", "pause");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/camera.wav", "camera");
+	SoundManager::loadWavFile(L"Assets/Sound/SE/cancel.wav", "cancel");
 #pragma endregion
 
 	GameDevice::initialize();

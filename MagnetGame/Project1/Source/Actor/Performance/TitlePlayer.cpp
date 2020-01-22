@@ -49,7 +49,7 @@ void TitlePlayer::update()
 		Vec3 move(1.0f*MOVE_SPEED*GameTime::getDeltaTime(), 0, 0);
 		setPosition(getPosition() + move);
 		seCnt++;
-		if (seCnt % 45 == 0) {
+		if (seCnt % 44 == 0) {
 			seCnt = 0;
 			SoundManager::playSE("walk");
 		}
@@ -156,10 +156,10 @@ void TitlePlayer::update()
 			anim->setFlipX(isFlipX);
 
 			if (pos.x <= -608) {
-				setPosition(Vec3(-608, -283, 0));
+				setPosition(Vec3(-608, -235, 0));
 			}
 			else if (pos.x >= 608) {
-				setPosition(Vec3(608, -283, 0));
+				setPosition(Vec3(608, -235, 0));
 			}
 		}
 		else {

@@ -2,6 +2,7 @@
 #include "Component\SpriteRenderer.h"
 #include"Device/Input.h"
 #include"Device/GameTime.h"
+#include"Device/SoundManager.h"
 
 PauseObject::PauseObject(IGameMediator * pMediator)
 	:GameObject(pMediator)
@@ -46,7 +47,8 @@ void PauseObject::update()
 			sprite->setTextureName("pause");
 			check->setActive(true);
 
-			if (Input::isPadButtonDown(Input::PAD_BUTTON_A) || Input::isKeyDown(VK_SPACE)) {
+			if (Input::isPadButtonDown(Input::PAD_BUTTON_X) || Input::isKeyDown(VK_SPACE)) {
+				SoundManager::playSE("pause");
 				switch (checkNum)
 				{
 				case 0:
@@ -70,6 +72,7 @@ void PauseObject::update()
 				case 4://ƒ^ƒCƒgƒ‹‚Ö
 					setActive(false);
 					isEndFlag = true;
+					SoundManager::playSE("pause");
 					break;
 				default:
 					break;
@@ -91,10 +94,12 @@ void PauseObject::update()
 				selectNum = 5;
 			}
 
-			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_A)) {
+			if (Input::isKeyDown(VK_SPACE) || Input::isPadButtonDown(Input::PAD_BUTTON_X)) {
+				SoundManager::playSE("pause");
 				pNum = selectNum;
 			}
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B)||Input::isKeyDown(VK_BACK)) {
+				SoundManager::playSE("cancel");
 				pNum = 0;
 				checkNum = 0;
 				selectNum = 2;
@@ -105,6 +110,7 @@ void PauseObject::update()
 			sprite->setTextureName("Mag_Ex");
 			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				SoundManager::playSE("cancel");
 				pNum = 1;
 				checkNum = 0;
 				selectNum = 2;
@@ -114,6 +120,7 @@ void PauseObject::update()
 			sprite->setTextureName("Punch_Ex");
 			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				SoundManager::playSE("cancel");
 				pNum = 1;
 				checkNum = 0;
 				selectNum = 2;
@@ -123,6 +130,7 @@ void PauseObject::update()
 			sprite->setTextureName("N_Ex");
 			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				SoundManager::playSE("cancel");
 				pNum = 1;
 				checkNum = 0;
 				selectNum = 2;
@@ -132,6 +140,7 @@ void PauseObject::update()
 			sprite->setTextureName("Jump_Ex");
 			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				SoundManager::playSE("cancel");
 				pNum = 1;
 				checkNum = 0;
 				selectNum = 2;
@@ -141,6 +150,7 @@ void PauseObject::update()
 			sprite->setTextureName("sousa");
 			check->setActive(false);
 			if (Input::isPadButtonDown(Input::PAD_BUTTON_B) || Input::isKeyDown(VK_BACK)) {
+				SoundManager::playSE("cancel");
 				pNum = 0;
 				checkNum = 0;
 				selectNum = 2;
@@ -195,12 +205,14 @@ void PauseObject::update()
 			if (prevY == 0) {
 				checkNum--;
 				selectNum--;
+				SoundManager::playSE("pause");
 			}
 		}
 		else if (Input::getLStickValue().y < 0) {
 			if (prevY == 0) {
 				checkNum++;
 				selectNum++;
+				SoundManager::playSE("pause");
 			}
 		}
 #pragma endregion
@@ -209,10 +221,12 @@ void PauseObject::update()
 		if (Input::isKeyDown(VK_DOWN)) {
 			checkNum++;
 			selectNum++;
+			SoundManager::playSE("pause");
 		}
 		else if (Input::isKeyDown(VK_UP)) {
 			checkNum--;
 			selectNum--;
+			SoundManager::playSE("pause");
 		}
 #pragma endregion
 
@@ -252,6 +266,7 @@ void PauseObject::onDestroy()
 
 void PauseObject::exit()
 {
+	SoundManager::playSE("cancel");
 	setActive(false);
 	GameTime::timeScale = 1.0f;
 }

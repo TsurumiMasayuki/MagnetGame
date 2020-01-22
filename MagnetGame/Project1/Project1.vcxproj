@@ -178,6 +178,7 @@
     <ClCompile Include="Source\Actor\Nobject\ObjN.cpp" />
     <ClCompile Include="Source\Actor\Nobject\ObjNState_Default.cpp" />
     <ClCompile Include="Source\Actor\PauseObject.cpp" />
+    <ClCompile Include="Source\Actor\Performance\BackGround.cpp" />
     <ClCompile Include="Source\Actor\Performance\ButtonTex.cpp" />
     <ClCompile Include="Source\Actor\Performance\Deliveryman.cpp" />
     <ClCompile Include="Source\Actor\Performance\EndTex.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="Source\Actor\Nobject\ObjN.h" />
     <ClInclude Include="Source\Actor\Nobject\ObjNState_Default.h" />
     <ClInclude Include="Source\Actor\PauseObject.h" />
+    <ClInclude Include="Source\Actor\Performance\BackGround.h" />
     <ClInclude Include="Source\Actor\Performance\ButtonTex.h" />
     <ClInclude Include="Source\Actor\Performance\Deliveryman.h" />
     <ClInclude Include="Source\Actor\Performance\EndTex.h" />

@@ -12,9 +12,9 @@ NameTexture::~NameTexture()
 
 void NameTexture::start()
 {
-	int size=3;
-	setSize(Vec3(106*size, 14*size, 0));
-	setPosition(Vec3(-640+159,-164,0));
+	int size = 3;
+	setSize(Vec3(106 * size, 14 * size, 0));
+	setPosition(Vec3(-640 + 159, -164, 0));
 	sprite = new SpriteRenderer(this, 312);
 	sprite->setTextureName("lop");
 }
@@ -91,6 +91,15 @@ void NameTexture::update()
 		nState = NameState::Doctor;
 		break;
 
+	case 27:
+		nState = NameState::Doctor;
+		break;
+	case 28:
+		nState = NameState::Doctor;
+		break;
+	case 29:
+		nState = NameState::Doctor;
+		break;
 	case 30:
 		nState = NameState::Doctor;
 		break;

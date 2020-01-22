@@ -38,7 +38,7 @@ void EventText::start()
 void EventText::update()
 {
 	a += 0.15f;
-	alpha += cos((double)a);
+	alpha += cos((double)a/2.0f);
 	arrow->setColor(Color(1, 1, 1, alpha));
 	switch (EventNum)
 	{

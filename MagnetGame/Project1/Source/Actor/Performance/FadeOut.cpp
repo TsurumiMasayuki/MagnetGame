@@ -17,7 +17,7 @@ void FadeOut::start()
 	sprite = new SpriteRenderer(this, 200);
 	sprite->setTextureName("white");
 
-	alpha = 1;
+	alpha = 1.5f;
 	isEndFlag = false;
 }
 
