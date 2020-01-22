@@ -17,7 +17,6 @@ void ExText::start()
 	sprite = new SpriteRenderer(this, 110);
 	sprite->setTextureName(name);
 
-	stateNum = 0;
 }
 
 void ExText::update()

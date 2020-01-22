@@ -11,6 +11,8 @@ class TitleBackGround;
 class EventText;
 class TitleFade;
 class FadeOut;
+class ButtonTex;
+class ExText;
 
 class GamePlay :
 	public AbstractScene, IGameMediator {
@@ -45,6 +47,8 @@ private:
 	EventText*m_pText;
 	FadeOut*m_pFadeOut;
 	TitleFade*m_pFadeIn;
+	ExText*m_pExText;
+	ButtonTex*m_pButton;
 
 	bool m_GameEndFlag;
 	Vec2 m_CurrentStage;
