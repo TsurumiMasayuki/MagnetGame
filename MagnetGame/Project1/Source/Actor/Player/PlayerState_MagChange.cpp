@@ -6,7 +6,7 @@
 #include "Device\SoundManager.h"
 
 PlayerState_MagChange::PlayerState_MagChange(Player * pPlayer)
-	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.1f))
+	: m_pPlayer(pPlayer), m_pTimer(new Timer(0.3f))
 {
 }
 
@@ -21,6 +21,11 @@ void PlayerState_MagChange::update()
 	m_pMagChange->setPosition(m_pPlayer->getPosition() + magChangePos * 0.5f);
 
 	m_pTimer->update();
+	if (m_pTimer->isTime())
+		if (!m_pPlayer->isSuperJump)
+			m_pPlayer->setAnimation("Idle");
+		else
+			m_pPlayer->setAnimation("GBIdle");
 }
 
 void PlayerState_MagChange::onStateEnter()
@@ -61,7 +66,13 @@ void PlayerState_MagChange::onStateExit()
 
 IState * PlayerState_MagChange::nextState()
 {
-	if (m_pTimer->isTime())
-		return new PlayerState_Default(m_pPlayer);
+	if (m_pTimer->isTime()) {
+		if (m_pPlayer->isDetectDown())
+			return new PlayerState_Default(m_pPlayer);
+		if (m_pPlayer->GetJumpForce() <= 0)
+			return new PlayerState_Default(m_pPlayer);
+		if (m_pPlayer->isDetectUp() && m_pPlayer->isDetectDown())
+			return new PlayerState_Default(m_pPlayer);
+	}
 	return nullptr;
 }
