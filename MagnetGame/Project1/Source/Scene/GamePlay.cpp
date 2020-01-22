@@ -23,6 +23,7 @@
 #include"Actor/Performance/TitleFade.h"
 #include"Actor/Performance/ExText.h"
 #include"Actor/Performance/ButtonTex.h"
+#include"Actor/Board.h"
 
 GamePlay::GamePlay()
 {
@@ -71,6 +72,8 @@ void GamePlay::init()
 	m_pButton = new ButtonTex(this);
 	m_pButton->setTextureName("X");
 	m_pButton->setActive(false);
+
+	
 
 	nScene = "Ending";
 
