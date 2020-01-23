@@ -40,6 +40,7 @@ void DetectHelper::start()
 void DetectHelper::update()
 {
 	m_CollisionTags.clear();
+	m_DetectFlag = false;
 }
 
 void DetectHelper::onCollisionEnter(GameObject * pHit)
@@ -58,7 +59,7 @@ void DetectHelper::onCollisionStay(GameObject * pHit)
 
 void DetectHelper::onCollisionExit(GameObject * pHit)
 {
-	m_DetectFlag = false;
+	//m_DetectFlag = false;
 }
 
 GameObject * DetectHelper::getUser()
